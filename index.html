@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEL Automobili — Vendi la tua auto con una valutazione chiara e gratuita</title>
+<meta name="description" content="Richiedi una valutazione gratuita e senza impegno della tua auto usata. Risposta rapida, criteri trasparenti, zero perdite di tempo.">
+
+<style>
+  :root{
+    --primary:#2E50E8;
+    --primary-dark:#2340c2;
+    --bg:#EAEBED;
+    --dark:#0F1F4D;
+    --white:#FFFFFF;
+    --gray-text:#5A6072;
+    --radius:16px;
+    --radius-sm:10px;
+    --shadow:0 10px 30px rgba(15,31,77,0.08);
+    --shadow-strong:0 20px 45px rgba(15,31,77,0.16);
+    --max-width:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    color:var(--dark);
+    background:var(--white);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;}
+  input,select{font-family:inherit;}
+
+  .container{
+    max-width:var(--max-width);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  section{padding:88px 0;}
+  @media(max-width:768px){ section{padding:56px 0;} }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--primary);
+    background:rgba(46,80,232,0.08);
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:18px;
+  }
+
+  h1,h2,h3{
+    margin:0 0 16px 0;
+    line-height:1.15;
+    font-weight:800;
+  }
+  h1{font-size:44px;}
+  h2{font-size:32px;}
+  h3{font-size:20px;}
+  p{margin:0 0 16px 0;color:var(--gray-text);}
+  .section-lead{max-width:640px;}
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
+
+  @media(max-width:768px){
+    h1{font-size:30px;}
+    h2{font-size:26px;}
+  }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:16px 30px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:16px;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--primary);
+    color:var(--white);
+    box-shadow:0 12px 24px rgba(46,80,232,0.30);
+  }
+  .btn-primary:hover{background:var(--primary-dark); transform:translateY(-2px);}
+  .btn-outline{
+    background:transparent;
+    color:var(--dark);
+    border:2px solid rgba(15,31,77,0.15);
+  }
+  .btn-outline:hover{border-color:var(--primary); color:var(--primary);}
+  .btn-white{
+    background:var(--white);
+    color:var(--primary);
+    box-shadow:0 12px 24px rgba(0,0,0,0.15);
+  }
+  .btn-white:hover{transform:translateY(-2px);}
+  .btn-block{width:100%;}
+
+  /* Reveal animation */
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible{opacity:1; transform:translateY(0);}
+
+  /* Header */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(15,31,77,0.06);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 24px;
+    max-width:var(--max-width);
+    margin:0 auto;
+  }
+  .logo{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:-0.01em;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .logo span{color:var(--primary);}
+  .nav-cta{display:flex; align-items:center; gap:18px;}
+  .nav-phone{
+    display:none;
+    font-weight:700;
+    font-size:15px;
+    color:var(--dark);
+  }
+  @media(min-width:860px){ .nav-phone{display:flex; align-items:center; gap:8px;} }
+
+  /* Hero */
+  .hero{
+    background:
+      radial-gradient(1100px 500px at 85% -10%, rgba(46,80,232,0.14), transparent 60%),
+      var(--bg);
+    padding:80px 0 70px;
+  }
+  .hero-inner{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+  @media(max-width:900px){
+    .hero-inner{grid-template-columns:1fr;}
+  }
+  .hero h1{max-width:560px;}
+  .hero p.sub{font-size:18px; max-width:520px;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:8px;}
+  .reassurance{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    margin-top:26px;
+  }
+  .reassurance-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    font-weight:600;
+    color:var(--dark);
+  }
+  .reassurance-item svg{flex-shrink:0;}
+
+  .hero-card{
+    background:var(--white);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-strong);
+    padding:32px;
+  }
+  .hero-card-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid rgba(15,31,77,0.08);
+  }
+  .hero-card-row:last-child{border-bottom:none;}
+  .hero-card-icon{
+    width:44px;height:44px;
+    border-radius:12px;
+    background:rgba(46,80,232,0.10);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .hero-card-text strong{display:block; font-size:15px; color:var(--dark);}
+  .hero-card-text span{font-size:13px; color:var(--gray-text);}
+
+  /* Icon circle helper */
+  .icon-circle{
+    width:52px;height:52px;
+    border-radius:14px;
+    background:rgba(46,80,232,0.10);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+
+  /* Pain points */
+  .pain{background:var(--white);}
+  .pain-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:start;
+  }
+  @media(max-width:820px){ .pain-grid{grid-template-columns:1fr;} }
+  .pain-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid rgba(15,31,77,0.08);
+    font-weight:600;
+    color:var(--dark);
+  }
+  .pain-list li:last-child{border-bottom:none;}
+  .pain-list svg{flex-shrink:0; margin-top:2px;}
+  .flip-card{
+    background:var(--dark);
+    color:var(--white);
+    border-radius:var(--radius);
+    padding:36px;
+  }
+  .flip-card p{color:rgba(255,255,255,0.85); font-size:19px; font-weight:600; margin:0;}
+  .flip-card .eyebrow{background:rgba(255,255,255,0.12); color:#fff;}
+
+  /* Come funziona */
+  .how{background:var(--bg);}
+  .steps-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+    margin-top:40px;
+  }
+  @media(max-width:980px){ .steps-grid{grid-template-columns:1fr 1fr;} }
+  @media(max-width:600px){ .steps-grid{grid-template-columns:1fr;} }
+  .step-card{
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:28px 24px;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .step-num{
+    font-size:38px;
+    font-weight:800;
+    color:rgba(46,80,232,0.25);
+    margin-bottom:10px;
+  }
+  .step-card h3{margin-bottom:8px;}
+  .step-card p{font-size:14px; margin:0;}
+
+  /* Perché SEL */
+  .why-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+    margin-top:40px;
+  }
+  @media(max-width:980px){ .why-grid{grid-template-columns:1fr 1fr;} }
+  @media(max-width:560px){ .why-grid{grid-template-columns:1fr;} }
+  .why-card{
+    padding:8px;
+  }
+  .why-card p{font-size:14px; margin:0;}
+
+  /* Doppio percorso */
+  .paths{background:var(--bg);}
+  .paths-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    margin-top:40px;
+  }
+  @media(max-width:820px){ .paths-grid{grid-template-columns:1fr;} }
+  .path-card{
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:36px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+  }
+  .path-card.highlight{
+    background:var(--dark);
+    color:var(--white);
+  }
+  .path-card.highlight p{color:rgba(255,255,255,0.75);}
+  .path-card h3{font-size:22px;}
+  .path-card p{flex-grow:1;}
+
+  /* Storytelling */
+  .story{background:var(--white);}
+  .story-inner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media(max-width:900px){ .story-inner{grid-template-columns:1fr;} }
+  .pillars{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .pillar{display:flex; gap:16px; align-items:flex-start;}
+  .pillar-num{
+    font-weight:800;
+    font-size:15px;
+    color:var(--primary);
+    background:rgba(46,80,232,0.10);
+    width:34px;height:34px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .pillar h3{margin-bottom:4px; font-size:17px;}
+  .pillar p{margin:0; font-size:14px;}
+
+  /* Geo targeting */
+  .geo{
+    background:linear-gradient(120deg, rgba(46,80,232,0.08), rgba(46,80,232,0.02));
+  }
+  .geo-box{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:32px;
+    box-shadow:var(--shadow);
+    flex-wrap:wrap;
+  }
+  .geo-box .icon-circle{margin-bottom:0;}
+  .geo-text{flex:1; min-width:240px;}
+  .geo-text h3{margin-bottom:6px;}
+  .geo-text p{margin:0;}
+
+  /* CTA finale */
+  .cta-final{
+    background:linear-gradient(120deg, var(--primary), #4a68f0);
+    color:var(--white);
+    text-align:center;
+  }
+  .cta-final h2{color:var(--white);}
+  .cta-final p{color:rgba(255,255,255,0.9); max-width:520px; margin-left:auto; margin-right:auto;}
+  .cta-final .reassurance{justify-content:center; margin-bottom:30px;}
+  .cta-final .reassurance-item{color:#fff;}
+
+  /* Form */
+  .form-section{background:var(--bg);}
+  .form-wrap{
+    max-width:640px;
+    margin:0 auto;
+    background:var(--white);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-strong);
+    padding:40px;
+  }
+  @media(max-width:600px){ .form-wrap{padding:26px 20px;} }
+  .form-progress{
+    display:flex;
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .form-progress-step{
+    flex:1;
+    text-align:center;
+    font-size:12px;
+    font-weight:700;
+    color:var(--gray-text);
+    padding-bottom:10px;
+    border-bottom:4px solid rgba(15,31,77,0.08);
+    transition:all .2s ease;
+  }
+  .form-progress-step.active{
+    color:var(--primary);
+    border-color:var(--primary);
+  }
+  .form-step{display:none;}
+  .form-step.active{display:block;}
+  .field{margin-bottom:18px;}
+  .field label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    color:var(--dark);
+    margin-bottom:6px;
+  }
+  .field input, .field select{
+    width:100%;
+    padding:13px 14px;
+    border-radius:var(--radius-sm);
+    border:1.5px solid rgba(15,31,77,0.14);
+    font-size:15px;
+    background:var(--white);
+    color:var(--dark);
+    transition:border-color .15s ease;
+  }
+  .field input:focus, .field select:focus{
+    outline:none;
+    border-color:var(--primary);
+  }
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media(max-width:520px){ .field-row{grid-template-columns:1fr;} }
+  .upload-box{
+    border:2px dashed rgba(15,31,77,0.2);
+    border-radius:var(--radius-sm);
+    padding:22px;
+    text-align:center;
+    cursor:pointer;
+    color:var(--gray-text);
+    font-size:14px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .upload-box:hover{border-color:var(--primary); background:rgba(46,80,232,0.04);}
+  .upload-box input{display:none;}
+  .upload-file-name{font-size:13px; font-weight:600; color:var(--primary); margin-top:8px;}
+  .form-nav{
+    display:flex;
+    justify-content:space-between;
+    gap:14px;
+    margin-top:26px;
+  }
+  .form-microcopy{
+    text-align:center;
+    font-size:13px;
+    color:var(--gray-text);
+    margin-top:16px;
+  }
+  .form-success{
+    display:none;
+    text-align:center;
+    padding:20px 0;
+  }
+  .form-success.active{display:block;}
+  .form-success .icon-circle{margin:0 auto 18px; width:64px; height:64px; background:rgba(46,80,232,0.12);}
+
+  /* FAQ */
+  .faq{background:var(--white);}
+  .faq-list{max-width:760px; margin:40px auto 0;}
+  .faq-item{
+    border-bottom:1px solid rgba(15,31,77,0.1);
+  }
+  .faq-question{
+    width:100%;
+    background:none;
+    text-align:left;
+    padding:20px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-weight:700;
+    font-size:16px;
+    color:var(--dark);
+  }
+  .faq-question .plus{
+    font-size:22px;
+    color:var(--primary);
+    transition:transform .2s ease;
+    flex-shrink:0;
+    margin-left:16px;
+  }
+  .faq-item.open .faq-question .plus{transform:rotate(45deg);}
+  .faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .faq-answer p{padding-bottom:18px; margin:0;}
+
+  /* Footer */
+  footer{
+    background:var(--dark);
+    color:rgba(255,255,255,0.75);
+    padding:64px 0 28px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:32px;
+  }
+  @media(max-width:820px){ .footer-grid{grid-template-columns:1fr 1fr;} }
+  @media(max-width:520px){ .footer-grid{grid-template-columns:1fr;} }
+  .footer-logo{
+    font-size:20px;
+    font-weight:800;
+    color:#fff;
+    margin-bottom:12px;
+  }
+  .footer-logo span{color:#7C93F5;}
+  footer h4{
+    color:#fff;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin-bottom:16px;
+  }
+  footer ul li{margin-bottom:10px; font-size:14px;}
+  footer ul li a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12);
+    margin-top:48px;
+    padding-top:24px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    font-size:13px;
+    color:rgba(255,255,255,0.5);
+  }
+  .social-row{display:flex; gap:12px;}
+  .social-row a{
+    width:36px;height:36px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .social-row a:hover{background:var(--primary);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">SEL <span>Automobili</span></div>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:+390000000000">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8Z" stroke="#0F1F4D" stroke-width="1.6"/></svg>
+        +39 000 000 0000
+      </a>
+      <a href="#form" class="btn btn-primary">Richiedi la valutazione</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="reveal">
+      <span class="eyebrow">Valutazione auto usate</span>
+      <h1>Scopri quanto vale davvero la tua auto, senza rischi e senza perdite di tempo.</h1>
+      <p class="sub">SEL Automobili valuta la tua auto con criteri chiari e concreti. Niente promesse gonfiate: solo una stima seria, in tempi brevi, per decidere con calma se vendere conviene.</p>
+      <div class="hero-actions">
+        <a href="#form" class="btn btn-primary">Richiedi la tua valutazione gratuita</a>
+        <a href="#come-funziona" class="btn btn-outline">Come funziona</a>
+      </div>
+      <div class="reassurance">
+        <div class="reassurance-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Valutazione gratuita
+        </div>
+        <div class="reassurance-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Nessun impegno di vendita
+        </div>
+        <div class="reassurance-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Risposta entro 24 ore
+        </div>
+      </div>
+    </div>
+    <div class="hero-card reveal">
+      <div class="hero-card-row">
+        <div class="hero-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke="#2E50E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="hero-card-text">
+          <strong>2 minuti per inviare i dati</strong>
+          <span>Modello, chilometraggio, targa e qualche foto</span>
+        </div>
+      </div>
+      <div class="hero-card-row">
+        <div class="hero-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2E50E8" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#2E50E8" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="hero-card-text">
+          <strong>Analisi rapida del team</strong>
+          <span>Verifichiamo tutto senza bisogno di un sopralluogo immediato</span>
+        </div>
+      </div>
+      <div class="hero-card-row">
+        <div class="hero-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12l7 7L21 5" stroke="#2E50E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="hero-card-text">
+          <strong>Valutazione chiara</strong>
+          <span>Capisci subito se e quanto conviene vendere</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain">
+  <div class="container">
+    <div class="pain-grid">
+      <div class="reveal">
+        <span class="eyebrow">Il problema</span>
+        <h2>Vendere l'auto da privato può diventare complicato.</h2>
+        <ul class="pain-list">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round"/></svg>
+            Non sai qual è il prezzo giusto da chiedere, e rischi di svenderla o restare bloccato.
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round"/></svg>
+            Tra truffe, offerte al ribasso e finti compratori, ogni annuncio diventa un terreno minato.
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round"/></svg>
+            Mille chiamate e messaggi, poche risposte serie: tempo che non torna indietro.
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round"/></svg>
+            Poca affidabilità nella compravendita privata: pagamenti incerti, passaggi di proprietà da gestire da soli.
+          </li>
+        </ul>
+      </div>
+      <div class="flip-card reveal">
+        <span class="eyebrow">La soluzione</span>
+        <p>Con SEL Automobili parti da una valutazione chiara e capisci subito se vendere la tua auto conviene.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COME FUNZIONA -->
+<section class="how" id="come-funziona">
+  <div class="container">
+    <span class="eyebrow">Il processo</span>
+    <h2>Un percorso semplice, pensato per farti risparmiare tempo.</h2>
+    <p class="section-lead reveal">Niente promesse gonfiate né sopralluoghi infiniti. Ti chiediamo solo le informazioni essenziali e ti diamo una risposta concreta, in tempi brevi.</p>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <h3>Invia i dati della tua auto</h3>
+        <p>Un form veloce con modello, chilometraggio, targa e qualche foto.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">02</div>
+        <h3>Analisi da parte del team</h3>
+        <p>Verifichiamo le informazioni ricevute, senza bisogno di un sopralluogo immediato.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">03</div>
+        <h3>Valutazione chiara</h3>
+        <p>Ricevi una stima trasparente di quanto vale la tua auto, senza impegno.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">04</div>
+        <h3>Decidi con calma</h3>
+        <p>Solo se la proposta ti convince, procediamo insieme verso la vendita.</p>
+      </div>
+    </div>
+    <div class="hero-actions" style="margin-top:36px; justify-content:center; display:flex;">
+      <a href="#form" class="btn btn-primary">Richiedi la tua valutazione gratuita</a>
+    </div>
+  </div>
+</section>
+
+<!-- PERCHE SEL -->
+<section class="why">
+  <div class="container">
+    <span class="eyebrow">Perché sceglierci</span>
+    <h2>Competenza vera, non l'ennesimo compro-auto.</h2>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="icon-circle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Trasparenza</h3>
+        <p>Criteri di valutazione chiari, spiegati passo passo. Nessun costo o sorpresa nascosta.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="icon-circle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13 3L4 14h6l-1 7 9-11h-6l1-7Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Velocità</h3>
+        <p>Risposta rapida e iter semplice: niente attese infinite o rimpalli tra uffici.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="icon-circle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#2E50E8" stroke-width="1.8"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Competenza</h3>
+        <p>Un team con esperienza reale nel mercato automotive, non uno script da call center.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="icon-circle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="#2E50E8" stroke-width="1.8"/><path d="M3 10h18" stroke="#2E50E8" stroke-width="1.8"/></svg>
+        </div>
+        <h3>Comodità</h3>
+        <p>Tutto il processo si gestisce online, con il minimo sforzo per chi vende da privato.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOPPIO PERCORSO -->
+<section class="paths">
+  <div class="container">
+    <span class="eyebrow">Cosa vuoi fare</span>
+    <h2>Scegli il percorso più adatto a te.</h2>
+    <div class="paths-grid">
+      <div class="path-card highlight reveal">
+        <h3>Vuoi procedere subito?</h3>
+        <p>Hai già le idee chiare e vuoi sapere quanto vale la tua auto. Compila il form: bastano 2 minuti e nessun impegno.</p>
+        <a href="#form" class="btn btn-white">Richiedi la valutazione ora</a>
+      </div>
+      <div class="path-card reveal">
+        <h3>Hai ancora qualche dubbio?</h3>
+        <p>Preferisci parlarne con qualcuno prima di decidere. Ti rispondiamo senza pressioni, con la stessa concretezza di sempre.</p>
+        <a href="#contatti-diretti" class="btn btn-outline">Parla con il team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORYTELLING -->
+<section class="story">
+  <div class="container story-inner">
+    <div class="reveal">
+      <span class="eyebrow">Chi siamo</span>
+      <h2>Nasciamo dall'esperienza reale nel mercato dell'auto usata.</h2>
+      <p>SEL Automobili è nata perché abbiamo visto troppi privati perdere tempo e fiducia nel tentativo di vendere la propria auto. Conosciamo il mercato, sappiamo cosa guardare in un veicolo e lo diciamo con chiarezza, senza girarci intorno.</p>
+      <p>Non promettiamo cifre impossibili. Offriamo un metodo di valutazione serio, un processo veloce e un interlocutore reale con cui parlare in ogni fase.</p>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <div class="pillar-num">1</div>
+        <div>
+          <h3>Trasparenza</h3>
+          <p>Ogni valutazione è spiegabile: sai sempre da dove nasce la stima.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">2</div>
+        <div>
+          <h3>Velocità</h3>
+          <p>Un processo pensato per farti risparmiare tempo, non per farti aspettare.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">3</div>
+        <div>
+          <h3>Semplicità</h3>
+          <p>Nessun passaggio superfluo: solo ciò che serve per decidere bene.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GEO TARGETING -->
+<section class="geo">
+  <div class="container">
+    <div class="geo-box reveal">
+      <div class="icon-circle">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8"/><circle cx="12" cy="9" r="2.5" stroke="#2E50E8" stroke-width="1.8"/></svg>
+      </div>
+      <div class="geo-text">
+        <h3 id="geo-title">Abiti in Veneto?</h3>
+        <p id="geo-desc">Valutiamo la tua auto anche vicino a te: il processo resta lo stesso, online e senza spostamenti, ovunque tu sia.</p>
+      </div>
+      <a href="#form" class="btn btn-outline">Scopri quanto vale la tua auto</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINALE -->
+<section class="cta-final">
+  <div class="container">
+    <h2 class="reveal">Pronto a scoprire quanto vale la tua auto?</h2>
+    <p class="reveal">Bastano 2 minuti per inviare i dati. La valutazione è gratuita, senza impegno di vendita, e ti rispondiamo entro 24 ore.</p>
+    <div class="reveal">
+      <a href="#form" class="btn btn-white">Richiedi la tua valutazione gratuita</a>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="form">
+  <div class="container">
+    <span class="eyebrow center" style="display:block; text-align:center;">Richiedi la valutazione</span>
+    <h2 class="center">Raccontaci della tua auto. Bastano 2 minuti.</h2>
+    <p class="center section-lead">Nessun impegno di vendita: al termine ricevi solo una valutazione chiara, senza sorprese.</p>
+
+    <div class="form-wrap reveal" id="contatti-diretti">
+      <div class="form-progress">
+        <div class="form-progress-step active" data-step-label="1">1. Il tuo veicolo</div>
+        <div class="form-progress-step" data-step-label="2">2. I tuoi contatti</div>
+      </div>
+
+      <form id="leadForm" novalidate>
+        <div class="form-step active" data-step="1">
+          <div class="field-row">
+            <div class="field">
+              <label for="marca">Marca e modello</label>
+              <input type="text" id="marca" name="marca" placeholder="Es. Volkswagen Golf" required>
+            </div>
+            <div class="field">
+              <label for="anno">Anno di immatricolazione</label>
+              <input type="number" id="anno" name="anno" placeholder="Es. 2018" min="1980" max="2026" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="km">Chilometraggio</label>
+              <input type="number" id="km" name="km" placeholder="Es. 85000" min="0" required>
+            </div>
+            <div class="field">
+              <label for="targa">Targa</label>
+              <input type="text" id="targa" name="targa" placeholder="Es. AB123CD" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="alimentazione">Alimentazione</label>
+              <select id="alimentazione" name="alimentazione" required>
+                <option value="" disabled selected>Seleziona</option>
+                <option>Benzina</option>
+                <option>Diesel</option>
+                <option>GPL</option>
+                <option>Metano</option>
+                <option>Ibrida</option>
+                <option>Elettrica</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="condizioni">Condizioni generali</label>
+              <select id="condizioni" name="condizioni" required>
+                <option value="" disabled selected>Seleziona</option>
+                <option>Ottime</option>
+                <option>Buone</option>
+                <option>Da revisionare</option>
+                <option>Con danni</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Foto dell'auto</label>
+            <label class="upload-box" id="uploadBox">
+              <input type="file" id="foto" name="foto" accept="image/*" multiple>
+              <span id="uploadText">Carica una o più foto (esterno, interno, cruscotto)</span>
+              <div class="upload-file-name" id="uploadFileName"></div>
+            </label>
+          </div>
+          <div class="form-nav">
+            <span></span>
+            <button type="button" class="btn btn-primary" id="toStep2">Continua</button>
+          </div>
+        </div>
+
+        <div class="form-step" data-step="2">
+          <div class="field-row">
+            <div class="field">
+              <label for="nome">Nome e cognome</label>
+              <input type="text" id="nome" name="nome" placeholder="Es. Mario Rossi" required>
+            </div>
+            <div class="field">
+              <label for="telefono">Telefono</label>
+              <input type="tel" id="telefono" name="telefono" placeholder="Es. 333 1234567" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Es. mario.rossi@email.it" required>
+          </div>
+          <div class="field">
+            <label for="citta">Città / Regione</label>
+            <input type="text" id="citta" name="citta" placeholder="Es. Padova, Veneto" required>
+          </div>
+          <div class="form-nav">
+            <button type="button" class="btn btn-outline" id="toStep1">Indietro</button>
+            <button type="submit" class="btn btn-primary">Richiedi la mia valutazione gratuita</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="icon-circle">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 12l7 7L21 5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Richiesta ricevuta.</h3>
+        <p>Il nostro team analizzerà i dati e ti risponderà entro 24 ore con una valutazione chiara. Nessun impegno da parte tua.</p>
+      </div>
+
+      <p class="form-microcopy">I tuoi dati sono trattati con riservatezza e usati solo per la valutazione richiesta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <span class="eyebrow center" style="display:block; text-align:center;">Domande frequenti</span>
+    <h2 class="center">Le risposte alle domande più comuni.</h2>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">SEL <span>Automobili</span></div>
+        <p style="max-width:280px; color:rgba(255,255,255,0.6); font-size:14px;">Valutazioni chiare e veloci per chi vuole vendere la propria auto usata senza rischi e senza perdite di tempo.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 8h2V4h-2c-2.2 0-4 1.8-4 4v2H9v4h2v8h4v-8h2.6l.4-4H15V8Z" fill="#fff"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1" fill="#fff"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#fff" stroke-width="1.8"/><path d="M7 10v7M7 7v.01M11 17v-4.5c0-1.4 1-2.5 2.5-2.5S16 11.1 16 12.5V17" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Servizi</h4>
+        <ul>
+          <li><a href="#come-funziona">Valutazione auto</a></li>
+          <li><a href="#form">Vendita da privato</a></li>
+          <li><a href="#paths">Consulenza gratuita</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Link utili</h4>
+        <ul>
+          <li><a href="#come-funziona">Come funziona</a></li>
+          <li><a href="#faq">Domande frequenti</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Termini e condizioni</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <ul>
+          <li><a href="tel:+390000000000">+39 000 000 0000</a></li>
+          <li><a href="mailto:info@selautomobili.it">info@selautomobili.it</a></li>
+          <li>Lun–Ven, 9:00–18:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SEL Automobili. Tutti i diritti riservati.</span>
+      <span>P.IVA 00000000000</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- Reveal on scroll ----
+  var revealEls = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(function(el){ observer.observe(el); });
+
+  // ---- Geo targeting block (placeholder, easily swappable) ----
+  var geoData = {
+    region: "Veneto",
+    message: "Valutiamo la tua auto anche vicino a te: il processo resta lo stesso, online e senza spostamenti, ovunque tu sia."
+  };
+  var geoTitle = document.getElementById('geo-title');
+  var geoDesc = document.getElementById('geo-desc');
+  if(geoTitle) geoTitle.textContent = "Abiti in " + geoData.region + "?";
+  if(geoDesc) geoDesc.textContent = geoData.message;
+
+  // ---- Multi-step form ----
+  var form = document.getElementById('leadForm');
+  var step1 = form.querySelector('[data-step="1"]');
+  var step2 = form.querySelector('[data-step="2"]');
+  var progressSteps = document.querySelectorAll('.form-progress-step');
+  var toStep2Btn = document.getElementById('toStep2');
+  var toStep1Btn = document.getElementById('toStep1');
+  var formSuccess = document.getElementById('formSuccess');
+
+  function isStepValid(stepEl){
+    var fields = stepEl.querySelectorAll('input, select');
+    var valid = true;
+    fields.forEach(function(f){
+      if(!f.checkValidity()){
+        f.reportValidity();
+        valid = false;
+      }
+    });
+    return valid;
+  }
+
+  toStep2Btn.addEventListener('click', function(){
+    if(!isStepValid(step1)) return;
+    step1.classList.remove('active');
+    step2.classList.add('active');
+    progressSteps[0].classList.remove('active');
+    progressSteps[1].classList.add('active');
+    form.scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+
+  toStep1Btn.addEventListener('click', function(){
+    step2.classList.remove('active');
+    step1.classList.add('active');
+    progressSteps[1].classList.remove('active');
+    progressSteps[0].classList.add('active');
+  });
+
+  // File upload feedback
+  var fotoInput = document.getElementById('foto');
+  var uploadFileName = document.getElementById('uploadFileName');
+  fotoInput.addEventListener('change', function(){
+    if(fotoInput.files.length > 0){
+      uploadFileName.textContent = fotoInput.files.length + " file selezionati";
+    } else {
+      uploadFileName.textContent = "";
+    }
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!isStepValid(step2)) return;
+    form.style.display = 'none';
+    document.querySelector('.form-progress').style.display = 'none';
+    formSuccess.classList.add('active');
+  });
+
+  // ---- FAQ accordion ----
+  var faqData = [
+    {
+      q: "La valutazione è davvero gratuita?",
+      a: "Sì, la valutazione non ha alcun costo. Ricevi la stima senza dover pagare nulla e senza obblighi successivi."
+    },
+    {
+      q: "Sono obbligato a vendere se accetto la valutazione?",
+      a: "No. La valutazione serve solo a darti un'idea chiara del valore della tua auto. Decidi tu se e quando procedere."
+    },
+    {
+      q: "Quanto ci mette SEL Automobili a rispondere?",
+      a: "Analizziamo i dati ricevuti e ti rispondiamo entro 24 ore con una valutazione chiara e motivata."
+    },
+    {
+      q: "I miei dati sono al sicuro?",
+      a: "Sì. I dati che ci invii vengono usati esclusivamente per la valutazione richiesta e trattati con la massima riservatezza."
+    },
+    {
+      q: "Serve un sopralluogo immediato?",
+      a: "No. La prima valutazione si basa sui dati e sulle foto che ci invii. Un eventuale sopralluogo arriva solo nelle fasi successive, se decidi di procedere."
+    }
+  ];
+
+  var faqList = document.getElementById('faqList');
+  faqData.forEach(function(item){
+    var faqItem = document.createElement('div');
+    faqItem.className = 'faq-item';
+
+    var button = document.createElement('button');
+    button.className = 'faq-question';
+    button.type = 'button';
+    button.innerHTML = '<span>' + item.q + '</span><span class="plus">+</span>';
+
+    var answerWrap = document.createElement('div');
+    answerWrap.className = 'faq-answer';
+    var answerP = document.createElement('p');
+    answerP.textContent = item.a;
+    answerWrap.appendChild(answerP);
+
+    button.addEventListener('click', function(){
+      var isOpen = faqItem.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(el){
+        el.classList.remove('open');
+        el.querySelector('.faq-answer').style.maxHeight = null;
+      });
+      if(!isOpen){
+        faqItem.classList.add('open');
+        answerWrap.style.maxHeight = answerWrap.scrollHeight + 'px';
+      }
+    });
+
+    faqItem.appendChild(button);
+    faqItem.appendChild(answerWrap);
+    faqList.appendChild(faqItem);
+  });
+
+})();
+</script>
+
+</body>
+</html>
