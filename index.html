@@ -48,8 +48,8 @@
     padding:0 24px;
   }
 
-  section{padding:88px 0;}
-  @media(max-width:768px){ section{padding:56px 0;} }
+  section{padding:68px 0;}
+  @media(max-width:768px){ section{padding:44px 0;} }
 
   .eyebrow{
     display:inline-block;
@@ -176,16 +176,18 @@
     background:
       radial-gradient(1100px 500px at 85% -10%, rgba(46,80,232,0.14), transparent 60%),
       var(--bg);
-    padding:80px 0 70px;
+    padding:60px 0 52px;
   }
   .hero-inner{
     display:grid;
-    grid-template-columns:1.1fr 0.9fr;
+    grid-template-columns:1fr 1fr;
     gap:48px;
-    align-items:center;
+    align-items:start;
   }
   @media(max-width:900px){
     .hero-inner{grid-template-columns:1fr;}
+    .hero-copy{order:2;}
+    .hero .form-wrap{order:1;}
   }
   .hero h1{max-width:560px;}
   .hero p.sub{font-size:18px; max-width:520px;}
@@ -205,30 +207,6 @@
     color:var(--dark);
   }
   .reassurance-item svg{flex-shrink:0;}
-
-  .hero-card{
-    background:var(--white);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow-strong);
-    padding:32px;
-  }
-  .hero-card-row{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:14px 0;
-    border-bottom:1px solid rgba(15,31,77,0.08);
-  }
-  .hero-card-row:last-child{border-bottom:none;}
-  .hero-card-icon{
-    width:44px;height:44px;
-    border-radius:12px;
-    background:rgba(46,80,232,0.10);
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-  }
-  .hero-card-text strong{display:block; font-size:15px; color:var(--dark);}
-  .hero-card-text span{font-size:13px; color:var(--gray-text);}
 
   /* Trust strip */
   .trust-strip{
@@ -267,7 +245,7 @@
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:24px;
-    margin-top:40px;
+    margin-top:32px;
   }
   @media(max-width:820px){ .pain-compare{grid-template-columns:1fr;} }
   .compare-col{
@@ -311,7 +289,7 @@
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:24px;
-    margin-top:40px;
+    margin-top:32px;
   }
   @media(max-width:980px){ .steps-grid{grid-template-columns:1fr 1fr;} }
   @media(max-width:600px){ .steps-grid{grid-template-columns:1fr;} }
@@ -331,19 +309,33 @@
   .step-card h3{margin-bottom:8px;}
   .step-card p{font-size:14px; margin:0;}
 
-  /* Perché SEL */
-  .why-grid{
+  /* Perché SEL + storytelling */
+  .why-story-inner{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:24px;
-    margin-top:40px;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:48px;
+    align-items:center;
   }
-  @media(max-width:980px){ .why-grid{grid-template-columns:1fr 1fr;} }
-  @media(max-width:560px){ .why-grid{grid-template-columns:1fr;} }
-  .why-card{
-    padding:8px;
+  @media(max-width:900px){ .why-story-inner{grid-template-columns:1fr;} }
+  .why-story-media img{
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-strong);
   }
-  .why-card p{font-size:14px; margin:0;}
+  @media(max-width:900px){ .why-story-media img{aspect-ratio:16/9;} }
+  .pillars-compact{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px 20px;
+    margin-top:24px;
+  }
+  @media(max-width:560px){ .pillars-compact{grid-template-columns:1fr;} }
+  .pillar-compact{display:flex; gap:12px; align-items:flex-start;}
+  .pillar-compact svg{flex-shrink:0; margin-top:2px;}
+  .pillar-compact h3{margin-bottom:2px; font-size:16px;}
+  .pillar-compact p{margin:0; font-size:13px;}
 
   /* Doppio percorso */
   .paths{background:var(--bg);}
@@ -351,7 +343,7 @@
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:28px;
-    margin-top:40px;
+    margin-top:32px;
   }
   @media(max-width:820px){ .paths-grid{grid-template-columns:1fr;} }
   .path-card{
@@ -370,37 +362,11 @@
   .path-card h3{font-size:22px;}
   .path-card p{flex-grow:1;}
 
-  /* Storytelling */
-  .story{background:var(--white);}
-  .story-inner{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:56px;
-    align-items:center;
-  }
-  @media(max-width:900px){ .story-inner{grid-template-columns:1fr;} }
-  .pillars{
-    display:flex;
-    flex-direction:column;
-    gap:22px;
-  }
-  .pillar{display:flex; gap:16px; align-items:flex-start;}
-  .pillar-num{
-    font-weight:800;
-    font-size:15px;
-    color:var(--primary);
-    background:rgba(46,80,232,0.10);
-    width:34px;height:34px;
-    border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-  }
-  .pillar h3{margin-bottom:4px; font-size:17px;}
-  .pillar p{margin:0; font-size:14px;}
-
   /* Geo targeting */
   .geo{
-    background:linear-gradient(120deg, rgba(46,80,232,0.08), rgba(46,80,232,0.02));
+    background:
+      linear-gradient(120deg, rgba(15,31,77,0.85), rgba(46,80,232,0.55)),
+      url('https://images.unsplash.com/photo-1621929747188-0b4dc28498d2?auto=format&fit=crop&w=1600&q=70') center/cover;
   }
   .geo-box{
     display:flex;
@@ -619,7 +585,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container hero-inner">
-    <div class="reveal">
+    <div class="reveal hero-copy">
       <span class="eyebrow">Valutazione auto usate</span>
       <h1>Scopri quanto vale davvero la tua auto, senza rischi e senza perdite di tempo.</h1>
       <p class="sub">SEL Automobili valuta la tua auto con criteri chiari e concreti. Niente promesse gonfiate: solo una stima seria, in tempi brevi, per decidere con calma se vendere conviene.</p>
@@ -642,68 +608,11 @@
         </div>
       </div>
     </div>
-    <div class="hero-card reveal">
-      <div class="hero-card-row">
-        <div class="hero-card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke="#2E50E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="hero-card-text">
-          <strong>2 minuti per inviare i dati</strong>
-          <span>Modello, chilometraggio, alimentazione e qualche foto</span>
-        </div>
-      </div>
-      <div class="hero-card-row">
-        <div class="hero-card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2E50E8" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#2E50E8" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <div class="hero-card-text">
-          <strong>Analisi rapida del team</strong>
-          <span>Verifichiamo tutto senza bisogno di un sopralluogo immediato</span>
-        </div>
-      </div>
-      <div class="hero-card-row">
-        <div class="hero-card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12l7 7L21 5" stroke="#2E50E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="hero-card-text">
-          <strong>Valutazione chiara</strong>
-          <span>Capisci subito se e quanto conviene vendere</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="form-wrap reveal" id="form">
+      <span class="eyebrow">Richiedi la valutazione</span>
+      <h3 style="margin-bottom:4px;">Raccontaci della tua auto</h3>
+      <p style="font-size:14px; margin-bottom:22px;">Bastano 2 minuti. Nessun impegno di vendita.</p>
 
-<!-- TRUST STRIP -->
-<section class="trust-strip">
-  <div class="container">
-    <div class="trust-badge reveal">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-      Nessun costo nascosto
-    </div>
-    <div class="trust-badge reveal">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#2E50E8" stroke-width="1.8"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
-      Team reale, non un call center
-    </div>
-    <div class="trust-badge reveal">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2E50E8" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
-      Risposta entro 24 ore
-    </div>
-    <div class="trust-badge reveal">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Nessun obbligo di vendita
-    </div>
-  </div>
-</section>
-
-<!-- FORM -->
-<section class="form-section" id="form">
-  <div class="container">
-    <span class="eyebrow center" style="display:block; text-align:center;">Richiedi la valutazione</span>
-    <h2 class="center">Raccontaci della tua auto. Bastano 2 minuti.</h2>
-    <p class="center section-lead">Nessun impegno di vendita: al termine ricevi solo una valutazione chiara, senza sorprese.</p>
-
-    <div class="form-wrap reveal" id="contatti-diretti">
       <div class="form-progress">
         <div class="form-progress-step active" data-step-label="1">1. Il tuo veicolo</div>
         <div class="form-progress-step" data-step-label="2">2. I tuoi contatti</div>
@@ -802,6 +711,28 @@
   </div>
 </section>
 
+<!-- TRUST STRIP -->
+<section class="trust-strip">
+  <div class="container">
+    <div class="trust-badge reveal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      Nessun costo nascosto
+    </div>
+    <div class="trust-badge reveal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#2E50E8" stroke-width="1.8"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Team reale, non un call center
+    </div>
+    <div class="trust-badge reveal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2E50E8" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Risposta entro 24 ore
+    </div>
+    <div class="trust-badge reveal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Nessun obbligo di vendita
+    </div>
+  </div>
+</section>
+
 <!-- PAIN POINTS -->
 <section class="pain">
   <div class="container">
@@ -894,39 +825,45 @@
   </div>
 </section>
 
-<!-- PERCHE SEL -->
+<!-- PERCHE SEL / STORYTELLING -->
 <section class="why">
-  <div class="container">
-    <span class="eyebrow">Perché sceglierci</span>
-    <h2>Competenza vera, non l'ennesimo compro-auto.</h2>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="icon-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+  <div class="container why-story-inner">
+    <div class="why-story-media reveal">
+      <img src="https://images.unsplash.com/photo-1533558701576-23c65e0272fb?auto=format&fit=crop&w=1000&q=80" alt="Consegna delle chiavi dell'auto dopo la vendita">
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Perché sceglierci</span>
+      <h2>Competenza vera, non l'ennesimo compro-auto.</h2>
+      <p>Siamo nati perché troppi privati perdevano tempo e fiducia nel vendere la propria auto. Conosciamo il mercato e lo diciamo con chiarezza, dalla prima stima fino alla consegna delle chiavi.</p>
+      <div class="pillars-compact">
+        <div class="pillar-compact">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <div>
+            <h3>Trasparenza</h3>
+            <p>Criteri chiari, nessun costo nascosto.</p>
+          </div>
         </div>
-        <h3>Trasparenza</h3>
-        <p>Criteri di valutazione chiari, spiegati passo passo. Nessun costo o sorpresa nascosta.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="icon-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13 3L4 14h6l-1 7 9-11h-6l1-7Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <div class="pillar-compact">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 3L4 14h6l-1 7 9-11h-6l1-7Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <div>
+            <h3>Velocità</h3>
+            <p>Risposta rapida, zero attese inutili.</p>
+          </div>
         </div>
-        <h3>Velocità</h3>
-        <p>Risposta rapida e iter semplice: niente attese infinite o rimpalli tra uffici.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="icon-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#2E50E8" stroke-width="1.8"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <div class="pillar-compact">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#2E50E8" stroke-width="1.8"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <div>
+            <h3>Competenza</h3>
+            <p>Un team con esperienza reale nel settore.</p>
+          </div>
         </div>
-        <h3>Competenza</h3>
-        <p>Un team con esperienza reale nel mercato automotive, non uno script da call center.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="icon-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="#2E50E8" stroke-width="1.8"/><path d="M3 10h18" stroke="#2E50E8" stroke-width="1.8"/></svg>
+        <div class="pillar-compact">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="#2E50E8" stroke-width="1.8"/><path d="M3 10h18" stroke="#2E50E8" stroke-width="1.8"/></svg>
+          <div>
+            <h3>Comodità</h3>
+            <p>Tutto online, senza sforzo.</p>
+          </div>
         </div>
-        <h3>Comodità</h3>
-        <p>Tutto il processo si gestisce online, con il minimo sforzo per chi vende da privato.</p>
       </div>
     </div>
   </div>
@@ -946,42 +883,7 @@
       <div class="path-card reveal">
         <h3>Hai ancora qualche dubbio?</h3>
         <p>Preferisci parlarne con qualcuno prima di decidere. Ti rispondiamo senza pressioni, con la stessa concretezza di sempre.</p>
-        <a href="#contatti-diretti" class="btn btn-outline">Parla con il team</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STORYTELLING -->
-<section class="story">
-  <div class="container story-inner">
-    <div class="reveal">
-      <span class="eyebrow">Chi siamo</span>
-      <h2>Nasciamo dall'esperienza reale nel mercato dell'auto usata.</h2>
-      <p>SEL Automobili è nata perché abbiamo visto troppi privati perdere tempo e fiducia nel tentativo di vendere la propria auto. Conosciamo il mercato, sappiamo cosa guardare in un veicolo e lo diciamo con chiarezza, senza girarci intorno.</p>
-      <p>Non promettiamo cifre impossibili. Offriamo un metodo di valutazione serio, un processo veloce e un interlocutore reale con cui parlare in ogni fase.</p>
-    </div>
-    <div class="pillars reveal">
-      <div class="pillar">
-        <div class="pillar-num">1</div>
-        <div>
-          <h3>Trasparenza</h3>
-          <p>Ogni valutazione è spiegabile: sai sempre da dove nasce la stima.</p>
-        </div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">2</div>
-        <div>
-          <h3>Velocità</h3>
-          <p>Un processo pensato per farti risparmiare tempo, non per farti aspettare.</p>
-        </div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">3</div>
-        <div>
-          <h3>Semplicità</h3>
-          <p>Nessun passaggio superfluo: solo ciò che serve per decidere bene.</p>
-        </div>
+        <a href="#form" class="btn btn-outline">Parla con il team</a>
       </div>
     </div>
   </div>
@@ -1172,14 +1074,6 @@
     {
       q: "Serve un sopralluogo immediato?",
       a: "No. La prima valutazione si basa sui dati e sulle foto che ci invii. Un eventuale sopralluogo arriva solo nelle fasi successive, se decidi di procedere."
-    },
-    {
-      q: "Devo fornire dei documenti per la valutazione?",
-      a: "Per la prima valutazione bastano i dati del veicolo e qualche foto. Libretto, tagliando e altri documenti si richiedono solo se decidi di procedere con la vendita."
-    },
-    {
-      q: "Posso vendere anche se l'auto è ancora finanziata?",
-      a: "Sì. Parlane con il nostro team: verifichiamo insieme la situazione del finanziamento e ti spieghiamo i passaggi necessari prima di procedere."
     }
   ];
 
