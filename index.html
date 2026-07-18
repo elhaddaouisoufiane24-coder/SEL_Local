@@ -246,6 +246,10 @@
     font-weight:600;
     color:var(--gray-text);
   }
+  .social-proof-compact{padding:28px 0;}
+  .social-proof-compact .stats-row{gap:32px;}
+  .social-proof-compact .stat-item strong{font-size:24px;}
+  .social-proof-compact .stat-item span{font-size:12px;}
   .testimonials-section{
     background:var(--white);
     border-bottom:1px solid rgba(15,31,77,0.08);
@@ -353,18 +357,33 @@
   .how{background:var(--bg);}
   .steps-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
     gap:24px;
     margin-top:32px;
   }
-  @media(max-width:980px){ .steps-grid{grid-template-columns:1fr 1fr;} }
-  @media(max-width:600px){ .steps-grid{grid-template-columns:1fr;} }
+  @media(max-width:700px){
+    .steps-grid{
+      display:flex;
+      grid-template-columns:none;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      gap:16px;
+      margin:32px -24px 0;
+      padding:2px 24px 12px;
+      scrollbar-width:none;
+    }
+    .steps-grid::-webkit-scrollbar{display:none;}
+  }
   .step-card{
     background:var(--white);
     border-radius:var(--radius);
     padding:20px;
     box-shadow:var(--shadow);
     position:relative;
+  }
+  @media(max-width:700px){
+    .step-card{flex:0 0 80%; scroll-snap-align:start;}
   }
   .step-media{
     aspect-ratio:4/3;
@@ -664,20 +683,6 @@
         <a href="#form" class="btn btn-primary">Richiedi la tua valutazione gratuita</a>
         <a href="#come-funziona" class="btn btn-outline">Come funziona</a>
       </div>
-      <div class="reassurance">
-        <div class="reassurance-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Valutazione gratuita
-        </div>
-        <div class="reassurance-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Nessun impegno di vendita
-        </div>
-        <div class="reassurance-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Risposta entro 24 ore
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -705,7 +710,7 @@
 </section>
 
 <!-- SOCIAL PROOF: valori segnaposto, da sostituire con dati reali prima del lancio -->
-<section class="social-proof">
+<section class="social-proof social-proof-compact">
   <div class="container">
     <div class="stats-row">
       <div class="stat-item reveal">
@@ -830,6 +835,41 @@
   </div>
 </section>
 
+<!-- COME FUNZIONA -->
+<section class="how" id="come-funziona">
+  <div class="container">
+    <span class="eyebrow">Il processo</span>
+    <h2>Un percorso semplice, pensato per farti risparmiare tempo.</h2>
+    <p class="section-lead reveal">Niente promesse gonfiate né sopralluoghi infiniti. Ti chiediamo solo le informazioni essenziali e ti diamo una risposta concreta, in tempi brevi.</p>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-media"><img src="https://images.unsplash.com/photo-1611612793815-eed1294fcbeb?auto=format&fit=crop&w=500&q=80" alt="Persona che fotografa la propria auto con lo smartphone"></div>
+        <div class="step-head">
+          <span class="step-badge">01</span>
+          <h3>Invia i dati della tua auto</h3>
+        </div>
+        <p>Un form veloce con modello, chilometraggio, alimentazione e qualche foto.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-media"><img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=500&q=80" alt="Report di valutazione chiaro su schermo"></div>
+        <div class="step-head">
+          <span class="step-badge">02</span>
+          <h3>Valutazione chiara</h3>
+        </div>
+        <p>Il team analizza i dati ricevuti e ti restituisce una stima trasparente, senza bisogno di un sopralluogo immediato.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-media"><img src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?auto=format&fit=crop&w=500&q=80" alt="Stretta di mano che conferma l'accordo"></div>
+        <div class="step-head">
+          <span class="step-badge">03</span>
+          <h3>Decidi con calma</h3>
+        </div>
+        <p>Solo se la proposta ti convince, procediamo insieme verso la vendita.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- RECENSIONI: segnaposto, da sostituire con recensioni reali prima del lancio -->
 <section class="testimonials-section">
   <div class="container">
@@ -908,52 +948,6 @@
     <div class="flip-card reveal">
       <span class="eyebrow">La soluzione</span>
       <p>Con SEL Automobili parti da una valutazione chiara e capisci subito se vendere la tua auto conviene.</p>
-    </div>
-  </div>
-</section>
-
-<!-- COME FUNZIONA -->
-<section class="how" id="come-funziona">
-  <div class="container">
-    <span class="eyebrow">Il processo</span>
-    <h2>Un percorso semplice, pensato per farti risparmiare tempo.</h2>
-    <p class="section-lead reveal">Niente promesse gonfiate né sopralluoghi infiniti. Ti chiediamo solo le informazioni essenziali e ti diamo una risposta concreta, in tempi brevi.</p>
-    <div class="steps-grid">
-      <div class="step-card reveal">
-        <div class="step-media"><img src="https://images.unsplash.com/photo-1611612793815-eed1294fcbeb?auto=format&fit=crop&w=500&q=80" alt="Persona che fotografa la propria auto con lo smartphone"></div>
-        <div class="step-head">
-          <span class="step-badge">01</span>
-          <h3>Invia i dati della tua auto</h3>
-        </div>
-        <p>Un form veloce con modello, chilometraggio, alimentazione e qualche foto.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-media"><img src="https://images.unsplash.com/photo-1663780852957-0e1f8bda3d0d?auto=format&fit=crop&w=500&q=80" alt="Il team analizza i dati ricevuti"></div>
-        <div class="step-head">
-          <span class="step-badge">02</span>
-          <h3>Analisi da parte del team</h3>
-        </div>
-        <p>Verifichiamo le informazioni ricevute, senza bisogno di un sopralluogo immediato.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-media"><img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=500&q=80" alt="Report di valutazione chiaro su schermo"></div>
-        <div class="step-head">
-          <span class="step-badge">03</span>
-          <h3>Valutazione chiara</h3>
-        </div>
-        <p>Ricevi una stima trasparente di quanto vale la tua auto, senza impegno.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-media"><img src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?auto=format&fit=crop&w=500&q=80" alt="Stretta di mano che conferma l'accordo"></div>
-        <div class="step-head">
-          <span class="step-badge">04</span>
-          <h3>Decidi con calma</h3>
-        </div>
-        <p>Solo se la proposta ti convince, procediamo insieme verso la vendita.</p>
-      </div>
-    </div>
-    <div class="hero-actions" style="margin-top:36px; justify-content:center; display:flex;">
-      <a href="#form" class="btn btn-primary">Vai alla valutazione</a>
     </div>
   </div>
 </section>
