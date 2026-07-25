@@ -163,10 +163,10 @@
   @media(min-width:860px){ .nav-phone{display:flex; align-items:center; gap:8px;} }
 
   @media(max-width:480px){
-    .nav{padding:6px 16px; gap:8px;}
-    .logo img{height:130px;}
+    .nav{padding:4px 16px;}
+    .logo img{height:150px;}
     .nav-cta{gap:8px;}
-    .nav-cta .btn{padding:10px 14px; font-size:13px;}
+    .nav-cta .btn{padding:14px 22px; font-size:15px;}
     .nav-cta .cta-full{display:none;}
     .nav-cta .cta-short{display:inline;}
   }
@@ -186,6 +186,7 @@
   .hero h1{max-width:700px; margin-left:auto; margin-right:auto;}
   .hero p.sub{font-size:18px; max-width:560px; margin-left:auto; margin-right:auto;}
   .hero-actions{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:8px;}
+  .hero-actions .btn{flex:1 1 260px; max-width:320px; white-space:normal;}
   .hero-trust{
     display:flex;
     flex-wrap:wrap;
@@ -307,11 +308,15 @@
     border:1.5px solid var(--primary);
   }
   .compare-card-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
     font-size:17px;
     margin:0 0 14px 0;
     color:var(--dark);
   }
   .compare-card-highlight .compare-card-title{color:var(--primary);}
+  .compare-card-logo{height:20px; width:auto;}
   .compare-card-row{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -571,6 +576,10 @@
     margin-bottom:16px;
   }
   .footer-logo img{height:36px; width:auto; display:block;}
+  @media(max-width:480px){
+    .footer-logo{padding:14px 20px;}
+    .footer-logo img{height:112px;}
+  }
   footer h4{
     color:#fff;
     font-size:14px;
@@ -614,7 +623,7 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8Z" stroke="#0F1F4D" stroke-width="1.6"/></svg>
         +39 000 000 0000
       </a>
-      <a href="#form" class="btn btn-primary"><span class="cta-full">Richiedi la valutazione</span><span class="cta-short">Valutazione</span></a>
+      <a href="#form" class="btn btn-primary"><span class="cta-full">Richiedi valutazione</span><span class="cta-short">Valutazione</span></a>
     </div>
   </div>
 </header>
@@ -658,16 +667,16 @@
       <div class="step-card reveal">
         <div class="step-head">
           <span class="step-badge">01</span>
-          <h3>Invia i dati della tua auto</h3>
+          <h3>Inviaci i dati della tua auto</h3>
         </div>
-        <p>Un form veloce con modello, chilometraggio, alimentazione e qualche foto.</p>
+        <p>Compila comodamente il form inserendo i dati della tua auto e qualche foto.</p>
       </div>
       <div class="step-card reveal">
         <div class="step-head">
           <span class="step-badge">02</span>
-          <h3>Valutazione chiara</h3>
+          <h3>Valutiamo la tua auto</h3>
         </div>
-        <p>Il team analizza i dati ricevuti e ti restituisce una stima trasparente, senza bisogno di un sopralluogo immediato.</p>
+        <p>Analizziamo la tua auto e, entro 48 ore, ti contattiamo per fornirti una stima e un documento di riepilogo.</p>
       </div>
       <div class="step-card reveal">
         <div class="step-head">
@@ -818,7 +827,7 @@
         <div class="compare-card-row"><span>Passaggio di proprietà</span><strong>A tuo carico</strong></div>
       </div>
       <div class="compare-card compare-card-highlight">
-        <h3 class="compare-card-title">Con SEL Automobili</h3>
+        <h3 class="compare-card-title"><img src="asset/logo.png" alt="" class="compare-card-logo">Con SEL Automobili</h3>
         <div class="compare-card-row"><span>Prezzo ottenuto</span><strong>Il vero prezzo di mercato</strong></div>
         <div class="compare-card-row"><span>Chi ci guadagna</span><strong>Resta tutto a te</strong></div>
         <div class="compare-card-row"><span>Tempo richiesto</span><strong>Minimo: ci pensiamo noi</strong></div>
@@ -849,15 +858,15 @@
     <span class="eyebrow center" style="display:block; text-align:center;">Cosa dicono i nostri clienti</span>
     <div class="stats-row stats-row-testimonials">
       <div class="stat-item reveal">
-        <strong>500+</strong>
+        <strong data-count-to="500" data-suffix="+">0+</strong>
         <span>Auto vendute con successo</span>
       </div>
       <div class="stat-item reveal">
-        <strong>4.8/5</strong>
+        <strong data-count-to="4.8" data-suffix="/5" data-decimals="1">0.0/5</strong>
         <span>Valutazione media clienti</span>
       </div>
       <div class="stat-item reveal">
-        <strong>24h</strong>
+        <strong data-count-to="24" data-suffix="h">0h</strong>
         <span>Tempo medio di risposta</span>
       </div>
     </div>
@@ -951,11 +960,34 @@
     entries.forEach(function(entry){
       if(entry.isIntersecting){
         entry.target.classList.add('visible');
+        var counter = entry.target.querySelector('[data-count-to]');
+        if(counter) animateCounter(counter);
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
   revealEls.forEach(function(el){ observer.observe(el); });
+
+  // ---- Counter animation for stats ----
+  function animateCounter(el){
+    var target = parseFloat(el.dataset.countTo);
+    var suffix = el.dataset.suffix || '';
+    var decimals = el.dataset.decimals ? parseInt(el.dataset.decimals, 10) : 0;
+    var duration = 1400;
+    var startTime = null;
+    function step(timestamp){
+      if(!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = (target * eased).toFixed(decimals) + suffix;
+      if(progress < 1){
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target.toFixed(decimals) + suffix;
+      }
+    }
+    requestAnimationFrame(step);
+  }
 
   // ---- Multi-step form ----
   var form = document.getElementById('leadForm');
