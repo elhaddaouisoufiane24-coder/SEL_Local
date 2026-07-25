@@ -289,90 +289,47 @@
   /* Pain points / comparison */
   .pain{background:var(--white);}
   .pain .section-lead{margin-top:8px;}
-  .compare-table-wrap{
+  .compare-cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
     margin-top:32px;
-    overflow-x:auto;
-    border-radius:var(--radius);
-    border:1.5px solid rgba(15,31,77,0.1);
-    -webkit-overflow-scrolling:touch;
+    align-items:start;
   }
-  .compare-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:640px;
+  .compare-card{
     background:var(--white);
+    border:1.5px solid rgba(15,31,77,0.1);
+    border-radius:var(--radius);
+    padding:24px;
   }
-  .compare-table th, .compare-table td{
-    padding:16px 18px;
-    text-align:left;
-    font-size:14px;
+  .compare-card-highlight{
+    background:rgba(46,80,232,0.06);
+    border:1.5px solid var(--primary);
+  }
+  .compare-card-title{
+    font-size:17px;
+    margin:0 0 14px 0;
+    color:var(--dark);
+  }
+  .compare-card-highlight .compare-card-title{color:var(--primary);}
+  .compare-card-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    padding:10px 0;
     border-bottom:1px solid rgba(15,31,77,0.08);
   }
-  .compare-table thead th{
-    background:var(--bg);
-    font-size:12px;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:0.04em;
-    color:var(--dark);
-    border-bottom:none;
-  }
-  .compare-table tbody th{
-    font-weight:700;
-    color:var(--dark);
-    white-space:nowrap;
-  }
-  .compare-table tbody td{color:var(--gray-text); font-weight:500;}
-  .compare-table tbody tr:last-child th, .compare-table tbody tr:last-child td{border-bottom:none;}
-  .compare-table .highlight-col{
-    background:rgba(46,80,232,0.06);
-    border-left:1.5px solid rgba(46,80,232,0.25);
-    border-right:1.5px solid rgba(46,80,232,0.25);
-    color:var(--dark);
-  }
-  .compare-table thead .highlight-col{
-    background:var(--primary);
-    color:#fff;
-    border-left:1.5px solid var(--primary);
-    border-right:1.5px solid var(--primary);
-  }
+  .compare-card-row:last-child{border-bottom:none;}
+  .compare-card-row span{color:var(--gray-text); font-weight:600; font-size:13px;}
+  .compare-card-row strong{color:var(--dark); font-weight:700; font-size:13px; text-align:right;}
 
-  /* Confronto: card verticali su mobile al posto della tabella */
-  .compare-cards{display:none;}
+  /* Confronto: card impilate su mobile */
   @media(max-width:768px){
-    .compare-table-wrap{display:none;}
     .compare-cards{
       display:flex;
       flex-direction:column;
       gap:16px;
-      margin-top:32px;
     }
-    .compare-card{
-      background:var(--white);
-      border:1.5px solid rgba(15,31,77,0.1);
-      border-radius:var(--radius);
-      padding:20px;
-    }
-    .compare-card-highlight{
-      background:rgba(46,80,232,0.06);
-      border:1.5px solid var(--primary);
-    }
-    .compare-card-title{
-      font-size:16px;
-      margin:0 0 12px 0;
-      color:var(--dark);
-    }
-    .compare-card-highlight .compare-card-title{color:var(--primary);}
-    .compare-card-row{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      padding:10px 0;
-      border-bottom:1px solid rgba(15,31,77,0.08);
-    }
-    .compare-card-row:last-child{border-bottom:none;}
-    .compare-card-row span{color:var(--gray-text); font-weight:600; font-size:13px;}
-    .compare-card-row strong{color:var(--dark); font-weight:700; font-size:13px; text-align:right;}
   }
 
   .flip-card{
@@ -411,29 +368,21 @@
   .step-card{
     background:var(--white);
     border-radius:var(--radius);
-    padding:20px;
+    padding:28px 24px;
     box-shadow:var(--shadow);
     position:relative;
   }
-  .step-media{
-    aspect-ratio:4/3;
-    border-radius:var(--radius-sm);
-    overflow:hidden;
-    margin-bottom:16px;
-  }
-  .step-media img{width:100%; height:100%; object-fit:cover;}
-  .step-head{display:flex; align-items:center; gap:10px; margin-bottom:8px;}
+  .step-head{display:block; margin-bottom:8px;}
   .step-badge{
-    flex-shrink:0;
-    width:28px;height:28px;
-    border-radius:50%;
-    background:var(--primary);
-    color:#fff;
-    font-size:13px;
+    display:block;
+    background:none;
+    color:var(--primary);
+    font-size:40px;
     font-weight:800;
-    display:flex;align-items:center;justify-content:center;
+    line-height:1;
+    margin-bottom:10px;
   }
-  .step-head h3{margin:0; font-size:17px;}
+  .step-head h3{margin:0; font-size:18px;}
   .step-card p{font-size:14px; margin:0;}
 
   /* Come funziona: lista verticale su mobile (no immagini, no colonne) */
@@ -456,7 +405,6 @@
     }
     .step-card:first-child{padding-top:4px;}
     .step-card:last-child{border-bottom:none;}
-    .step-media{display:none;}
     .step-head{display:contents;}
     .step-badge{
       grid-column:1;
@@ -700,6 +648,38 @@
   </div>
 </section>
 
+<!-- COME FUNZIONA -->
+<section class="how" id="come-funziona">
+  <div class="container">
+    <span class="eyebrow">Il processo</span>
+    <h2>Un percorso semplice, pensato per farti risparmiare tempo.</h2>
+    <p class="section-lead reveal">Niente promesse gonfiate né sopralluoghi infiniti. Ti chiediamo solo le informazioni essenziali e ti diamo una risposta concreta, in tempi brevi.</p>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-head">
+          <span class="step-badge">01</span>
+          <h3>Invia i dati della tua auto</h3>
+        </div>
+        <p>Un form veloce con modello, chilometraggio, alimentazione e qualche foto.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-head">
+          <span class="step-badge">02</span>
+          <h3>Valutazione chiara</h3>
+        </div>
+        <p>Il team analizza i dati ricevuti e ti restituisce una stima trasparente, senza bisogno di un sopralluogo immediato.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-head">
+          <span class="step-badge">03</span>
+          <h3>La vendita, seguita da noi</h3>
+        </div>
+        <p>Se decidi di procedere, troviamo l'acquirente giusto e ti accompagniamo fino al passaggio di proprietà.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PAIN AGITATION -->
 <section class="pain-agitation">
   <div class="container">
@@ -709,41 +689,6 @@
       <p>Prepari l'auto, fai le foto, scrivi l'annuncio. Poi aspetti. Rispondi a messaggi a qualsiasi ora, filtri i curiosi, dai appuntamento a sconosciuti. Qualcuno sparisce. Qualcuno arriva e offre la metà. Qualcuno chiede garanzie che non puoi dare. E nel frattempo l'auto è ferma, tu perdi tempo, e il prezzo che speravi di ottenere si abbassa ad ogni trattativa andata male.</p>
       <p class="pain-agitation-highlight">Con SEL Automobili non gestisci nulla di tutto questo. Ci pensiamo noi.</p>
       <a href="#form" class="btn btn-primary">Richiedi la valutazione gratuita</a>
-    </div>
-  </div>
-</section>
-
-<!-- COME FUNZIONA -->
-<section class="how" id="come-funziona">
-  <div class="container">
-    <span class="eyebrow">Il processo</span>
-    <h2>Un percorso semplice, pensato per farti risparmiare tempo.</h2>
-    <p class="section-lead reveal">Niente promesse gonfiate né sopralluoghi infiniti. Ti chiediamo solo le informazioni essenziali e ti diamo una risposta concreta, in tempi brevi.</p>
-    <div class="steps-grid">
-      <div class="step-card reveal">
-        <div class="step-media"><img src="https://images.unsplash.com/photo-1611612793815-eed1294fcbeb?auto=format&fit=crop&w=500&q=80" alt="Persona che fotografa la propria auto con lo smartphone"></div>
-        <div class="step-head">
-          <span class="step-badge">01</span>
-          <h3>Invia i dati della tua auto</h3>
-        </div>
-        <p>Un form veloce con modello, chilometraggio, alimentazione e qualche foto.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-media"><img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=500&q=80" alt="Report di valutazione chiaro su schermo"></div>
-        <div class="step-head">
-          <span class="step-badge">02</span>
-          <h3>Valutazione chiara</h3>
-        </div>
-        <p>Il team analizza i dati ricevuti e ti restituisce una stima trasparente, senza bisogno di un sopralluogo immediato.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-media"><img src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?auto=format&fit=crop&w=500&q=80" alt="Stretta di mano che conferma l'accordo"></div>
-        <div class="step-head">
-          <span class="step-badge">03</span>
-          <h3>La vendita, seguita da noi</h3>
-        </div>
-        <p>Se decidi di procedere, troviamo l'acquirente giusto e ti accompagniamo fino al passaggio di proprietà.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -861,56 +806,6 @@
       <span class="eyebrow">Il confronto</span>
       <h2>Vendere l'auto da privato può diventare complicato. Venderla a un concessionario ti fa perdere soldi.</h2>
       <p>Chi ritira la tua auto per rivenderla deve tenersi un margine: quel margine esce dalla tua tasca. Ecco come si confrontano le tre strade.</p>
-    </div>
-    <div class="compare-table-wrap reveal">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th scope="col" class="compare-row-label"></th>
-            <th scope="col">Da solo</th>
-            <th scope="col" class="highlight-col">Con SEL Automobili</th>
-            <th scope="col">Al concessionario</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Prezzo ottenuto</th>
-            <td>Incerto, rischi di svenderla</td>
-            <td class="highlight-col"><strong>Il vero prezzo di mercato</strong></td>
-            <td>Ribassato: deve restargli margine per rivenderla</td>
-          </tr>
-          <tr>
-            <th scope="row">Chi ci guadagna</th>
-            <td>Nessuno</td>
-            <td class="highlight-col"><strong>Resta tutto a te</strong></td>
-            <td>Il concessionario, sulla tua auto</td>
-          </tr>
-          <tr>
-            <th scope="row">Tempo richiesto</th>
-            <td>Settimane, tra annunci e chiamate</td>
-            <td class="highlight-col">Minimo: ci pensiamo noi</td>
-            <td>Rapido</td>
-          </tr>
-          <tr>
-            <th scope="row">Contatti con sconosciuti</th>
-            <td>Diretti, senza filtri</td>
-            <td class="highlight-col">Filtrati da noi</td>
-            <td>Nessuno</td>
-          </tr>
-          <tr>
-            <th scope="row">Rischio truffe</th>
-            <td>Alto</td>
-            <td class="highlight-col">Nessuno</td>
-            <td>Nessuno</td>
-          </tr>
-          <tr>
-            <th scope="row">Passaggio di proprietà</th>
-            <td>A tuo carico</td>
-            <td class="highlight-col">Ti assistiamo noi</td>
-            <td>Gestito dal concessionario</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
     <div class="compare-cards reveal">
       <div class="compare-card">
