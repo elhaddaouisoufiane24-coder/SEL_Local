@@ -27,7 +27,7 @@
     --shadow-md:0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
     --shadow-lg:0 20px 48px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.04);
     --transition:cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --section-gap:120px;
+    --section-gap:72px;
 
     /* alias retrocompatibili per le regole esistenti */
     --primary:var(--accent);
@@ -71,7 +71,6 @@
   }
 
   section{padding:var(--section-gap) 0;}
-  @media(max-width:768px){ section{padding:72px 0;} }
 
   .eyebrow{
     display:block;
@@ -120,11 +119,11 @@
   h2{font-size:clamp(28px, 4vw, 46px); font-weight:700; letter-spacing:-0.02em; max-width:700px;}
   h3{font-size:20px;}
   p{margin:0 0 16px 0;color:var(--gray-text);}
-  .section-lead{max-width:600px; font-size:17px; line-height:1.7; margin-bottom:56px;}
+  .section-lead{max-width:600px; font-size:17px; line-height:1.7; margin-bottom:32px;}
   .center{text-align:center;margin-left:auto;margin-right:auto;}
 
   @media(max-width:768px){
-    :root{ --section-gap:72px; }
+    :root{ --section-gap:48px; }
     h1{font-size:clamp(32px, 8vw, 48px);}
     h2{font-size:clamp(24px, 6vw, 36px);}
   }
@@ -162,16 +161,13 @@
   .btn-white:hover{background:var(--bg-subtle); transform:translateY(-1px);}
   .btn-block{width:100%;}
 
-  /* CTA navbar: variante compatta scura */
+  /* CTA navbar: variante compatta */
   .nav-cta .btn-primary{
-    background:var(--text);
-    color:#fff;
     padding:10px 20px;
     font-size:14px;
     font-weight:500;
-    box-shadow:none;
   }
-  .nav-cta .btn-primary:hover{background:#333; transform:scale(1.02); box-shadow:none;}
+  .nav-cta .btn-primary:hover{transform:scale(1.02);}
 
   @media(max-width:480px){
     .btn{padding:14px 20px; font-size:14px; white-space:normal; text-align:center;}
@@ -275,7 +271,7 @@
     background:
       radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37,99,235,0.06), transparent),
       var(--bg);
-    padding:160px 0 120px;
+    padding:128px 0 64px;
   }
   .hero-inner{
     max-width:760px;
@@ -284,14 +280,14 @@
   }
   .hero h1{max-width:700px; margin-left:auto; margin-right:auto;}
   .hero p.sub{font-size:18px; line-height:1.65; color:var(--text-muted); max-width:560px; margin-left:auto; margin-right:auto; margin-top:20px;}
-  .hero-actions{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:40px;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:28px;}
   .hero-actions .btn{flex:1 1 260px; max-width:320px; white-space:normal;}
   .hero-trust{
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
     gap:12px 24px;
-    margin-top:48px;
+    margin-top:28px;
   }
   .trust-badge{
     display:flex;
@@ -491,6 +487,7 @@
     background:var(--white);
     border-top:1px solid rgba(29,29,31,0.08);
   }
+  .solution{background:var(--bg-subtle);}
   .pain-agitation-body{max-width:700px;}
   .pain-agitation-body p{font-size:16px;}
   .pain-agitation-highlight{
@@ -509,11 +506,16 @@
     gap:32px;
     margin-top:32px;
   }
+  .steps-grid-4{grid-template-columns:repeat(4,1fr); gap:20px;}
+  @media(max-width:900px){
+    .steps-grid-4{grid-template-columns:repeat(2,1fr);}
+    .steps-grid-4 .step-card:not(:last-child)::after{display:none;}
+  }
   .step-card{
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:var(--radius);
-    padding:32px;
+    padding:24px;
     box-shadow:none;
     transition:transform .2s ease, box-shadow .2s ease;
     position:relative;
@@ -523,14 +525,16 @@
   .step-card:not(:last-child)::after{
     content:'';
     position:absolute;
-    top:56px;
-    left:92px;
+    top:48px;
+    left:84px;
     right:-32px;
     height:1px;
     background:linear-gradient(90deg, var(--accent), var(--border));
     z-index:0;
     pointer-events:none;
   }
+  .steps-grid-4 .step-card:not(:last-child)::after{right:-20px;}
+  .step-card p + p{margin-top:8px;}
   .step-head{display:block; margin-bottom:8px;}
   .step-badge{
     display:flex;
@@ -833,7 +837,9 @@
     gap:48px;
     align-items:center;
   }
-  .about .eyebrow, .about h2, .about .section-lead, .about .credential-row{grid-column:1;}
+  .about .eyebrow, .about h2, .about .about-bio, .about .credential-row{grid-column:1;}
+  .about-bio p{margin:0 0 10px 0; max-width:600px;}
+  .about-bio p:last-child{margin-bottom:0;}
   .about .container::after{
     content:'';
     grid-column:2;
@@ -850,15 +856,15 @@
   .credential-row{
     display:flex;
     flex-direction:column;
-    margin-top:32px;
+    margin-top:20px;
   }
   .credential-item{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:16px 0;
+    gap:10px;
+    padding:9px 0;
     border-top:1px solid var(--border);
-    font-size:15px;
+    font-size:14px;
     font-weight:500;
     color:var(--text);
   }
@@ -870,7 +876,7 @@
     background:var(--accent);
     flex-shrink:0;
   }
-  .credential-item span{font-weight:500; font-size:15px; color:var(--text);}
+  .credential-item span{font-weight:500; font-size:14px; color:var(--text);}
 
   /* Cosa controllo */
   .services{background:var(--bg-subtle); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
@@ -894,12 +900,29 @@
   .service-card h3{margin:0 0 8px 0; font-size:16px; font-weight:700; color:var(--text);}
   .service-card p{font-size:14px; line-height:1.6; margin:0; color:var(--text-muted);}
 
+  .checklist{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:4px 32px;
+    margin:0 0 24px 0;
+  }
+  @media(max-width:640px){ .checklist{grid-template-columns:1fr;} }
+  .checklist li{
+    font-size:16px;
+    font-weight:600;
+    color:var(--text);
+    padding:10px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .ispezione-question{margin:0;}
+  .ispezione-question.pain-agitation-highlight{margin-top:4px;}
+
   /* CTA intermedia */
   .cta-mid{
     background:var(--bg-dark);
     color:#fff;
     border-radius:var(--radius-lg);
-    padding:72px 64px;
+    padding:48px 56px;
     margin:0 max(24px, calc((100% - 1120px)/2));
     text-align:center;
     position:relative;
@@ -957,11 +980,11 @@
   <div class="container hero-inner">
     <div class="reveal hero-copy">
       <span class="eyebrow">Il tuo amico esperto per l'auto usata</span>
-      <h1>Prima di comprare, sappi cosa stai comprando.</h1>
-      <p class="sub">Vengo con te a vedere l'auto che vuoi comprare e te la controllo per bene. Non compro auto, non vendo auto, non ho accordi con nessuno: ti dico solo la verità, anche quando non è quella che vuoi sentire.</p>
+      <h1>Un'ispezione professionale prima dell'acquisto può evitarti migliaia di euro di problemi.</h1>
+      <p class="sub">Ti accompagno a vedere l'auto che vuoi acquistare e la ispeziono da cima a fondo. Il mio obiettivo non è convincerti a comprarla, ma aiutarti a capire se è davvero la scelta giusta per te.</p>
       <div class="hero-actions">
-        <a href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20venire%20a%20vedere%20un%27auto%20con%20te" target="_blank" rel="noopener" class="btn btn-primary">Andiamo a vederla insieme</a>
-        <a href="#come-funziona" class="btn btn-outline">Come funziona</a>
+        <a href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20venire%20a%20vedere%20un%27auto%20con%20te" target="_blank" rel="noopener" class="btn btn-primary">👉 Andiamo a vederla insieme</a>
+        <a href="#come-funziona" class="btn btn-outline">Scopri come funziona</a>
       </div>
       <div class="hero-trust">
         <div class="trust-badge reveal">
@@ -986,9 +1009,29 @@
   <div class="container">
     <div class="reveal center pain-agitation-body">
       <span class="eyebrow">Il problema</span>
-      <h2>I problemi di un'auto usata non si vedono. Si trovano.</h2>
-      <p>Chilometri azzerati. Incidenti non dichiarati. Tagliandi saltati. Motori con difetti che emergono solo dopo qualche settimana. Chi vende sa già tutto questo. Tu, di solito, lo scopri dopo.</p>
-      <p class="pain-agitation-highlight">Bastano un paio d'ore insieme, prima di firmare, per evitare un errore che poi si paga a lungo.</p>
+      <h2>Una bella auto non è sempre un buon acquisto.</h2>
+      <p>Quando compri un'auto usata, hai pochissimo tempo per prendere una decisione importante.</p>
+      <p>Una prova su strada e qualche occhiata non bastano per capire davvero in che condizioni si trova il veicolo.</p>
+      <p>Difetti meccanici nascosti, riparazioni dopo incidenti, chilometraggi poco credibili o semplicemente un prezzo troppo alto sono problemi che spesso emergono solo dopo l'acquisto.</p>
+      <p>Ed è lì che iniziano le spese.</p>
+      <p class="pain-agitation-highlight">Per questo, prima di comprare, è fondamentale fare un'ispezione accurata.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LA SOLUZIONE -->
+<section class="solution">
+  <div class="container">
+    <div class="reveal center pain-agitation-body">
+      <span class="eyebrow">La soluzione</span>
+      <h2>Un'ispezione fatta con un solo interesse: il tuo.</h2>
+      <p>Quando ispeziono un'auto non devo venderla.</p>
+      <p>Non lavoro per concessionarie.</p>
+      <p>Non prendo commissioni.</p>
+      <p>Il mio compito è controllare tutto quello che conta davvero e dirti con sincerità cosa ne penso.</p>
+      <p>Se secondo me è un buon acquisto, te lo dico.</p>
+      <p>Se penso che sia meglio lasciarla perdere, te lo dico con la stessa tranquillità.</p>
+      <p class="pain-agitation-highlight">Perché preferisco farti perdere un'auto oggi, piuttosto che farti perdere migliaia di euro domani.</p>
     </div>
   </div>
 </section>
@@ -997,17 +1040,17 @@
 <section class="how" id="come-funziona">
   <div class="container">
     <span class="eyebrow">Come funziona</span>
-    <h2>Tre passi. Zero sorprese.</h2>
-    <div class="steps-grid">
+    <h2>Quattro passaggi. Nessuna complicazione.</h2>
+    <div class="steps-grid steps-grid-4">
       <div class="step-card reveal">
         <div class="step-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
         </div>
         <div class="step-head">
           <span class="step-badge">01</span>
-          <h3>Dimmi che auto stai guardando</h3>
+          <h3>Mi invii l'annuncio.</h3>
         </div>
-        <p>Mandami il link dell'annuncio. Ti rispondo entro poche ore con una prima valutazione e organizziamo la visita.</p>
+        <p>Analizziamo insieme l'auto che hai trovato.</p>
       </div>
       <div class="step-card reveal">
         <div class="step-icon">
@@ -1015,19 +1058,30 @@
         </div>
         <div class="step-head">
           <span class="step-badge">02</span>
-          <h3>Veniamo insieme a vederla</h3>
+          <h3>Organizziamo l'appuntamento.</h3>
         </div>
-        <p>Arrivo con strumentazione professionale. Ispezione completa: carrozzeria, motore, diagnosi elettronica, freni, storico tagliandi.</p>
+        <p>Ci incontriamo direttamente dal venditore.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 15l1.5-5.5A2 2 0 0 1 6.4 8h11.2a2 2 0 0 1 1.9 1.5L21 15" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><rect x="2.5" y="15" width="19" height="4.5" rx="1.5" stroke="#2E50E8" stroke-width="1.8"/><circle cx="7" cy="19.5" r="1.4" fill="#2E50E8"/><circle cx="17" cy="19.5" r="1.4" fill="#2E50E8"/></svg>
+        </div>
+        <div class="step-head">
+          <span class="step-badge">03</span>
+          <h3>Effettuo un'ispezione completa.</h3>
+        </div>
+        <p>Controllo meccanica, carrozzeria, elettronica, telaio, interni e tutto ciò che può incidere sul valore e sull'affidabilità del veicolo.</p>
+        <p>Durante l'ispezione ti spiego ogni verifica in modo semplice, così sai esattamente cosa sto controllando.</p>
       </div>
       <div class="step-card reveal">
         <div class="step-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="step-head">
-          <span class="step-badge">03</span>
-          <h3>Sai esattamente cosa stai comprando</h3>
+          <span class="step-badge">04</span>
+          <h3>Ti aiuto a decidere.</h3>
         </div>
-        <p>Ti dico tutto quello che ho trovato, cosa potrebbe costare e se il prezzo è giustificato. Poi decidi tu — senza pressioni.</p>
+        <p>Alla fine dell'ispezione saprai se quell'auto vale davvero il prezzo richiesto oppure se è meglio continuare a cercare.</p>
       </div>
     </div>
   </div>
@@ -1036,52 +1090,19 @@
 <!-- COSA CONTROLLO -->
 <section class="services" id="ispezione">
   <div class="container">
-    <span class="eyebrow">L'ispezione</span>
-    <h2>Ogni aspetto che un venditore preferirebbe che tu ignorassi.</h2>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="icon-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 15l1.5-5.5A2 2 0 0 1 6.4 8h11.2a2 2 0 0 1 1.9 1.5L21 15" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><rect x="2.5" y="15" width="19" height="4.5" rx="1.5" stroke="#2E50E8" stroke-width="1.8"/><circle cx="7" cy="19.5" r="1.4" fill="#2E50E8"/><circle cx="17" cy="19.5" r="1.4" fill="#2E50E8"/></svg>
-        </div>
-        <h3>Carrozzeria e vernice</h3>
-        <p>Ritocchi, riparazioni, danni da grandine, allineamento pannelli. Quello che non si nota da lontano.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="icon-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M10 3v2M14 3v2M10 19v2M14 19v2M3 10h2M3 14h2M19 10h2M19 14h2" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/><rect x="6" y="6" width="12" height="12" rx="2" stroke="#2E50E8" stroke-width="1.8"/></svg>
-        </div>
-        <h3>Motore e vano motore</h3>
-        <p>Perdite, usura, stato delle cinghie e dei liquidi. Niente che dovrebbe essere nascosto, lo è.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="icon-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="14" height="10" rx="2" stroke="#2E50E8" stroke-width="1.8"/><path d="M9 9v4M13 9v4" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/><path d="M17 10h4v4h-4" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Diagnosi elettronica</h3>
-        <p>Scanner collegato all'auto: errori attuali e storici, anche quelli cancellati di recente.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="icon-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="7" stroke="#2E50E8" stroke-width="1.8"/><path d="M12 5v2M12 17v2M5 12h2M17 12h2M7.3 7.3l1.4 1.4M15.3 15.3l1.4 1.4M7.3 16.7l1.4-1.4M15.3 8.7l1.4-1.4" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Freni e sospensioni</h3>
-        <p>Spessore pastiglie, dischi, rumori su strada. Componenti che incidono su sicurezza e costi di manutenzione.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="icon-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v4h4M9 12h6M9 16h6" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Storico e visure</h3>
-        <p>Libretto manutenzione, storico tagliandi, eventuali pendenze. Tutto verificato prima che tu firmi qualcosa.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="icon-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 18h6M10 21h4" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.45.9 1.15.9 1.9V16h5.4v-.3c0-.75.3-1.45.9-1.9A6 6 0 0 0 12 3Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Valutazione finale</h3>
-        <p>Al termine ti dico se l'auto vale il prezzo, cosa andrà sistemato e se conviene procedere. In chiaro, senza giri di parole.</p>
-      </div>
-    </div>
+    <span class="eyebrow">Ispezione</span>
+    <h2>Un'ispezione completa. Non un'occhiata veloce.</h2>
+    <p class="section-lead reveal">Quando investirai migliaia di euro in un'auto, vuoi essere sicuro di sapere cosa stai comprando. Per questo controllo ogni aspetto che può influenzare il valore, l'affidabilità e la sicurezza del veicolo.</p>
+    <ul class="checklist reveal">
+      <li>✅ Carrozzeria e struttura</li>
+      <li>✅ Motore e componenti meccaniche</li>
+      <li>✅ Interni ed elettronica</li>
+      <li>✅ Prova su strada</li>
+      <li>✅ Stato generale del veicolo</li>
+      <li>✅ Coerenza tra chilometraggio, condizioni e prezzo richiesto</li>
+    </ul>
+    <p class="ispezione-question">Ogni controllo serve a rispondere a una sola domanda.</p>
+    <p class="pain-agitation-highlight ispezione-question">Compreresti quest'auto sapendo tutto quello che sappiamo adesso?</p>
   </div>
 </section>
 
@@ -1128,7 +1149,15 @@
   <div class="container">
     <span class="eyebrow">Chi ti accompagna</span>
     <h2>Un esperto indipendente dalla tua parte.</h2>
-    <p class="section-lead reveal">Non vendo auto. Non ho accordi con concessionari o privati. Non guadagno né di più né di meno in base a quello che decidi: è per questo che puoi fidarti di quello che ti dico. Se un'auto fa schifo, te lo dico senza problemi. Vengo con te a vederla, la controllo in ogni punto, e alla fine decidi tu — con tutte le informazioni in mano.</p>
+    <div class="about-bio reveal">
+      <p>Ciao, sono Soufiane.</p>
+      <p>Per anni ho lavorato sulle auto ogni giorno.</p>
+      <p>In officina ho visto arrivare veicoli acquistati da poco con problemi che, se fossero stati scoperti prima, avrebbero evitato ai proprietari spese e delusioni.</p>
+      <p>Per questo ho creato S.E.L.</p>
+      <p>Per offrire un'ispezione professionale e un parere indipendente a chi sta per fare uno degli acquisti più importanti degli ultimi anni.</p>
+      <p>Il mio lavoro non è venderti un'auto.</p>
+      <p>È aiutarti a capire se vale davvero la pena comprarla.</p>
+    </div>
     <div class="credential-row reveal">
       <div class="credential-item">
         <div class="icon-circle">
@@ -1165,20 +1194,6 @@
   </div>
 </section>
 
-<!-- CALENDARIO -->
-<section class="booking" id="calendario">
-  <div class="container">
-    <span class="eyebrow">Disponibilità</span>
-    <h2>Scegli quando vuoi vederci.</h2>
-    <p class="section-lead reveal">Seleziona un giorno e un orario: ti scrivo su WhatsApp per confermare insieme l'appuntamento.</p>
-    <div class="booking-card reveal">
-      <div class="booking-days" id="bookingDays"></div>
-      <div class="booking-slots" id="bookingSlots"></div>
-      <p class="booking-note">Lavoro soprattutto in Veneto. Se sei fuori zona scrivimi comunque, vediamo insieme come organizzarci.</p>
-    </div>
-  </div>
-</section>
-
 <!-- FORM -->
 <section class="form-section" id="form">
   <div class="container">
@@ -1188,8 +1203,9 @@
 
     <div class="form-wrap reveal">
       <div class="form-progress">
-        <div class="form-progress-step active" data-step-label="1">1. L'auto che vuoi comprare</div>
-        <div class="form-progress-step" data-step-label="2">2. I tuoi contatti</div>
+        <div class="form-progress-step active" data-step-label="1">1. L'auto</div>
+        <div class="form-progress-step" data-step-label="2">2. Contatti</div>
+        <div class="form-progress-step" data-step-label="3">3. Quando</div>
       </div>
 
       <form id="leadForm" novalidate>
@@ -1249,7 +1265,18 @@
           </div>
           <div class="form-nav">
             <button type="button" class="btn btn-outline" data-prev>Indietro</button>
-            <button type="submit" class="btn btn-primary">Invia la richiesta</button>
+            <button type="button" class="btn btn-primary" data-next>Continua</button>
+          </div>
+        </div>
+
+        <div class="form-step" data-step="3">
+          <p class="field-hint" style="margin-bottom:16px; font-size:14px;">Seleziona un giorno e un orario: ti scrivo su WhatsApp per confermare insieme l'appuntamento.</p>
+          <div class="booking-days" id="bookingDays"></div>
+          <div class="booking-slots" id="bookingSlots"></div>
+          <p class="booking-note">Lavoro soprattutto in Veneto. Se sei fuori zona scrivimi comunque, vediamo insieme come organizzarci.</p>
+          <div class="form-nav">
+            <button type="button" class="btn btn-outline" data-prev>Indietro</button>
+            <span></span>
           </div>
         </div>
       </form>
@@ -1431,6 +1458,9 @@
           var label = dayNamesFull[date.getDay()] + ' ' + date.getDate() + ' ' + monthNamesFull[date.getMonth()];
           var msg = 'Ciao, vorrei prenotare un appuntamento per ' + label + ' alle ' + slot;
           window.open('https://wa.me/390000000000?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+          form.style.display = 'none';
+          document.querySelector('.form-progress').style.display = 'none';
+          formSuccess.classList.add('active');
         });
         bookingSlotsEl.appendChild(btn);
       });
@@ -1500,10 +1530,6 @@
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    if(!isStepValid(steps[currentStepIndex()])) return;
-    form.style.display = 'none';
-    document.querySelector('.form-progress').style.display = 'none';
-    formSuccess.classList.add('active');
   });
 
   // ---- FAQ accordion ----
