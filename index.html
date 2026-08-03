@@ -571,7 +571,6 @@
     .step-card{
       display:grid;
       grid-template-columns:auto 1fr;
-      grid-template-rows:auto auto;
       column-gap:18px;
       row-gap:6px;
       background:none;
@@ -587,15 +586,15 @@
     .step-head{display:contents;}
     .step-badge{
       grid-column:1;
-      grid-row:1 / span 2;
+      grid-row:1 / -1;
       align-self:start;
       width:36px;
       height:36px;
       font-size:15px;
       margin-bottom:0;
     }
-    .step-head h3{grid-column:2; grid-row:1;}
-    .step-card p{grid-column:2; grid-row:2; font-size:14px;}
+    .step-head h3{grid-column:2;}
+    .step-card p{grid-column:2; font-size:14px;}
   }
 
   /* Form */
@@ -826,50 +825,59 @@
   .social-row a:hover{background:var(--accent);}
 
   /* Chi sono */
-  .about{background:var(--bg);}
+  .about{background:var(--bg); text-align:center;}
   .about .section-lead{margin-top:8px;}
   .about .container{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:220px 1fr;
     gap:48px;
     align-items:center;
   }
-  .about .eyebrow, .about h2, .about .about-bio, .about .credential-row{grid-column:1;}
-  .about-bio p{margin:0 0 10px 0; max-width:600px;}
-  .about-bio p:last-child{margin-bottom:0;}
-  .about .container::after{
+  .about .container::before{
     content:'📷';
-    grid-column:2;
+    grid-column:1;
     grid-row:1/-1;
-    align-self:stretch;
+    justify-self:center;
+    align-self:center;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:48px;
-    color:var(--text-light);
+    width:200px;
+    height:200px;
+    border-radius:50%;
     background:var(--bg-subtle);
     border:2px dashed var(--border-hover);
-    border-radius:var(--radius-lg);
-    aspect-ratio:4/5;
+    font-size:44px;
+    color:var(--text-light);
   }
-  @media(max-width:900px){
+  .about .eyebrow, .about h2, .about .about-bio, .about .credential-row{grid-column:2;}
+  .about .eyebrow, .about h2{margin-left:auto; margin-right:auto;}
+  .about-bio{margin:0 auto;}
+  .about-bio p{margin:0 0 10px 0; text-align:center;}
+  .about-bio p:last-child{margin-bottom:0;}
+  @media(max-width:820px){
     .about .container{display:block;}
-    .about .container::after{display:none;}
+    .about .container::before{margin:0 auto 28px auto;}
+    .about .eyebrow, .about h2, .about .about-bio, .about .credential-row{grid-column:auto;}
   }
   .credential-row{
     display:flex;
     flex-direction:column;
+    align-items:center;
     margin-top:20px;
   }
   .credential-item{
-    display:flex;
+    display:inline-flex;
     align-items:center;
+    justify-content:center;
     gap:10px;
     padding:9px 0;
     border-top:1px solid var(--border);
     font-size:14px;
     font-weight:500;
     color:var(--text);
+    width:100%;
+    max-width:420px;
   }
   .credential-item .icon-circle{display:none;}
   .credential-item::before{
@@ -942,9 +950,28 @@
     pointer-events:none;
   }
   .cta-mid .container{max-width:none; margin:0; padding:0; position:relative; z-index:1;}
-  .cta-mid .center{max-width:520px;}
+  .cta-mid .center{max-width:680px;}
   .cta-mid h2{color:#fff; font-size:clamp(24px, 3.5vw, 40px);}
   .cta-mid p{color:rgba(255,255,255,0.6);}
+  .cta-mid-options{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:32px;
+    margin-top:32px;
+  }
+  .cta-mid-option{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    flex:1 1 240px;
+    max-width:280px;
+  }
+  .cta-mid-option p{margin:0; color:rgba(255,255,255,0.8); font-weight:600; font-size:16px;}
+  .cta-mid-option .btn{width:100%;}
+  .cta-mid .btn-outline{background:transparent; border:1px solid rgba(255,255,255,0.3); color:#fff;}
+  .cta-mid .btn-outline:hover{background:rgba(255,255,255,0.1);}
   .cta-mid-link{
     display:inline-block;
     margin-top:16px;
@@ -1015,7 +1042,7 @@
     <h2>Un esperto indipendente dalla tua parte.</h2>
     <div class="about-bio reveal">
       <p>Ciao, sono Soufiane.</p>
-      <p>Per anni ho lavorato sulle auto ogni giorno.</p>
+      <p>Per anni ho lavorato sulle auto ogni giorno, dalla concessionaria Audi all'officina sotto casa.</p>
       <p>In officina ho visto arrivare veicoli acquistati da poco con problemi che, se fossero stati scoperti prima, avrebbero evitato ai proprietari spese e delusioni.</p>
       <p>Per questo ho creato S.E.L.</p>
       <p>Per offrire un'ispezione professionale e un parere indipendente a chi sta per fare uno degli acquisti più importanti degli ultimi anni.</p>
@@ -1133,7 +1160,7 @@
   <div class="container">
     <span class="eyebrow center">Ispezione</span>
     <h2 class="center">Un'ispezione completa. Non un'occhiata veloce.</h2>
-    <p class="section-lead center reveal">Quando investirai migliaia di euro in un'auto, vuoi essere sicuro di sapere cosa stai comprando. Per questo controllo ogni aspetto che può influenzare il valore, l'affidabilità e la sicurezza del veicolo.</p>
+    <p class="section-lead center reveal">Prima di investire migliaia di euro su un'auto usata, devi essere sicuro di cosa stai comprando. Per questo controllo ogni aspetto che può influenzare il valore, l'affidabilità e la sicurezza del veicolo.</p>
     <ul class="checklist reveal">
       <li>✅ Carrozzeria e struttura</li>
       <li>✅ Motore e componenti meccaniche</li>
@@ -1168,7 +1195,7 @@
     <div class="testimonial-row">
       <div class="testimonial-card reveal">
         <div class="stars">★★★★★</div>
-        <p>"Stavo per comprare un'auto con i km azzerati. L'ha scoperto alla diagnosi in meno di cinque minuti. Mi ha salvato da un errore da tremila euro."</p>
+        <p>"Stavo per comprare un'auto con i km scalati. L'ha scoperto alla diagnosi in meno di cinque minuti. Mi ha salvato da un errore da tremila euro."</p>
         <span class="testimonial-author">Luca M. · Padova</span>
       </div>
       <div class="testimonial-card reveal">
@@ -1189,11 +1216,17 @@
 <section class="cta-mid">
   <div class="container">
     <div class="reveal center">
-      <h2>Prima di comprare qualsiasi auto usata, dimmi cosa stai guardando.</h2>
-      <p>Non devi aver già deciso. Basta che tu stia cercando.</p>
-      <a href="#form" class="btn btn-white">Andiamo a vederla insieme</a>
-      <br>
-      <a href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20venire%20a%20vedere%20un%27auto%20con%20te" target="_blank" rel="noopener" class="cta-mid-link">oppure scrivimi su WhatsApp</a>
+      <h2>Prima di comprare qualsiasi auto usata, contattami!</h2>
+      <div class="cta-mid-options">
+        <div class="cta-mid-option">
+          <p>Hai già trovato l'auto?</p>
+          <a href="#form" class="btn btn-white">Andiamo a vederla insieme</a>
+        </div>
+        <div class="cta-mid-option">
+          <p>Non hai ancora trovato l'auto e ti serve qualche consiglio?</p>
+          <a href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20un%20consiglio%20per%20trovare%20l%27auto%20giusta" target="_blank" rel="noopener" class="btn btn-outline">Scrivimi su WhatsApp</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1203,7 +1236,7 @@
   <div class="container">
     <span class="eyebrow center" style="display:block; text-align:center;">Prenota</span>
     <h2 class="center">Dimmi che auto stai valutando.</h2>
-    <p class="center section-lead">Ti rispondo entro poche ore. Nessun impegno.</p>
+    <p class="center section-lead">Compila il form per prenotare la tua ispezione. Ti rispondo entro poche ore con le indicazioni per il pagamento.</p>
 
     <div class="form-wrap reveal">
       <div class="form-progress">
@@ -1247,6 +1280,42 @@
               <label for="cittaAuto">Dove si trova</label>
               <input type="text" id="cittaAuto" name="cittaAuto" placeholder="es. Padova, Verona…" required>
             </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="alimentazione">Alimentazione</label>
+              <select id="alimentazione" name="alimentazione" required>
+                <option value="" disabled selected>Seleziona</option>
+                <option>Benzina</option>
+                <option>Diesel</option>
+                <option>GPL</option>
+                <option>Metano</option>
+                <option>Ibrida</option>
+                <option>Ibrida plug-in</option>
+                <option>Elettrica</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cambio">Cambio</label>
+              <select id="cambio" name="cambio" required>
+                <option value="" disabled selected>Seleziona</option>
+                <option>Manuale</option>
+                <option>Automatico</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="km">Chilometraggio indicativo</label>
+            <select id="km" name="km" required>
+              <option value="" disabled selected>Seleziona</option>
+              <option>0 - 30.000 km</option>
+              <option>30.000 - 50.000 km</option>
+              <option>50.000 - 80.000 km</option>
+              <option>80.000 - 120.000 km</option>
+              <option>120.000 - 150.000 km</option>
+              <option>Oltre 150.000 km</option>
+              <option>Non lo so</option>
+            </select>
           </div>
           <div class="field">
             <label for="linkAnnuncio">Link all'annuncio <span class="optional-tag">(opzionale)</span></label>
@@ -1316,7 +1385,7 @@
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 12l7 7L21 5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>Richiesta ricevuta.</h3>
-        <p>Ti contatto entro 24 ore per organizzare insieme la visita.</p>
+        <p>Ti contatto entro 24 ore con le indicazioni per il pagamento e per organizzare insieme la visita.</p>
       </div>
 
       <p class="form-microcopy">I tuoi dati sono trattati con riservatezza e usati solo per organizzare la visita.</p>
