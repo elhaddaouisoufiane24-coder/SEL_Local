@@ -828,37 +828,26 @@
   .about{background:var(--bg); text-align:center;}
   .about .section-lead{margin-top:8px;}
   .about .container{
-    display:grid;
-    grid-template-columns:220px 1fr;
-    gap:48px;
-    align-items:center;
+    display:block;
+    max-width:640px;
   }
-  .about .container::before{
-    content:'📷';
-    grid-column:1;
-    grid-row:1/-1;
-    justify-self:center;
-    align-self:center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:200px;
-    height:200px;
-    border-radius:50%;
-    background:var(--bg-subtle);
-    border:2px dashed var(--border-hover);
-    font-size:44px;
-    color:var(--text-light);
+  .about-photo{
+    display:block;
+    width:100%;
+    max-width:460px;
+    aspect-ratio:4/5;
+    margin:28px auto 32px auto;
+    border-radius:var(--radius-lg);
+    object-fit:cover;
+    object-position:center 32%;
+    box-shadow:var(--shadow-md);
   }
-  .about .eyebrow, .about h2, .about .about-bio, .about .credential-row{grid-column:2;}
   .about .eyebrow, .about h2{margin-left:auto; margin-right:auto;}
   .about-bio{margin:0 auto;}
   .about-bio p{margin:0 0 10px 0; text-align:center;}
   .about-bio p:last-child{margin-bottom:0;}
-  @media(max-width:820px){
-    .about .container{display:block;}
-    .about .container::before{margin:0 auto 28px auto;}
-    .about .eyebrow, .about h2, .about .about-bio, .about .credential-row{grid-column:auto;}
+  @media(max-width:480px){
+    .about-photo{aspect-ratio:1/1;}
   }
   .credential-row{
     display:flex;
@@ -954,19 +943,19 @@
   .cta-mid h2{color:#fff; font-size:clamp(24px, 3.5vw, 40px);}
   .cta-mid p{color:rgba(255,255,255,0.6);}
   .cta-mid-options{
-    display:flex;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 280px));
     justify-content:center;
+    align-items:stretch;
     gap:32px;
     margin-top:32px;
   }
   .cta-mid-option{
-    display:flex;
-    flex-direction:column;
+    display:grid;
+    grid-template-rows:1fr auto;
     align-items:center;
+    justify-items:center;
     gap:14px;
-    flex:1 1 240px;
-    max-width:280px;
   }
   .cta-mid-option p{margin:0; color:rgba(255,255,255,0.8); font-weight:600; font-size:16px;}
   .cta-mid-option .btn{width:100%;}
@@ -1012,7 +1001,7 @@
     <div class="reveal hero-copy">
       <span class="eyebrow">Al tuo fianco, prima dell'acquisto di un'auto usata</span>
       <h1>Un'ispezione professionale prima dell'acquisto può evitarti migliaia di euro di problemi.</h1>
-      <p class="sub">Ti accompagno a vedere l'auto che vuoi acquistare e la ispeziono da cima a fondo. Il mio obiettivo non è convincerti a comprarla, ma aiutarti a capire se è davvero la scelta giusta per te.</p>
+      <p class="sub">Ti accompagno a vedere l'auto che vuoi acquistare e la ispeziono da cima a fondo. Se l'auto è valida te lo dirò. Se c'è margine per trattare il prezzo, te lo dimostrerò. Se non vale la pena comprarla, sarò il primo a dirtelo.</p>
       <div class="hero-actions">
         <a href="#form" class="btn btn-primary">👉 Andiamo a vederla insieme</a>
         <a href="#come-funziona" class="btn btn-outline">Scopri come funziona</a>
@@ -1040,12 +1029,13 @@
   <div class="container">
     <span class="eyebrow">Chi ti accompagna</span>
     <h2>Un esperto indipendente dalla tua parte.</h2>
+    <img src="asset/IMG_2564.PNG" alt="Soufiane al lavoro su un'auto" class="about-photo">
     <div class="about-bio reveal">
       <p>Ciao, sono Soufiane.</p>
-      <p>Per anni ho lavorato sulle auto ogni giorno, dalla concessionaria Audi all'officina sotto casa.</p>
+      <p>Da anni lavoro sulle auto ogni giorno, dalla concessionaria Audi all'officina sotto casa.</p>
       <p>In officina ho visto arrivare veicoli acquistati da poco con problemi che, se fossero stati scoperti prima, avrebbero evitato ai proprietari spese e delusioni.</p>
       <p>Per questo ho creato S.E.L.</p>
-      <p>Per offrire un'ispezione professionale e un parere indipendente a chi sta per fare uno degli acquisti più importanti degli ultimi anni.</p>
+      <p>Per offrire un'ispezione professionale e un parere indipendente a chi sta per fare un acquisto da migliaia di euro.</p>
       <p>Il mio lavoro non è venderti un'auto.</p>
       <p>È aiutarti a capire se vale davvero la pena comprarla.</p>
     </div>
@@ -1068,6 +1058,20 @@
         </div>
         <span>Diagnosi professionale sul posto</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- COME NASCE IL SERVIZIO -->
+<section class="solution">
+  <div class="container">
+    <div class="reveal center pain-agitation-body">
+      <span class="eyebrow">La storia</span>
+      <h2>Come nasce il servizio</h2>
+      <p>Questo servizio è nato nel modo più naturale possibile: per anni amici e parenti mi hanno chiesto di accompagnarli a vedere le auto che volevano comprare.</p>
+      <p>Sapere di avere accanto qualcuno con esperienza gli dava più tranquillità in un momento in cui si stavano giocando migliaia di euro.</p>
+      <p>Durante l'ispezione capitava di confermare che l'auto fosse davvero un buon acquisto, altre volte emergevano difetti o lavori da fare che permettevano di trattare il prezzo o, semplicemente, di evitare un acquisto sbagliato.</p>
+      <p>Alla fine prendevano sempre una decisione consapevole, con tutte le informazioni necessarie per scegliere la strada migliore.</p>
     </div>
   </div>
 </section>
@@ -1147,9 +1151,9 @@
         </div>
         <div class="step-head">
           <span class="step-badge">04</span>
-          <h3>Resoconto finale</h3>
+          <h3>Ricevi il report e la strategia di trattativa</h3>
         </div>
-        <p>Grazie al report che ti consegnerò avrai tutte le informazioni per un'acquisto consapevole. In poche parole saprai se quell'auto è sana e se vale davvero il prezzo richiesto oppure se è meglio cercarne un'altra.</p>
+        <p>Grazie al report che ti consegnerò avrai tutte le informazioni per un'acquisto consapevole. Saprai se l'auto è sana e vale il prezzo richiesto. Se è meglio evitarla e cercare altro. Se, invece, troviamo difetti lievi o manutenzioni imminenti, saprai esattamente quanto valgono e come usarli durante la trattativa.</p>
       </div>
     </div>
   </div>
@@ -1223,8 +1227,8 @@
           <a href="#form" class="btn btn-white">Andiamo a vederla insieme</a>
         </div>
         <div class="cta-mid-option">
-          <p>Non hai ancora trovato l'auto e ti serve qualche consiglio?</p>
-          <a href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20un%20consiglio%20per%20trovare%20l%27auto%20giusta" target="_blank" rel="noopener" class="btn btn-outline">Scrivimi su WhatsApp</a>
+          <p>Hai qualche dubbio sul servizio?</p>
+          <a href="https://wa.me/390000000000?text=Ciao%2C%20ho%20un%20dubbio%20sul%20servizio" target="_blank" rel="noopener" class="btn btn-outline">Scrivimi su WhatsApp</a>
         </div>
       </div>
     </div>
