@@ -410,7 +410,11 @@
     margin-bottom:18px;
   }
 
-  /* Calendario appuntamenti */
+  /* Embed Cal.com */
+  .cal-embed{width:100%; min-height:600px; overflow:auto;}
+  @media(max-width:600px){ .cal-embed{min-height:520px;} }
+
+  /* Calendario appuntamenti (legacy, non più usato nel form) */
   .booking{background:var(--bg);}
   .booking .section-lead{margin-top:8px;}
   .booking-card{
@@ -1373,10 +1377,8 @@
         </div>
 
         <div class="form-step" data-step="3">
-          <p class="field-hint" style="margin-bottom:16px; font-size:14px;">Seleziona un giorno e un orario: ti scrivo su WhatsApp per confermare insieme l'appuntamento.</p>
-          <div class="booking-days" id="bookingDays"></div>
-          <div class="booking-slots" id="bookingSlots"></div>
-          <p class="booking-note">Lavoro soprattutto in Veneto. Se sei fuori zona scrivimi comunque, vediamo insieme come organizzarci.</p>
+          <p class="field-hint" style="margin-bottom:16px; font-size:14px;">Scegli il giorno e l'orario direttamente dal calendario.</p>
+          <div id="cal-inline" class="cal-embed"></div>
           <div class="form-nav">
             <button type="button" class="btn btn-outline" data-prev>Indietro</button>
             <span></span>
@@ -1529,65 +1531,54 @@
     requestAnimationFrame(step);
   }
 
-  // ---- Calendario appuntamenti ----
-  var bookingDaysEl = document.getElementById('bookingDays');
-  var bookingSlotsEl = document.getElementById('bookingSlots');
+  // ---- Embed Cal.com (step 3 del form) ----
+  var calInlineEl = document.getElementById('cal-inline');
+  if(calInlineEl){
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
 
-  if(bookingDaysEl && bookingSlotsEl){
-    var dayNamesShort = ['DOM','LUN','MAR','MER','GIO','VEN','SAB'];
-    var dayNamesFull = ['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
-    var monthNamesShort = ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
-    var monthNamesFull = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
-    var timeSlots = ['09:00','11:00','14:30','16:30'];
+    Cal("init", "ispezione-auto-con-cliente", { origin: "https://cal.com" });
 
-    var bookingDays = [];
-    var cursor = new Date();
-    cursor.setHours(0,0,0,0);
-    while(bookingDays.length < 10){
-      cursor.setDate(cursor.getDate() + 1);
-      var dow = cursor.getDay();
-      if(dow !== 0 && dow !== 6){
-        bookingDays.push(new Date(cursor));
-      }
-    }
-
-    function renderSlots(date){
-      bookingSlotsEl.innerHTML = '';
-      timeSlots.forEach(function(slot){
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'slot-btn';
-        btn.textContent = slot;
-        btn.addEventListener('click', function(){
-          var label = dayNamesFull[date.getDay()] + ' ' + date.getDate() + ' ' + monthNamesFull[date.getMonth()];
-          var msg = 'Ciao, vorrei prenotare un appuntamento per ' + label + ' alle ' + slot;
-          window.open('https://wa.me/390000000000?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-          form.style.display = 'none';
-          document.querySelector('.form-progress').style.display = 'none';
-          formSuccess.classList.add('active');
-        });
-        bookingSlotsEl.appendChild(btn);
-      });
-    }
-
-    bookingDays.forEach(function(date, idx){
-      var card = document.createElement('div');
-      card.className = 'day-card' + (idx === 0 ? ' selected' : '');
-      card.innerHTML =
-        '<span class="weekday">' + dayNamesShort[date.getDay()] + '</span>' +
-        '<span class="daynum">' + date.getDate() + '</span>' +
-        '<span class="month">' + monthNamesShort[date.getMonth()] + '</span>';
-      card.addEventListener('click', function(){
-        bookingDaysEl.querySelectorAll('.day-card').forEach(function(c){ c.classList.remove('selected'); });
-        card.classList.add('selected');
-        renderSlots(date);
-      });
-      bookingDaysEl.appendChild(card);
+    Cal.ns["ispezione-auto-con-cliente"]("inline", {
+      elementOrSelector: "#cal-inline",
+      config: { "layout": "month_view", "theme": "light" },
+      calLink: "soufiane-el-haddaoui-cycd2y/ispezione-auto-con-cliente",
     });
 
-    if(bookingDays.length){
-      renderSlots(bookingDays[0]);
-    }
+    Cal.ns["ispezione-auto-con-cliente"]("ui", { "hideEventTypeDetails": false, "layout": "month_view", "theme": "light" });
+
+    Cal.ns["ispezione-auto-con-cliente"]("on", {
+      action: "bookingSuccessful",
+      callback: function(){
+        form.style.display = 'none';
+        document.querySelector('.form-progress').style.display = 'none';
+        formSuccess.classList.add('active');
+      }
+    });
   }
 
   // ---- Marca / Modello a cascata ----
