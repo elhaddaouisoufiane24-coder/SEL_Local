@@ -311,6 +311,91 @@
     .hero-actions .btn{flex:none; max-width:none;}
   }
 
+  /* Social proof strip */
+  .social-proof-strip{
+    padding:16px 0;
+    background:var(--bg-subtle);
+    border-bottom:1px solid var(--border);
+    text-align:center;
+  }
+  .social-proof-strip p{
+    margin:0;
+    font-size:14px;
+    color:var(--text-muted);
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  .social-proof-strip .stars{color:#f59e0b; letter-spacing:1px; font-size:13px;}
+  .social-proof-strip strong{color:var(--text); font-weight:600;}
+
+  /* Scegli il tuo percorso */
+  .path-choice{background:var(--bg);}
+  .path-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+    margin-top:40px;
+    align-items:stretch;
+  }
+  @media(max-width:820px){ .path-grid{grid-template-columns:1fr;} }
+  .path-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:32px;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    transition:all .25s var(--transition);
+  }
+  .path-card:hover{transform:translateY(-2px); box-shadow:var(--shadow-md);}
+  .path-card-main{
+    border:2px solid var(--accent);
+    box-shadow:var(--shadow-lg);
+  }
+  .path-badge{
+    position:absolute;
+    top:-14px;
+    left:32px;
+    background:var(--accent);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    padding:6px 14px;
+    border-radius:var(--radius-full);
+  }
+  .path-eyebrow{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    margin-bottom:8px;
+  }
+  .path-card h3{font-size:22px; margin-bottom:12px;}
+  .path-card > p{font-size:15px; line-height:1.65; color:var(--text-muted); margin-bottom:16px;}
+  .path-bullets{margin:0 0 20px 0;}
+  .path-bullets li{font-size:14px; line-height:1.6; color:var(--text); padding:4px 0;}
+  .path-price{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .price-old{font-size:16px; color:var(--text-light); text-decoration:line-through;}
+  .price-new{font-size:28px; font-weight:800; color:var(--text);}
+  .price-tag{font-size:12px; font-weight:600; color:var(--accent); background:var(--accent-light); padding:3px 10px; border-radius:var(--radius-full);}
+  .path-micro{font-size:13px; color:var(--text-light); margin-bottom:20px;}
+  .path-note{font-size:14px; color:var(--text-muted); margin-bottom:20px;}
+  .path-card .btn{margin-top:auto;}
+  .path-connector{margin-top:32px; font-size:15px; color:var(--text-muted); max-width:560px;}
+
   /* Stats */
   .stats-row{
     display:flex;
@@ -1008,7 +1093,7 @@
       <p class="sub">Ti accompagno a vedere l'auto che vuoi acquistare e la ispeziono da cima a fondo. Se l'auto è valida te lo dirò. Se c'è margine per trattare il prezzo, te lo dimostrerò. Se non vale la pena comprarla, sarò il primo a dirtelo.</p>
       <div class="hero-actions">
         <a href="#form" class="btn btn-primary">👉 Andiamo a vederla insieme</a>
-        <a href="#come-funziona" class="btn btn-outline">Scopri come funziona</a>
+        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-outline">Hai solo qualche annuncio da valutare? → Prenota la consulenza (29,99€)</a>
       </div>
       <div class="hero-trust">
         <div class="trust-badge reveal">
@@ -1025,6 +1110,13 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="social-proof-strip">
+  <div class="container">
+    <p><span class="stars">★★★★★</span> "Ha trovato un problema alle sospensioni che il venditore diceva non esserci. Ho risparmiato sul prezzo." — <strong>Davide R.</strong> · Verona</p>
   </div>
 </section>
 
@@ -1114,6 +1206,48 @@
         <p>Grazie al report che ti consegnerò avrai tutte le informazioni per un'acquisto consapevole. Saprai se l'auto è sana e vale il prezzo richiesto. Se è meglio evitarla e cercare altro. Se, invece, troviamo difetti lievi o manutenzioni imminenti, saprai esattamente quanto valgono e come usarli durante la trattativa.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- SCEGLI IL TUO PERCORSO -->
+<section class="path-choice">
+  <div class="container">
+    <span class="eyebrow center" style="display:block; text-align:center;">Due modi per farti aiutare</span>
+    <h2 class="center">Sei ancora in cerca o hai già trovato l'auto giusta?</h2>
+    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">A seconda di dove sei nella ricerca, posso aiutarti in due modi diversi.</p>
+    <div class="path-grid">
+      <div class="path-card reveal">
+        <span class="path-eyebrow">Consulenza rapida</span>
+        <h3>Un parere prima di scegliere</h3>
+        <p>Hai trovato 2 o 3 annunci e non sai quale valga davvero la pena andare a vedere? Mandameli su WhatsApp: li analizzo e ti dico pregi, difetti comuni del modello e su quale conviene puntare.</p>
+        <ul class="path-bullets">
+          <li>✅ Analisi di fino a 3 annunci</li>
+          <li>✅ Difetti comuni del modello scelto</li>
+          <li>✅ Un consiglio chiaro su quale conviene guardare dal vivo</li>
+        </ul>
+        <div class="path-price">
+          <span class="price-old">59,99€</span>
+          <span class="price-new">29,99€</span>
+          <span class="price-tag">prezzo di lancio</span>
+        </div>
+        <p class="path-micro">Non è una chiacchierata veloce: analizzo davvero gli annunci, controllo difetti noti del modello e ti dico su quale conviene puntare. Zero fretta, risposta ragionata.</p>
+        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-outline btn-block">Prenota la consulenza →</a>
+      </div>
+      <div class="path-card path-card-main reveal">
+        <span class="path-badge">Servizio principale</span>
+        <span class="path-eyebrow">Ispezione completa in loco</span>
+        <h3>Un controllo prima di comprare</h3>
+        <p>Hai già trovato l'auto giusta e sei vicino a chiuderla? Vengo con te a vederla, la ispeziono da cima a fondo e ti dico se conviene davvero comprarla, a quel prezzo.</p>
+        <ul class="path-bullets">
+          <li>✅ Ispezione completa: meccanica, carrozzeria, elettronica</li>
+          <li>✅ Diagnosi elettronica sul posto</li>
+          <li>✅ Report finale e strategia di trattativa</li>
+        </ul>
+        <p class="path-note">Il servizio principale, pensato per chi sta per prendere la decisione finale.</p>
+        <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione →</a>
+      </div>
+    </div>
+    <p class="path-connector center">Non sei sicuro di quale ti serva? Nessun problema: scrivimi comunque, ti indico io il passo giusto.</p>
   </div>
 </section>
 
@@ -1276,63 +1410,58 @@
             <label for="modelloAltro">Specifica il modello</label>
             <input type="text" id="modelloAltro" name="modelloAltro" placeholder="Es. nome del modello">
           </div>
-          <div class="field-row">
+          <div class="field">
+            <label for="cittaAuto">Dove si trova <span class="optional-tag">(città/zona)</span></label>
+            <input type="text" id="cittaAuto" name="cittaAuto" placeholder="es. Padova, Verona…" required>
+          </div>
+          <div class="field">
+            <label for="linkAnnuncio">Link all'annuncio <span class="optional-tag">(se disponibile)</span></label>
+            <input type="text" id="linkAnnuncio" name="linkAnnuncio" placeholder="Incolla il link da AutoScout, Subito, ecc.">
+            <p class="field-hint">Se hai il link dell'annuncio, incollalo qui: mi basta per farmi un'idea completa di km, alimentazione e cambio. Se non ce l'hai, non è un problema — ne parliamo su WhatsApp.</p>
+          </div>
+          <div id="annuncioDettagliWrap">
             <div class="field">
               <label for="annoIndicativo">Anno indicativo</label>
               <select id="annoIndicativo" name="annoIndicativo" required>
                 <option value="" disabled selected>Seleziona</option>
               </select>
             </div>
-            <div class="field">
-              <label for="cittaAuto">Dove si trova</label>
-              <input type="text" id="cittaAuto" name="cittaAuto" placeholder="es. Padova, Verona…" required>
+            <div class="field-row">
+              <div class="field">
+                <label for="alimentazione">Alimentazione</label>
+                <select id="alimentazione" name="alimentazione" required>
+                  <option value="" disabled selected>Seleziona</option>
+                  <option>Benzina</option>
+                  <option>Diesel</option>
+                  <option>GPL</option>
+                  <option>Metano</option>
+                  <option>Ibrida</option>
+                  <option>Ibrida plug-in</option>
+                  <option>Elettrica</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="cambio">Cambio</label>
+                <select id="cambio" name="cambio" required>
+                  <option value="" disabled selected>Seleziona</option>
+                  <option>Manuale</option>
+                  <option>Automatico</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="field-row">
             <div class="field">
-              <label for="alimentazione">Alimentazione</label>
-              <select id="alimentazione" name="alimentazione" required>
+              <label for="km">Chilometraggio indicativo</label>
+              <select id="km" name="km" required>
                 <option value="" disabled selected>Seleziona</option>
-                <option>Benzina</option>
-                <option>Diesel</option>
-                <option>GPL</option>
-                <option>Metano</option>
-                <option>Ibrida</option>
-                <option>Ibrida plug-in</option>
-                <option>Elettrica</option>
+                <option>0 - 30.000 km</option>
+                <option>30.000 - 50.000 km</option>
+                <option>50.000 - 80.000 km</option>
+                <option>80.000 - 120.000 km</option>
+                <option>120.000 - 150.000 km</option>
+                <option>Oltre 150.000 km</option>
+                <option>Non lo so</option>
               </select>
             </div>
-            <div class="field">
-              <label for="cambio">Cambio</label>
-              <select id="cambio" name="cambio" required>
-                <option value="" disabled selected>Seleziona</option>
-                <option>Manuale</option>
-                <option>Automatico</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="km">Chilometraggio indicativo</label>
-            <select id="km" name="km" required>
-              <option value="" disabled selected>Seleziona</option>
-              <option>0 - 30.000 km</option>
-              <option>30.000 - 50.000 km</option>
-              <option>50.000 - 80.000 km</option>
-              <option>80.000 - 120.000 km</option>
-              <option>120.000 - 150.000 km</option>
-              <option>Oltre 150.000 km</option>
-              <option>Non lo so</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="linkAnnuncio">Link all'annuncio <span class="optional-tag">(opzionale)</span></label>
-            <input type="text" id="linkAnnuncio" name="linkAnnuncio" placeholder="Incolla il link da AutoScout, Subito, ecc.">
-            <p class="field-hint">Se l'hai vista dal vivo o in concessionaria, va bene anche senza.</p>
-          </div>
-          <div class="field">
-            <label for="targa">Targa <span class="optional-tag">(opzionale)</span></label>
-            <input type="text" id="targa" name="targa" placeholder="Es. AB123CD">
-            <p class="field-hint">Se puoi, fattela dare dal venditore: mi serve per la visura.</p>
           </div>
           <div class="field">
             <label for="quando">Quando vorresti vederla</label>
@@ -1365,7 +1494,7 @@
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 12l7 7L21 5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>Richiesta ricevuta.</h3>
-        <p>Ti contatto entro 24 ore con le indicazioni per il pagamento e per organizzare insieme la visita.</p>
+        <p>Ti scrivo su WhatsApp entro 24 ore per confermare la targa (se non l'hai già data) e le indicazioni per il pagamento.</p>
       </div>
 
       <p class="form-microcopy">I tuoi dati sono trattati con riservatezza e usati solo per organizzare la visita.</p>
@@ -1665,6 +1794,21 @@
   beforeOpt.textContent = 'Prima del 1990';
   annoSelect.appendChild(beforeOpt);
 
+  // ---- Progressive disclosure: nascondi anno/alimentazione/cambio/km se c'è il link dell'annuncio ----
+  var linkAnnuncioInput = document.getElementById('linkAnnuncio');
+  var annuncioDettagliWrap = document.getElementById('annuncioDettagliWrap');
+  var annuncioDettagliFields = Array.prototype.slice.call(annuncioDettagliWrap.querySelectorAll('select'));
+  function updateAnnuncioDettagli(){
+    var hasLink = linkAnnuncioInput.value.trim().length > 0;
+    annuncioDettagliWrap.hidden = hasLink;
+    annuncioDettagliFields.forEach(function(f){
+      if(hasLink){ f.removeAttribute('required'); }
+      else { f.setAttribute('required', ''); }
+    });
+  }
+  linkAnnuncioInput.addEventListener('input', updateAnnuncioDettagli);
+  updateAnnuncioDettagli();
+
   // ---- Multi-step form ----
   var form = document.getElementById('leadForm');
   var steps = Array.prototype.slice.call(form.querySelectorAll('.form-step'));
@@ -1736,6 +1880,18 @@
     {
       q: "Posso chiederti consiglio prima ancora di scegliere l'auto?",
       a: "Certo. Molti mi scrivono in quella fase: quale modello evitare, diesel o benzina, che km considerare. Scrivimi su WhatsApp — per un consiglio rapido non serve nemmeno un appuntamento."
+    },
+    {
+      q: "Qual è la differenza tra la consulenza WhatsApp e l'ispezione in loco?",
+      a: "La consulenza è un parere veloce su annunci che hai già trovato, utile quando sei ancora in fase di scelta. L'ispezione in loco è un controllo fisico e completo dell'auto, quando sei pronto a decidere se comprarla davvero."
+    },
+    {
+      q: "Posso passare dalla consulenza all'ispezione?",
+      a: "Sì. Se durante la consulenza individuiamo un'auto che vale la pena guardare dal vivo, possiamo organizzare l'ispezione subito dopo."
+    },
+    {
+      q: "Quanto costa la consulenza sugli annunci e come si paga?",
+      a: "29,99€ (prezzo di lancio, invece di 59,99€), per l'analisi di fino a 3 annunci. Il pagamento avviene online al momento della prenotazione; subito dopo ricevi le indicazioni per scrivermi su WhatsApp con i tuoi annunci."
     }
   ];
 
