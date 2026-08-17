@@ -311,25 +311,37 @@
     .hero-actions .btn{flex:none; max-width:none;}
   }
 
-  /* Social proof strip */
+  /* Social proof strip: carosello recensioni */
   .social-proof-strip{
-    padding:16px 0;
+    padding:20px 0;
     background:var(--bg-subtle);
     border-bottom:1px solid var(--border);
-    text-align:center;
   }
-  .social-proof-strip p{
-    margin:0;
-    font-size:14px;
-    color:var(--text-muted);
+  .reviews-carousel{
+    max-width:700px;
+    margin:0 auto;
+    padding:0 24px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .reviews-carousel::-webkit-scrollbar{display:none;}
+  .reviews-track{display:flex;}
+  .review-chip{
+    flex:0 0 100%;
+    scroll-snap-align:start;
     display:flex;
-    flex-wrap:wrap;
     align-items:center;
     justify-content:center;
     gap:8px;
+    flex-wrap:wrap;
+    text-align:center;
+    padding:0 8px;
   }
-  .social-proof-strip .stars{color:#f59e0b; letter-spacing:1px; font-size:13px;}
-  .social-proof-strip strong{color:var(--text); font-weight:600;}
+  .review-chip .stars{color:#f59e0b; letter-spacing:1px; font-size:13px; flex-shrink:0;}
+  .review-chip p{margin:0; font-size:14px; color:var(--text-muted);}
+  .review-chip strong{color:var(--text); font-weight:600;}
 
   /* Scegli il tuo percorso */
   .path-choice{background:var(--bg);}
@@ -1093,7 +1105,7 @@
       <p class="sub">Ti accompagno a vedere l'auto che vuoi acquistare e la ispeziono da cima a fondo. Se l'auto è valida te lo dirò. Se c'è margine per trattare il prezzo, te lo dimostrerò. Se non vale la pena comprarla, sarò il primo a dirtelo.</p>
       <div class="hero-actions">
         <a href="#form" class="btn btn-primary">👉 Andiamo a vederla insieme</a>
-        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-outline">Hai solo qualche annuncio da valutare? → Prenota la consulenza (29,99€)</a>
+        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-outline">Hai solo qualche annuncio da valutare? → Fatti dare un parere prima di scegliere</a>
       </div>
       <div class="hero-trust">
         <div class="trust-badge reveal">
@@ -1115,8 +1127,21 @@
 
 <!-- SOCIAL PROOF -->
 <section class="social-proof-strip">
-  <div class="container">
-    <p><span class="stars">★★★★★</span> "Ha trovato un problema alle sospensioni che il venditore diceva non esserci. Ho risparmiato sul prezzo." — <strong>Davide R.</strong> · Verona</p>
+  <div class="reviews-carousel" id="reviewsCarousel">
+    <div class="reviews-track" id="reviewsTrack">
+      <div class="review-chip">
+        <span class="stars">★★★★★</span>
+        <p>"Ha scoperto km scalati alla diagnosi in meno di cinque minuti. Mi ha salvato da un errore da tremila euro." — <strong>Luca M.</strong> · Padova</p>
+      </div>
+      <div class="review-chip">
+        <span class="stars">★★★★★</span>
+        <p>"Mi sono sentito protetto dall'inizio alla fine. Ha controllato tutto quello che non avrei mai saputo guardare." — <strong>Sara V.</strong> · Treviso</p>
+      </div>
+      <div class="review-chip">
+        <span class="stars">★★★★★</span>
+        <p>"Ha trovato un problema alle sospensioni che il venditore diceva non esserci. Ho ritrattato il prezzo e risparmiato." — <strong>Davide R.</strong> · Verona</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1170,9 +1195,9 @@
         </div>
         <div class="step-head">
           <span class="step-badge">01</span>
-          <h3>Mi invii l'annuncio.</h3>
+          <h3>Mi mandi l'auto che hai trovato</h3>
         </div>
-        <p>Analizziamo insieme l'auto che hai trovato. Prezzo, difetti comuni del modello e se è perfetta per le tue esigenze. Facciamo un controllo revisioni, storico tagliandi ove possibile e visura ACI.</p>
+        <p>Compili il form con marca, modello e il link dell'annuncio: mi basta per farmi già un'idea prima di vederla dal vivo.</p>
       </div>
       <div class="step-card reveal">
         <div class="step-icon">
@@ -1180,9 +1205,9 @@
         </div>
         <div class="step-head">
           <span class="step-badge">02</span>
-          <h3>Organizziamo l'appuntamento.</h3>
+          <h3>Confermiamo data e ora</h3>
         </div>
-        <p>Tramite il form che trovi qui sotto ci mettiamo d'accordo per giorno e ora. Ci incontriamo direttamente dal venditore.</p>
+        <p>Ti scrivo per confermare i dettagli e organizzare l'incontro direttamente dal venditore.</p>
       </div>
       <div class="step-card reveal">
         <div class="step-icon">
@@ -1190,10 +1215,9 @@
         </div>
         <div class="step-head">
           <span class="step-badge">03</span>
-          <h3>Effettuo un'ispezione completa.</h3>
+          <h3>Effettuo un'ispezione completa</h3>
         </div>
-        <p>Controllo meccanica, carrozzeria, elettronica, telaio, interni e tutto ciò che può incidere sul valore e sull'affidabilità del veicolo.</p>
-        <p>Durante l'ispezione ti spiego ogni verifica in modo semplice, così sai esattamente cosa sto controllando.</p>
+        <p>Controllo meccanica, carrozzeria, elettronica, telaio, interni e tutto ciò che può incidere sul valore e sull'affidabilità del veicolo. Durante l'ispezione ti spiego ogni verifica in modo semplice.</p>
       </div>
       <div class="step-card reveal">
         <div class="step-icon">
@@ -1201,9 +1225,9 @@
         </div>
         <div class="step-head">
           <span class="step-badge">04</span>
-          <h3>Ricevi il report e la strategia di trattativa</h3>
+          <h3>Ricevi report e strategia di trattativa</h3>
         </div>
-        <p>Grazie al report che ti consegnerò avrai tutte le informazioni per un'acquisto consapevole. Saprai se l'auto è sana e vale il prezzo richiesto. Se è meglio evitarla e cercare altro. Se, invece, troviamo difetti lievi o manutenzioni imminenti, saprai esattamente quanto valgono e come usarli durante la trattativa.</p>
+        <p>Sai se l'auto è sana e vale il prezzo richiesto, se è meglio evitarla, o se ci sono difetti lievi da usare per trattare il prezzo.</p>
       </div>
     </div>
   </div>
@@ -1591,6 +1615,45 @@
   }
   window.addEventListener('scroll', updateWaFloat, { passive: true });
   updateWaFloat();
+
+  // ---- Carosello recensioni: auto-scroll + swipe ----
+  var reviewsCarousel = document.getElementById('reviewsCarousel');
+  if(reviewsCarousel){
+    var reviewChips = Array.prototype.slice.call(reviewsCarousel.querySelectorAll('.review-chip'));
+    var reviewIndex = 0;
+    var reviewsAutoplay = null;
+    var reviewsUserActive = false;
+    var reviewsResumeTimeout = null;
+
+    function goToReview(i){
+      reviewIndex = (i + reviewChips.length) % reviewChips.length;
+      reviewsCarousel.scrollTo({ left: reviewChips[reviewIndex].offsetLeft, behavior: 'smooth' });
+    }
+    function startReviewsAutoplay(){
+      clearInterval(reviewsAutoplay);
+      reviewsAutoplay = setInterval(function(){
+        if(!reviewsUserActive) goToReview(reviewIndex + 1);
+      }, 4000);
+    }
+    function pauseReviewsForUser(){
+      reviewsUserActive = true;
+      clearTimeout(reviewsResumeTimeout);
+      reviewsResumeTimeout = setTimeout(function(){ reviewsUserActive = false; }, 6000);
+    }
+    reviewsCarousel.addEventListener('touchstart', pauseReviewsForUser, { passive: true });
+    reviewsCarousel.addEventListener('mousedown', pauseReviewsForUser);
+    reviewsCarousel.addEventListener('wheel', pauseReviewsForUser, { passive: true });
+    reviewsCarousel.addEventListener('scroll', function(){
+      var closest = 0, minDist = Infinity;
+      reviewChips.forEach(function(chip, i){
+        var dist = Math.abs(chip.offsetLeft - reviewsCarousel.scrollLeft);
+        if(dist < minDist){ minDist = dist; closest = i; }
+      });
+      reviewIndex = closest;
+    }, { passive: true });
+
+    startReviewsAutoplay();
+  }
 
   // ---- Estende .reveal a H2 di sezione e credenziali (senza toccare l'HTML sorgente) ----
   document.querySelectorAll('h2').forEach(function(el){ el.classList.add('reveal'); });
