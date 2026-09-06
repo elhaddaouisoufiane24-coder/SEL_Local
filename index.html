@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>S.E.L. — Ti accompagno a comprare l'auto giusta</title>
+<title>Autoinspecta — Ti accompagno a comprare l'auto giusta</title>
 <meta name="description" content="Prima di comprare un'auto usata, falla controllare da un esperto indipendente. Ispezione completa, diagnosi elettronica, analisi onesta. Eviti problemi che potrebbero costarti migliaia di euro.">
 
 <!-- Meta Pixel Code -->
@@ -265,6 +265,8 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     flex-shrink:0;
   }
   .logo img{height:32px; width:auto; display:block;}
+  .logo-text{font-size:19px; font-weight:800; letter-spacing:-0.02em; color:var(--text);}
+  .logo-text .logo-accent{color:var(--accent);}
   .nav-cta{display:flex; align-items:center; gap:18px; flex-shrink:0;}
   .nav-cta .btn{white-space:nowrap;}
   .nav-phone{
@@ -902,16 +904,10 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   @media(max-width:520px){ .footer-grid{grid-template-columns:1fr;} }
   .footer-logo{
     display:inline-flex;
-    background:#fff;
-    border-radius:12px;
-    padding:8px 14px;
     margin-bottom:16px;
   }
-  .footer-logo img{height:36px; width:auto; display:block;}
-  @media(max-width:480px){
-    .footer-logo{padding:14px 20px;}
-    .footer-logo img{height:112px;}
-  }
+  .footer-logo .logo-text{font-size:22px; color:#fff;}
+  .footer-logo .logo-text .logo-accent{color:#60a5fa;}
   footer h4{
     color:rgba(255,255,255,0.3);
     font-size:12px;
@@ -1100,7 +1096,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 
 <header>
   <div class="nav">
-    <div class="logo"><img src="asset/logo.png" alt="S.E.L."></div>
+    <div class="logo"><span class="logo-text">Auto<span class="logo-accent">inspecta</span></span></div>
     <div class="nav-cta">
       <a class="nav-whatsapp" href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20venire%20a%20vedere%20un%27auto%20con%20te" target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
@@ -1122,8 +1118,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       <h1>Un'ispezione professionale prima dell'acquisto può evitarti migliaia di euro di problemi.</h1>
       <p class="sub">Ti accompagno a vedere l'auto che vuoi acquistare e la ispeziono da cima a fondo. Se l'auto è valida te lo dirò. Se c'è margine per trattare il prezzo, te lo dimostrerò. Se non vale la pena comprarla, sarò il primo a dirtelo.</p>
       <div class="hero-actions">
-        <a href="#form" class="btn btn-primary">👉 Andiamo a vederla insieme</a>
-        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-outline">Hai solo qualche annuncio da valutare? → Fatti dare un parere prima di scegliere</a>
+        <a href="#percorso" class="btn btn-primary">👉 Scegli il servizio giusto per te</a>
       </div>
       <div class="hero-trust">
         <div class="trust-badge reveal">
@@ -1140,6 +1135,49 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- SCEGLI IL TUO PERCORSO -->
+<section class="path-choice" id="percorso">
+  <div class="container">
+    <span class="eyebrow center" style="display:block; text-align:center;">A che punto sei?</span>
+    <h2 class="center">Sei ancora in cerca o hai già trovato l'auto giusta?</h2>
+    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">A seconda di dove sei nella ricerca, posso aiutarti in due modi diversi.</p>
+    <div class="path-grid">
+      <div class="path-card reveal">
+        <span class="path-eyebrow">Consulenza annunci</span>
+        <h3>Un parere prima di scegliere</h3>
+        <p>Hai trovato 2 o 3 annunci e non sai quale valga davvero la pena andare a vedere? Mandameli su WhatsApp: li analizzo e ti dico pregi, difetti comuni del modello e su quale conviene puntare.</p>
+        <ul class="path-bullets">
+          <li>✅ Analisi di fino a 3 annunci</li>
+          <li>✅ Difetti comuni del modello scelto</li>
+          <li>✅ Un consiglio chiaro su quale conviene guardare dal vivo</li>
+        </ul>
+        <div class="path-price">
+          <span class="price-old">59,99€</span>
+          <span class="price-new">29,99€</span>
+          <span class="price-tag">prezzo di lancio</span>
+        </div>
+        <p class="path-micro">Non è una chiacchierata veloce: analizzo davvero gli annunci, controllo difetti noti del modello e ti dico su quale conviene puntare. Zero fretta, risposta ragionata.</p>
+        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-outline btn-block">Prenota la consulenza →</a>
+      </div>
+      <div class="path-card path-card-main reveal">
+        <span class="path-badge">Servizio principale</span>
+        <span class="path-eyebrow">Ispezione completa</span>
+        <h3>Un controllo prima di comprare</h3>
+        <p>Hai già trovato l'auto giusta e sei vicino a chiuderla? Vengo con te a vederla, la ispeziono da cima a fondo e ti dico se conviene davvero comprarla, a quel prezzo.</p>
+        <ul class="path-bullets">
+          <li>✅ Controllo fisico sul posto: meccanica, carrozzeria, elettronica</li>
+          <li>✅ Diagnosi elettronica e prova su strada</li>
+          <li>✅ Valutazione complessiva dell'auto</li>
+          <li>✅ Supporto nella trattativa col venditore</li>
+        </ul>
+        <p class="path-note">Il servizio principale, pensato per chi sta per prendere la decisione finale.</p>
+        <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione →</a>
+      </div>
+    </div>
+    <p class="path-connector center">Non sei sicuro di quale ti serva? Nessun problema: scrivimi comunque, ti indico io il passo giusto.</p>
   </div>
 </section>
 
@@ -1173,7 +1211,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       <p>Ciao, sono Soufiane.</p>
       <p>Da anni lavoro sulle auto ogni giorno, dalla concessionaria Audi all'officina sotto casa.</p>
       <p>In officina ho visto arrivare veicoli acquistati da poco con problemi che, se fossero stati scoperti prima, avrebbero evitato ai proprietari spese e delusioni.</p>
-      <p>Per questo ho creato S.E.L.</p>
+      <p>Per questo ho creato Autoinspecta.</p>
       <p>Per offrire un'ispezione professionale e un parere indipendente a chi sta per fare un acquisto da migliaia di euro.</p>
       <p>Il mio lavoro non è venderti un'auto.</p>
       <p>È aiutarti a capire se vale davvero la pena comprarla.</p>
@@ -1248,48 +1286,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <p>Sai se l'auto è sana e vale il prezzo richiesto, se è meglio evitarla, o se ci sono difetti lievi da usare per trattare il prezzo.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- SCEGLI IL TUO PERCORSO -->
-<section class="path-choice">
-  <div class="container">
-    <span class="eyebrow center" style="display:block; text-align:center;">Due modi per farti aiutare</span>
-    <h2 class="center">Sei ancora in cerca o hai già trovato l'auto giusta?</h2>
-    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">A seconda di dove sei nella ricerca, posso aiutarti in due modi diversi.</p>
-    <div class="path-grid">
-      <div class="path-card reveal">
-        <span class="path-eyebrow">Consulenza rapida</span>
-        <h3>Un parere prima di scegliere</h3>
-        <p>Hai trovato 2 o 3 annunci e non sai quale valga davvero la pena andare a vedere? Mandameli su WhatsApp: li analizzo e ti dico pregi, difetti comuni del modello e su quale conviene puntare.</p>
-        <ul class="path-bullets">
-          <li>✅ Analisi di fino a 3 annunci</li>
-          <li>✅ Difetti comuni del modello scelto</li>
-          <li>✅ Un consiglio chiaro su quale conviene guardare dal vivo</li>
-        </ul>
-        <div class="path-price">
-          <span class="price-old">59,99€</span>
-          <span class="price-new">29,99€</span>
-          <span class="price-tag">prezzo di lancio</span>
-        </div>
-        <p class="path-micro">Non è una chiacchierata veloce: analizzo davvero gli annunci, controllo difetti noti del modello e ti dico su quale conviene puntare. Zero fretta, risposta ragionata.</p>
-        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-outline btn-block">Prenota la consulenza →</a>
-      </div>
-      <div class="path-card path-card-main reveal">
-        <span class="path-badge">Servizio principale</span>
-        <span class="path-eyebrow">Ispezione completa in loco</span>
-        <h3>Un controllo prima di comprare</h3>
-        <p>Hai già trovato l'auto giusta e sei vicino a chiuderla? Vengo con te a vederla, la ispeziono da cima a fondo e ti dico se conviene davvero comprarla, a quel prezzo.</p>
-        <ul class="path-bullets">
-          <li>✅ Ispezione completa: meccanica, carrozzeria, elettronica</li>
-          <li>✅ Diagnosi elettronica sul posto</li>
-          <li>✅ Report finale e strategia di trattativa</li>
-        </ul>
-        <p class="path-note">Il servizio principale, pensato per chi sta per prendere la decisione finale.</p>
-        <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione →</a>
-      </div>
-    </div>
-    <p class="path-connector center">Non sei sicuro di quale ti serva? Nessun problema: scrivimi comunque, ti indico io il passo giusto.</p>
   </div>
 </section>
 
@@ -1404,11 +1400,11 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       <div class="cta-mid-options">
         <div class="cta-mid-option">
           <p>Hai già trovato l'auto?</p>
-          <a href="#form" class="btn btn-white">Andiamo a vederla insieme</a>
+          <a href="#form" class="btn btn-white">Prenota l'ispezione</a>
         </div>
         <div class="cta-mid-option">
-          <p>Hai qualche dubbio sul servizio?</p>
-          <a href="https://wa.me/390000000000?text=Ciao%2C%20ho%20un%20dubbio%20sul%20servizio" target="_blank" rel="noopener" class="btn btn-outline">Scrivimi su WhatsApp</a>
+          <p>Sei ancora in cerca?</p>
+          <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-outline">Prenota la consulenza (29,99€)</a>
         </div>
       </div>
     </div>
@@ -1558,7 +1554,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-logo"><img src="asset/logo.png" alt="S.E.L."></div>
+        <div class="footer-logo"><span class="logo-text">Auto<span class="logo-accent">inspecta</span></span></div>
         <p style="max-width:280px; color:rgba(255,255,255,0.4); font-size:14px; margin-top:8px;">Ti accompagno a comprare l'auto giusta, come farebbe un amico.</p>
         <div class="social-row">
           <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 8h2V4h-2c-2.2 0-4 1.8-4 4v2H9v4h2v8h4v-8h2.6l.4-4H15V8Z" fill="#fff"/></svg></a>
@@ -1588,13 +1584,13 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <ul>
           <li><a href="tel:+390000000000">+39 000 000 0000</a></li>
           <li><a href="https://wa.me/390000000000" target="_blank" rel="noopener">WhatsApp</a></li>
-          <li><a href="mailto:info@selautomobili.it">info@selautomobili.it</a></li>
+          <li><a href="mailto:info@autoinspecta.it">info@autoinspecta.it</a></li>
           <li>Lun–Ven, 9:00–18:00</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 S.E.L. — Tutti i diritti riservati.</span>
+      <span>© 2026 Autoinspecta — Tutti i diritti riservati.</span>
       <span>P.IVA 00000000000</span>
     </div>
   </div>
