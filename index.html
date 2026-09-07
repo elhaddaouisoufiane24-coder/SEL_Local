@@ -206,15 +206,14 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .reveal-delay-4{transition-delay:.4s;}
 
   /* Delay progressivo per card in griglia (via nth-child, nessuna classe extra) */
-  .step-card:nth-child(1),
   .service-card:nth-child(1),
   .testimonial-card:nth-child(1),
+  .process-card:nth-child(1),
   .credential-item:nth-child(1){transition-delay:0s;}
-  .step-card:nth-child(2),
   .service-card:nth-child(2),
   .testimonial-card:nth-child(2),
+  .process-card:nth-child(2),
   .credential-item:nth-child(2){transition-delay:.1s;}
-  .step-card:nth-child(3),
   .service-card:nth-child(3),
   .testimonial-card:nth-child(3),
   .credential-item:nth-child(3){transition-delay:.2s;}
@@ -645,103 +644,69 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }
   .pain-agitation-body .btn{margin-top:8px;}
 
-  /* Come funziona */
+  /* Come funziona: due percorsi con timeline */
   .how{background:var(--bg);}
-  .steps-grid{
+  .how-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:32px;
-    margin-top:32px;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+    margin-top:40px;
+    align-items:stretch;
   }
-  .steps-grid-4{grid-template-columns:repeat(2,1fr); gap:20px; align-items:start;}
-  .steps-grid-4 .step-card:not(:last-child)::after{display:none;}
-  .step-card{
-    background:var(--surface);
+  @media(max-width:860px){ .how-grid{grid-template-columns:1fr;} }
+  .process-card{
+    background:#fff;
     border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:24px;
-    box-shadow:none;
-    transition:transform .2s ease, box-shadow .2s ease;
+    border-radius:var(--radius-lg);
+    padding:32px;
+    display:flex;
+    flex-direction:column;
+  }
+  .process-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:24px;
+  }
+  .process-head svg{flex-shrink:0;}
+  .process-head h3{margin:0; font-size:20px;}
+  .process-steps{display:flex; flex-direction:column; margin-bottom:24px;}
+  .process-step{
+    display:flex;
+    gap:14px;
+    padding-bottom:20px;
     position:relative;
   }
-  .step-card:hover{transform:translateY(-2px); box-shadow:var(--shadow);}
-  .step-icon{display:none;}
-  .step-card:not(:last-child)::after{
+  .process-step:last-child{padding-bottom:0;}
+  .process-step:not(:last-child)::before{
     content:'';
     position:absolute;
-    top:48px;
-    left:84px;
-    right:-32px;
-    height:1px;
-    background:linear-gradient(90deg, var(--accent), var(--border));
-    z-index:0;
-    pointer-events:none;
+    left:17px;
+    top:36px;
+    bottom:0;
+    width:1px;
+    background:var(--border);
   }
-  .steps-grid-4 .step-card:not(:last-child)::after{right:-20px;}
-  .step-card p + p{margin-top:8px;}
-  .step-head{display:block; margin-bottom:8px;}
   .step-badge{
     display:flex;
     align-items:center;
     justify-content:center;
-    width:48px;
-    height:48px;
+    width:36px;
+    height:36px;
     border-radius:50%;
     background:var(--accent);
     color:#fff;
-    font-size:18px;
+    font-size:14px;
     font-weight:800;
-    line-height:1;
-    margin-bottom:20px;
+    flex-shrink:0;
     position:relative;
     z-index:1;
   }
-  .step-head h3{margin:0 0 8px 0; font-size:17px; font-weight:700;}
-  .step-card p{font-size:15px; line-height:1.6; color:var(--text-muted); margin:0;}
-
-  .how-result{
-    background:var(--dark);
-    color:var(--white);
-    border-radius:var(--radius);
-    padding:32px;
-    margin-top:32px;
-  }
-  .how-result .eyebrow{background:rgba(255,255,255,0.12); color:#fff;}
-  .how-result p{color:rgba(255,255,255,0.85); font-size:16px; margin:0;}
-
-  /* Come funziona: lista verticale su mobile (no immagini, no colonne) */
-  @media(max-width:768px){
-    .steps-grid{
-      display:block;
-      margin-top:28px;
-    }
-    .step-card{
-      display:grid;
-      grid-template-columns:auto 1fr;
-      column-gap:18px;
-      row-gap:6px;
-      background:none;
-      border:none;
-      box-shadow:none;
-      border-radius:0;
-      padding:22px 0;
-      border-bottom:1px solid rgba(29,29,31,0.12);
-    }
-    .step-card:first-child{padding-top:4px;}
-    .step-card:last-child{border-bottom:none;}
-    .step-card::after{display:none;}
-    .step-head{display:contents;}
-    .step-badge{
-      grid-column:1;
-      grid-row:1 / -1;
-      align-self:start;
-      width:36px;
-      height:36px;
-      font-size:15px;
-      margin-bottom:0;
-    }
-    .step-head h3{grid-column:2;}
-    .step-card p{grid-column:2; font-size:14px;}
+  .process-step h4{margin:0 0 4px 0; font-size:15px; font-weight:700; color:var(--text);}
+  .process-step p{margin:0; font-size:14px; line-height:1.55; color:var(--text-muted);}
+  .process-card .btn{margin-top:auto;}
+  @media(max-width:480px){
+    .process-card{padding:24px 20px;}
   }
 
   /* Form */
@@ -1286,48 +1251,74 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <!-- COME FUNZIONA -->
 <section class="how" id="come-funziona">
   <div class="container">
-    <span class="eyebrow center">Come funziona</span>
-    <h2 class="center">Quattro passaggi. Nessuna complicazione.</h2>
-    <div class="steps-grid steps-grid-4">
-      <div class="step-card reveal">
-        <div class="step-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    <span class="eyebrow center">Il processo</span>
+    <h2 class="center">Come funziona</h2>
+    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Due percorsi diversi, in base a dove sei nella ricerca.</p>
+    <div class="how-grid">
+      <div class="process-card reveal">
+        <div class="process-head">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6" stroke="#2E50E8" stroke-width="1.8"/><path d="M20 20l-4.35-4.35" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <h3>Consulenza annunci</h3>
         </div>
-        <div class="step-head">
-          <span class="step-badge">01</span>
-          <h3>Mi mandi l'auto che hai trovato</h3>
+        <div class="process-steps">
+          <div class="process-step">
+            <span class="step-badge">1</span>
+            <div>
+              <h4>Mi invii gli annunci</h4>
+              <p>Puoi inviarmi fino a 3 auto che stai valutando.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <span class="step-badge">2</span>
+            <div>
+              <h4>Li analizzo</h4>
+              <p>Valuto offerta, modello, motorizzazione e possibili criticità.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <span class="step-badge">3</span>
+            <div>
+              <h4>Ti do il mio parere</h4>
+              <p>Ti indico quale vale la pena approfondire e cosa controllare.</p>
+            </div>
+          </div>
         </div>
-        <p>Compili il form con marca, modello e il link dell'annuncio: mi basta per farmi già un'idea prima di vederla dal vivo.</p>
+        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-primary btn-block">Analizza i miei annunci</a>
       </div>
-      <div class="step-card reveal">
-        <div class="step-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="3" stroke="#2E50E8" stroke-width="1.8"/><circle cx="17" cy="9" r="2.4" stroke="#2E50E8" stroke-width="1.8"/><path d="M2.5 20c.5-3.5 3-5.5 5.5-5.5s5 2 5.5 5.5M14.5 20c.4-2.8 2-4.5 4-4.5s3.6 1.7 4 4.5" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <div class="process-card reveal">
+        <div class="process-head">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
+          <h3>Ispezione completa</h3>
         </div>
-        <div class="step-head">
-          <span class="step-badge">02</span>
-          <h3>Confermiamo data e ora</h3>
+        <div class="process-steps">
+          <div class="process-step">
+            <span class="step-badge">1</span>
+            <div>
+              <h4>Mi mandi l'auto</h4>
+              <p>Mi invii l'annuncio e le informazioni principali.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <span class="step-badge">2</span>
+            <div>
+              <h4>Organizziamo l'appuntamento</h4>
+            </div>
+          </div>
+          <div class="process-step">
+            <span class="step-badge">3</span>
+            <div>
+              <h4>Ispeziono l'auto sul posto</h4>
+            </div>
+          </div>
+          <div class="process-step">
+            <span class="step-badge">4</span>
+            <div>
+              <h4>Ti aiuto a decidere</h4>
+              <p>Ricevi una valutazione complessiva e, quando utile, indicazioni per la trattativa.</p>
+            </div>
+          </div>
         </div>
-        <p>Ti scrivo per confermare i dettagli e organizzare l'incontro direttamente dal venditore.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 15l1.5-5.5A2 2 0 0 1 6.4 8h11.2a2 2 0 0 1 1.9 1.5L21 15" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><rect x="2.5" y="15" width="19" height="4.5" rx="1.5" stroke="#2E50E8" stroke-width="1.8"/><circle cx="7" cy="19.5" r="1.4" fill="#2E50E8"/><circle cx="17" cy="19.5" r="1.4" fill="#2E50E8"/></svg>
-        </div>
-        <div class="step-head">
-          <span class="step-badge">03</span>
-          <h3>Effettuo un'ispezione completa</h3>
-        </div>
-        <p>Controllo meccanica, carrozzeria, elettronica, telaio, interni e tutto ciò che può incidere sul valore e sull'affidabilità del veicolo. Durante l'ispezione ti spiego ogni verifica in modo semplice.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="step-head">
-          <span class="step-badge">04</span>
-          <h3>Ricevi report e strategia di trattativa</h3>
-        </div>
-        <p>Sai se l'auto è sana e vale il prezzo richiesto, se è meglio evitarla, o se ci sono difetti lievi da usare per trattare il prezzo.</p>
+        <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione</a>
       </div>
     </div>
   </div>
