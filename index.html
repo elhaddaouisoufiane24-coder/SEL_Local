@@ -2045,16 +2045,48 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       a: "Principalmente in Veneto — Padova, Treviso, Venezia, Verona, Vicenza. Per auto fuori dal Veneto possiamo trovare una soluzione."
     },
     {
-      q: "Quanto costa?",
+      q: "Quanto costa l'ispezione?",
       a: "La tariffa dipende dalla distanza e dal tipo di veicolo. Scrivimi e te la dico subito — senza costi nascosti."
+    },
+    {
+      q: "Quanto dura?",
+      a: "In genere tra 45 minuti e un'ora, inclusa la diagnosi elettronica e la prova su strada."
+    },
+    {
+      q: "Posso richiederla per un'auto venduta da un privato?",
+      a: "Sì, è il caso più comune: vengo con te a vedere l'auto direttamente dal privato che la vende."
+    },
+    {
+      q: "Posso richiederla per un'auto venduta da un concessionario?",
+      a: "Sì. Il controllo è identico. In concessionaria spesso ci si fida troppo del nome — è lì che le sorprese costano di più."
+    },
+    {
+      q: "Devo essere presente?",
+      a: "Sì, è consigliato: vieni con me all'appuntamento così vediamo l'auto insieme e ti spiego ogni controllo in tempo reale."
+    },
+    {
+      q: "Cosa ricevo al termine dell'ispezione?",
+      a: "Una valutazione chiara dell'auto e, quando utile, indicazioni concrete per trattare il prezzo."
+    },
+    {
+      q: "Quale servizio fa per me?",
+      a: "Se hai già trovato l'auto, l'ispezione in loco. Se stai ancora confrontando annunci, la consulenza è il primo passo — puoi comunque passare all'ispezione dopo."
+    },
+    {
+      q: "Come funziona la consulenza annunci?",
+      a: "Prenoti online, poi mi invii su WhatsApp fino a 3 annunci: li analizzo e ti dico su quale conviene puntare."
+    },
+    {
+      q: "Quanto costa la consulenza sugli annunci e come si paga?",
+      a: "29,99€ (prezzo di lancio, invece di 59,99€), per l'analisi di fino a 3 annunci. Il pagamento avviene online al momento della prenotazione; subito dopo ricevi le indicazioni per scrivermi su WhatsApp con i tuoi annunci."
+    },
+    {
+      q: "Posso passare dalla consulenza all'ispezione?",
+      a: "Sì. Se durante la consulenza individuiamo un'auto che vale la pena guardare dal vivo, possiamo organizzare l'ispezione subito dopo."
     },
     {
       q: "E se l'auto non va bene?",
       a: "Te lo dico chiaramente. Il mio compenso è per l'ispezione, non per la vendita. Se l'auto ha problemi, è mio interesse dirtelo."
-    },
-    {
-      q: "Funziona anche per auto in concessionaria?",
-      a: "Sì. Il controllo è identico. In concessionaria spesso ci si fida troppo del nome — è lì che le sorprese costano di più."
     },
     {
       q: "Hai esperienza con elettriche e ibride?",
@@ -2063,18 +2095,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     {
       q: "Posso chiederti consiglio prima ancora di scegliere l'auto?",
       a: "Certo. Molti mi scrivono in quella fase: quale modello evitare, diesel o benzina, che km considerare. Scrivimi su WhatsApp — per un consiglio rapido non serve nemmeno un appuntamento."
-    },
-    {
-      q: "Qual è la differenza tra la consulenza WhatsApp e l'ispezione in loco?",
-      a: "La consulenza è un parere veloce su annunci che hai già trovato, utile quando sei ancora in fase di scelta. L'ispezione in loco è un controllo fisico e completo dell'auto, quando sei pronto a decidere se comprarla davvero."
-    },
-    {
-      q: "Posso passare dalla consulenza all'ispezione?",
-      a: "Sì. Se durante la consulenza individuiamo un'auto che vale la pena guardare dal vivo, possiamo organizzare l'ispezione subito dopo."
-    },
-    {
-      q: "Quanto costa la consulenza sugli annunci e come si paga?",
-      a: "29,99€ (prezzo di lancio, invece di 59,99€), per l'analisi di fino a 3 annunci. Il pagamento avviene online al momento della prenotazione; subito dopo ricevi le indicazioni per scrivermi su WhatsApp con i tuoi annunci."
     }
   ];
 
@@ -2086,10 +2106,14 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     var button = document.createElement('button');
     button.className = 'faq-question';
     button.type = 'button';
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', 'faq-answer-' + idx);
     button.innerHTML = '<span>' + item.q + '</span><span class="plus">+</span>';
 
     var answerWrap = document.createElement('div');
     answerWrap.className = 'faq-answer';
+    answerWrap.id = 'faq-answer-' + idx;
+    answerWrap.setAttribute('role', 'region');
     var answerP = document.createElement('p');
     answerP.textContent = item.a;
     answerWrap.appendChild(answerP);
@@ -2099,10 +2123,12 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       document.querySelectorAll('.faq-item').forEach(function(el){
         el.classList.remove('open');
         el.querySelector('.faq-answer').style.maxHeight = null;
+        el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
       });
       if(!isOpen){
         faqItem.classList.add('open');
         answerWrap.style.maxHeight = answerWrap.scrollHeight + 'px';
+        button.setAttribute('aria-expanded', 'true');
       }
     });
 
@@ -2114,6 +2140,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     if(idx === 0){
       faqItem.classList.add('open');
       answerWrap.style.maxHeight = answerWrap.scrollHeight + 'px';
+      button.setAttribute('aria-expanded', 'true');
     }
   });
 
