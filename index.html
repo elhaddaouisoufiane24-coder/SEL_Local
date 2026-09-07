@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Autoinspecta — Ti accompagno a comprare l'auto giusta</title>
+<title>Autoinspecta — Ti accompagniamo a comprare l'auto giusta</title>
 <meta name="description" content="Prima di comprare un'auto usata, falla controllare da un esperto indipendente. Ispezione completa, diagnosi elettronica, analisi onesta. Eviti problemi che potrebbero costarti migliaia di euro.">
 
 <!-- Meta Pixel Code -->
@@ -204,17 +204,13 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   /* Delay progressivo per card in griglia (via nth-child, nessuna classe extra) */
   .service-card:nth-child(1),
   .testimonial-card:nth-child(1),
-  .process-card:nth-child(1),
-  .credential-item:nth-child(1){transition-delay:0s;}
+  .process-card:nth-child(1){transition-delay:0s;}
   .service-card:nth-child(2),
   .testimonial-card:nth-child(2),
-  .process-card:nth-child(2),
-  .credential-item:nth-child(2){transition-delay:.1s;}
+  .process-card:nth-child(2){transition-delay:.1s;}
   .service-card:nth-child(3),
-  .testimonial-card:nth-child(3),
-  .credential-item:nth-child(3){transition-delay:.2s;}
-  .service-card:nth-child(4),
-  .credential-item:nth-child(4){transition-delay:.3s;}
+  .testimonial-card:nth-child(3){transition-delay:.2s;}
+  .service-card:nth-child(4){transition-delay:.3s;}
   .service-card:nth-child(5),
   .service-card:nth-child(6){transition-delay:.4s;}
 
@@ -460,35 +456,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .price-new{font-size:28px; font-weight:800; color:var(--text);}
   .path-card .btn{margin-top:auto;}
 
-  /* Stats */
-  .stats-row{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:48px;
-    text-align:center;
-  }
-  .stat-item strong{
-    display:block;
-    font-size:48px;
-    font-weight:800;
-    letter-spacing:-0.03em;
-    color:var(--text);
-    line-height:1.1;
-  }
-  .stat-item span{
-    display:block;
-    font-size:14px;
-    font-weight:400;
-    color:var(--text-muted);
-    margin-top:4px;
-  }
-  .stats-row-testimonials{
-    margin-top:32px;
-    margin-bottom:64px;
-    padding-bottom:32px;
-    border-bottom:1px solid var(--border);
-  }
   .testimonials-section{
     background:var(--bg-subtle);
     border-top:1px solid var(--border);
@@ -737,21 +704,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     color:var(--gray-text);
     cursor:not-allowed;
   }
-  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
-  @media(max-width:520px){ .field-row{grid-template-columns:1fr;} }
-  .upload-box{
-    border:2px dashed rgba(29,29,31,0.2);
-    border-radius:var(--radius-sm);
-    padding:22px;
-    text-align:center;
-    cursor:pointer;
-    color:var(--gray-text);
-    font-size:14px;
-    transition:border-color .15s ease, background .15s ease;
-  }
-  .upload-box:hover{border-color:var(--primary); background:rgba(0,102,204,0.04);}
-  .upload-box input{display:none;}
-  .upload-file-name{font-size:13px; font-weight:600; color:var(--primary); margin-top:8px;}
   .form-nav{
     display:flex;
     flex-direction:column-reverse;
@@ -873,61 +825,52 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   /* Chi sono */
   .about{background:var(--bg); text-align:center;}
   .about .section-lead{margin-top:8px;}
-  .about .container{
-    display:block;
-    max-width:640px;
+  .about .container{max-width:640px;}
+  .about .eyebrow, .about h2{margin-left:auto; margin-right:auto;}
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+    margin-top:28px;
   }
   .about-photo{
     display:block;
     width:100%;
     max-width:460px;
     aspect-ratio:4/5;
-    margin:28px auto 32px auto;
+    margin:0 auto;
     border-radius:var(--radius-lg);
     object-fit:cover;
     object-position:center 32%;
     box-shadow:var(--shadow-md);
   }
-  .about .eyebrow, .about h2{margin-left:auto; margin-right:auto;}
-  .about-bio{margin:0 auto;}
-  .about-bio p{margin:0 0 10px 0; text-align:center;}
-  .about-bio p:last-child{margin-bottom:0;}
   @media(max-width:480px){
     .about-photo{aspect-ratio:1/1;}
   }
-  .credential-row{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:12px;
-    margin-top:24px;
-    max-width:480px;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  .credential-item{
+  .about-bio{margin:0 auto;}
+  .about-bio p{margin:0 0 10px 0; text-align:center;}
+  .about-bio p:last-child{margin-bottom:0;}
+
+  .trust-points{
     display:flex;
-    align-items:center;
-    gap:10px;
-    padding:12px 14px;
-    background:var(--bg-subtle);
-    border:1px solid var(--border);
-    border-radius:var(--radius-md);
+    flex-direction:column;
+    gap:16px;
+    margin-top:28px;
     text-align:left;
-    min-width:0;
   }
-  .credential-item span{min-width:0;}
-  .credential-item .icon-circle{
-    width:34px;
-    height:34px;
-    border-radius:10px;
-    margin-bottom:0;
-    flex-shrink:0;
-  }
-  .credential-item .icon-circle svg{width:16px; height:16px;}
-  .credential-item span{font-weight:600; font-size:13px; line-height:1.3; color:var(--text);}
-  @media(max-width:480px){
-    .credential-item{padding:10px 12px;}
-    .credential-item span{font-size:12.5px;}
+  .trust-point{display:flex; gap:14px; align-items:flex-start;}
+  .trust-point .icon-circle{flex-shrink:0;}
+  .trust-point h4{margin:0 0 4px 0; font-size:15px; font-weight:700; color:var(--text);}
+  .trust-point p{margin:0; font-size:14px; line-height:1.55; color:var(--text-muted);}
+
+  @media(min-width:900px){
+    .about .container{max-width:1080px;}
+    .about-grid{
+      grid-template-columns:minmax(320px,420px) 1fr;
+      align-items:start;
+      gap:56px;
+    }
+    .about-bio p{text-align:left;}
   }
 
   /* Cosa controllo */
@@ -965,7 +908,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     color:#fff;
     border-radius:var(--radius-lg);
     padding:48px 56px;
-    margin:0 max(24px, calc((100% - 1120px)/2));
+    margin:0 max(24px, calc((100% - 1120px)/2)) 64px;
     text-align:center;
     position:relative;
     overflow:hidden;
@@ -1002,7 +945,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }
   .cta-mid-link:hover{color:#fff;}
   @media(max-width:768px){
-    .cta-mid{padding:48px 24px; margin:0 16px;}
+    .cta-mid{padding:48px 24px; margin:0 16px 40px;}
   }
 </style>
 </head>
@@ -1021,7 +964,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <a href="#faq">FAQ</a>
       </nav>
       <div class="nav-cta">
-        <a href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20avere%20informazioni%20su%20Autoinspecta" target="_blank" rel="noopener" class="btn btn-primary" aria-label="Scrivimi su WhatsApp">
+        <a href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20avere%20informazioni%20su%20Autoinspecta" target="_blank" rel="noopener" class="btn btn-primary" aria-label="Scrivici su WhatsApp">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
           <span class="nav-cta-label">WhatsApp</span>
         </a>
@@ -1052,13 +995,92 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       </div>
       <div class="hero-trust">
         <div class="trust-badge reveal">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          Indipendente al 100%
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Nessun interesse nella vendita
         </div>
         <div class="trust-badge reveal">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Nessun conflitto di interessi
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          Controlli approfonditi
         </div>
+        <div class="trust-badge reveal">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H8l-4 4V5Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          Un parere sincero
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHI SONO -->
+<section class="about" id="chi-sono">
+  <div class="container">
+    <span class="eyebrow center">Chi ti accompagna</span>
+    <h2 class="center">Un esperto indipendente dalla tua parte</h2>
+    <div class="about-grid">
+      <div class="about-media">
+        <img src="asset/IMG_2564.PNG" alt="Soufiane al lavoro su un'auto" class="about-photo">
+      </div>
+      <div class="about-content">
+        <div class="about-bio reveal">
+          <p>Ciao, sono Soufiane.</p>
+          <p>Da anni lavoro ogni giorno nel mondo dell'auto, dalla concessionaria Porsche, Audi, Volkswagen all'officina.</p>
+          <p>In questo tempo ho visto arrivare in officina veicoli acquistati da poco con problemi che, se scoperti prima, avrebbero evitato ai proprietari spese, delusioni e acquisti sbagliati.</p>
+          <p>È da questa esperienza che nasce AutoInspecta.</p>
+          <p>AutoInspecta nasce per offrire a chi sta per acquistare un'auto usata qualcosa che spesso manca: un controllo indipendente e il parere di qualcuno che guarda l'auto dalla parte di chi compra.</p>
+          <p>Il nostro lavoro non è venderti un'auto.</p>
+          <p>È aiutarti a capire se vale davvero la pena comprarla.</p>
+          <p>Questo servizio è nato nel modo più naturale possibile. Per anni amici e parenti mi hanno chiesto di accompagnarli a vedere le auto che stavano pensando di acquistare.</p>
+          <p>A volte il controllo confermava che l'auto fosse davvero un buon acquisto. Altre volte emergevano difetti, lavori da prevedere o aspetti che permettevano di rinegoziare il prezzo — oppure di evitare completamente un acquisto sbagliato.</p>
+        </div>
+        <div class="trust-points reveal">
+          <div class="trust-point">
+            <div class="icon-circle">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6" stroke="#2E50E8" stroke-width="1.8"/><path d="M20 20l-4.35-4.35" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h4>Nessun interesse nella vendita</h4>
+              <p>Non vendiamo auto e non guadagniamo dalla loro vendita.</p>
+            </div>
+          </div>
+          <div class="trust-point">
+            <div class="icon-circle">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h4>Un controllo fatto per chi compra</h4>
+              <p>Guardiamo l'auto dalla parte dell'acquirente, non del venditore.</p>
+            </div>
+          </div>
+          <div class="trust-point">
+            <div class="icon-circle">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H8l-4 4V5Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h4>Un parere sincero</h4>
+              <p>Se qualcosa non ci convince, te lo diciamo chiaramente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="social-proof-strip">
+  <div class="reviews-carousel" id="reviewsCarousel">
+    <div class="reviews-track" id="reviewsTrack">
+      <div class="review-chip">
+        <span class="stars">★★★★★</span>
+        <p>"Ha scoperto km scalati alla diagnosi in meno di cinque minuti. Mi ha salvato da un errore da tremila euro." — <strong>Luca M.</strong> · Padova</p>
+      </div>
+      <div class="review-chip">
+        <span class="stars">★★★★★</span>
+        <p>"Ha trovato un problema alle sospensioni che il venditore diceva non esserci. Ho ritrattato il prezzo e risparmiato." — <strong>Davide R.</strong> · Verona</p>
+      </div>
+      <div class="review-chip">
+        <span class="stars">★★★★★</span>
+        <p>"Mi sono sentita protetta dall'inizio alla fine. Ha controllato tutto quello che non avrei mai saputo guardare." — <strong>Sara V.</strong> · Treviso</p>
       </div>
     </div>
   </div>
@@ -1076,7 +1098,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           Sto ancora cercando
         </span>
         <h3>Consulenza annunci</h3>
-        <p>Hai trovato alcune auto interessanti ma non sai quale vale davvero la pena approfondire?</p>
+        <p>Hai trovato alcune auto interessanti ma non sai quale fa per te e quale ha meno problemi?</p>
         <ul class="path-bullets">
           <li>✅ Fino a 3 annunci</li>
           <li>✅ Analisi dell'offerta</li>
@@ -1109,64 +1131,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- SOCIAL PROOF -->
-<section class="social-proof-strip">
-  <div class="reviews-carousel" id="reviewsCarousel">
-    <div class="reviews-track" id="reviewsTrack">
-      <div class="review-chip">
-        <span class="stars">★★★★★</span>
-        <p>"Ha scoperto km scalati alla diagnosi in meno di cinque minuti. Mi ha salvato da un errore da tremila euro." — <strong>Luca M.</strong> · Padova</p>
-      </div>
-      <div class="review-chip">
-        <span class="stars">★★★★★</span>
-        <p>"Ha trovato un problema alle sospensioni che il venditore diceva non esserci. Ho ritrattato il prezzo e risparmiato." — <strong>Davide R.</strong> · Verona</p>
-      </div>
-      <div class="review-chip">
-        <span class="stars">★★★★★</span>
-        <p>"Mi sono sentito protetto dall'inizio alla fine. Ha controllato tutto quello che non avrei mai saputo guardare." — <strong>Sara V.</strong> · Treviso</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CHI SONO -->
-<section class="about" id="chi-sono">
-  <div class="container">
-    <span class="eyebrow">Chi ti accompagna</span>
-    <h2>Un esperto indipendente dalla tua parte</h2>
-    <img src="asset/IMG_2564.PNG" alt="Soufiane al lavoro su un'auto" class="about-photo">
-    <div class="about-bio reveal">
-      <p>Ciao, sono Soufiane. Lavoro sulle auto da oltre 10 anni, tra concessionarie Porsche, Volkswagen, Audi, Škoda e Cupra e l'officina sotto casa. Ho creato Autoinspecta per offrirti lo stesso controllo che farei per un amico, prima di un acquisto così importante.</p>
-    </div>
-    <div class="credential-row reveal">
-      <div class="credential-item">
-        <div class="icon-circle">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        </div>
-        <span>10+ anni di esperienza</span>
-      </div>
-      <div class="credential-item">
-        <div class="icon-circle">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span>100% indipendente</span>
-      </div>
-      <div class="credential-item">
-        <div class="icon-circle">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#2E50E8" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <span>Diagnosi professionale</span>
-      </div>
-      <div class="credential-item">
-        <div class="icon-circle">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H8l-4 4V5Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        </div>
-        <span>Ti dico anche quando NON comprare</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- COME FUNZIONA -->
 <section class="how" id="come-funziona">
   <div class="container">
@@ -1190,15 +1154,15 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           <div class="process-step">
             <span class="step-badge">2</span>
             <div>
-              <h4>Li analizzo</h4>
-              <p>Valuto offerta, modello, motorizzazione e possibili criticità.</p>
+              <h4>Li analizziamo</h4>
+              <p>Valutiamo offerta, modello, motorizzazione e possibili criticità.</p>
             </div>
           </div>
           <div class="process-step">
             <span class="step-badge">3</span>
             <div>
-              <h4>Ti do il mio parere</h4>
-              <p>Ti indico quale vale la pena approfondire e cosa controllare.</p>
+              <h4>Ti diamo il nostro parere</h4>
+              <p>Ti indichiamo quale vale la pena approfondire e cosa controllare.</p>
             </div>
           </div>
         </div>
@@ -1213,27 +1177,29 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           <div class="process-step">
             <span class="step-badge">1</span>
             <div>
-              <h4>Mi mandi l'auto</h4>
-              <p>Mi invii l'annuncio e le informazioni principali.</p>
+              <h4>Compili il form</h4>
+              <p>Inserisci il link dell'annuncio dell'auto che vuoi valutare.</p>
             </div>
           </div>
           <div class="process-step">
             <span class="step-badge">2</span>
             <div>
-              <h4>Organizziamo l'appuntamento</h4>
+              <h4>Fissiamo l'appuntamento</h4>
+              <p>Selezioni data e luogo dell'appuntamento dal venditore.</p>
             </div>
           </div>
           <div class="process-step">
             <span class="step-badge">3</span>
             <div>
-              <h4>Ispeziono l'auto sul posto</h4>
+              <h4>Ispezioniamo l'auto sul posto</h4>
+              <p>Ci troviamo direttamente là e controlliamo l'auto insieme a te.</p>
             </div>
           </div>
           <div class="process-step">
             <span class="step-badge">4</span>
             <div>
-              <h4>Ti aiuto a decidere</h4>
-              <p>Ricevi una valutazione complessiva e, quando utile, indicazioni per la trattativa.</p>
+              <h4>Ti aiutiamo a decidere</h4>
+              <p>Ricevi una valutazione reale e sincera, positiva o negativa che sia, e quando utile indicazioni per la trattativa.</p>
             </div>
           </div>
         </div>
@@ -1247,8 +1213,8 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <section class="services" id="ispezione">
   <div class="container">
     <span class="eyebrow center">Ispezione</span>
-    <h2 class="center">Cosa controllo prima di dirti se vale la pena comprarla</h2>
-    <p class="section-lead center reveal" style="margin-left:auto; margin-right:auto;">Ispeziono ogni aspetto che incide su valore, affidabilità e sicurezza.</p>
+    <h2 class="center">Cosa controlliamo prima di dirti se vale la pena comprarla</h2>
+    <p class="section-lead center reveal" style="margin-left:auto; margin-right:auto;">Ispezioniamo ogni aspetto che incide su valore, affidabilità e sicurezza.</p>
     <div class="services-grid">
       <div class="service-card reveal">
         <div class="icon-circle">
@@ -1337,6 +1303,12 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         </div>
         <span>Riduci il rischio di un acquisto sbagliato</span>
       </div>
+      <div class="benefit-item reveal">
+        <div class="icon-circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span>Nessun conflitto di interessi: non dobbiamo venderti niente</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1345,106 +1317,28 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <section class="form-section" id="form">
   <div class="container">
     <span class="eyebrow center" style="display:block; text-align:center;">Prenota</span>
-    <h2 class="center">Dimmi che auto stai valutando.</h2>
-    <p class="center section-lead">Compila il form per prenotare la tua ispezione. Ti rispondo entro poche ore con le indicazioni per il pagamento.</p>
+    <h2 class="center">Raccontaci che auto stai valutando.</h2>
+    <p class="center section-lead">Compila il form per prenotare la tua ispezione. Ti rispondiamo entro poche ore con le indicazioni per il pagamento.</p>
 
     <div class="form-wrap reveal">
       <div class="form-progress">
-        <div class="form-progress-step active" data-step-label="1">1. L'auto</div>
+        <div class="form-progress-step active" data-step-label="1">1. I tuoi dati</div>
         <div class="form-progress-step" data-step-label="2">2. Quando</div>
       </div>
 
       <form id="leadForm" novalidate>
         <div class="form-step active" data-step="1">
-          <div class="field-row">
-            <div class="field">
-              <label for="marca">Marca</label>
-              <select id="marca" name="marca" required>
-                <option value="" disabled selected>Seleziona</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="modello">Modello</label>
-              <select id="modello" name="modello" required disabled>
-                <option value="" disabled selected>Prima seleziona la marca</option>
-              </select>
-            </div>
-          </div>
-          <div class="field" id="marcaAltroWrap" hidden>
-            <label for="marcaAltro">Specifica la marca</label>
-            <input type="text" id="marcaAltro" name="marcaAltro" placeholder="Es. Mitsubishi">
-          </div>
-          <div class="field" id="modelloAltroWrap" hidden>
-            <label for="modelloAltro">Specifica il modello</label>
-            <input type="text" id="modelloAltro" name="modelloAltro" placeholder="Es. nome del modello">
+          <div class="field">
+            <label for="nomeCognome">Nome e cognome</label>
+            <input type="text" id="nomeCognome" name="nomeCognome" placeholder="Es. Mario Rossi" required>
           </div>
           <div class="field">
-            <label for="cittaAuto">Dove si trova <span class="optional-tag">(città/zona)</span></label>
-            <input type="text" id="cittaAuto" name="cittaAuto" placeholder="es. Padova, Verona…" required>
+            <label for="linkAnnuncio">Link all'annuncio</label>
+            <input type="text" id="linkAnnuncio" name="linkAnnuncio" placeholder="Incolla il link da AutoScout, Subito, ecc." required>
           </div>
           <div class="field">
-            <label for="linkAnnuncio">Link all'annuncio <span class="optional-tag">(se disponibile)</span></label>
-            <input type="text" id="linkAnnuncio" name="linkAnnuncio" placeholder="Incolla il link da AutoScout, Subito, ecc.">
-            <p class="field-hint">Se hai il link dell'annuncio, incollalo qui: mi basta per farmi un'idea completa di km, alimentazione e cambio. Se non ce l'hai, non è un problema — ne parliamo su WhatsApp.</p>
-          </div>
-          <div id="annuncioDettagliWrap">
-            <div class="field">
-              <label for="annoIndicativo">Anno indicativo</label>
-              <select id="annoIndicativo" name="annoIndicativo" required>
-                <option value="" disabled selected>Seleziona</option>
-              </select>
-            </div>
-            <div class="field-row">
-              <div class="field">
-                <label for="alimentazione">Alimentazione</label>
-                <select id="alimentazione" name="alimentazione" required>
-                  <option value="" disabled selected>Seleziona</option>
-                  <option>Benzina</option>
-                  <option>Diesel</option>
-                  <option>GPL</option>
-                  <option>Metano</option>
-                  <option>Ibrida</option>
-                  <option>Ibrida plug-in</option>
-                  <option>Elettrica</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="cambio">Cambio</label>
-                <select id="cambio" name="cambio" required>
-                  <option value="" disabled selected>Seleziona</option>
-                  <option>Manuale</option>
-                  <option>Automatico</option>
-                </select>
-              </div>
-            </div>
-            <div class="field">
-              <label for="km">Chilometraggio indicativo</label>
-              <select id="km" name="km" required>
-                <option value="" disabled selected>Seleziona</option>
-                <option>0 - 30.000 km</option>
-                <option>30.000 - 50.000 km</option>
-                <option>50.000 - 80.000 km</option>
-                <option>80.000 - 120.000 km</option>
-                <option>120.000 - 150.000 km</option>
-                <option>Oltre 150.000 km</option>
-                <option>Non lo so</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="quando">Quando vorresti vederla</label>
-            <select id="quando" name="quando" required>
-              <option value="" disabled selected>Seleziona</option>
-              <option>Prima possibile</option>
-              <option>Entro questa settimana</option>
-              <option>Entro 2 settimane</option>
-              <option>Ho ancora tempo</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="telefono">Numero di telefono</label>
-            <input type="tel" id="telefono" name="telefono" placeholder="Es. 333 1234567" required>
-            <p class="field-hint">Ti scrivo qui su WhatsApp per confermare i dettagli.</p>
+            <label for="messaggio">Altro <span class="optional-tag">(opzionale)</span></label>
+            <textarea id="messaggio" name="messaggio" rows="3" placeholder="Scrivi qui eventuali informazioni utili"></textarea>
           </div>
           <div class="form-nav">
             <span></span>
@@ -1467,7 +1361,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 12l7 7L21 5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>Richiesta ricevuta.</h3>
-        <p>Ti scrivo su WhatsApp entro 24 ore per confermare la targa (se non l'hai già data) e le indicazioni per il pagamento.</p>
+        <p>Ti scriviamo su WhatsApp entro 24 ore per confermare la targa (se non l'hai già data) e le indicazioni per il pagamento.</p>
       </div>
 
       <p class="form-microcopy">I tuoi dati sono trattati con riservatezza e usati solo per organizzare la visita.</p>
@@ -1479,20 +1373,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <section class="testimonials-section" id="recensioni">
   <div class="container">
     <span class="eyebrow center" style="display:block; text-align:center;">Cosa dicono i clienti</span>
-    <div class="stats-row stats-row-testimonials">
-      <div class="stat-item reveal">
-        <strong data-count-to="100" data-suffix="+">0+</strong>
-        <span>Ispezioni completate</span>
-      </div>
-      <div class="stat-item reveal">
-        <strong data-count-to="4.9" data-suffix="/5" data-decimals="1">0.0/5</strong>
-        <span>Valutazione media</span>
-      </div>
-      <div class="stat-item reveal">
-        <strong data-count-to="4" data-prefix="&lt; " data-suffix="h">0h</strong>
-        <span>Tempo di risposta</span>
-      </div>
-    </div>
     <div class="testimonial-row">
       <div class="testimonial-card reveal">
         <div class="stars">★★★★★</div>
@@ -1506,7 +1386,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       </div>
       <div class="testimonial-card reveal">
         <div class="stars">★★★★★</div>
-        <p>"Non avevo la minima competenza meccanica. Mi sono sentito protetto dall'inizio alla fine. Ha controllato tutto quello che non avrei mai saputo guardare."</p>
+        <p>"Non avevo la minima competenza meccanica. Mi sono sentita protetta dall'inizio alla fine. Ha controllato tutto quello che non avrei mai saputo guardare."</p>
         <span class="testimonial-author">Sara V. · Treviso</span>
       </div>
     </div>
@@ -1517,7 +1397,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <section class="faq" id="faq">
   <div class="container">
     <span class="eyebrow center" style="display:block; text-align:center;">Domande frequenti</span>
-    <h2 class="center">Le domande che mi fanno prima di prenotare.</h2>
+    <h2 class="center">Le domande che ci fanno prima di prenotare.</h2>
     <div class="faq-list" id="faqList"></div>
   </div>
 </section>
@@ -1531,7 +1411,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-white">Analizza i miei annunci</a>
         <a href="#form" class="btn btn-white">Prenota l'ispezione</a>
       </div>
-      <a href="https://wa.me/390000000000?text=Ciao%2C%20non%20so%20quale%20servizio%20scegliere" target="_blank" rel="noopener" class="cta-mid-link">Non sai quale servizio scegliere? Scrivimi su WhatsApp.</a>
+      <a href="https://wa.me/390000000000?text=Ciao%2C%20non%20so%20quale%20servizio%20scegliere" target="_blank" rel="noopener" class="cta-mid-link">Non sai quale servizio scegliere? Scrivici su WhatsApp.</a>
     </div>
   </div>
 </section>
@@ -1542,7 +1422,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     <div class="footer-grid">
       <div>
         <div class="footer-logo"><img src="asset/logo-autoinspecta-dark.png" alt="Autoinspecta"></div>
-        <p style="max-width:280px; color:rgba(255,255,255,0.4); font-size:14px; margin-top:8px;">Ti accompagno a comprare l'auto giusta, come farebbe un amico.</p>
+        <p style="max-width:280px; color:rgba(255,255,255,0.4); font-size:14px; margin-top:8px;">Ti accompagniamo a comprare l'auto giusta, come farebbe un amico.</p>
         <div class="social-row">
           <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 8h2V4h-2c-2.2 0-4 1.8-4 4v2H9v4h2v8h4v-8h2.6l.4-4H15V8Z" fill="#fff"/></svg></a>
           <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1" fill="#fff"/></svg></a>
@@ -1583,7 +1463,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   </div>
 </footer>
 
-<a class="whatsapp-float" href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20venire%20a%20vedere%20un%27auto%20con%20te" target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp">
+<a class="whatsapp-float" href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20venire%20a%20vedere%20un%27auto%20con%20te" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
 </a>
 
@@ -1675,11 +1555,8 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     startReviewsAutoplay();
   }
 
-  // ---- Estende .reveal a H2 di sezione e credenziali (senza toccare l'HTML sorgente) ----
+  // ---- Estende .reveal a H2 di sezione (senza toccare l'HTML sorgente) ----
   document.querySelectorAll('h2').forEach(function(el){ el.classList.add('reveal'); });
-  var credentialRow = document.querySelector('.credential-row');
-  if(credentialRow) credentialRow.classList.remove('reveal');
-  document.querySelectorAll('.credential-item').forEach(function(el){ el.classList.add('reveal'); });
 
   // ---- Reveal on scroll ----
   var revealEls = document.querySelectorAll('.reveal');
@@ -1687,35 +1564,11 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     entries.forEach(function(entry){
       if(entry.isIntersecting){
         entry.target.classList.add('visible');
-        var counter = entry.target.querySelector('[data-count-to]');
-        if(counter) animateCounter(counter);
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(function(el){ observer.observe(el); });
-
-  // ---- Counter animation for stats ----
-  function animateCounter(el){
-    var target = parseFloat(el.dataset.countTo);
-    var prefix = el.dataset.prefix || '';
-    var suffix = el.dataset.suffix || '';
-    var decimals = el.dataset.decimals ? parseInt(el.dataset.decimals, 10) : 0;
-    var duration = 1400;
-    var startTime = null;
-    function step(timestamp){
-      if(!startTime) startTime = timestamp;
-      var progress = Math.min((timestamp - startTime) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
-      if(progress < 1){
-        requestAnimationFrame(step);
-      } else {
-        el.textContent = prefix + target.toFixed(decimals) + suffix;
-      }
-    }
-    requestAnimationFrame(step);
-  }
 
   // ---- Embed Cal.com (step 3 del form) ----
   var calInlineEl = document.getElementById('cal-inline');
@@ -1766,131 +1619,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       }
     });
   }
-
-  // ---- Marca / Modello a cascata ----
-  var carData = {
-    "Fiat": ["Panda","500","Tipo","Punto","500X","500L","Doblò","Ducato"],
-    "Volkswagen": ["Golf","Polo","Passat","Tiguan","T-Roc","Up!","Touran","Arteon"],
-    "Ford": ["Fiesta","Focus","Puma","Kuga","EcoSport","Mondeo","C-Max"],
-    "Renault": ["Clio","Captur","Megane","Kadjar","Twingo","Scenic"],
-    "Peugeot": ["208","2008","308","3008","108","5008"],
-    "Opel": ["Corsa","Astra","Mokka","Crossland","Grandland","Insignia"],
-    "Citroën": ["C3","C4","C1","C3 Aircross","Berlingo"],
-    "Toyota": ["Yaris","Corolla","C-HR","RAV4","Aygo"],
-    "BMW": ["Serie 1","Serie 2","Serie 3","Serie 5","X1","X2","X3","X5"],
-    "Mercedes-Benz": ["Classe A","Classe B","Classe C","Classe E","GLA","GLC","CLA"],
-    "Audi": ["A1","A3","A4","A6","Q2","Q3","Q5"],
-    "Alfa Romeo": ["Giulietta","Giulia","Stelvio","MiTo","Tonale"],
-    "Lancia": ["Ypsilon","Musa","Delta"],
-    "Nissan": ["Micra","Juke","Qashqai","X-Trail","Note"],
-    "Hyundai": ["i10","i20","i30","Tucson","Kona","Santa Fe"],
-    "Kia": ["Picanto","Rio","Ceed","Sportage","Niro","Stonic"],
-    "Škoda": ["Fabia","Octavia","Kamiq","Karoq","Kodiaq","Scala"],
-    "Seat": ["Ibiza","Leon","Arona","Ateca"],
-    "Mazda": ["Mazda2","Mazda3","CX-3","CX-5"],
-    "Honda": ["Jazz","Civic","CR-V","HR-V"],
-    "Volvo": ["V40","V60","XC40","XC60","XC90"],
-    "Jeep": ["Renegade","Compass","Wrangler","Cherokee"],
-    "Mini": ["Cooper","Countryman","Clubman"],
-    "Smart": ["Fortwo","Forfour"],
-    "Dacia": ["Sandero","Duster","Logan","Spring"],
-    "Suzuki": ["Swift","Vitara","S-Cross","Ignis"],
-    "Land Rover": ["Discovery","Discovery Sport","Range Rover","Range Rover Evoque"],
-    "Porsche": ["911","Cayenne","Macan","Panamera"],
-    "Tesla": ["Model 3","Model S","Model X","Model Y"]
-  };
-
-  var marcaSelect = document.getElementById('marca');
-  var modelloSelect = document.getElementById('modello');
-  var marcaAltroWrap = document.getElementById('marcaAltroWrap');
-  var marcaAltroInput = document.getElementById('marcaAltro');
-  var modelloAltroWrap = document.getElementById('modelloAltroWrap');
-  var modelloAltroInput = document.getElementById('modelloAltro');
-
-  Object.keys(carData).sort().forEach(function(brand){
-    var opt = document.createElement('option');
-    opt.textContent = brand;
-    marcaSelect.appendChild(opt);
-  });
-  var altroMarcaOpt = document.createElement('option');
-  altroMarcaOpt.textContent = 'Altro';
-  marcaSelect.appendChild(altroMarcaOpt);
-
-  function toggleField(wrap, input, show){
-    wrap.hidden = !show;
-    if(show){
-      input.setAttribute('required', '');
-    } else {
-      input.removeAttribute('required');
-      input.value = '';
-    }
-  }
-
-  marcaSelect.addEventListener('change', function(){
-    modelloSelect.innerHTML = '';
-    if(marcaSelect.value === 'Altro'){
-      toggleField(marcaAltroWrap, marcaAltroInput, true);
-      modelloSelect.disabled = true;
-      modelloSelect.removeAttribute('required');
-      var placeholderOpt = document.createElement('option');
-      placeholderOpt.value = '';
-      placeholderOpt.disabled = true;
-      placeholderOpt.selected = true;
-      placeholderOpt.textContent = 'Seleziona';
-      modelloSelect.appendChild(placeholderOpt);
-      toggleField(modelloAltroWrap, modelloAltroInput, true);
-    } else {
-      toggleField(marcaAltroWrap, marcaAltroInput, false);
-      modelloSelect.disabled = false;
-      modelloSelect.setAttribute('required', '');
-      var placeholder = document.createElement('option');
-      placeholder.value = '';
-      placeholder.disabled = true;
-      placeholder.selected = true;
-      placeholder.textContent = 'Seleziona';
-      modelloSelect.appendChild(placeholder);
-      (carData[marcaSelect.value] || []).forEach(function(model){
-        var o = document.createElement('option');
-        o.textContent = model;
-        modelloSelect.appendChild(o);
-      });
-      var altroModelOpt = document.createElement('option');
-      altroModelOpt.textContent = 'Altro';
-      modelloSelect.appendChild(altroModelOpt);
-      toggleField(modelloAltroWrap, modelloAltroInput, false);
-    }
-  });
-
-  modelloSelect.addEventListener('change', function(){
-    toggleField(modelloAltroWrap, modelloAltroInput, modelloSelect.value === 'Altro');
-  });
-
-  // ---- Anno indicativo ----
-  var annoSelect = document.getElementById('annoIndicativo');
-  var thisYear = new Date().getFullYear();
-  for(var y = thisYear; y >= 1990; y--){
-    var yearOpt = document.createElement('option');
-    yearOpt.textContent = y;
-    annoSelect.appendChild(yearOpt);
-  }
-  var beforeOpt = document.createElement('option');
-  beforeOpt.textContent = 'Prima del 1990';
-  annoSelect.appendChild(beforeOpt);
-
-  // ---- Progressive disclosure: nascondi anno/alimentazione/cambio/km se c'è il link dell'annuncio ----
-  var linkAnnuncioInput = document.getElementById('linkAnnuncio');
-  var annuncioDettagliWrap = document.getElementById('annuncioDettagliWrap');
-  var annuncioDettagliFields = Array.prototype.slice.call(annuncioDettagliWrap.querySelectorAll('select'));
-  function updateAnnuncioDettagli(){
-    var hasLink = linkAnnuncioInput.value.trim().length > 0;
-    annuncioDettagliWrap.hidden = hasLink;
-    annuncioDettagliFields.forEach(function(f){
-      if(hasLink){ f.removeAttribute('required'); }
-      else { f.setAttribute('required', ''); }
-    });
-  }
-  linkAnnuncioInput.addEventListener('input', updateAnnuncioDettagli);
-  updateAnnuncioDettagli();
 
   // ---- Multi-step form ----
   var form = document.getElementById('leadForm');
@@ -1946,7 +1674,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     },
     {
       q: "Quanto costa l'ispezione?",
-      a: "La tariffa dipende dalla distanza e dal tipo di veicolo. Scrivimi e te la dico subito — senza costi nascosti."
+      a: "La tariffa dipende dalla distanza e dal tipo di veicolo. Scrivici e te la diciamo subito — senza costi nascosti."
     },
     {
       q: "Quanto dura?",
@@ -1954,7 +1682,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     },
     {
       q: "Posso richiederla per un'auto venduta da un privato?",
-      a: "Sì, è il caso più comune: vengo con te a vedere l'auto direttamente dal privato che la vende."
+      a: "Sì, è il caso più comune: veniamo con te a vedere l'auto direttamente dal privato che la vende."
     },
     {
       q: "Posso richiederla per un'auto venduta da un concessionario?",
@@ -1962,7 +1690,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     },
     {
       q: "Devo essere presente?",
-      a: "Sì, è consigliato: vieni con me all'appuntamento così vediamo l'auto insieme e ti spiego ogni controllo in tempo reale."
+      a: "Sì, è consigliato: vieni con noi all'appuntamento così vediamo l'auto insieme e ti spieghiamo ogni controllo in tempo reale."
     },
     {
       q: "Cosa ricevo al termine dell'ispezione?",
@@ -1974,11 +1702,11 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     },
     {
       q: "Come funziona la consulenza annunci?",
-      a: "Prenoti online, poi mi invii su WhatsApp fino a 3 annunci: li analizzo e ti dico su quale conviene puntare."
+      a: "Prenoti online, poi ci invii su WhatsApp fino a 3 annunci: li analizziamo e ti diciamo su quale conviene puntare."
     },
     {
       q: "Quanto costa la consulenza sugli annunci e come si paga?",
-      a: "29,99€ (prezzo di lancio, invece di 59,99€), per l'analisi di fino a 3 annunci. Il pagamento avviene online al momento della prenotazione; subito dopo ricevi le indicazioni per scrivermi su WhatsApp con i tuoi annunci."
+      a: "29,99€ (prezzo di lancio, invece di 59,99€), per l'analisi di fino a 3 annunci. Il pagamento avviene online al momento della prenotazione; subito dopo ricevi le indicazioni per scriverci su WhatsApp con i tuoi annunci."
     },
     {
       q: "Posso passare dalla consulenza all'ispezione?",
@@ -1986,15 +1714,15 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     },
     {
       q: "E se l'auto non va bene?",
-      a: "Te lo dico chiaramente. Il mio compenso è per l'ispezione, non per la vendita. Se l'auto ha problemi, è mio interesse dirtelo."
+      a: "Te lo diciamo chiaramente. Il nostro compenso è per l'ispezione, non per la vendita. Se l'auto ha problemi, è nostro interesse dirtelo."
     },
     {
       q: "Hai esperienza con elettriche e ibride?",
       a: "Sì. Ho lavorato su tutta la gamma del gruppo Volkswagen, incluse le versioni elettriche e ibride plug-in."
     },
     {
-      q: "Posso chiederti consiglio prima ancora di scegliere l'auto?",
-      a: "Certo. Molti mi scrivono in quella fase: quale modello evitare, diesel o benzina, che km considerare. Scrivimi su WhatsApp — per un consiglio rapido non serve nemmeno un appuntamento."
+      q: "Posso chiedervi consiglio prima ancora di scegliere l'auto?",
+      a: "Certo. Molti ci scrivono in quella fase: quale modello evitare, diesel o benzina, che km considerare. Scrivici su WhatsApp — per un consiglio rapido non serve nemmeno un appuntamento."
     }
   ];
 
