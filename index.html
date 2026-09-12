@@ -415,46 +415,79 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .review-chip p{margin:0; font-size:14px; color:var(--text-muted);}
   .review-chip strong{color:var(--text); font-weight:600;}
 
-  /* Scegli il tuo percorso */
+  /* Scegli il tuo percorso: percorso principale (ispezione) + secondario (scelta auto) */
   .path-choice{background:var(--bg);}
-  .path-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:24px;
-    margin-top:40px;
-    align-items:stretch;
-  }
-  @media(max-width:820px){ .path-grid{grid-template-columns:1fr;} }
-  @media(max-width:480px){ .path-card{padding:24px 20px;} }
-  .path-card{
+  .path-primary{
+    position:relative;
     background:#fff;
-    border:1px solid var(--border);
+    border:2px solid var(--accent);
     border-radius:var(--radius-lg);
-    padding:32px;
-    display:flex;
-    flex-direction:column;
-    transition:all .25s var(--transition);
+    box-shadow:var(--shadow-lg);
+    padding:40px;
+    margin-top:48px;
   }
-  .path-card:hover{transform:translateY(-2px); box-shadow:var(--shadow-md);}
-  .path-eyebrow{
-    display:flex;
-    align-items:center;
-    gap:8px;
+  .path-primary-badge{
+    position:absolute;
+    top:-14px;
+    left:40px;
+    background:var(--accent);
+    color:#fff;
     font-size:12px;
     font-weight:700;
-    letter-spacing:0.08em;
+    letter-spacing:0.04em;
     text-transform:uppercase;
-    color:var(--text-muted);
-    margin-bottom:12px;
+    padding:6px 14px;
+    border-radius:var(--radius-full);
   }
-  .path-eyebrow svg{flex-shrink:0;}
-  .path-card h3{font-size:22px; margin-bottom:12px;}
-  .path-card > p{font-size:15px; line-height:1.65; color:var(--text-muted); margin-bottom:16px;}
-  .path-bullets{margin:0 0 20px 0;}
+  .path-primary-inner{
+    display:flex;
+    align-items:flex-start;
+    gap:28px;
+  }
+  .path-primary-icon{
+    width:64px;
+    height:64px;
+    border-radius:16px;
+    background:var(--accent-light);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .path-primary-content h3{font-size:26px; margin-bottom:12px;}
+  .path-primary-content > p{font-size:16px; line-height:1.65; color:var(--text-muted); margin-bottom:20px;}
+  .path-bullets{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:4px 24px;
+    margin:0 0 24px 0;
+  }
   .path-bullets li{font-size:14px; line-height:1.6; color:var(--text); padding:4px 0;}
-  .path-price{margin-bottom:16px;}
-  .price-new{font-size:28px; font-weight:800; color:var(--text);}
-  .path-card .btn{margin-top:auto;}
+  @media(max-width:640px){
+    .path-primary{padding:28px 22px;}
+    .path-primary-badge{left:22px;}
+    .path-primary-inner{flex-direction:column; gap:16px;}
+    .path-bullets{grid-template-columns:1fr;}
+  }
+
+  .path-secondary{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    background:var(--bg-subtle);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:22px 28px;
+    margin-top:20px;
+  }
+  .path-secondary-text h4{font-size:16px; margin:0 0 4px 0; color:var(--text);}
+  .path-secondary-text p{font-size:14px; line-height:1.5; color:var(--text-muted); margin:0;}
+  .path-secondary .btn{flex-shrink:0; white-space:nowrap;}
+  @media(max-width:640px){
+    .path-secondary{flex-direction:column; align-items:stretch; text-align:center; padding:20px;}
+    .path-secondary .btn{width:100%;}
+  }
 
   .testimonials-section{
     background:var(--bg-subtle);
@@ -562,16 +595,12 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }
   .benefit-item span{font-size:14px; font-weight:600; color:var(--text); min-width:0;}
 
-  /* Come funziona: due percorsi con timeline */
+  /* Come funziona: processo dell'ispezione */
   .how{background:var(--bg);}
   .how-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:24px;
-    margin-top:40px;
-    align-items:stretch;
+    max-width:640px;
+    margin:40px auto 0;
   }
-  @media(max-width:860px){ .how-grid{grid-template-columns:1fr;} }
   .process-card{
     background:#fff;
     border:1px solid var(--border);
@@ -990,7 +1019,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       <h1>Un'ispezione professionale prima dell'acquisto può evitarti migliaia di euro di problemi.</h1>
       <p class="sub">Ti accompagno a vedere l'auto che vuoi acquistare e la ispeziono da cima a fondo. Se l'auto è valida te lo dirò. Se c'è margine per trattare il prezzo, te lo dimostrerò. Se non vale la pena comprarla, sarò il primo a dirtelo.</p>
       <div class="hero-actions">
-        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-primary">Analizza i miei annunci</a>
         <a href="#form" class="btn btn-primary">Prenota l'ispezione</a>
       </div>
       <div class="hero-trust">
@@ -1089,43 +1117,37 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <section class="path-choice" id="percorso">
   <div class="container">
     <h2 class="center">A che punto sei?</h2>
-    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Scegli il supporto più adatto al momento in cui ti trovi.</p>
-    <div class="path-grid">
-      <div class="path-card reveal">
-        <span class="path-eyebrow">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6" stroke="#2E50E8" stroke-width="1.8"/><path d="M20 20l-4.35-4.35" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
-          Sto ancora cercando
-        </span>
-        <h3>Consulenza annunci</h3>
-        <p>Hai trovato alcune auto interessanti ma non sai quale fa per te e quale ha meno problemi?</p>
-        <ul class="path-bullets">
-          <li>✅ Fino a 3 annunci</li>
-          <li>✅ Analisi dell'offerta</li>
-          <li>✅ Criticità e difetti noti</li>
-          <li>✅ Consiglio su quale auto approfondire</li>
-        </ul>
-        <div class="path-price">
-          <span class="price-new">29,99 €</span>
+    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">In base a dove sei nella tua ricerca, so come posso esserti utile.</p>
+
+    <div class="path-primary reveal">
+      <span class="path-primary-badge">Servizio principale</span>
+      <div class="path-primary-inner">
+        <div class="path-primary-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
         </div>
-        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-primary btn-block">Analizza i miei annunci</a>
+        <div class="path-primary-content">
+          <h3>Hai già trovato l'auto che vuoi comprare?</h3>
+          <p>Vengo con te a vederla, la ispeziono da cima a fondo e ti dico se conviene davvero comprarla, a quel prezzo.</p>
+          <ul class="path-bullets">
+            <li>✅ Controllo sul posto</li>
+            <li>✅ Diagnosi elettronica</li>
+            <li>✅ Meccanica e carrozzeria</li>
+            <li>✅ Prova su strada</li>
+            <li>✅ Valutazione complessiva</li>
+            <li>✅ Supporto alla trattativa</li>
+          </ul>
+          <a href="#form" class="btn btn-primary">Prenota l'ispezione →</a>
+        </div>
       </div>
-      <div class="path-card reveal">
-        <span class="path-eyebrow">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
-          Ho già trovato l'auto
-        </span>
-        <h3>Ispezione completa</h3>
-        <p>Hai individuato l'auto che vorresti acquistare? La controllo prima che tu prenda una decisione.</p>
-        <ul class="path-bullets">
-          <li>✅ Controllo sul posto</li>
-          <li>✅ Diagnosi elettronica</li>
-          <li>✅ Meccanica e carrozzeria</li>
-          <li>✅ Prova su strada</li>
-          <li>✅ Valutazione complessiva</li>
-          <li>✅ Supporto alla trattativa</li>
-        </ul>
-        <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione</a>
+    </div>
+
+    <div class="path-secondary reveal" id="scelta-auto">
+      <div class="path-secondary-text">
+        <h4>Non hai ancora trovato l'auto giusta?</h4>
+        <p>Se sei indeciso tra più modelli o non sai quale alimentazione fa per te, posso aiutarti a capire cosa cercare prima di decidere.</p>
       </div>
+      <!-- TODO: collegare al futuro questionario per la scelta dell'auto (non ancora implementato) -->
+      <a href="#scelta-auto" class="btn btn-outline">Scopri come posso aiutarti</a>
     </div>
   </div>
 </section>
@@ -1134,39 +1156,9 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <section class="how" id="come-funziona">
   <div class="container">
     <span class="eyebrow center">Il processo</span>
-    <h2 class="center">Come funziona</h2>
-    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Due percorsi diversi, in base a dove sei nella ricerca.</p>
+    <h2 class="center">Come funziona l'ispezione</h2>
+    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Dal form alla decisione finale, ecco cosa succede passo per passo.</p>
     <div class="how-grid">
-      <div class="process-card reveal">
-        <div class="process-head">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6" stroke="#2E50E8" stroke-width="1.8"/><path d="M20 20l-4.35-4.35" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
-          <h3>Consulenza annunci</h3>
-        </div>
-        <div class="process-steps">
-          <div class="process-step">
-            <span class="step-badge">1</span>
-            <div>
-              <h4>Mi invii gli annunci</h4>
-              <p>Puoi inviarmi fino a 3 auto che stai valutando.</p>
-            </div>
-          </div>
-          <div class="process-step">
-            <span class="step-badge">2</span>
-            <div>
-              <h4>Li analizzo</h4>
-              <p>Valuto offerta, modello, motorizzazione e possibili criticità.</p>
-            </div>
-          </div>
-          <div class="process-step">
-            <span class="step-badge">3</span>
-            <div>
-              <h4>Ti do il mio parere</h4>
-              <p>Ti indico quale vale la pena approfondire e cosa controllare.</p>
-            </div>
-          </div>
-        </div>
-        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-primary btn-block">Analizza i miei annunci</a>
-      </div>
       <div class="process-card reveal">
         <div class="process-head">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
@@ -1407,10 +1399,9 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     <div class="reveal center">
       <h2>Pronto a fare una scelta più sicura?</h2>
       <div class="cta-mid-options">
-        <a href="[STRIPE_PAYMENT_LINK]" class="btn btn-white">Analizza i miei annunci</a>
         <a href="#form" class="btn btn-white">Prenota l'ispezione</a>
       </div>
-      <a href="https://wa.me/390000000000?text=Ciao%2C%20non%20so%20quale%20servizio%20scegliere" target="_blank" rel="noopener" class="cta-mid-link">Non sai quale servizio scegliere? Scrivimi su WhatsApp.</a>
+      <a href="#scelta-auto" class="cta-mid-link">Non hai ancora trovato l'auto? Scopri come posso aiutarti.</a>
     </div>
   </div>
 </section>
@@ -1697,19 +1688,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     },
     {
       q: "Quale servizio fa per me?",
-      a: "Se hai già trovato l'auto, l'ispezione in loco. Se stai ancora confrontando annunci, la consulenza è il primo passo — puoi comunque passare all'ispezione dopo."
-    },
-    {
-      q: "Come funziona la consulenza annunci?",
-      a: "Prenoti online, poi mi invii su WhatsApp fino a 3 annunci: li analizzo e ti dico su quale conviene puntare."
-    },
-    {
-      q: "Quanto costa la consulenza sugli annunci e come si paga?",
-      a: "29,99€ (prezzo di lancio, invece di 59,99€), per l'analisi di fino a 3 annunci. Il pagamento avviene online al momento della prenotazione; subito dopo ricevi le indicazioni per scrivermi su WhatsApp con i tuoi annunci."
-    },
-    {
-      q: "Posso passare dalla consulenza all'ispezione?",
-      a: "Sì. Se durante la consulenza individuo un'auto che vale la pena guardare dal vivo, possiamo organizzare l'ispezione subito dopo."
+      a: "Se hai già trovato l'auto, il passo giusto è l'ispezione in loco. Se invece non sai ancora quale auto comprare, posso aiutarti anche prima, per capire cosa cercare."
     },
     {
       q: "E se l'auto non va bene?",
