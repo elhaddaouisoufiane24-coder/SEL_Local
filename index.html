@@ -454,19 +454,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     padding:40px;
     margin-top:48px;
   }
-  .path-primary-badge{
-    position:absolute;
-    top:-14px;
-    left:40px;
-    background:var(--accent);
-    color:#fff;
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:0.04em;
-    text-transform:uppercase;
-    padding:6px 14px;
-    border-radius:var(--radius-full);
-  }
   .path-primary-inner{
     display:flex;
     align-items:flex-start;
@@ -502,7 +489,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .price-note{font-size:13px; color:var(--text-muted);}
   @media(max-width:640px){
     .path-primary{padding:28px 22px;}
-    .path-primary-badge{left:22px;}
     .path-primary-inner{flex-direction:column; gap:16px;}
     .path-bullets{grid-template-columns:1fr;}
   }
@@ -840,7 +826,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 
   /* Footer */
   footer{
-    background:var(--bg-dark);
+    background:#081f36;
     color:rgba(255,255,255,0.5);
     padding:72px max(24px, calc((100% - 1120px)/2)) 32px;
   }
@@ -1160,11 +1146,10 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <!-- SCEGLI IL TUO PERCORSO -->
 <section class="path-choice" id="percorso">
   <div class="container">
-    <h2 class="center">Le nostre tariffe</h2>
-    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">In base a dove sei nella tua ricerca, so come posso esserti utile.</p>
+    <h2 class="center">Ok ma quanto costa?</h2>
+    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Abbiamo un solo pacchetto, il controllo COMPLETO di tutta la vettura.</p>
 
     <div class="path-primary reveal">
-      <span class="path-primary-badge">Servizio principale</span>
       <div class="path-primary-inner">
         <div class="path-primary-icon">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
@@ -1196,6 +1181,54 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       </div>
       <!-- TODO: collegare al futuro questionario per la scelta dell'auto (non ancora implementato) -->
       <a href="#scelta-auto" class="btn btn-outline">Scopri come posso aiutarti</a>
+    </div>
+  </div>
+</section>
+
+<!-- PERCHÉ FARE UN'ISPEZIONE -->
+<section class="pain-agitation">
+  <div class="container">
+    <div class="reveal center pain-agitation-body">
+      <h2>Cosa eviterai?</h2>
+      <p>Difetti nascosti, riparazioni mal fatte o un prezzo gonfiato spesso emergono solo dopo aver firmato. Un controllo prima di comprare ti protegge da tutto questo.</p>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit-item reveal">
+        <div class="icon-circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#2E50E8" stroke-width="1.8"/><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <span>Eviti problemi nascosti</span>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="icon-circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <span>Individui lavori imminenti</span>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="icon-circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3h6a2 2 0 0 1 2 2v6L11 20 2 11 12 3Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="15.5" cy="8.5" r="1.3" fill="#2E50E8"/></svg>
+        </div>
+        <span>Capisci se il prezzo è coerente</span>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="icon-circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#2E50E8" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <span>Hai argomenti concreti per trattare</span>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="icon-circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span>Riduci il rischio di un acquisto sbagliato</span>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="icon-circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span>Nessun conflitto di interessi: non devo venderti niente</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1252,55 +1285,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     </div>
     <p class="ispezione-question">Ogni controllo serve a rispondere a una sola domanda.</p>
     <p class="pain-agitation-highlight ispezione-question">Compreresti quest'auto sapendo tutto quello che sappiamo adesso?</p>
-  </div>
-</section>
-
-<!-- PERCHÉ FARE UN'ISPEZIONE -->
-<section class="pain-agitation">
-  <div class="container">
-    <div class="reveal center pain-agitation-body">
-      <span class="eyebrow">Perché conviene</span>
-      <h2>Cosa eviterai?</h2>
-      <p>Difetti nascosti, riparazioni mal fatte o un prezzo gonfiato spesso emergono solo dopo aver firmato. Un controllo prima di comprare ti protegge da tutto questo.</p>
-    </div>
-    <div class="benefit-grid">
-      <div class="benefit-item reveal">
-        <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#2E50E8" stroke-width="1.8"/><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        </div>
-        <span>Eviti problemi nascosti</span>
-      </div>
-      <div class="benefit-item reveal">
-        <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        </div>
-        <span>Individui lavori imminenti</span>
-      </div>
-      <div class="benefit-item reveal">
-        <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3h6a2 2 0 0 1 2 2v6L11 20 2 11 12 3Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="15.5" cy="8.5" r="1.3" fill="#2E50E8"/></svg>
-        </div>
-        <span>Capisci se il prezzo è coerente</span>
-      </div>
-      <div class="benefit-item reveal">
-        <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#2E50E8" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <span>Hai argomenti concreti per trattare</span>
-      </div>
-      <div class="benefit-item reveal">
-        <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span>Riduci il rischio di un acquisto sbagliato</span>
-      </div>
-      <div class="benefit-item reveal">
-        <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span>Nessun conflitto di interessi: non devo venderti niente</span>
-      </div>
-    </div>
   </div>
 </section>
 
