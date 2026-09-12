@@ -415,6 +415,34 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .review-chip p{margin:0; font-size:14px; color:var(--text-muted);}
   .review-chip strong{color:var(--text); font-weight:600;}
 
+  /* Scopri il nostro servizio: spazio video */
+  .video-intro{background:var(--bg);}
+  .video-placeholder{
+    max-width:720px;
+    margin:32px auto 0;
+    aspect-ratio:16/9;
+    background:var(--bg-subtle);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    color:var(--text-muted);
+  }
+  .video-placeholder-icon{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background:var(--accent);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .video-placeholder span{font-size:14px; font-weight:600;}
+
   /* Scegli il tuo percorso: percorso principale (ispezione) + secondario (scelta auto) */
   .path-choice{background:var(--bg);}
   .path-primary{
@@ -463,6 +491,15 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     margin:0 0 24px 0;
   }
   .path-bullets li{font-size:14px; line-height:1.6; color:var(--text); padding:4px 0;}
+  .path-price{
+    display:flex;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px 10px;
+    margin-bottom:20px;
+  }
+  .price-new{font-size:28px; font-weight:800; color:var(--text);}
+  .price-note{font-size:13px; color:var(--text-muted);}
   @media(max-width:640px){
     .path-primary{padding:28px 22px;}
     .path-primary-badge{left:22px;}
@@ -1039,56 +1076,15 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- CHI SONO -->
-<section class="about" id="chi-sono">
+<!-- VIDEO SPIEGAZIONE -->
+<section class="video-intro">
   <div class="container">
-    <h2 class="center">Chi c'è dietro AutoInspecta</h2>
-    <div class="about-grid">
-      <div class="about-media">
-        <img src="asset/IMG_2564.PNG" alt="Soufiane al lavoro su un'auto" class="about-photo">
+    <h2 class="center">Scopri il nostro servizio</h2>
+    <div class="video-placeholder reveal">
+      <div class="video-placeholder-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7L8 5Z"/></svg>
       </div>
-      <div class="about-content">
-        <div class="about-bio reveal">
-          <p>Ciao, sono Soufiane. Ho creato AutoInspecta e sarò io a controllare l'auto insieme a te.</p>
-          <p>Da anni lavoro ogni giorno nel mondo dell'auto, tra concessionarie ufficiali e officina. È un'esperienza che mi ha permesso di conoscere da vicino le auto, i loro difetti più comuni e tutti quegli aspetti che spesso non emergono semplicemente guardandole in un annuncio.</p>
-          <p>AutoInspecta nasce anche da qualcosa di molto semplice: per anni amici e parenti mi hanno chiesto di accompagnarli a vedere le auto che stavano pensando di comprare.</p>
-          <p>Andavamo dal venditore, controllavamo l'auto insieme e cercavamo di capire una cosa sola: <strong>vale davvero la pena comprarla?</strong></p>
-          <p>A volte il controllo confermava che fosse un buon acquisto. Altre volte emergevano problemi, lavori da mettere in conto o semplicemente motivi per lasciarla perdere.</p>
-          <p>Da qui è nata AutoInspecta.</p>
-          <p>Oggi ho trasformato quell'aiuto che davo ad amici e parenti in un vero servizio: quando prenoti un'ispezione, <strong>sarò io a venire con te a vedere l'auto e a controllarla prima dell'acquisto</strong>.</p>
-          <p>Perché prima di spendere migliaia di euro per un'auto usata, secondo me è importante avere accanto qualcuno che sappia cosa guardare.</p>
-          <p><strong>Io non devo venderti quell'auto. Devo aiutarti a capire se vale la pena comprarla.</strong></p>
-        </div>
-        <div class="trust-points reveal">
-          <div class="trust-point">
-            <div class="icon-circle">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6" stroke="#2E50E8" stroke-width="1.8"/><path d="M20 20l-4.35-4.35" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </div>
-            <div>
-              <h4>Nessun interesse nella vendita</h4>
-              <p>Non vendo auto e non guadagno dalla loro vendita.</p>
-            </div>
-          </div>
-          <div class="trust-point">
-            <div class="icon-circle">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            </div>
-            <div>
-              <h4>Un controllo fatto per chi compra</h4>
-              <p>Guardo l'auto dalla parte dell'acquirente, non del venditore.</p>
-            </div>
-          </div>
-          <div class="trust-point">
-            <div class="icon-circle">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H8l-4 4V5Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            </div>
-            <div>
-              <h4>Un parere sincero</h4>
-              <p>Se qualcosa non mi convince, te lo dico chiaramente.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <span>Video in arrivo</span>
     </div>
   </div>
 </section>
@@ -1109,45 +1105,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <span class="stars">★★★★★</span>
         <p>"Mi sono sentita protetta dall'inizio alla fine. Ha controllato tutto quello che non avrei mai saputo guardare." — <strong>Sara V.</strong> · Treviso</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- SCEGLI IL TUO PERCORSO -->
-<section class="path-choice" id="percorso">
-  <div class="container">
-    <h2 class="center">A che punto sei?</h2>
-    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">In base a dove sei nella tua ricerca, so come posso esserti utile.</p>
-
-    <div class="path-primary reveal">
-      <span class="path-primary-badge">Servizio principale</span>
-      <div class="path-primary-inner">
-        <div class="path-primary-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
-        </div>
-        <div class="path-primary-content">
-          <h3>Hai già trovato l'auto che vuoi comprare?</h3>
-          <p>Vengo con te a vederla, la ispeziono da cima a fondo e ti dico se conviene davvero comprarla, a quel prezzo.</p>
-          <ul class="path-bullets">
-            <li>✅ Controllo sul posto</li>
-            <li>✅ Diagnosi elettronica</li>
-            <li>✅ Meccanica e carrozzeria</li>
-            <li>✅ Prova su strada</li>
-            <li>✅ Valutazione complessiva</li>
-            <li>✅ Supporto alla trattativa</li>
-          </ul>
-          <a href="#form" class="btn btn-primary">Prenota l'ispezione →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="path-secondary reveal" id="scelta-auto">
-      <div class="path-secondary-text">
-        <h4>Non hai ancora trovato l'auto giusta?</h4>
-        <p>Se sei indeciso tra più modelli o non sai quale alimentazione fa per te, posso aiutarti a capire cosa cercare prima di decidere.</p>
-      </div>
-      <!-- TODO: collegare al futuro questionario per la scelta dell'auto (non ancora implementato) -->
-      <a href="#scelta-auto" class="btn btn-outline">Scopri come posso aiutarti</a>
     </div>
   </div>
 </section>
@@ -1175,7 +1132,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           <div class="process-step">
             <span class="step-badge">2</span>
             <div>
-              <h4>Fisso l'appuntamento</h4>
+              <h4>Scegli data e ora dell'appuntamento</h4>
               <p>Selezioni data e luogo dell'appuntamento dal venditore.</p>
             </div>
           </div>
@@ -1196,6 +1153,49 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         </div>
         <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCEGLI IL TUO PERCORSO -->
+<section class="path-choice" id="percorso">
+  <div class="container">
+    <h2 class="center">Le nostre tariffe</h2>
+    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">In base a dove sei nella tua ricerca, so come posso esserti utile.</p>
+
+    <div class="path-primary reveal">
+      <span class="path-primary-badge">Servizio principale</span>
+      <div class="path-primary-inner">
+        <div class="path-primary-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
+        </div>
+        <div class="path-primary-content">
+          <h3>Hai già trovato l'auto che vuoi comprare?</h3>
+          <p>Vengo con te a vederla, la ispeziono da cima a fondo e ti dico se conviene davvero comprarla, a quel prezzo.</p>
+          <ul class="path-bullets">
+            <li>✅ Controllo sul posto</li>
+            <li>✅ Diagnosi elettronica</li>
+            <li>✅ Meccanica e carrozzeria</li>
+            <li>✅ Prova su strada</li>
+            <li>✅ Valutazione complessiva</li>
+            <li>✅ Supporto alla trattativa</li>
+          </ul>
+          <div class="path-price">
+            <span class="price-new">149 €</span>
+            <span class="price-note">+ spese di uscita calcolate a checkout</span>
+          </div>
+          <a href="#form" class="btn btn-primary">Prenota l'ispezione →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="path-secondary reveal" id="scelta-auto">
+      <div class="path-secondary-text">
+        <h4>Non hai ancora trovato l'auto giusta?</h4>
+        <p>Se sei indeciso tra più modelli o non sai quale alimentazione fa per te, posso aiutarti a capire cosa cercare prima di decidere.</p>
+      </div>
+      <!-- TODO: collegare al futuro questionario per la scelta dell'auto (non ancora implementato) -->
+      <a href="#scelta-auto" class="btn btn-outline">Scopri come posso aiutarti</a>
     </div>
   </div>
 </section>
@@ -1260,7 +1260,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   <div class="container">
     <div class="reveal center pain-agitation-body">
       <span class="eyebrow">Perché conviene</span>
-      <h2>Una bella auto non è sempre un buon acquisto.</h2>
+      <h2>Cosa eviterai?</h2>
       <p>Difetti nascosti, riparazioni mal fatte o un prezzo gonfiato spesso emergono solo dopo aver firmato. Un controllo prima di comprare ti protegge da tutto questo.</p>
     </div>
     <div class="benefit-grid">
@@ -1402,6 +1402,60 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <a href="#form" class="btn btn-white">Prenota l'ispezione</a>
       </div>
       <a href="#scelta-auto" class="cta-mid-link">Non hai ancora trovato l'auto? Scopri come posso aiutarti.</a>
+    </div>
+  </div>
+</section>
+
+<!-- CHI SONO -->
+<section class="about" id="chi-sono">
+  <div class="container">
+    <h2 class="center">Chi c'è dietro AutoInspecta</h2>
+    <div class="about-grid">
+      <div class="about-media">
+        <img src="asset/IMG_2564.PNG" alt="Soufiane al lavoro su un'auto" class="about-photo">
+      </div>
+      <div class="about-content">
+        <div class="about-bio reveal">
+          <p>Ciao, sono Soufiane. Ho creato AutoInspecta e sarò io a controllare l'auto insieme a te.</p>
+          <p>Da anni lavoro ogni giorno nel mondo dell'auto, tra concessionarie ufficiali e officina. È un'esperienza che mi ha permesso di conoscere da vicino le auto, i loro difetti più comuni e tutti quegli aspetti che spesso non emergono semplicemente guardandole in un annuncio.</p>
+          <p>AutoInspecta nasce anche da qualcosa di molto semplice: per anni amici e parenti mi hanno chiesto di accompagnarli a vedere le auto che stavano pensando di comprare.</p>
+          <p>Andavamo dal venditore, controllavamo l'auto insieme e cercavamo di capire una cosa sola: <strong>vale davvero la pena comprarla?</strong></p>
+          <p>A volte il controllo confermava che fosse un buon acquisto. Altre volte emergevano problemi, lavori da mettere in conto o semplicemente motivi per lasciarla perdere.</p>
+          <p>Da qui è nata AutoInspecta.</p>
+          <p>Oggi ho trasformato quell'aiuto che davo ad amici e parenti in un vero servizio: quando prenoti un'ispezione, <strong>sarò io a venire con te a vedere l'auto e a controllarla prima dell'acquisto</strong>.</p>
+          <p>Perché prima di spendere migliaia di euro per un'auto usata, secondo me è importante avere accanto qualcuno che sappia cosa guardare.</p>
+          <p><strong>Io non devo venderti quell'auto. Devo aiutarti a capire se vale la pena comprarla.</strong></p>
+        </div>
+        <div class="trust-points reveal">
+          <div class="trust-point">
+            <div class="icon-circle">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6" stroke="#2E50E8" stroke-width="1.8"/><path d="M20 20l-4.35-4.35" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h4>Nessun interesse nella vendita</h4>
+              <p>Non vendo auto e non guadagno dalla loro vendita.</p>
+            </div>
+          </div>
+          <div class="trust-point">
+            <div class="icon-circle">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h4>Un controllo fatto per chi compra</h4>
+              <p>Guardo l'auto dalla parte dell'acquirente, non del venditore.</p>
+            </div>
+          </div>
+          <div class="trust-point">
+            <div class="icon-circle">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H8l-4 4V5Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h4>Un parere sincero</h4>
+              <p>Se qualcosa non mi convince, te lo dico chiaramente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
