@@ -45,7 +45,9 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     --shadow-md:0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
     --shadow-lg:0 20px 48px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.04);
     --transition:cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --section-gap:72px;
+    --section-gap:80px;
+    --bg-alt:#eef3fb;
+    --hero-dark:#081f36;
 
     /* alias retrocompatibili per le regole esistenti */
     --primary:var(--accent);
@@ -90,6 +92,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 
   section{padding:var(--section-gap) 0;}
 
+  .accent-word{color:var(--accent);}
   .eyebrow{
     display:block;
     font-size:12px;
@@ -141,7 +144,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .center{text-align:center;margin-left:auto;margin-right:auto;}
 
   @media(max-width:768px){
-    :root{ --section-gap:48px; }
+    :root{ --section-gap:56px; }
     h1{font-size:clamp(32px, 8vw, 48px);}
     h2{font-size:clamp(24px, 6vw, 36px);}
   }
@@ -258,9 +261,9 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     gap:8px;
     flex-shrink:0;
   }
-  .logo img{height:48px; width:auto; display:block;}
+  .logo img{height:54px; width:auto; display:block;}
 
-  .nav-right{display:flex; align-items:center; gap:32px;}
+  .nav-right{display:flex; align-items:center; gap:20px;}
 
   .nav-links{display:none; align-items:center; gap:26px;}
   .nav-links a{
@@ -268,12 +271,12 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     font-weight:600;
     color:var(--text-muted);
     white-space:nowrap;
-    transition:color .15s ease;
+    transition:color .2s ease;
   }
-  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover{color:var(--accent);}
   @media(min-width:900px){ .nav-links{display:flex;} }
 
-  .nav-cta{display:flex; align-items:center; gap:14px; flex-shrink:0;}
+  .nav-cta{display:flex; align-items:center; gap:10px; flex-shrink:0;}
   .nav-cta .btn{white-space:nowrap;}
 
   .nav-toggle{
@@ -332,19 +335,40 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     .nav-mobile{padding:8px 16px 16px;}
   }
   @media(max-width:380px){
-    .logo img{height:36px;}
-    .nav-cta-label{display:none;}
-    .nav-cta .btn-primary{padding:10px 12px;}
+    .logo img{height:40px;}
+    .nav-cta .btn-primary{padding:10px 14px; font-size:13px;}
   }
 
   /* Hero */
   .hero{
-    background:
-      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37,99,235,0.06), transparent),
-      var(--bg);
+    position:relative;
+    background:var(--bg);
     padding:128px 0 64px;
+    overflow:hidden;
+  }
+  .hero::before, .hero::after{
+    content:'';
+    position:absolute;
+    border-radius:50%;
+    filter:blur(60px);
+    z-index:0;
+  }
+  .hero::before{
+    width:420px; height:420px;
+    top:-160px; left:50%;
+    transform:translateX(-60%);
+    background:rgba(37,99,235,0.10);
+    box-shadow:0 40px 80px rgba(37,99,235,0.08);
+  }
+  .hero::after{
+    width:320px; height:320px;
+    top:60px; right:8%;
+    background:rgba(37,99,235,0.06);
+    box-shadow:0 30px 60px rgba(0,0,0,0.04);
   }
   .hero-inner{
+    position:relative;
+    z-index:1;
     max-width:980px;
     margin:0 auto;
     text-align:center;
@@ -415,7 +439,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .review-chip p{margin:0; font-size:14px; color:var(--text-muted);}
   .review-chip strong{color:var(--text); font-weight:600;}
 
-  /* Scopri il nostro servizio: spazio video */
+  /* Scopri il mio servizio: spazio video */
   .video-intro{background:var(--bg);}
   .video-placeholder{
     max-width:720px;
@@ -444,7 +468,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .video-placeholder span{font-size:14px; font-weight:600;}
 
   /* Scegli il tuo percorso: percorso principale (ispezione) + secondario (scelta auto) */
-  .path-choice{background:var(--bg);}
+  .path-choice{background:var(--bg-alt);}
   .path-primary{
     position:relative;
     background:#fff;
@@ -485,8 +509,9 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     gap:8px 10px;
     margin-bottom:20px;
   }
-  .price-new{font-size:28px; font-weight:800; color:var(--text);}
+  .price-new{font-size:28px; font-weight:800; color:var(--accent);}
   .price-note{font-size:13px; color:var(--text-muted);}
+  .price-checklist{font-size:14px; font-weight:600; color:var(--text); margin-bottom:16px;}
   @media(max-width:640px){
     .path-primary{padding:28px 22px;}
     .path-primary-inner{flex-direction:column; gap:16px;}
@@ -495,9 +520,10 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 
   .path-secondary{
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:24px;
+    flex-direction:column;
+    align-items:stretch;
+    text-align:center;
+    gap:16px;
     background:var(--bg-subtle);
     border:1px solid var(--border);
     border-radius:var(--radius-md);
@@ -506,16 +532,10 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }
   .path-secondary-text h4{font-size:16px; margin:0 0 4px 0; color:var(--text);}
   .path-secondary-text p{font-size:14px; line-height:1.5; color:var(--text-muted); margin:0;}
-  .path-secondary .btn{flex-shrink:0; white-space:nowrap;}
-  @media(max-width:640px){
-    .path-secondary{flex-direction:column; align-items:stretch; text-align:center; padding:20px;}
-    .path-secondary .btn{width:100%;}
-  }
+  .path-secondary .btn{width:100%;}
 
   .testimonials-section{
-    background:var(--bg-subtle);
-    border-top:1px solid var(--border);
-    border-bottom:1px solid var(--border);
+    background:var(--bg);
   }
   .testimonial-row{
     display:grid;
@@ -541,27 +561,91 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .testimonial-author{font-size:13px; font-weight:600; color:var(--text-muted); margin-top:auto;}
 
   /* WhatsApp floating button */
-  .whatsapp-float{
+  .whatsapp-widget{
     position:fixed;
     bottom:28px;
     right:28px;
     z-index:998;
+    display:flex;
+    align-items:center;
+    opacity:0;
+    transform:translateY(8px);
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .whatsapp-widget.visible{opacity:1; transform:translateY(0); pointer-events:auto;}
+  .whatsapp-float{
+    position:relative;
     width:56px;
     height:56px;
+    flex-shrink:0;
     border-radius:var(--radius-full);
     background:#25D366;
     display:flex;
     align-items:center;
     justify-content:center;
     box-shadow:0 4px 20px rgba(37,211,102,0.35);
-    transition:all .25s ease;
-    opacity:0;
-    transform:translateY(8px);
-    pointer-events:none;
+    transition:transform .25s ease, box-shadow .25s ease;
   }
-  .whatsapp-float.visible{opacity:1; transform:translateY(0); pointer-events:auto;}
   .whatsapp-float:hover{transform:translateY(-2px); box-shadow:0 8px 28px rgba(37,211,102,0.45);}
-  @media(max-width:480px){ .whatsapp-float{width:50px; height:50px; bottom:16px; right:16px;} }
+  @media(max-width:480px){
+    .whatsapp-widget{bottom:16px; right:16px;}
+    .whatsapp-float{width:50px; height:50px;}
+  }
+
+  .whatsapp-tooltip{
+    position:relative;
+    margin-right:14px;
+    max-width:210px;
+    background:#fff;
+    color:var(--text);
+    font-size:14px;
+    font-weight:500;
+    line-height:1.4;
+    padding:12px 30px 12px 16px;
+    border-radius:var(--radius-md);
+    box-shadow:var(--shadow-md);
+    opacity:0;
+    transform:translateX(8px) scale(0.96);
+    pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .whatsapp-widget:hover .whatsapp-tooltip,
+  .whatsapp-tooltip.show{
+    opacity:1;
+    transform:translateX(0) scale(1);
+    pointer-events:auto;
+  }
+  .whatsapp-tooltip::after{
+    content:'';
+    position:absolute;
+    top:50%;
+    right:-6px;
+    transform:translateY(-50%);
+    width:0; height:0;
+    border-top:7px solid transparent;
+    border-bottom:7px solid transparent;
+    border-left:7px solid #fff;
+  }
+  .whatsapp-tooltip-close{
+    position:absolute;
+    top:6px;
+    right:8px;
+    width:18px;
+    height:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:none;
+    background:none;
+    color:var(--text-muted);
+    font-size:16px;
+    line-height:1;
+    cursor:pointer;
+    padding:0;
+  }
+  .whatsapp-tooltip-close:hover{color:var(--text);}
+  @media(max-width:480px){ .whatsapp-tooltip{max-width:180px; font-size:13px;} }
   /* Icon circle helper */
   .icon-circle{
     width:52px;height:52px;
@@ -781,7 +865,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .form-success .icon-circle{margin:0 auto 18px; width:64px; height:64px; background:rgba(0,102,204,0.12);}
 
   /* FAQ */
-  .faq{background:var(--white);}
+  .faq{background:var(--bg-alt);}
   .faq-list{max-width:720px; margin:40px auto 0;}
   .faq-item{
     border-bottom:1px solid var(--border);
@@ -911,6 +995,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     text-align:left;
   }
   .trust-point{display:flex; gap:14px; align-items:flex-start;}
+  .how-reassurance{max-width:640px; margin-left:auto; margin-right:auto; margin-top:40px;}
   .trust-point .icon-circle{flex-shrink:0;}
   .trust-point h4{margin:0 0 4px 0; font-size:15px; font-weight:700; color:var(--text);}
   .trust-point p{margin:0; font-size:14px; line-height:1.55; color:var(--text-muted);}
@@ -926,7 +1011,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }
 
   /* Cosa controllo */
-  .services{background:var(--bg-subtle); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .services{background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
   .services-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -1007,7 +1092,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 
 <header>
   <div class="nav">
-    <div class="logo"><img src="asset/logo-autoinspecta.png" alt="Autoinspecta"></div>
+    <div class="logo"><img src="asset/logo-autoinspecta-transparent.png" alt="Autoinspecta"></div>
     <div class="nav-right">
       <nav class="nav-links">
         <a href="#percorso">Servizi</a>
@@ -1016,10 +1101,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <a href="#faq">FAQ</a>
       </nav>
       <div class="nav-cta">
-        <a href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20avere%20informazioni%20su%20Autoinspecta" target="_blank" rel="noopener" class="btn btn-primary" aria-label="Scrivimi su WhatsApp">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
-          <span class="nav-cta-label">WhatsApp</span>
-        </a>
+        <a href="#form" class="btn btn-primary">Prenota l'ispezione</a>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Apri il menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -1039,7 +1121,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   <div class="container hero-inner">
     <div class="reveal hero-copy">
       <span class="eyebrow">Al tuo fianco, prima dell'acquisto di un'auto usata</span>
-      <h1>Un'ispezione professionale prima dell'acquisto può evitarti migliaia di euro di problemi.</h1>
+      <h1>Stai per acquistare un'auto usata? Un'ispezione professionale può evitarti di buttare migliaia di euro!</h1>
       <p class="sub">Ti accompagno a vedere l'auto che vuoi acquistare e la ispeziono da cima a fondo. Se l'auto è valida te lo dirò. Se c'è margine per trattare il prezzo, te lo dimostrerò. Se non vale la pena comprarla, sarò il primo a dirtelo.</p>
       <div class="hero-actions">
         <a href="#form" class="btn btn-primary">Prenota l'ispezione</a>
@@ -1065,7 +1147,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <!-- VIDEO SPIEGAZIONE -->
 <section class="video-intro">
   <div class="container">
-    <h2 class="center">Scopri il nostro servizio</h2>
+    <h2 class="center">Scopri il mio servizio</h2>
     <div class="video-placeholder reveal">
       <div class="video-placeholder-icon">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7L8 5Z"/></svg>
@@ -1126,7 +1208,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
             <span class="step-badge">3</span>
             <div>
               <h4>Ispeziono l'auto sul posto</h4>
-              <p>Vengo direttamente là e controllo l'auto insieme a te.</p>
+              <p>Ispeziono l'auto su 101 punti: carrozzeria, motore, interni, elettronica e molto altro.</p>
             </div>
           </div>
           <div class="process-step">
@@ -1140,6 +1222,35 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione</a>
       </div>
     </div>
+    <div class="trust-points how-reassurance reveal">
+      <div class="trust-point">
+        <div class="icon-circle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
+        </div>
+        <div>
+          <h4>Non hai tempo o non vuoi fare tutta quella strada per vedere la macchina?</h4>
+          <p>Vado io a vederla per te e ti consegno foto e un report dettagliato.</p>
+        </div>
+      </div>
+      <div class="trust-point">
+        <div class="icon-circle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12l3-3 6 6 9-9" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h4>Puoi restare comodamente a casa</h4>
+          <p>Mi occupo io di raggiungere il venditore, ispezionare l'auto e fornirti tutto quello che ti serve per decidere.</p>
+        </div>
+      </div>
+      <div class="trust-point">
+        <div class="icon-circle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#2E50E8" stroke-width="1.8"/><path d="M12 8v4l3 2" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h4>Non devi sapere nulla di meccanica</h4>
+          <p>Ci penso io a controllare ogni dettaglio e a spiegarti cosa ho trovato in modo chiaro.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1147,7 +1258,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <section class="path-choice" id="percorso">
   <div class="container">
     <h2 class="center">Ok ma quanto costa?</h2>
-    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Abbiamo un solo pacchetto, il controllo COMPLETO di tutta la vettura.</p>
+    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Ho un solo pacchetto, il controllo COMPLETO di tutta la vettura.</p>
 
     <div class="path-primary reveal">
       <div class="path-primary-inner">
@@ -1169,7 +1280,8 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
             <span class="price-new">149 €</span>
             <span class="price-note">+ spese di uscita calcolate a checkout</span>
           </div>
-          <a href="#form" class="btn btn-primary">Prenota l'ispezione →</a>
+          <p class="price-checklist">✅ Checklist di 101 controlli inclusa nel report</p>
+          <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione →</a>
         </div>
       </div>
     </div>
@@ -1237,7 +1349,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <section class="services" id="ispezione">
   <div class="container">
     <span class="eyebrow center">Ispezione</span>
-    <h2 class="center">Cosa controllo prima di dirti se vale la pena comprarla</h2>
+    <h2 class="center"><span class="accent-word">101</span> punti di controllo per non lasciare nulla al caso</h2>
     <p class="section-lead center reveal" style="margin-left:auto; margin-right:auto;">Ispeziono ogni aspetto che incide su valore, affidabilità e sicurezza.</p>
     <div class="services-grid">
       <div class="service-card reveal">
@@ -1491,9 +1603,15 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   </div>
 </footer>
 
-<a class="whatsapp-float" href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20venire%20a%20vedere%20un%27auto%20con%20te" target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
-</a>
+<div class="whatsapp-widget" id="waWidget">
+  <div class="whatsapp-tooltip" id="waTooltip">
+    Vorrei maggiori informazioni 💬
+    <button type="button" class="whatsapp-tooltip-close" id="waTooltipClose" aria-label="Chiudi">✕</button>
+  </div>
+  <a class="whatsapp-float" id="waLink" href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20venire%20a%20vedere%20un%27auto%20con%20te" target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
+  </a>
+</div>
 
 <script>
 (function(){
@@ -1536,13 +1654,46 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     });
   }
 
-  // ---- WhatsApp float: appare dopo 300px di scroll ----
-  var waFloat = document.querySelector('.whatsapp-float');
+  // ---- WhatsApp float: appare dopo 300px di scroll, tooltip dopo 3s ----
+  var waWidget = document.getElementById('waWidget');
+  var waTooltip = document.getElementById('waTooltip');
+  var waTooltipClose = document.getElementById('waTooltipClose');
+  var waLink = document.getElementById('waLink');
+  var waDismissed = false;
+  var waReadyToShow = false;
+
+  function maybeShowWaTooltip(){
+    if(waDismissed || !waReadyToShow) return;
+    if(waWidget.classList.contains('visible')){
+      waTooltip.classList.add('show');
+    }
+  }
+  setTimeout(function(){
+    waReadyToShow = true;
+    maybeShowWaTooltip();
+  }, 3000);
+
   function updateWaFloat(){
-    waFloat.classList.toggle('visible', window.scrollY > 300);
+    waWidget.classList.toggle('visible', window.scrollY > 300);
+    maybeShowWaTooltip();
   }
   window.addEventListener('scroll', updateWaFloat, { passive: true });
   updateWaFloat();
+
+  function dismissWaTooltip(){
+    waDismissed = true;
+    waTooltip.classList.remove('show');
+  }
+  if(waTooltipClose){
+    waTooltipClose.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      dismissWaTooltip();
+    });
+  }
+  if(waLink){
+    waLink.addEventListener('click', dismissWaTooltip);
+  }
 
   // ---- Carosello recensioni: auto-scroll + swipe ----
   var reviewsCarousel = document.getElementById('reviewsCarousel');
