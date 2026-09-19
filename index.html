@@ -496,12 +496,37 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .path-primary-content h3{font-size:26px; margin-bottom:12px;}
   .path-primary-content > p{font-size:16px; line-height:1.65; color:var(--text-muted); margin-bottom:20px;}
   .path-bullets{
+    list-style:none;
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:4px 24px;
+    gap:8px 24px;
     margin:0 0 24px 0;
+    padding:0;
   }
-  .path-bullets li{font-size:14px; line-height:1.6; color:var(--text); padding:4px 0;}
+  .path-bullets li{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+    line-height:1.6;
+    color:var(--text);
+    padding:4px 0;
+  }
+  .path-bullets li::before{
+    content:'✓';
+    flex-shrink:0;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:var(--accent-light);
+    color:var(--accent);
+    font-size:12px;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    line-height:1;
+  }
   .path-price{
     display:flex;
     align-items:baseline;
@@ -511,7 +536,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }
   .price-new{font-size:28px; font-weight:800; color:var(--accent);}
   .price-note{font-size:13px; color:var(--text-muted);}
-  .price-checklist{font-size:14px; font-weight:600; color:var(--text); margin-bottom:16px;}
   @media(max-width:640px){
     .path-primary{padding:28px 22px;}
     .path-primary-inner{flex-direction:column; gap:16px;}
@@ -1272,18 +1296,17 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           <h3>Hai già trovato l'auto che vuoi comprare?</h3>
           <p>Vengo con te a vederla, la ispeziono da cima a fondo e ti dico se conviene davvero comprarla, a quel prezzo.</p>
           <ul class="path-bullets">
-            <li>✅ Controllo sul posto</li>
-            <li>✅ Diagnosi elettronica</li>
-            <li>✅ Meccanica e carrozzeria</li>
-            <li>✅ Prova su strada</li>
-            <li>✅ Valutazione complessiva</li>
-            <li>✅ Supporto alla trattativa</li>
+            <li>Controllo sul posto</li>
+            <li>Diagnosi elettronica</li>
+            <li>Meccanica e carrozzeria</li>
+            <li>Prova su strada</li>
+            <li>Valutazione complessiva</li>
+            <li>Supporto alla trattativa</li>
           </ul>
           <div class="path-price">
             <span class="price-new">149 €</span>
-            <span class="price-note">+ spese di uscita calcolate a checkout</span>
+            <span class="price-note">+ spese di uscita calcolate al checkout</span>
           </div>
-          <p class="price-checklist">✅ Checklist di 101 controlli inclusa nel report</p>
           <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione →</a>
         </div>
       </div>
