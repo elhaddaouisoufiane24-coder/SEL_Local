@@ -534,8 +534,22 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     gap:8px 10px;
     margin-bottom:20px;
   }
+  .price-old{font-size:18px; font-weight:600; color:var(--text-muted); text-decoration:line-through; text-decoration-thickness:1.5px;}
   .price-new{font-size:28px; font-weight:800; color:var(--accent);}
-  .price-note{font-size:13px; color:var(--text-muted);}
+  .price-note{font-size:13px; color:var(--text-muted); width:100%;}
+  .price-launch-badge{
+    display:inline-flex;
+    align-items:center;
+    background:var(--accent-light);
+    color:var(--accent);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    padding:4px 10px;
+    border-radius:var(--radius-full);
+    width:fit-content;
+    margin-bottom:10px;
+  }
   @media(max-width:640px){
     .path-primary{padding:28px 22px;}
     .path-primary-inner{flex-direction:column; gap:16px;}
@@ -1303,7 +1317,9 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
             <li>Valutazione complessiva</li>
             <li>Supporto alla trattativa</li>
           </ul>
+          <span class="price-launch-badge">Prezzo di lancio</span>
           <div class="path-price">
+            <span class="price-old">249 €</span>
             <span class="price-new">149 €</span>
             <span class="price-note">+ spese di uscita calcolate al checkout</span>
           </div>
@@ -1345,21 +1361,21 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       </div>
       <div class="benefit-item reveal">
         <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3h6a2 2 0 0 1 2 2v6L11 20 2 11 12 3Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="15.5" cy="8.5" r="1.3" fill="#2E50E8"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 15l1.5-5.5A2 2 0 0 1 6.4 8h11.2a2 2 0 0 1 1.9 1.5L21 15" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><rect x="2.5" y="15" width="19" height="4.5" rx="1.5" stroke="#2E50E8" stroke-width="1.8"/><circle cx="7" cy="19.5" r="1.4" fill="#2E50E8"/><circle cx="17" cy="19.5" r="1.4" fill="#2E50E8"/><path d="M9 5l6 0" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
         </div>
-        <span>Capisci se il prezzo è coerente</span>
+        <span>Auto gravemente incidentate e riparate</span>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="icon-circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="13" r="8" stroke="#2E50E8" stroke-width="1.8"/><path d="M12 13l4-3M8 13a4 4 0 0 1 4-4" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <span>Km scalati</span>
       </div>
       <div class="benefit-item reveal">
         <div class="icon-circle">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#2E50E8" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
         </div>
-        <span>Hai argomenti concreti per trattare</span>
-      </div>
-      <div class="benefit-item reveal">
-        <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E50E8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span>Riduci il rischio di un acquisto sbagliato</span>
+        <span>Per trattare il prezzo</span>
       </div>
       <div class="benefit-item reveal">
         <div class="icon-circle">
@@ -1895,7 +1911,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     },
     {
       q: "Quanto costa l'ispezione?",
-      a: "La tariffa dipende dalla distanza e dal tipo di veicolo. Scrivimi e te la dico subito — senza costi nascosti."
+      a: "Il prezzo è 149 €, a cui si aggiungono le spese di uscita calcolate al checkout in base alla distanza. Nessun altro costo nascosto."
     },
     {
       q: "Quanto dura?",
@@ -1931,7 +1947,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     },
     {
       q: "Posso chiederti consiglio prima ancora di scegliere l'auto?",
-      a: "Certo. Molti mi scrivono in quella fase: quale modello evitare, diesel o benzina, che km considerare. Scrivimi su WhatsApp — per un consiglio rapido non serve nemmeno un appuntamento."
+      a: "Certo. Puoi compilare un form indicando le tue esigenze, il budget e la percorrenza che ti serve: in base a queste informazioni ti mando un report con le migliori auto da cercare."
     }
   ];
 
