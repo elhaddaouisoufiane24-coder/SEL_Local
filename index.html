@@ -1997,11 +1997,24 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     }
   }
 
+  var travelRequestId = 0;
+  var travelDebounceTimer = null;
+
   function calcolaTrasferta(indirizzo){
     indirizzo = (indirizzo || '').trim();
     if(indirizzo.length < 5) return;
     if(travelState.indirizzo === indirizzo && (travelState.loading || travelState.trasferta_cents != null)) return;
 
+    // Debounce di sicurezza: se arrivano più trigger ravvicinati per lo stesso
+    // indirizzo, esegue solo l'ultimo.
+    clearTimeout(travelDebounceTimer);
+    travelDebounceTimer = setTimeout(function(){
+      eseguiCalcoloTrasferta(indirizzo);
+    }, 400);
+  }
+
+  function eseguiCalcoloTrasferta(indirizzo){
+    var requestId = ++travelRequestId;
     travelState.loading = true;
     travelState.error = null;
     travelState.indirizzo = indirizzo;
@@ -2016,6 +2029,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       return r.json().then(function(data){ return { ok: r.ok, data: data }; });
     })
     .then(function(result){
+      if(requestId !== travelRequestId) return; // risposta di una chiamata obsoleta: ignorala
       travelState.loading = false;
       if(!result.ok){
         travelState.error = (result.data && result.data.error) || 'Errore nel calcolo del percorso.';
@@ -2029,6 +2043,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       renderPriceSummary();
     })
     .catch(function(){
+      if(requestId !== travelRequestId) return;
       travelState.loading = false;
       travelState.error = 'Errore di connessione. Riprova.';
       renderPriceSummary();
@@ -2041,12 +2056,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     calcolaTrasferta(value);
   }
 
-  if(indirizzoInput){
-    indirizzoInput.addEventListener('blur', function(){
-      calcolaTrasferta(indirizzoInput.value);
-    });
-  }
-
   window.initAddressAutocomplete = function(){
     if(!indirizzoInput || !window.google || !google.maps || !google.maps.places) return;
     var autocomplete = new google.maps.places.Autocomplete(indirizzoInput, {
@@ -2054,11 +2063,16 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       fields: ['formatted_address'],
       types: ['address']
     });
+    // Chiama il calcolo SOLO quando l'utente seleziona una voce dal menu di
+    // autocomplete (place_changed con un indirizzo completo restituito da
+    // Google). Se preme Invio senza selezionare nulla, place.formatted_address
+    // non è valorizzato: non scatta nessuna chiamata, evitando indirizzi
+    // incompleti verso l'endpoint.
     autocomplete.addListener('place_changed', function(){
       var place = autocomplete.getPlace();
-      var value = (place && place.formatted_address) ? place.formatted_address : indirizzoInput.value;
-      indirizzoInput.value = value;
-      calcolaTrasferta(value);
+      if(!place || !place.formatted_address) return;
+      indirizzoInput.value = place.formatted_address;
+      calcolaTrasferta(place.formatted_address);
     });
   };
 
