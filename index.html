@@ -262,6 +262,9 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     flex-shrink:0;
   }
   .logo img{height:54px; width:auto; display:block;}
+  @media(min-width:900px){
+    .logo img{height:68px;}
+  }
 
   .nav-right{display:flex; align-items:center; gap:20px;}
 
@@ -894,13 +897,39 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     color:var(--gray-text);
     margin-top:16px;
   }
-  .form-success{
-    display:none;
-    text-align:center;
-    padding:20px 0;
+  .hp-field{
+    position:absolute;
+    left:-9999px;
+    opacity:0;
+    pointer-events:none;
+    width:1px;
+    height:1px;
+    overflow:hidden;
   }
-  .form-success.active{display:block;}
-  .form-success .icon-circle{margin:0 auto 18px; width:64px; height:64px; background:rgba(0,102,204,0.12);}
+
+  .price-summary{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:20px;
+    margin-bottom:20px;
+  }
+  .price-summary-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    font-size:14px;
+    color:var(--text);
+    padding:6px 0;
+  }
+  .price-summary-row span:last-child{font-weight:600; white-space:nowrap;}
+  .price-summary hr{border:none; border-top:1px solid var(--border); margin:8px 0;}
+  .price-summary-total{font-size:16px; font-weight:700;}
+  .price-summary-total span:last-child{color:var(--accent); font-size:20px;}
+  .price-summary-note{font-size:12px; color:var(--text-muted); margin-top:4px;}
+  .price-summary-loading{font-size:14px; color:var(--text-muted); padding:8px 0;}
+  .price-summary-error{font-size:14px; color:#dc2626; padding:8px 0;}
 
   /* FAQ */
   .faq{background:var(--bg-alt);}
@@ -1144,6 +1173,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     .cta-mid{padding:48px 24px; margin:0 16px 40px;}
   }
 </style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3I-hl6ZDhd2NRFjP5mQRq1YsrkTLO-KQ&libraries=places&language=it&region=IT&callback=initAddressAutocomplete" async defer></script>
 </head>
 <body>
 
@@ -1453,9 +1483,12 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       <div class="form-progress">
         <div class="form-progress-step active" data-step-label="1">1. I tuoi dati</div>
         <div class="form-progress-step" data-step-label="2">2. Quando</div>
+        <div class="form-progress-step" data-step-label="3">3. Paga</div>
       </div>
 
       <form id="leadForm" novalidate>
+        <input type="text" name="sito_web" id="sitoWeb" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
         <div class="form-step active" data-step="1">
           <div class="field">
             <label for="nomeCognome">Nome e cognome</label>
@@ -1464,6 +1497,11 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           <div class="field">
             <label for="linkAnnuncio">Link all'annuncio</label>
             <input type="text" id="linkAnnuncio" name="linkAnnuncio" placeholder="Incolla il link da AutoScout, Subito, ecc." required>
+          </div>
+          <div class="field">
+            <label for="indirizzo">Indirizzo dove si trova l'auto</label>
+            <input type="text" id="indirizzo" name="indirizzo" placeholder="Via, città, provincia" autocomplete="off" required>
+            <p class="field-hint">Serve per calcolare il rimborso trasferta prima del pagamento.</p>
           </div>
           <div class="field">
             <label for="messaggio">Altro <span class="optional-tag">(opzionale)</span></label>
@@ -1483,15 +1521,33 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
             <span></span>
           </div>
         </div>
-      </form>
 
-      <div class="form-success" id="formSuccess">
-        <div class="icon-circle">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 12l7 7L21 5" stroke="#2E50E8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="form-step" data-step="3">
+          <div class="price-summary" id="priceSummary">
+            <div class="price-summary-row">
+              <span>🔍 Ispezione professionale</span>
+              <span>€149,00</span>
+            </div>
+            <div class="price-summary-row" id="rowTrasferta" hidden>
+              <span>🚗 Rimborso trasferta (<span id="kmValue">0</span> km A/R)</span>
+              <span id="trasfertaValue">€0,00</span>
+            </div>
+            <p class="price-summary-note" id="pedaggiNote" hidden>Pedaggi stimati inclusi nel rimborso trasferta.</p>
+            <p class="price-summary-loading" id="summaryLoading">Sto calcolando il percorso...</p>
+            <p class="price-summary-error" id="summaryError" hidden></p>
+            <hr>
+            <div class="price-summary-row price-summary-total">
+              <span>💰 Totale</span>
+              <span id="totaleValue">€149,00</span>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary btn-block" id="btnPaga" disabled>Paga e prenota ora</button>
+          <div class="form-nav">
+            <button type="button" class="btn btn-outline" data-prev>Indietro</button>
+            <span></span>
+          </div>
         </div>
-        <h3>Richiesta ricevuta.</h3>
-        <p>Ti scrivo su WhatsApp entro 24 ore per confermare la targa (se non l'hai già data) e le indicazioni per il pagamento.</p>
-      </div>
+      </form>
 
       <p class="form-microcopy">I tuoi dati sono trattati con riservatezza e usati solo per organizzare la visita.</p>
     </div>
@@ -1850,9 +1906,8 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     Cal.ns["ispezione-auto-con-cliente"]("on", {
       action: "bookingSuccessful",
       callback: function(){
-        form.style.display = 'none';
-        document.querySelector('.form-progress').style.display = 'none';
-        formSuccess.classList.add('active');
+        goToStep(2);
+        ensureTravelCalculated();
       }
     });
   }
@@ -1861,7 +1916,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   var form = document.getElementById('leadForm');
   var steps = Array.prototype.slice.call(form.querySelectorAll('.form-step'));
   var progressSteps = Array.prototype.slice.call(document.querySelectorAll('.form-progress-step'));
-  var formSuccess = document.getElementById('formSuccess');
 
   function isStepValid(stepEl){
     var fields = stepEl.querySelectorAll('input, select, textarea');
@@ -1890,6 +1944,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       var i = currentStepIndex();
       if(!isStepValid(steps[i])) return;
       goToStep(i + 1);
+      if(i === 0){ ensureTravelCalculated(); }
     });
   });
 
@@ -1902,6 +1957,144 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   form.addEventListener('submit', function(e){
     e.preventDefault();
   });
+
+  // ---- Calcolo trasferta (Google Routes API) + riepilogo prezzo + pagamento Stripe ----
+  var travelState = { km: null, trasferta_cents: null, pedaggi_cents: null, stima_pedaggi: false, loading: false, error: null, indirizzo: null };
+  var sitoWebInput = document.getElementById('sitoWeb');
+  var indirizzoInput = document.getElementById('indirizzo');
+
+  function formatEuro(cents){
+    return '€' + (cents / 100).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function renderPriceSummary(){
+    var rowTrasferta = document.getElementById('rowTrasferta');
+    var kmValue = document.getElementById('kmValue');
+    var trasfertaValue = document.getElementById('trasfertaValue');
+    var pedaggiNote = document.getElementById('pedaggiNote');
+    var loadingEl = document.getElementById('summaryLoading');
+    var errorEl = document.getElementById('summaryError');
+    var totaleValue = document.getElementById('totaleValue');
+    var btnPaga = document.getElementById('btnPaga');
+
+    loadingEl.hidden = !travelState.loading;
+    errorEl.hidden = !travelState.error;
+    if(travelState.error){ errorEl.textContent = travelState.error; }
+
+    if(!travelState.loading && !travelState.error && travelState.trasferta_cents != null){
+      rowTrasferta.hidden = false;
+      kmValue.textContent = travelState.km;
+      trasfertaValue.textContent = formatEuro(travelState.trasferta_cents);
+      pedaggiNote.hidden = !travelState.stima_pedaggi;
+      totaleValue.textContent = formatEuro(14900 + travelState.trasferta_cents);
+      btnPaga.disabled = false;
+    } else {
+      rowTrasferta.hidden = true;
+      pedaggiNote.hidden = true;
+      totaleValue.textContent = formatEuro(14900);
+      btnPaga.disabled = true;
+    }
+  }
+
+  function calcolaTrasferta(indirizzo){
+    indirizzo = (indirizzo || '').trim();
+    if(indirizzo.length < 5) return;
+    if(travelState.indirizzo === indirizzo && (travelState.loading || travelState.trasferta_cents != null)) return;
+
+    travelState.loading = true;
+    travelState.error = null;
+    travelState.indirizzo = indirizzo;
+    renderPriceSummary();
+
+    fetch('/api/calculate-travel', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ indirizzo: indirizzo, sito_web: sitoWebInput.value })
+    })
+    .then(function(r){
+      return r.json().then(function(data){ return { ok: r.ok, data: data }; });
+    })
+    .then(function(result){
+      travelState.loading = false;
+      if(!result.ok){
+        travelState.error = (result.data && result.data.error) || 'Errore nel calcolo del percorso.';
+        renderPriceSummary();
+        return;
+      }
+      travelState.km = result.data.km;
+      travelState.trasferta_cents = result.data.trasferta_cents;
+      travelState.pedaggi_cents = result.data.pedaggi_cents;
+      travelState.stima_pedaggi = result.data.stima_pedaggi;
+      renderPriceSummary();
+    })
+    .catch(function(){
+      travelState.loading = false;
+      travelState.error = 'Errore di connessione. Riprova.';
+      renderPriceSummary();
+    });
+  }
+
+  function ensureTravelCalculated(){
+    var value = indirizzoInput.value.trim();
+    if(!value) return;
+    calcolaTrasferta(value);
+  }
+
+  if(indirizzoInput){
+    indirizzoInput.addEventListener('blur', function(){
+      calcolaTrasferta(indirizzoInput.value);
+    });
+  }
+
+  window.initAddressAutocomplete = function(){
+    if(!indirizzoInput || !window.google || !google.maps || !google.maps.places) return;
+    var autocomplete = new google.maps.places.Autocomplete(indirizzoInput, {
+      componentRestrictions: { country: 'it' },
+      fields: ['formatted_address'],
+      types: ['address']
+    });
+    autocomplete.addListener('place_changed', function(){
+      var place = autocomplete.getPlace();
+      var value = (place && place.formatted_address) ? place.formatted_address : indirizzoInput.value;
+      indirizzoInput.value = value;
+      calcolaTrasferta(value);
+    });
+  };
+
+  var btnPaga = document.getElementById('btnPaga');
+  if(btnPaga){
+    btnPaga.addEventListener('click', function(){
+      if(btnPaga.disabled) return;
+      btnPaga.disabled = true;
+      btnPaga.textContent = 'Reindirizzamento al pagamento...';
+
+      fetch('/api/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: document.getElementById('nomeCognome').value,
+          link_annuncio: document.getElementById('linkAnnuncio').value,
+          indirizzo: indirizzoInput.value,
+          trasferta_cents: travelState.trasferta_cents || 0,
+          pedaggi_cents: travelState.pedaggi_cents || 0,
+          sito_web: sitoWebInput.value
+        })
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if(data.url){
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'Errore sconosciuto');
+        }
+      })
+      .catch(function(){
+        btnPaga.disabled = false;
+        btnPaga.textContent = 'Paga e prenota ora';
+        alert('Si è verificato un errore. Riprova o contattami su WhatsApp.');
+      });
+    });
+  }
 
   // ---- FAQ accordion ----
   var faqData = [
