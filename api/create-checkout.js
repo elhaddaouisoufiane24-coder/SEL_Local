@@ -20,14 +20,13 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Troppe richieste, riprova più tardi.' });
   }
 
-  const { nome, link_annuncio, indirizzo, trasferta_cents, pedaggi_cents } = req.body || {};
+  const { nome, link_annuncio, indirizzo, trasferta_cents } = req.body || {};
 
   if (!nome || !link_annuncio || !indirizzo) {
     return res.status(400).json({ error: 'Dati mancanti o non validi' });
   }
 
   const trasferta = Number.isFinite(trasferta_cents) ? trasferta_cents : 0;
-  const pedaggi = Number.isFinite(pedaggi_cents) ? pedaggi_cents : 0;
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -44,14 +43,14 @@ export default async function handler(req, res) {
           },
           quantity: 1,
         },
-        ...(trasferta + pedaggi > 0 ? [{
+        ...(trasferta > 0 ? [{
           price_data: {
             currency: 'eur',
             product_data: {
               name: 'Rimborso trasferta',
               description: `Viaggio andata/ritorno verso: ${indirizzo}`,
             },
-            unit_amount: trasferta + pedaggi,
+            unit_amount: trasferta,
           },
           quantity: 1,
         }] : []),

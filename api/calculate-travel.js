@@ -5,7 +5,7 @@ import { isBot } from '../lib/honeypot.js';
 const ORIGIN_LAT = 45.7528549;
 const ORIGIN_LON = 12.3398874;
 
-const RATE_PER_KM_EURO = 0.5; // per km, già sul totale andata+ritorno
+const RATE_PER_KM_EURO = 0.65; // per km, già sul totale andata+ritorno; include una stima dei pedaggi
 const NOMINATIM_USER_AGENT = 'AutoInspecta.it Booking Form (contatto: elhaddaoui.soufiane24@gmail.com)';
 const ORS_DIRECTIONS_URL = 'https://api.heigit.org/openrouteservice/v2/directions/driving-car';
 
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
   // Bot rilevato dall'honeypot: rispondiamo 200 senza far capire che è stato
   // scoperto, ma non chiamiamo servizi esterni (niente costo, niente dati finti utili).
   if (isBot(req.body)) {
-    return res.status(200).json({ km: 0, trasferta_cents: 0, pedaggi_cents: 0, stima_pedaggi: false });
+    return res.status(200).json({ km: 0, trasferta_cents: 0 });
   }
 
   const ip = getClientIp(req);
@@ -85,17 +85,11 @@ export default async function handler(req, res) {
 
     const kmAndata = route.summary.distance / 1000;
     const kmTotali = kmAndata * 2;
-
-    // Nessun provider di routing gratuito (OpenRouteService incluso) fornisce
-    // prezzi reali dei pedaggi italiani: sono dati commerciali proprietari.
-    // Il rimborso resta quindi solo km × tariffa, segnalato come stima.
     const trasfertaEuro = kmTotali * RATE_PER_KM_EURO;
 
     res.status(200).json({
       km: Math.round(kmTotali * 10) / 10,
-      pedaggi_cents: 0,
       trasferta_cents: Math.round(trasfertaEuro * 100),
-      stima_pedaggi: true,
     });
   } catch (err) {
     res.status(500).json({ error: err.message || 'Errore nel calcolo del percorso' });

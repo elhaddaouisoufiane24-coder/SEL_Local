@@ -1558,7 +1558,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
               <span>🚗 Rimborso trasferta (<span id="kmValue">0</span> km A/R)</span>
               <span id="trasfertaValue">€0,00</span>
             </div>
-            <p class="price-summary-note" id="pedaggiNote" hidden>Pedaggi stimati inclusi nel rimborso trasferta.</p>
             <p class="price-summary-loading" id="summaryLoading">Sto calcolando il percorso...</p>
             <p class="price-summary-error" id="summaryError" hidden></p>
             <hr>
@@ -1985,7 +1984,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   });
 
   // ---- Calcolo trasferta + riepilogo prezzo + pagamento Stripe ----
-  var travelState = { km: null, trasferta_cents: null, pedaggi_cents: null, stima_pedaggi: false, loading: false, error: null, indirizzo: null };
+  var travelState = { km: null, trasferta_cents: null, loading: false, error: null, indirizzo: null };
   var sitoWebInput = document.getElementById('sitoWeb');
   var indirizzoInput = document.getElementById('indirizzo');
   var indirizzoCoords = null; // {lat, lon} dalla selezione Nominatim, se disponibile
@@ -1998,7 +1997,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     var rowTrasferta = document.getElementById('rowTrasferta');
     var kmValue = document.getElementById('kmValue');
     var trasfertaValue = document.getElementById('trasfertaValue');
-    var pedaggiNote = document.getElementById('pedaggiNote');
     var loadingEl = document.getElementById('summaryLoading');
     var errorEl = document.getElementById('summaryError');
     var totaleValue = document.getElementById('totaleValue');
@@ -2012,12 +2010,10 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       rowTrasferta.hidden = false;
       kmValue.textContent = travelState.km;
       trasfertaValue.textContent = formatEuro(travelState.trasferta_cents);
-      pedaggiNote.hidden = !travelState.stima_pedaggi;
       totaleValue.textContent = formatEuro(14900 + travelState.trasferta_cents);
       btnPaga.disabled = false;
     } else {
       rowTrasferta.hidden = true;
-      pedaggiNote.hidden = true;
       totaleValue.textContent = formatEuro(14900);
       btnPaga.disabled = true;
     }
@@ -2070,8 +2066,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       }
       travelState.km = result.data.km;
       travelState.trasferta_cents = result.data.trasferta_cents;
-      travelState.pedaggi_cents = result.data.pedaggi_cents;
-      travelState.stima_pedaggi = result.data.stima_pedaggi;
       renderPriceSummary();
     })
     .catch(function(){
@@ -2175,7 +2169,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           link_annuncio: document.getElementById('linkAnnuncio').value,
           indirizzo: indirizzoInput.value,
           trasferta_cents: travelState.trasferta_cents || 0,
-          pedaggi_cents: travelState.pedaggi_cents || 0,
           sito_web: sitoWebInput.value
         })
       })
