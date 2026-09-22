@@ -44,16 +44,19 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Troppe richieste, riprova più tardi.' });
   }
 
-  const { indirizzo } = req.body || {};
+  const { indirizzo, lat, lon } = req.body || {};
   if (!indirizzo || typeof indirizzo !== 'string' || indirizzo.trim().length < 5) {
     return res.status(400).json({ error: 'Indirizzo non valido' });
   }
 
   try {
-    // L'indirizzo arriva come testo (dal campo "Dove si trova l'auto" di
-    // Cal.com, che non espone coordinate): lo geocodiamo qui, OpenRouteService
-    // accetta solo coordinate.
-    const { lat: destLat, lon: destLon } = await geocodeIndirizzo(indirizzo);
+    // Se il frontend ha già le coordinate (l'utente ha selezionato un
+    // suggerimento Nominatim), le usiamo direttamente e saltiamo il
+    // geocoding: OpenRouteService accetta solo coordinate, non testo.
+    const hasCoords = Number.isFinite(lat) && Number.isFinite(lon);
+    const { lat: destLat, lon: destLon } = hasCoords
+      ? { lat, lon }
+      : await geocodeIndirizzo(indirizzo);
 
     const orsResponse = await fetch(ORS_DIRECTIONS_URL, {
       method: 'POST',
