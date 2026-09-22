@@ -44,23 +44,16 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Troppe richieste, riprova più tardi.' });
   }
 
-  const { indirizzo, lat, lon } = req.body || {};
+  const { indirizzo } = req.body || {};
   if (!indirizzo || typeof indirizzo !== 'string' || indirizzo.trim().length < 5) {
     return res.status(400).json({ error: 'Indirizzo non valido' });
   }
 
   try {
-    let destLat = lat;
-    let destLon = lon;
-
-    // Se il frontend non ha già le coordinate (es. l'utente non ha selezionato
-    // una voce dal menu di suggerimenti), geocodiamo qui l'indirizzo testuale:
-    // OpenRouteService accetta solo coordinate, non indirizzi in chiaro.
-    if (!Number.isFinite(destLat) || !Number.isFinite(destLon)) {
-      const geo = await geocodeIndirizzo(indirizzo);
-      destLat = geo.lat;
-      destLon = geo.lon;
-    }
+    // L'indirizzo arriva come testo (dal campo "Dove si trova l'auto" di
+    // Cal.com, che non espone coordinate): lo geocodiamo qui, OpenRouteService
+    // accetta solo coordinate.
+    const { lat: destLat, lon: destLon } = await geocodeIndirizzo(indirizzo);
 
     const orsResponse = await fetch(ORS_DIRECTIONS_URL, {
       method: 'POST',

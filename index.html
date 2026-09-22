@@ -859,32 +859,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     color:var(--gray-text);
     margin:6px 0 0 0;
   }
-  .address-field{position:relative;}
-  .address-suggestions{
-    position:absolute;
-    top:calc(100% + 4px);
-    left:0;
-    right:0;
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:var(--radius-sm);
-    box-shadow:var(--shadow-md);
-    max-height:220px;
-    overflow-y:auto;
-    z-index:20;
-    list-style:none;
-    margin:0;
-    padding:4px;
-  }
-  .address-suggestions li{
-    padding:10px 12px;
-    font-size:14px;
-    line-height:1.4;
-    color:var(--text);
-    border-radius:6px;
-    cursor:pointer;
-  }
-  .address-suggestions li:hover{background:var(--bg-subtle);}
   .field input, .field select, .field textarea{
     width:100%;
     padding:12px 16px;
@@ -1523,12 +1497,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
             <label for="linkAnnuncio">Link all'annuncio</label>
             <input type="text" id="linkAnnuncio" name="linkAnnuncio" placeholder="Incolla il link da AutoScout, Subito, ecc." required>
           </div>
-          <div class="field address-field">
-            <label for="indirizzo">Indirizzo dove si trova l'auto</label>
-            <input type="text" id="indirizzo" name="indirizzo" placeholder="Via, città, provincia" autocomplete="off" required>
-            <ul class="address-suggestions" id="indirizzoSuggestions" hidden></ul>
-            <p class="field-hint">Serve per calcolare il rimborso trasferta prima del pagamento.</p>
-          </div>
           <div class="field">
             <label for="messaggio">Altro <span class="optional-tag">(opzionale)</span></label>
             <textarea id="messaggio" name="messaggio" rows="3" placeholder="Scrivi qui eventuali informazioni utili"></textarea>
@@ -1930,9 +1898,17 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 
     Cal.ns["ispezione-auto-con-cliente"]("on", {
       action: "bookingSuccessful",
-      callback: function(){
+      callback: function(event){
+        var booking = event?.detail?.data?.booking;
+        var indirizzoBooking = booking && typeof booking.location === 'string' ? booking.location : '';
+        calBookingIndirizzo = indirizzoBooking || null;
         goToStep(2);
-        ensureTravelCalculated();
+        if(indirizzoBooking){
+          calcolaTrasferta(indirizzoBooking);
+        } else {
+          travelState.error = 'Non ho trovato l\'indirizzo della prenotazione. Scrivimi su WhatsApp per completare.';
+          renderPriceSummary();
+        }
       }
     });
   }
@@ -1969,7 +1945,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       var i = currentStepIndex();
       if(!isStepValid(steps[i])) return;
       goToStep(i + 1);
-      if(i === 0){ ensureTravelCalculated(); }
     });
   });
 
@@ -1984,10 +1959,11 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   });
 
   // ---- Calcolo trasferta + riepilogo prezzo + pagamento Stripe ----
+  // L'indirizzo arriva dal campo "Dove si trova l'auto" di Cal.com (step 2),
+  // non da un campo del nostro form: vedi il callback bookingSuccessful sopra.
   var travelState = { km: null, trasferta_cents: null, loading: false, error: null, indirizzo: null };
   var sitoWebInput = document.getElementById('sitoWeb');
-  var indirizzoInput = document.getElementById('indirizzo');
-  var indirizzoCoords = null; // {lat, lon} dalla selezione Nominatim, se disponibile
+  var calBookingIndirizzo = null;
 
   function formatEuro(cents){
     return '€' + (cents / 100).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -2042,16 +2018,10 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     travelState.indirizzo = indirizzo;
     renderPriceSummary();
 
-    var payload = { indirizzo: indirizzo, sito_web: sitoWebInput.value };
-    if(indirizzoCoords && indirizzoCoords.lat != null && indirizzoCoords.lon != null){
-      payload.lat = indirizzoCoords.lat;
-      payload.lon = indirizzoCoords.lon;
-    }
-
     fetch('/api/calculate-travel', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({ indirizzo: indirizzo, sito_web: sitoWebInput.value })
     })
     .then(function(r){
       return r.json().then(function(data){ return { ok: r.ok, data: data }; });
@@ -2076,84 +2046,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     });
   }
 
-  function ensureTravelCalculated(){
-    var value = indirizzoInput.value.trim();
-    if(!value) return;
-    calcolaTrasferta(value);
-  }
-
-  // ---- Autocomplete indirizzo (Nominatim/OpenStreetMap via proxy /api/geocode) ----
-  var indirizzoSuggestions = document.getElementById('indirizzoSuggestions');
-  var geocodeDebounceTimer = null;
-  var geocodeRequestId = 0;
-
-  function hideSuggestions(){
-    if(!indirizzoSuggestions) return;
-    indirizzoSuggestions.hidden = true;
-    indirizzoSuggestions.innerHTML = '';
-  }
-
-  function renderSuggestions(results){
-    indirizzoSuggestions.innerHTML = '';
-    if(!results || results.length === 0){
-      hideSuggestions();
-      return;
-    }
-    results.forEach(function(r){
-      var li = document.createElement('li');
-      li.textContent = r.display_name;
-      li.addEventListener('click', function(){
-        indirizzoInput.value = r.display_name;
-        indirizzoCoords = { lat: parseFloat(r.lat), lon: parseFloat(r.lon) };
-        hideSuggestions();
-        // Selezione completa da un menu di suggerimenti: unico trigger
-        // automatico del calcolo trasferta, come per il precedente autocomplete.
-        calcolaTrasferta(r.display_name);
-      });
-      indirizzoSuggestions.appendChild(li);
-    });
-    indirizzoSuggestions.hidden = false;
-  }
-
-  function cercaIndirizzi(query){
-    var requestId = ++geocodeRequestId;
-    fetch('/api/geocode?q=' + encodeURIComponent(query))
-      .then(function(r){ return r.json(); })
-      .then(function(results){
-        if(requestId !== geocodeRequestId) return; // risposta obsoleta
-        renderSuggestions(Array.isArray(results) ? results : []);
-      })
-      .catch(function(){
-        if(requestId !== geocodeRequestId) return;
-        hideSuggestions();
-      });
-  }
-
-  if(indirizzoInput && indirizzoSuggestions){
-    indirizzoInput.addEventListener('input', function(){
-      indirizzoCoords = null; // l'utente sta modificando a mano: le coordinate precedenti non sono più valide
-      var query = indirizzoInput.value.trim();
-      clearTimeout(geocodeDebounceTimer);
-      if(query.length < 3){
-        hideSuggestions();
-        return;
-      }
-      geocodeDebounceTimer = setTimeout(function(){
-        cercaIndirizzi(query);
-      }, 400);
-    });
-
-    indirizzoInput.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') hideSuggestions();
-    });
-
-    document.addEventListener('click', function(e){
-      if(e.target !== indirizzoInput && !indirizzoSuggestions.contains(e.target)){
-        hideSuggestions();
-      }
-    });
-  }
-
   var btnPaga = document.getElementById('btnPaga');
   if(btnPaga){
     btnPaga.addEventListener('click', function(){
@@ -2167,7 +2059,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         body: JSON.stringify({
           nome: document.getElementById('nomeCognome').value,
           link_annuncio: document.getElementById('linkAnnuncio').value,
-          indirizzo: indirizzoInput.value,
+          indirizzo: calBookingIndirizzo || '',
           trasferta_cents: travelState.trasferta_cents || 0,
           sito_web: sitoWebInput.value
         })
