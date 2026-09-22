@@ -697,8 +697,25 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }
 
   /* Embed Cal.com */
-  .cal-embed{width:100%; min-height:600px; overflow:auto;}
-  @media(max-width:600px){ .cal-embed{min-height:520px;} }
+  .slot-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(84px, 1fr));
+    gap:8px;
+  }
+  .slot-btn{
+    padding:10px 6px;
+    border-radius:var(--radius-sm);
+    border:1px solid var(--border);
+    background:#fff;
+    color:var(--text);
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:border-color .2s ease, background .2s ease, color .2s ease;
+  }
+  .slot-btn:hover{border-color:var(--accent);}
+  .slot-btn.selected{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .slot-btn:disabled{opacity:0.4; cursor:not-allowed;}
 
   /* Pain agitation */
   .pain-agitation{
@@ -1508,11 +1525,36 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         </div>
 
         <div class="form-step" data-step="2">
-          <p class="field-hint" style="margin-bottom:16px; font-size:14px;">Scegli il giorno e l'orario direttamente dal calendario.</p>
-          <div id="cal-inline" class="cal-embed"></div>
+          <div class="field">
+            <label for="dataAppuntamento">Giorno</label>
+            <input type="date" id="dataAppuntamento" name="dataAppuntamento" required>
+          </div>
+          <div class="field">
+            <label>Orario</label>
+            <div class="slot-grid" id="slotGrid">
+              <p class="field-hint">Scegli prima un giorno.</p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="stepEmail">Indirizzo email</label>
+            <input type="email" id="stepEmail" name="stepEmail" placeholder="mario.rossi@email.it" required>
+          </div>
+          <div class="field">
+            <label for="stepIndirizzo">Dove si trova l'auto</label>
+            <input type="text" id="stepIndirizzo" name="stepIndirizzo" placeholder="Via, città, provincia" required>
+          </div>
+          <div class="field">
+            <label for="tipoServizio">Tipo di servizio</label>
+            <select id="tipoServizio" name="tipoServizio" required>
+              <option value="" disabled selected>Scegli un'opzione</option>
+              <option value="Andiamo a vederla insieme">Andiamo a vederla insieme</option>
+              <option value="Vai a vederla tu e fammi sapere">Vai a vederla tu e fammi sapere</option>
+            </select>
+          </div>
+          <p class="price-summary-error" id="slotError" hidden></p>
           <div class="form-nav">
             <button type="button" class="btn btn-outline" data-prev>Indietro</button>
-            <span></span>
+            <button type="button" class="btn btn-primary" id="btnStep2Continua" disabled>Continua</button>
           </div>
         </div>
 
@@ -1856,63 +1898,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(function(el){ observer.observe(el); });
 
-  // ---- Embed Cal.com (step 3 del form) ----
-  var calInlineEl = document.getElementById('cal-inline');
-  if(calInlineEl){
-    (function (C, A, L) {
-      let p = function (a, ar) { a.q.push(ar); };
-      let d = C.document;
-      C.Cal = C.Cal || function () {
-        let cal = C.Cal;
-        let ar = arguments;
-        if (!cal.loaded) {
-          cal.ns = {};
-          cal.q = cal.q || [];
-          d.head.appendChild(d.createElement("script")).src = A;
-          cal.loaded = true;
-        }
-        if (ar[0] === L) {
-          const api = function () { p(api, arguments); };
-          const namespace = ar[1];
-          api.q = api.q || [];
-          if (typeof namespace === "string") {
-            cal.ns[namespace] = cal.ns[namespace] || api;
-            p(cal.ns[namespace], ar);
-            p(cal, ["initNamespace", namespace]);
-          } else p(cal, ar);
-          return;
-        }
-        p(cal, ar);
-      };
-    })(window, "https://app.cal.com/embed/embed.js", "init");
-
-    Cal("init", "ispezione-auto-con-cliente", { origin: "https://cal.com" });
-
-    Cal.ns["ispezione-auto-con-cliente"]("inline", {
-      elementOrSelector: "#cal-inline",
-      config: { "layout": "month_view", "theme": "light" },
-      calLink: "soufiane-el-haddaoui-cycd2y/ispezione-auto-con-cliente",
-    });
-
-    Cal.ns["ispezione-auto-con-cliente"]("ui", { "hideEventTypeDetails": false, "layout": "month_view", "theme": "light" });
-
-    Cal.ns["ispezione-auto-con-cliente"]("on", {
-      action: "bookingSuccessful",
-      callback: function(event){
-        var booking = event?.detail?.data?.booking;
-        var indirizzoBooking = booking && typeof booking.location === 'string' ? booking.location : '';
-        calBookingIndirizzo = indirizzoBooking || null;
-        goToStep(2);
-        if(indirizzoBooking){
-          calcolaTrasferta(indirizzoBooking);
-        } else {
-          travelState.error = 'Non ho trovato l\'indirizzo della prenotazione. Scrivimi su WhatsApp per completare.';
-          renderPriceSummary();
-        }
-      }
-    });
-  }
-
   // ---- Multi-step form ----
   var form = document.getElementById('leadForm');
   var steps = Array.prototype.slice.call(form.querySelectorAll('.form-step'));
@@ -1958,12 +1943,136 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     e.preventDefault();
   });
 
-  // ---- Calcolo trasferta + riepilogo prezzo + pagamento Stripe ----
-  // L'indirizzo arriva dal campo "Dove si trova l'auto" di Cal.com (step 2),
-  // non da un campo del nostro form: vedi il callback bookingSuccessful sopra.
-  var travelState = { km: null, trasferta_cents: null, loading: false, error: null, indirizzo: null };
+  // ---- Step 2: scelta orario (Cal.com Slots API) senza creare una prenotazione ----
+  // La prenotazione vera si crea solo nel webhook Stripe a pagamento avvenuto
+  // (api/stripe-webhook.js): qui mostriamo solo gli orari liberi e blocchiamo
+  // temporaneamente quello scelto (reservation) finché il cliente paga.
   var sitoWebInput = document.getElementById('sitoWeb');
-  var calBookingIndirizzo = null;
+  var dataAppuntamentoInput = document.getElementById('dataAppuntamento');
+  var slotGrid = document.getElementById('slotGrid');
+  var slotErrorEl = document.getElementById('slotError');
+  var stepEmailInput = document.getElementById('stepEmail');
+  var stepIndirizzoInput = document.getElementById('stepIndirizzo');
+  var tipoServizioSelect = document.getElementById('tipoServizio');
+  var btnStep2Continua = document.getElementById('btnStep2Continua');
+
+  var selectedSlotStart = null;
+  var selectedSlotReservationUid = null;
+
+  function nextDayString(dateStr){
+    // Aritmetica in UTC "puro": passare per un Date locale e poi toISOString()
+    // può far retrocedere la data nei fusi avanti rispetto a UTC (es. Italia).
+    var parts = dateStr.split('-').map(Number);
+    var d = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+    d.setUTCDate(d.getUTCDate() + 1);
+    return d.toISOString().slice(0, 10);
+  }
+
+  function formatSlotTime(iso){
+    return new Date(iso).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
+  }
+
+  function resetSlotSelection(){
+    selectedSlotStart = null;
+    selectedSlotReservationUid = null;
+    btnStep2Continua.disabled = true;
+  }
+
+  function renderSlots(slots){
+    slotGrid.innerHTML = '';
+    if(!slots || slots.length === 0){
+      var p = document.createElement('p');
+      p.className = 'field-hint';
+      p.textContent = 'Nessun orario disponibile per questo giorno.';
+      slotGrid.appendChild(p);
+      return;
+    }
+    slots.forEach(function(slot){
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'slot-btn';
+      btn.textContent = formatSlotTime(slot.start);
+      btn.addEventListener('click', function(){
+        selectSlot(slot.start, btn);
+      });
+      slotGrid.appendChild(btn);
+    });
+  }
+
+  function loadSlotsForDate(dateStr){
+    resetSlotSelection();
+    slotErrorEl.hidden = true;
+    slotGrid.innerHTML = '<p class="field-hint">Carico gli orari disponibili...</p>';
+
+    fetch('/api/cal-slots?start=' + encodeURIComponent(dateStr) + '&end=' + encodeURIComponent(nextDayString(dateStr)))
+      .then(function(r){ return r.json(); })
+      .then(function(result){
+        var slots = result && result.data ? result.data[dateStr] : null;
+        renderSlots(slots);
+      })
+      .catch(function(){
+        slotGrid.innerHTML = '';
+        slotErrorEl.hidden = false;
+        slotErrorEl.textContent = 'Errore nel caricare gli orari. Riprova.';
+      });
+  }
+
+  function selectSlot(startIso, btnEl){
+    slotGrid.querySelectorAll('.slot-btn').forEach(function(b){ b.disabled = true; });
+    slotErrorEl.hidden = true;
+
+    fetch('/api/cal-reserve-slot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ start: startIso, sito_web: sitoWebInput.value })
+    })
+    .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, data: data }; }); })
+    .then(function(result){
+      slotGrid.querySelectorAll('.slot-btn').forEach(function(b){ b.disabled = false; });
+      if(!result.ok){
+        slotErrorEl.hidden = false;
+        slotErrorEl.textContent = (result.data && result.data.error) || 'Questo slot non è più disponibile, scegline un altro.';
+        loadSlotsForDate(dataAppuntamentoInput.value);
+        return;
+      }
+      slotGrid.querySelectorAll('.slot-btn').forEach(function(b){ b.classList.remove('selected'); });
+      btnEl.classList.add('selected');
+      selectedSlotStart = startIso;
+      selectedSlotReservationUid = result.data.reservationUid;
+      btnStep2Continua.disabled = false;
+    })
+    .catch(function(){
+      slotGrid.querySelectorAll('.slot-btn').forEach(function(b){ b.disabled = false; });
+      slotErrorEl.hidden = false;
+      slotErrorEl.textContent = 'Errore di connessione. Riprova.';
+    });
+  }
+
+  if(dataAppuntamentoInput){
+    var todayStr = new Date().toISOString().slice(0, 10);
+    dataAppuntamentoInput.min = todayStr;
+    dataAppuntamentoInput.addEventListener('change', function(){
+      if(dataAppuntamentoInput.value){
+        loadSlotsForDate(dataAppuntamentoInput.value);
+      }
+    });
+  }
+
+  if(btnStep2Continua){
+    btnStep2Continua.addEventListener('click', function(){
+      if(!isStepValid(steps[currentStepIndex()])) return;
+      if(!selectedSlotStart || !selectedSlotReservationUid){
+        slotErrorEl.hidden = false;
+        slotErrorEl.textContent = 'Scegli un orario disponibile prima di continuare.';
+        return;
+      }
+      goToStep(currentStepIndex() + 1);
+      calcolaTrasferta(stepIndirizzoInput.value);
+    });
+  }
+
+  // ---- Calcolo trasferta + riepilogo prezzo + pagamento Stripe ----
+  var travelState = { km: null, trasferta_cents: null, loading: false, error: null, indirizzo: null };
 
   function formatEuro(cents){
     return '€' + (cents / 100).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -2058,19 +2167,31 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           nome: document.getElementById('nomeCognome').value,
+          email: stepEmailInput.value,
           link_annuncio: document.getElementById('linkAnnuncio').value,
-          indirizzo: calBookingIndirizzo || '',
+          indirizzo: stepIndirizzoInput.value,
+          data_ora: selectedSlotStart || '',
+          tipo_servizio: tipoServizioSelect.value,
           trasferta_cents: travelState.trasferta_cents || 0,
           sito_web: sitoWebInput.value
         })
       })
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        if(data.url){
-          window.location.href = data.url;
-        } else {
-          throw new Error(data.error || 'Errore sconosciuto');
+      .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, data: data }; }); })
+      .then(function(result){
+        if(result.data && result.data.url){
+          window.location.href = result.data.url;
+          return;
         }
+        if(result.data && result.data.error === 'SLOT_TAKEN'){
+          alert(result.data.message || 'Questo slot non è più disponibile, scegline un altro.');
+          btnPaga.disabled = false;
+          btnPaga.textContent = 'Paga e prenota ora';
+          resetSlotSelection();
+          goToStep(1);
+          if(dataAppuntamentoInput.value){ loadSlotsForDate(dataAppuntamentoInput.value); }
+          return;
+        }
+        throw new Error((result.data && result.data.error) || 'Errore sconosciuto');
       })
       .catch(function(){
         btnPaga.disabled = false;
