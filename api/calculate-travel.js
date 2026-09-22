@@ -21,10 +21,17 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Troppe richieste, riprova più tardi.' });
   }
 
-  const { indirizzo } = req.body || {};
+  const { indirizzo, lat, lon } = req.body || {};
   if (!indirizzo || typeof indirizzo !== 'string' || indirizzo.trim().length < 5) {
     return res.status(400).json({ error: 'Indirizzo non valido' });
   }
+
+  const hasCoords = Number.isFinite(lat) && Number.isFinite(lon);
+  // Se il frontend ha già geocoded l'indirizzo (selezione da Nominatim), usa
+  // le coordinate esatte e salta il geocoding interno di Google.
+  const destination = hasCoords
+    ? { location: { latLng: { latitude: lat, longitude: lon } } }
+    : { address: indirizzo };
 
   try {
     const response = await fetch('https://routes.googleapis.com/directions/v2:computeRoutes', {
@@ -32,11 +39,11 @@ export default async function handler(req, res) {
       headers: {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': process.env.GOOGLE_MAPS_API_KEY,
-        'X-Goog-FieldMask': 'routes.distanceMeters,routes.duration,routes.travelAdvisory.tollInfo',
+        'X-Goog-FieldMask': 'routes.distanceMeters,routes.duration,routes.travelAdvisory.tollInfo,routes.legs.travelAdvisory.tollInfo',
       },
       body: JSON.stringify({
         origin: { address: ORIGIN_ADDRESS },
-        destination: { address: indirizzo },
+        destination,
         travelMode: 'DRIVE',
         routingPreference: 'TRAFFIC_AWARE',
         extraComputations: ['TOLLS'],
