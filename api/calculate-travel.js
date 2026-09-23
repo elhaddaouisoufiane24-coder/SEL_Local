@@ -6,25 +6,31 @@ const ORIGIN_LAT = 45.7528549;
 const ORIGIN_LON = 12.3398874;
 
 const RATE_PER_KM_EURO = 0.65; // per km, già sul totale andata+ritorno; include una stima dei pedaggi
-const NOMINATIM_USER_AGENT = 'AutoInspecta.it Booking Form (contatto: elhaddaoui.soufiane24@gmail.com)';
+const ORS_GEOCODE_URL = 'https://api.openrouteservice.org/geocode/search';
 const ORS_DIRECTIONS_URL = 'https://api.heigit.org/openrouteservice/v2/directions/driving-car';
 
-async function geocodeIndirizzo(indirizzo) {
-  const url = `https://nominatim.openstreetmap.org/search?${new URLSearchParams({
-    q: indirizzo,
-    format: 'json',
-    limit: '1',
-    countrycodes: 'it',
+async function geocodeComune(comune) {
+  const url = `${ORS_GEOCODE_URL}?${new URLSearchParams({
+    api_key: process.env.OPENROUTESERVICE_API_KEY,
+    text: comune,
+    'boundary.country': 'IT',
+    size: '1',
   })}`;
-  const response = await fetch(url, { headers: { 'User-Agent': NOMINATIM_USER_AGENT } });
+  const response = await fetch(url);
   if (!response.ok) {
-    throw new Error('Geocoding non riuscito per questo indirizzo');
+    throw new Error('Geocoding non riuscito per questo comune');
   }
-  const results = await response.json();
-  if (!Array.isArray(results) || results.length === 0) {
-    throw new Error('Indirizzo non trovato');
+  const data = await response.json();
+  const feature = data?.features?.[0];
+  if (!feature) {
+    const err = new Error('Comune non trovato, controlla come l\'hai scritto');
+    err.notFound = true;
+    throw err;
   }
-  return { lat: parseFloat(results[0].lat), lon: parseFloat(results[0].lon) };
+  const [lon, lat] = feature.geometry.coordinates;
+  const props = feature.properties || {};
+  const comuneTrovato = props.region_a ? `${props.name}, ${props.region_a}` : props.label || props.name;
+  return { lat, lon, comuneTrovato };
 }
 
 export default async function handler(req, res) {
@@ -35,7 +41,7 @@ export default async function handler(req, res) {
   // Bot rilevato dall'honeypot: rispondiamo 200 senza far capire che è stato
   // scoperto, ma non chiamiamo servizi esterni (niente costo, niente dati finti utili).
   if (isBot(req.body)) {
-    return res.status(200).json({ km: 0, trasferta_cents: 0 });
+    return res.status(200).json({ km: 0, trasferta_cents: 0, comune_trovato: '' });
   }
 
   const ip = getClientIp(req);
@@ -44,19 +50,13 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Troppe richieste, riprova più tardi.' });
   }
 
-  const { indirizzo, lat, lon } = req.body || {};
-  if (!indirizzo || typeof indirizzo !== 'string' || indirizzo.trim().length < 5) {
-    return res.status(400).json({ error: 'Indirizzo non valido' });
+  const { comune } = req.body || {};
+  if (!comune || typeof comune !== 'string' || comune.trim().length < 2) {
+    return res.status(400).json({ error: 'Comune non valido' });
   }
 
   try {
-    // Se il frontend ha già le coordinate (l'utente ha selezionato un
-    // suggerimento Nominatim), le usiamo direttamente e saltiamo il
-    // geocoding: OpenRouteService accetta solo coordinate, non testo.
-    const hasCoords = Number.isFinite(lat) && Number.isFinite(lon);
-    const { lat: destLat, lon: destLon } = hasCoords
-      ? { lat, lon }
-      : await geocodeIndirizzo(indirizzo);
+    const { lat: destLat, lon: destLon, comuneTrovato } = await geocodeComune(comune);
 
     const orsResponse = await fetch(ORS_DIRECTIONS_URL, {
       method: 'POST',
@@ -76,7 +76,7 @@ export default async function handler(req, res) {
     const route = orsData?.routes?.[0];
 
     if (!orsResponse.ok || !route || !Number.isFinite(route.summary?.distance)) {
-      throw new Error(orsData?.error?.message || 'Percorso non trovato per questo indirizzo');
+      throw new Error(orsData?.error?.message || 'Percorso non trovato per questo comune');
     }
 
     const kmAndata = route.summary.distance / 1000;
@@ -86,8 +86,12 @@ export default async function handler(req, res) {
     res.status(200).json({
       km: Math.round(kmTotali * 10) / 10,
       trasferta_cents: Math.round(trasfertaEuro * 100),
+      comune_trovato: comuneTrovato,
     });
   } catch (err) {
+    if (err.notFound) {
+      return res.status(400).json({ error: err.message });
+    }
     res.status(500).json({ error: err.message || 'Errore nel calcolo del percorso' });
   }
 }

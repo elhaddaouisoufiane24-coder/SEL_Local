@@ -696,27 +696,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     margin-bottom:18px;
   }
 
-  /* Embed Cal.com */
-  .slot-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(84px, 1fr));
-    gap:8px;
-  }
-  .slot-btn{
-    padding:10px 6px;
-    border-radius:var(--radius-sm);
-    border:1px solid var(--border);
-    background:#fff;
-    color:var(--text);
-    font-size:14px;
-    font-weight:600;
-    cursor:pointer;
-    transition:border-color .2s ease, background .2s ease, color .2s ease;
-  }
-  .slot-btn:hover{border-color:var(--accent);}
-  .slot-btn.selected{background:var(--accent); border-color:var(--accent); color:#fff;}
-  .slot-btn:disabled{opacity:0.4; cursor:not-allowed;}
-
   /* Pain agitation */
   .pain-agitation{
     background:var(--white);
@@ -833,30 +812,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     padding:40px;
   }
   @media(max-width:600px){ .form-wrap{padding:26px 20px;} }
-  .form-progress{
-    display:flex;
-    gap:8px;
-    margin-bottom:32px;
-  }
-  .form-progress-step{
-    font-size:13px;
-    font-weight:600;
-    color:var(--text-light);
-    padding-bottom:0;
-    border-bottom:none;
-    transition:color .2s ease;
-  }
-  .form-progress-step:not(:last-child)::after{
-    content:'→';
-    margin-left:8px;
-    color:var(--border-hover);
-    font-weight:400;
-  }
-  .form-progress-step.active{
-    color:var(--accent);
-  }
-  .form-step{display:none;}
-  .form-step.active{display:block;}
   .field{margin-bottom:20px;}
   .field label{
     display:block;
@@ -876,32 +831,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     color:var(--gray-text);
     margin:6px 0 0 0;
   }
-  .address-field{position:relative;}
-  .address-suggestions{
-    position:absolute;
-    top:calc(100% + 4px);
-    left:0;
-    right:0;
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:var(--radius-sm);
-    box-shadow:var(--shadow-md);
-    max-height:220px;
-    overflow-y:auto;
-    z-index:20;
-    list-style:none;
-    margin:0;
-    padding:4px;
-  }
-  .address-suggestions li{
-    padding:10px 12px;
-    font-size:14px;
-    line-height:1.4;
-    color:var(--text);
-    border-radius:6px;
-    cursor:pointer;
-  }
-  .address-suggestions li:hover{background:var(--bg-subtle);}
   .field input, .field select, .field textarea{
     width:100%;
     padding:12px 16px;
@@ -1519,96 +1448,69 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   <div class="container">
     <span class="eyebrow center" style="display:block; text-align:center;">Prenota</span>
     <h2 class="center">Raccontami che auto stai valutando.</h2>
-    <p class="center section-lead">Compila il form per prenotare la tua ispezione e controllare l'auto che vuoi comprare.</p>
+    <p class="center section-lead">Compila il form, vedi il prezzo e paga: ti scrivo su WhatsApp entro 24 ore per fissare giorno e ora.</p>
 
     <div class="form-wrap reveal">
-      <div class="form-progress">
-        <div class="form-progress-step active" data-step-label="1">1. I tuoi dati</div>
-        <div class="form-progress-step" data-step-label="2">2. Quando</div>
-        <div class="form-progress-step" data-step-label="3">3. Paga</div>
-      </div>
-
       <form id="leadForm" novalidate>
         <input type="text" name="sito_web" id="sitoWeb" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-        <div class="form-step active" data-step="1">
-          <div class="field">
-            <label for="nomeCognome">Nome e cognome</label>
-            <input type="text" id="nomeCognome" name="nomeCognome" placeholder="Es. Mario Rossi" required>
-          </div>
-          <div class="field">
-            <label for="linkAnnuncio">Link all'annuncio</label>
-            <input type="text" id="linkAnnuncio" name="linkAnnuncio" placeholder="Incolla il link da AutoScout, Subito, ecc." required>
-          </div>
-          <div class="field">
-            <label for="messaggio">Altro <span class="optional-tag">(opzionale)</span></label>
-            <textarea id="messaggio" name="messaggio" rows="3" placeholder="Scrivi qui eventuali informazioni utili"></textarea>
-          </div>
-          <div class="form-nav">
-            <span></span>
-            <button type="button" class="btn btn-primary" data-next>Continua</button>
-          </div>
+        <div class="field">
+          <label for="nomeCognome">Nome e cognome</label>
+          <input type="text" id="nomeCognome" name="nomeCognome" placeholder="Es. Mario Rossi" required>
+        </div>
+        <div class="field">
+          <label for="whatsappNumero">Numero WhatsApp</label>
+          <input type="tel" id="whatsappNumero" name="whatsappNumero" placeholder="Es. 333 1234567" required>
+        </div>
+        <div class="field">
+          <label for="stepEmail">Indirizzo email</label>
+          <input type="email" id="stepEmail" name="stepEmail" placeholder="mario.rossi@email.it" required>
+        </div>
+        <div class="field">
+          <label for="linkAnnuncio">Link all'annuncio</label>
+          <input type="text" id="linkAnnuncio" name="linkAnnuncio" placeholder="Incolla il link da AutoScout, Subito, ecc." required>
+        </div>
+        <div class="field">
+          <label for="tipoServizio">Tipo di servizio</label>
+          <select id="tipoServizio" name="tipoServizio" required>
+            <option value="" disabled selected>Scegli un'opzione</option>
+            <option value="Andiamo a vederla insieme">Andiamo a vederla insieme</option>
+            <option value="Vai a vederla tu e fammi sapere">Vai a vederla tu e fammi sapere</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="comuneAuto">Comune dove si trova l'auto</label>
+          <input type="text" id="comuneAuto" name="comuneAuto" placeholder="Es. Verona" required>
+          <p class="field-hint">Serve solo per calcolare il rimborso trasferta.</p>
+        </div>
+        <div class="field">
+          <label for="viaCivico">Via e numero civico</label>
+          <input type="text" id="viaCivico" name="viaCivico" placeholder="Es. Via Roma 12" required>
+        </div>
+        <div class="field">
+          <label for="preferenze">Giorni/orari preferiti <span class="optional-tag">(opzionale)</span></label>
+          <textarea id="preferenze" name="preferenze" rows="2" placeholder="Es. Preferisco i pomeriggi infrasettimanali"></textarea>
         </div>
 
-        <div class="form-step" data-step="2">
-          <div class="field">
-            <label for="dataAppuntamento">Giorno</label>
-            <input type="date" id="dataAppuntamento" name="dataAppuntamento" required>
+        <div class="price-summary" id="priceSummary">
+          <div class="price-summary-row">
+            <span>🔍 Ispezione professionale</span>
+            <span>€149,00</span>
           </div>
-          <div class="field">
-            <label>Orario</label>
-            <div class="slot-grid" id="slotGrid">
-              <p class="field-hint">Scegli prima un giorno.</p>
-            </div>
+          <div class="price-summary-row" id="rowTrasferta" hidden>
+            <span>🚗 Rimborso trasferta (<span id="kmValue">0</span> km A/R)</span>
+            <span id="trasfertaValue">€0,00</span>
           </div>
-          <div class="field">
-            <label for="stepEmail">Indirizzo email</label>
-            <input type="email" id="stepEmail" name="stepEmail" placeholder="mario.rossi@email.it" required>
-          </div>
-          <div class="field address-field">
-            <label for="stepIndirizzo">Dove si trova l'auto</label>
-            <input type="text" id="stepIndirizzo" name="stepIndirizzo" placeholder="Via, città, provincia" autocomplete="off" required>
-            <ul class="address-suggestions" id="indirizzoSuggestions" hidden></ul>
-          </div>
-          <div class="field">
-            <label for="tipoServizio">Tipo di servizio</label>
-            <select id="tipoServizio" name="tipoServizio" required>
-              <option value="" disabled selected>Scegli un'opzione</option>
-              <option value="Andiamo a vederla insieme">Andiamo a vederla insieme</option>
-              <option value="Vai a vederla tu e fammi sapere">Vai a vederla tu e fammi sapere</option>
-            </select>
-          </div>
-          <p class="price-summary-error" id="slotError" hidden></p>
-          <div class="form-nav">
-            <button type="button" class="btn btn-outline" data-prev>Indietro</button>
-            <button type="button" class="btn btn-primary" id="btnStep2Continua" disabled>Continua</button>
+          <p class="price-summary-note" id="comuneTrovatoNote" hidden></p>
+          <p class="price-summary-loading" id="summaryLoading" hidden>Sto calcolando il percorso...</p>
+          <p class="price-summary-error" id="summaryError" hidden></p>
+          <hr>
+          <div class="price-summary-row price-summary-total">
+            <span>💰 Totale</span>
+            <span id="totaleValue">€149,00</span>
           </div>
         </div>
-
-        <div class="form-step" data-step="3">
-          <div class="price-summary" id="priceSummary">
-            <div class="price-summary-row">
-              <span>🔍 Ispezione professionale</span>
-              <span>€149,00</span>
-            </div>
-            <div class="price-summary-row" id="rowTrasferta" hidden>
-              <span>🚗 Rimborso trasferta (<span id="kmValue">0</span> km A/R)</span>
-              <span id="trasfertaValue">€0,00</span>
-            </div>
-            <p class="price-summary-loading" id="summaryLoading">Sto calcolando il percorso...</p>
-            <p class="price-summary-error" id="summaryError" hidden></p>
-            <hr>
-            <div class="price-summary-row price-summary-total">
-              <span>💰 Totale</span>
-              <span id="totaleValue">€149,00</span>
-            </div>
-          </div>
-          <button type="button" class="btn btn-primary btn-block" id="btnPaga" disabled>Paga e prenota ora</button>
-          <div class="form-nav">
-            <button type="button" class="btn btn-outline" data-prev>Indietro</button>
-            <span></span>
-          </div>
-        </div>
+        <button type="button" class="btn btn-primary btn-block" id="btnPaga" disabled>Paga e prenota ora</button>
       </form>
 
       <p class="form-microcopy">I tuoi dati sono trattati con riservatezza e usati solo per organizzare la visita.</p>
@@ -1925,257 +1827,17 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(function(el){ observer.observe(el); });
 
-  // ---- Multi-step form ----
+  // ---- Form a step unico ----
   var form = document.getElementById('leadForm');
-  var steps = Array.prototype.slice.call(form.querySelectorAll('.form-step'));
-  var progressSteps = Array.prototype.slice.call(document.querySelectorAll('.form-progress-step'));
-
-  function isStepValid(stepEl){
-    var fields = stepEl.querySelectorAll('input, select, textarea');
-    var valid = true;
-    fields.forEach(function(f){
-      if(!f.checkValidity()){
-        f.reportValidity();
-        valid = false;
-      }
-    });
-    return valid;
-  }
-
-  function currentStepIndex(){
-    return steps.findIndex(function(s){ return s.classList.contains('active'); });
-  }
-
-  function goToStep(index){
-    steps.forEach(function(s, i){ s.classList.toggle('active', i === index); });
-    progressSteps.forEach(function(p, i){ p.classList.toggle('active', i === index); });
-    form.scrollIntoView({ behavior:'smooth', block:'start' });
-  }
-
-  form.querySelectorAll('[data-next]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var i = currentStepIndex();
-      if(!isStepValid(steps[i])) return;
-      goToStep(i + 1);
-    });
-  });
-
-  form.querySelectorAll('[data-prev]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      goToStep(currentStepIndex() - 1);
-    });
-  });
+  var sitoWebInput = document.getElementById('sitoWeb');
+  var comuneAutoInput = document.getElementById('comuneAuto');
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
   });
 
-  // ---- Step 2: scelta orario (Cal.com Slots API) senza creare una prenotazione ----
-  // La prenotazione vera si crea solo nel webhook Stripe a pagamento avvenuto
-  // (api/stripe-webhook.js): qui mostriamo solo gli orari liberi e blocchiamo
-  // temporaneamente quello scelto (reservation) finché il cliente paga.
-  var sitoWebInput = document.getElementById('sitoWeb');
-  var dataAppuntamentoInput = document.getElementById('dataAppuntamento');
-  var slotGrid = document.getElementById('slotGrid');
-  var slotErrorEl = document.getElementById('slotError');
-  var stepEmailInput = document.getElementById('stepEmail');
-  var stepIndirizzoInput = document.getElementById('stepIndirizzo');
-  var tipoServizioSelect = document.getElementById('tipoServizio');
-  var btnStep2Continua = document.getElementById('btnStep2Continua');
-
-  var selectedSlotStart = null;
-  var selectedSlotReservationUid = null;
-
-  // ---- Autocomplete indirizzo (Nominatim/OpenStreetMap via proxy /api/geocode) ----
-  // Il testo digitato dall'utente non viene mai sovrascritto: la selezione di
-  // un suggerimento serve solo a recuperare lat/lon, passate a
-  // calculate-travel.js per saltare il geocoding interno.
-  var indirizzoSuggestions = document.getElementById('indirizzoSuggestions');
-  var geocodeDebounceTimer = null;
-  var geocodeRequestId = 0;
-  var selectedIndirizzoCoords = null;
-
-  function hideSuggestions(){
-    if(!indirizzoSuggestions) return;
-    indirizzoSuggestions.hidden = true;
-    indirizzoSuggestions.innerHTML = '';
-  }
-
-  function renderSuggestions(results){
-    indirizzoSuggestions.innerHTML = '';
-    if(!results || results.length === 0){
-      hideSuggestions();
-      return;
-    }
-    results.forEach(function(r){
-      var li = document.createElement('li');
-      li.textContent = r.display_name;
-      li.addEventListener('click', function(){
-        // Non tocchiamo stepIndirizzoInput.value: resta esattamente quello
-        // digitato dall'utente. Salviamo solo le coordinate del suggerimento.
-        selectedIndirizzoCoords = { lat: parseFloat(r.lat), lon: parseFloat(r.lon) };
-        hideSuggestions();
-      });
-      indirizzoSuggestions.appendChild(li);
-    });
-    indirizzoSuggestions.hidden = false;
-  }
-
-  function cercaIndirizzi(query){
-    var requestId = ++geocodeRequestId;
-    fetch('/api/geocode?q=' + encodeURIComponent(query))
-      .then(function(r){ return r.json(); })
-      .then(function(results){
-        if(requestId !== geocodeRequestId) return; // risposta obsoleta
-        renderSuggestions(Array.isArray(results) ? results : []);
-      })
-      .catch(function(){
-        if(requestId !== geocodeRequestId) return;
-        hideSuggestions();
-      });
-  }
-
-  if(stepIndirizzoInput && indirizzoSuggestions){
-    stepIndirizzoInput.addEventListener('input', function(){
-      // L'utente sta modificando il testo: le coordinate selezionate in
-      // precedenza non sono più valide per quello che c'è scritto ora.
-      selectedIndirizzoCoords = null;
-      var query = stepIndirizzoInput.value.trim();
-      clearTimeout(geocodeDebounceTimer);
-      if(query.length < 3){
-        hideSuggestions();
-        return;
-      }
-      geocodeDebounceTimer = setTimeout(function(){
-        cercaIndirizzi(query);
-      }, 400);
-    });
-
-    stepIndirizzoInput.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') hideSuggestions();
-    });
-
-    document.addEventListener('click', function(e){
-      if(e.target !== stepIndirizzoInput && !indirizzoSuggestions.contains(e.target)){
-        hideSuggestions();
-      }
-    });
-  }
-
-  function nextDayString(dateStr){
-    // Aritmetica in UTC "puro": passare per un Date locale e poi toISOString()
-    // può far retrocedere la data nei fusi avanti rispetto a UTC (es. Italia).
-    var parts = dateStr.split('-').map(Number);
-    var d = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
-    d.setUTCDate(d.getUTCDate() + 1);
-    return d.toISOString().slice(0, 10);
-  }
-
-  function formatSlotTime(iso){
-    return new Date(iso).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
-  }
-
-  function resetSlotSelection(){
-    selectedSlotStart = null;
-    selectedSlotReservationUid = null;
-    btnStep2Continua.disabled = true;
-  }
-
-  function renderSlots(slots){
-    slotGrid.innerHTML = '';
-    if(!slots || slots.length === 0){
-      var p = document.createElement('p');
-      p.className = 'field-hint';
-      p.textContent = 'Nessun orario disponibile per questo giorno.';
-      slotGrid.appendChild(p);
-      return;
-    }
-    slots.forEach(function(slot){
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'slot-btn';
-      btn.textContent = formatSlotTime(slot.start);
-      btn.addEventListener('click', function(){
-        selectSlot(slot.start, btn);
-      });
-      slotGrid.appendChild(btn);
-    });
-  }
-
-  function loadSlotsForDate(dateStr){
-    resetSlotSelection();
-    slotErrorEl.hidden = true;
-    slotGrid.innerHTML = '<p class="field-hint">Carico gli orari disponibili...</p>';
-
-    fetch('/api/cal-slots?start=' + encodeURIComponent(dateStr) + '&end=' + encodeURIComponent(nextDayString(dateStr)))
-      .then(function(r){ return r.json(); })
-      .then(function(result){
-        var slots = result && result.data ? result.data[dateStr] : null;
-        renderSlots(slots);
-      })
-      .catch(function(){
-        slotGrid.innerHTML = '';
-        slotErrorEl.hidden = false;
-        slotErrorEl.textContent = 'Errore nel caricare gli orari. Riprova.';
-      });
-  }
-
-  function selectSlot(startIso, btnEl){
-    slotGrid.querySelectorAll('.slot-btn').forEach(function(b){ b.disabled = true; });
-    slotErrorEl.hidden = true;
-
-    fetch('/api/cal-reserve-slot', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ start: startIso, sito_web: sitoWebInput.value })
-    })
-    .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, data: data }; }); })
-    .then(function(result){
-      slotGrid.querySelectorAll('.slot-btn').forEach(function(b){ b.disabled = false; });
-      if(!result.ok){
-        slotErrorEl.hidden = false;
-        slotErrorEl.textContent = (result.data && result.data.error) || 'Questo slot non è più disponibile, scegline un altro.';
-        loadSlotsForDate(dataAppuntamentoInput.value);
-        return;
-      }
-      slotGrid.querySelectorAll('.slot-btn').forEach(function(b){ b.classList.remove('selected'); });
-      btnEl.classList.add('selected');
-      selectedSlotStart = startIso;
-      selectedSlotReservationUid = result.data.reservationUid;
-      btnStep2Continua.disabled = false;
-    })
-    .catch(function(){
-      slotGrid.querySelectorAll('.slot-btn').forEach(function(b){ b.disabled = false; });
-      slotErrorEl.hidden = false;
-      slotErrorEl.textContent = 'Errore di connessione. Riprova.';
-    });
-  }
-
-  if(dataAppuntamentoInput){
-    var todayStr = new Date().toISOString().slice(0, 10);
-    dataAppuntamentoInput.min = todayStr;
-    dataAppuntamentoInput.addEventListener('change', function(){
-      if(dataAppuntamentoInput.value){
-        loadSlotsForDate(dataAppuntamentoInput.value);
-      }
-    });
-  }
-
-  if(btnStep2Continua){
-    btnStep2Continua.addEventListener('click', function(){
-      if(!isStepValid(steps[currentStepIndex()])) return;
-      if(!selectedSlotStart || !selectedSlotReservationUid){
-        slotErrorEl.hidden = false;
-        slotErrorEl.textContent = 'Scegli un orario disponibile prima di continuare.';
-        return;
-      }
-      goToStep(currentStepIndex() + 1);
-      calcolaTrasferta(stepIndirizzoInput.value);
-    });
-  }
-
-  // ---- Calcolo trasferta + riepilogo prezzo + pagamento Stripe ----
-  var travelState = { km: null, trasferta_cents: null, loading: false, error: null, indirizzo: null };
+  // ---- Calcolo trasferta (solo sul comune) + riepilogo prezzo + pagamento Stripe ----
+  var travelState = { km: null, trasferta_cents: null, comune_trovato: null, loading: false, error: null, comune: null };
 
   function formatEuro(cents){
     return '€' + (cents / 100).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -2185,6 +1847,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     var rowTrasferta = document.getElementById('rowTrasferta');
     var kmValue = document.getElementById('kmValue');
     var trasfertaValue = document.getElementById('trasfertaValue');
+    var comuneTrovatoNote = document.getElementById('comuneTrovatoNote');
     var loadingEl = document.getElementById('summaryLoading');
     var errorEl = document.getElementById('summaryError');
     var totaleValue = document.getElementById('totaleValue');
@@ -2198,10 +1861,13 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       rowTrasferta.hidden = false;
       kmValue.textContent = travelState.km;
       trasfertaValue.textContent = formatEuro(travelState.trasferta_cents);
+      comuneTrovatoNote.hidden = !travelState.comune_trovato;
+      comuneTrovatoNote.textContent = travelState.comune_trovato ? ('Calcolato su: ' + travelState.comune_trovato) : '';
       totaleValue.textContent = formatEuro(14900 + travelState.trasferta_cents);
       btnPaga.disabled = false;
     } else {
       rowTrasferta.hidden = true;
+      comuneTrovatoNote.hidden = true;
       totaleValue.textContent = formatEuro(14900);
       btnPaga.disabled = true;
     }
@@ -2210,36 +1876,30 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   var travelRequestId = 0;
   var travelDebounceTimer = null;
 
-  function calcolaTrasferta(indirizzo){
-    indirizzo = (indirizzo || '').trim();
-    if(indirizzo.length < 5) return;
-    if(travelState.indirizzo === indirizzo && (travelState.loading || travelState.trasferta_cents != null)) return;
+  function calcolaTrasferta(comune){
+    comune = (comune || '').trim();
+    if(comune.length < 2) return;
+    if(travelState.comune === comune && (travelState.loading || travelState.trasferta_cents != null)) return;
 
     // Debounce di sicurezza: se arrivano più trigger ravvicinati per lo stesso
-    // indirizzo, esegue solo l'ultimo.
+    // comune, esegue solo l'ultimo.
     clearTimeout(travelDebounceTimer);
     travelDebounceTimer = setTimeout(function(){
-      eseguiCalcoloTrasferta(indirizzo);
+      eseguiCalcoloTrasferta(comune);
     }, 400);
   }
 
-  function eseguiCalcoloTrasferta(indirizzo){
+  function eseguiCalcoloTrasferta(comune){
     var requestId = ++travelRequestId;
     travelState.loading = true;
     travelState.error = null;
-    travelState.indirizzo = indirizzo;
+    travelState.comune = comune;
     renderPriceSummary();
-
-    var payload = { indirizzo: indirizzo, sito_web: sitoWebInput.value };
-    if(selectedIndirizzoCoords && Number.isFinite(selectedIndirizzoCoords.lat) && Number.isFinite(selectedIndirizzoCoords.lon)){
-      payload.lat = selectedIndirizzoCoords.lat;
-      payload.lon = selectedIndirizzoCoords.lon;
-    }
 
     fetch('/api/calculate-travel', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({ comune: comune, sito_web: sitoWebInput.value })
     })
     .then(function(r){
       return r.json().then(function(data){ return { ok: r.ok, data: data }; });
@@ -2249,18 +1909,27 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       travelState.loading = false;
       if(!result.ok){
         travelState.error = (result.data && result.data.error) || 'Errore nel calcolo del percorso.';
+        travelState.trasferta_cents = null;
         renderPriceSummary();
         return;
       }
       travelState.km = result.data.km;
       travelState.trasferta_cents = result.data.trasferta_cents;
+      travelState.comune_trovato = result.data.comune_trovato;
       renderPriceSummary();
     })
     .catch(function(){
       if(requestId !== travelRequestId) return;
       travelState.loading = false;
       travelState.error = 'Errore di connessione. Riprova.';
+      travelState.trasferta_cents = null;
       renderPriceSummary();
+    });
+  }
+
+  if(comuneAutoInput){
+    comuneAutoInput.addEventListener('blur', function(){
+      calcolaTrasferta(comuneAutoInput.value);
     });
   }
 
@@ -2268,6 +1937,10 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   if(btnPaga){
     btnPaga.addEventListener('click', function(){
       if(btnPaga.disabled) return;
+      if(!form.checkValidity()){
+        form.reportValidity();
+        return;
+      }
       btnPaga.disabled = true;
       btnPaga.textContent = 'Reindirizzamento al pagamento...';
 
@@ -2276,11 +1949,13 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           nome: document.getElementById('nomeCognome').value,
-          email: stepEmailInput.value,
+          whatsapp: document.getElementById('whatsappNumero').value,
+          email: document.getElementById('stepEmail').value,
           link_annuncio: document.getElementById('linkAnnuncio').value,
-          indirizzo: stepIndirizzoInput.value,
-          data_ora: selectedSlotStart || '',
-          tipo_servizio: tipoServizioSelect.value,
+          tipo_servizio: document.getElementById('tipoServizio').value,
+          comune: comuneAutoInput.value,
+          via_civico: document.getElementById('viaCivico').value,
+          preferenze: document.getElementById('preferenze').value,
           trasferta_cents: travelState.trasferta_cents || 0,
           sito_web: sitoWebInput.value
         })
@@ -2289,15 +1964,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       .then(function(result){
         if(result.data && result.data.url){
           window.location.href = result.data.url;
-          return;
-        }
-        if(result.data && result.data.error === 'SLOT_TAKEN'){
-          alert(result.data.message || 'Questo slot non è più disponibile, scegline un altro.');
-          btnPaga.disabled = false;
-          btnPaga.textContent = 'Paga e prenota ora';
-          resetSlotSelection();
-          goToStep(1);
-          if(dataAppuntamentoInput.value){ loadSlotsForDate(dataAppuntamentoInput.value); }
           return;
         }
         throw new Error((result.data && result.data.error) || 'Errore sconosciuto');
