@@ -812,6 +812,28 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     padding:40px;
   }
   @media(max-width:600px){ .form-wrap{padding:26px 20px;} }
+  .form-progress{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 8px;
+    margin-bottom:32px;
+  }
+  .form-progress-step{
+    font-size:13px;
+    font-weight:600;
+    color:var(--text-light);
+    transition:color .2s ease;
+  }
+  .form-progress-step:not(:last-child)::after{
+    content:'→';
+    margin-left:8px;
+    color:var(--border-hover);
+    font-weight:400;
+  }
+  .form-progress-step.active{color:var(--accent);}
+  .form-progress-step.done{color:var(--text);}
+  .form-step{display:none;}
+  .form-step.active{display:block;}
   .field{margin-bottom:20px;}
   .field label{
     display:block;
@@ -1448,69 +1470,100 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   <div class="container">
     <span class="eyebrow center" style="display:block; text-align:center;">Prenota</span>
     <h2 class="center">Raccontami che auto stai valutando.</h2>
-    <p class="center section-lead">Compila il form, vedi il prezzo e paga: ti scrivo su WhatsApp entro 24 ore per fissare giorno e ora.</p>
+    <p class="center section-lead">Compila il form, vedi il prezzo e paga: ti scrivo su WhatsApp entro poche ore per fissare giorno e ora.</p>
 
     <div class="form-wrap reveal">
+      <div class="form-progress">
+        <div class="form-progress-step active" id="progressStep1">1. L'auto</div>
+        <div class="form-progress-step" id="progressStep2">2. I tuoi dati</div>
+        <div class="form-progress-step" id="progressStep3">3. Pagamento</div>
+      </div>
+
       <form id="leadForm" novalidate>
         <input type="text" name="sito_web" id="sitoWeb" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-        <div class="field">
-          <label for="nomeCognome">Nome e cognome</label>
-          <input type="text" id="nomeCognome" name="nomeCognome" placeholder="Es. Mario Rossi" required>
-        </div>
-        <div class="field">
-          <label for="whatsappNumero">Numero WhatsApp</label>
-          <input type="tel" id="whatsappNumero" name="whatsappNumero" placeholder="Es. 333 1234567" required>
-        </div>
-        <div class="field">
-          <label for="stepEmail">Indirizzo email</label>
-          <input type="email" id="stepEmail" name="stepEmail" placeholder="mario.rossi@email.it" required>
-        </div>
-        <div class="field">
-          <label for="linkAnnuncio">Link all'annuncio</label>
-          <input type="text" id="linkAnnuncio" name="linkAnnuncio" placeholder="Incolla il link da AutoScout, Subito, ecc." required>
-        </div>
-        <div class="field">
-          <label for="tipoServizio">Tipo di servizio</label>
-          <select id="tipoServizio" name="tipoServizio" required>
-            <option value="" disabled selected>Scegli un'opzione</option>
-            <option value="Andiamo a vederla insieme">Andiamo a vederla insieme</option>
-            <option value="Vai a vederla tu e fammi sapere">Vai a vederla tu e fammi sapere</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="comuneAuto">Comune dove si trova l'auto</label>
-          <input type="text" id="comuneAuto" name="comuneAuto" placeholder="Es. Verona" required>
-          <p class="field-hint">Serve solo per calcolare il rimborso trasferta.</p>
-        </div>
-        <div class="field">
-          <label for="viaCivico">Via e numero civico</label>
-          <input type="text" id="viaCivico" name="viaCivico" placeholder="Es. Via Roma 12" required>
-        </div>
-        <div class="field">
-          <label for="preferenze">Giorni/orari preferiti <span class="optional-tag">(opzionale)</span></label>
-          <textarea id="preferenze" name="preferenze" rows="2" placeholder="Es. Preferisco i pomeriggi infrasettimanali"></textarea>
+        <div class="form-step active" id="formStep1">
+          <div class="field">
+            <label for="marcaModello">Marca e modello</label>
+            <input type="text" id="marcaModello" name="marcaModello" placeholder="Es. Volkswagen Golf 1.6 TDI" required>
+          </div>
+          <div class="field">
+            <label for="linkAnnuncio">Link all'annuncio <span class="optional-tag">(opzionale)</span></label>
+            <input type="text" id="linkAnnuncio" name="linkAnnuncio" placeholder="Incolla il link da AutoScout, Subito, ecc.">
+          </div>
+          <div class="field">
+            <label for="tipoServizio">Tipo di servizio</label>
+            <select id="tipoServizio" name="tipoServizio" required>
+              <option value="" disabled selected>Scegli un'opzione</option>
+              <option value="Andiamo a vederla insieme">Andiamo a vederla insieme</option>
+              <option value="Vai a vederla tu e fammi sapere">Vai a vederla tu e fammi sapere</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="comuneAuto">Comune dove si trova l'auto</label>
+            <input type="text" id="comuneAuto" name="comuneAuto" placeholder="Es. Verona" required>
+            <p class="field-hint">Serve solo per calcolare il rimborso trasferta.</p>
+          </div>
+          <div class="field">
+            <label for="viaCivico">Via e numero civico</label>
+            <input type="text" id="viaCivico" name="viaCivico" placeholder="Es. Via Roma 12" required>
+          </div>
+
+          <div class="price-summary" id="priceSummary" hidden>
+            <div class="price-summary-row">
+              <span>🔍 Ispezione professionale</span>
+              <span>€149,00</span>
+            </div>
+            <div class="price-summary-row" id="rowTrasferta" hidden>
+              <span>🚗 Rimborso trasferta (<span id="kmValue">0</span> km A/R)</span>
+              <span id="trasfertaValue">€0,00</span>
+            </div>
+            <p class="price-summary-note" id="comuneTrovatoNote" hidden></p>
+            <p class="price-summary-loading" id="summaryLoading" hidden>Sto calcolando il percorso...</p>
+            <p class="price-summary-error" id="summaryError" hidden></p>
+            <hr>
+            <div class="price-summary-row price-summary-total">
+              <span>💰 Totale</span>
+              <span id="totaleValue">€149,00</span>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button type="button" class="btn btn-outline" id="btnCalcolaPrezzo">Calcola prezzo</button>
+            <button type="button" class="btn btn-primary" id="btnStep1Continua" hidden>Continua</button>
+          </div>
         </div>
 
-        <div class="price-summary" id="priceSummary">
-          <div class="price-summary-row">
-            <span>🔍 Ispezione professionale</span>
-            <span>€149,00</span>
+        <div class="form-step" id="formStep2">
+          <div class="field">
+            <label for="nomeCognome">Nome e cognome</label>
+            <input type="text" id="nomeCognome" name="nomeCognome" placeholder="Es. Mario Rossi" required>
           </div>
-          <div class="price-summary-row" id="rowTrasferta" hidden>
-            <span>🚗 Rimborso trasferta (<span id="kmValue">0</span> km A/R)</span>
-            <span id="trasfertaValue">€0,00</span>
+          <div class="field">
+            <label for="whatsappNumero">Numero WhatsApp</label>
+            <input type="tel" id="whatsappNumero" name="whatsappNumero" placeholder="Es. 333 1234567" required>
           </div>
-          <p class="price-summary-note" id="comuneTrovatoNote" hidden></p>
-          <p class="price-summary-loading" id="summaryLoading" hidden>Sto calcolando il percorso...</p>
-          <p class="price-summary-error" id="summaryError" hidden></p>
-          <hr>
-          <div class="price-summary-row price-summary-total">
-            <span>💰 Totale</span>
-            <span id="totaleValue">€149,00</span>
+          <div class="field">
+            <label for="stepEmail">Indirizzo email</label>
+            <input type="email" id="stepEmail" name="stepEmail" placeholder="mario.rossi@email.it" required>
+          </div>
+          <div class="field">
+            <label for="preferenze">Giorni/orari preferiti <span class="optional-tag">(opzionale)</span></label>
+            <textarea id="preferenze" name="preferenze" rows="2" placeholder="Es. Preferisco i pomeriggi infrasettimanali"></textarea>
+          </div>
+
+          <div class="price-summary">
+            <div class="price-summary-row price-summary-total">
+              <span>💰 Totale</span>
+              <span id="totaleValueStep2">€149,00</span>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button type="button" class="btn btn-outline" id="btnStep2Indietro">Indietro</button>
+            <button type="button" class="btn btn-primary" id="btnPaga">Paga ora</button>
           </div>
         </div>
-        <button type="button" class="btn btn-primary btn-block" id="btnPaga" disabled>Paga e prenota ora</button>
       </form>
 
       <p class="form-microcopy">I tuoi dati sono trattati con riservatezza e usati solo per organizzare la visita.</p>
@@ -1827,16 +1880,45 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(function(el){ observer.observe(el); });
 
-  // ---- Form a step unico ----
+  // ---- Form a 2 step (+ Stripe come step esterno) ----
   var form = document.getElementById('leadForm');
   var sitoWebInput = document.getElementById('sitoWeb');
   var comuneAutoInput = document.getElementById('comuneAuto');
+  var formStep1 = document.getElementById('formStep1');
+  var formStep2 = document.getElementById('formStep2');
+  var progressStep1 = document.getElementById('progressStep1');
+  var progressStep2 = document.getElementById('progressStep2');
+  var priceSummaryEl = document.getElementById('priceSummary');
+  var btnCalcolaPrezzo = document.getElementById('btnCalcolaPrezzo');
+  var btnStep1Continua = document.getElementById('btnStep1Continua');
+  var btnStep2Indietro = document.getElementById('btnStep2Indietro');
+  var btnPaga = document.getElementById('btnPaga');
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
   });
 
-  // ---- Calcolo trasferta (solo sul comune) + riepilogo prezzo + pagamento Stripe ----
+  function goToFormStep(n){
+    formStep1.classList.toggle('active', n === 1);
+    formStep2.classList.toggle('active', n === 2);
+    progressStep1.classList.toggle('active', n === 1);
+    progressStep1.classList.toggle('done', n > 1);
+    progressStep2.classList.toggle('active', n === 2);
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function validateFields(container){
+    var valid = true;
+    container.querySelectorAll('input, select, textarea').forEach(function(f){
+      if(!f.checkValidity()){
+        f.reportValidity();
+        valid = false;
+      }
+    });
+    return valid;
+  }
+
+  // ---- Calcolo trasferta (solo sul comune) + riepilogo prezzo ----
   var travelState = { km: null, trasferta_cents: null, comune_trovato: null, loading: false, error: null, comune: null };
 
   function formatEuro(cents){
@@ -1851,7 +1933,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     var loadingEl = document.getElementById('summaryLoading');
     var errorEl = document.getElementById('summaryError');
     var totaleValue = document.getElementById('totaleValue');
-    var btnPaga = document.getElementById('btnPaga');
+    var totaleValueStep2 = document.getElementById('totaleValueStep2');
 
     loadingEl.hidden = !travelState.loading;
     errorEl.hidden = !travelState.error;
@@ -1863,38 +1945,37 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       trasfertaValue.textContent = formatEuro(travelState.trasferta_cents);
       comuneTrovatoNote.hidden = !travelState.comune_trovato;
       comuneTrovatoNote.textContent = travelState.comune_trovato ? ('Calcolato su: ' + travelState.comune_trovato) : '';
-      totaleValue.textContent = formatEuro(14900 + travelState.trasferta_cents);
-      btnPaga.disabled = false;
+      var totale = 14900 + travelState.trasferta_cents;
+      totaleValue.textContent = formatEuro(totale);
+      totaleValueStep2.textContent = formatEuro(totale);
+      btnStep1Continua.hidden = false;
     } else {
       rowTrasferta.hidden = true;
       comuneTrovatoNote.hidden = true;
       totaleValue.textContent = formatEuro(14900);
-      btnPaga.disabled = true;
+      totaleValueStep2.textContent = formatEuro(14900);
+      btnStep1Continua.hidden = true;
     }
   }
 
   var travelRequestId = 0;
-  var travelDebounceTimer = null;
 
-  function calcolaTrasferta(comune){
-    comune = (comune || '').trim();
-    if(comune.length < 2) return;
-    if(travelState.comune === comune && (travelState.loading || travelState.trasferta_cents != null)) return;
-
-    // Debounce di sicurezza: se arrivano più trigger ravvicinati per lo stesso
-    // comune, esegue solo l'ultimo.
-    clearTimeout(travelDebounceTimer);
-    travelDebounceTimer = setTimeout(function(){
-      eseguiCalcoloTrasferta(comune);
-    }, 400);
-  }
-
-  function eseguiCalcoloTrasferta(comune){
+  function calcolaPrezzo(){
+    var comune = comuneAutoInput.value.trim();
     var requestId = ++travelRequestId;
+    priceSummaryEl.hidden = false;
     travelState.loading = true;
     travelState.error = null;
+    travelState.trasferta_cents = null;
     travelState.comune = comune;
     renderPriceSummary();
+
+    if(comune.length < 2){
+      travelState.loading = false;
+      travelState.error = 'Inserisci un comune valido.';
+      renderPriceSummary();
+      return;
+    }
 
     fetch('/api/calculate-travel', {
       method: 'POST',
@@ -1927,20 +2008,43 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     });
   }
 
+  if(btnCalcolaPrezzo){
+    btnCalcolaPrezzo.addEventListener('click', calcolaPrezzo);
+  }
+
+  // Se il comune cambia dopo un calcolo già fatto, il prezzo non è più
+  // valido: si nasconde tutto finché non si preme di nuovo "Calcola prezzo".
   if(comuneAutoInput){
-    comuneAutoInput.addEventListener('blur', function(){
-      calcolaTrasferta(comuneAutoInput.value);
+    comuneAutoInput.addEventListener('input', function(){
+      if(travelState.trasferta_cents != null || travelState.error){
+        travelState.trasferta_cents = null;
+        travelState.error = null;
+        travelState.comune = null;
+        priceSummaryEl.hidden = true;
+        btnStep1Continua.hidden = true;
+      }
     });
   }
 
-  var btnPaga = document.getElementById('btnPaga');
+  if(btnStep1Continua){
+    btnStep1Continua.addEventListener('click', function(){
+      if(!validateFields(formStep1)) return;
+      if(travelState.trasferta_cents == null) return;
+      goToFormStep(2);
+    });
+  }
+
+  if(btnStep2Indietro){
+    btnStep2Indietro.addEventListener('click', function(){
+      goToFormStep(1);
+    });
+  }
+
   if(btnPaga){
     btnPaga.addEventListener('click', function(){
       if(btnPaga.disabled) return;
-      if(!form.checkValidity()){
-        form.reportValidity();
-        return;
-      }
+      if(!validateFields(formStep2)) return;
+
       btnPaga.disabled = true;
       btnPaga.textContent = 'Reindirizzamento al pagamento...';
 
@@ -1952,6 +2056,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           whatsapp: document.getElementById('whatsappNumero').value,
           email: document.getElementById('stepEmail').value,
           link_annuncio: document.getElementById('linkAnnuncio').value,
+          marca_modello: document.getElementById('marcaModello').value,
           tipo_servizio: document.getElementById('tipoServizio').value,
           comune: comuneAutoInput.value,
           via_civico: document.getElementById('viaCivico').value,
@@ -1970,7 +2075,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       })
       .catch(function(){
         btnPaga.disabled = false;
-        btnPaga.textContent = 'Paga e prenota ora';
+        btnPaga.textContent = 'Paga ora';
         alert('Si è verificato un errore. Riprova o contattami su WhatsApp.');
       });
     });
