@@ -835,6 +835,14 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .form-step{display:none;}
   .form-step.active{display:block;}
   .field{margin-bottom:20px;}
+  .field-row{
+    display:grid;
+    grid-template-columns:1.1fr 1.1fr 0.8fr;
+    gap:14px;
+  }
+  @media(max-width:560px){
+    .field-row{grid-template-columns:1fr; gap:0;}
+  }
   .field label{
     display:block;
     font-size:13px;
@@ -1460,7 +1468,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <p>Il prezzo giusto per lo stato reale dell'auto.</p>
       </div>
     </div>
-    <p class="ispezione-question">Ogni controllo serve a rispondere a una sola domanda.</p>
+    <p class="ispezione-question">Ogni controllo serve a rispondere a una sola domanda:</p>
     <p class="pain-agitation-highlight ispezione-question">Compreresti quest'auto sapendo tutto quello che sappiamo adesso?</p>
   </div>
 </section>
@@ -1483,9 +1491,55 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <input type="text" name="sito_web" id="sitoWeb" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <div class="form-step active" id="formStep1">
-          <div class="field">
-            <label for="marcaModello">Marca e modello</label>
-            <input type="text" id="marcaModello" name="marcaModello" placeholder="Es. Volkswagen Golf 1.6 TDI" required>
+          <div class="field-row">
+            <div class="field">
+              <label for="marcaAuto">Marca</label>
+              <select id="marcaAuto" name="marcaAuto" required>
+                <option value="" disabled selected>Seleziona</option>
+                <option>Abarth</option>
+                <option>Alfa Romeo</option>
+                <option>Audi</option>
+                <option>BMW</option>
+                <option>Citroen</option>
+                <option>Cupra</option>
+                <option>Dacia</option>
+                <option>DS</option>
+                <option>Fiat</option>
+                <option>Ford</option>
+                <option>Honda</option>
+                <option>Hyundai</option>
+                <option>Jeep</option>
+                <option>Kia</option>
+                <option>Lancia</option>
+                <option>Land Rover</option>
+                <option>Mazda</option>
+                <option>Mercedes-Benz</option>
+                <option>Mini</option>
+                <option>Nissan</option>
+                <option>Opel</option>
+                <option>Peugeot</option>
+                <option>Porsche</option>
+                <option>Renault</option>
+                <option>Seat</option>
+                <option>Skoda</option>
+                <option>Smart</option>
+                <option>Suzuki</option>
+                <option>Toyota</option>
+                <option>Volkswagen</option>
+                <option>Volvo</option>
+                <option>Altra</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="modelloAuto">Modello</label>
+              <input type="text" id="modelloAuto" name="modelloAuto" placeholder="Es. Golf 1.6 TDI" required>
+            </div>
+            <div class="field">
+              <label for="annoAuto">Anno</label>
+              <select id="annoAuto" name="annoAuto" required>
+                <option value="" disabled selected>Anno</option>
+              </select>
+            </div>
           </div>
           <div class="field">
             <label for="linkAnnuncio">Link all'annuncio <span class="optional-tag">(opzionale)</span></label>
@@ -1893,10 +1947,21 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   var btnStep1Continua = document.getElementById('btnStep1Continua');
   var btnStep2Indietro = document.getElementById('btnStep2Indietro');
   var btnPaga = document.getElementById('btnPaga');
+  var annoAutoSelect = document.getElementById('annoAuto');
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
   });
+
+  (function populateAnni(){
+    var currentYear = new Date().getFullYear();
+    for(var y = currentYear + 1; y >= 1990; y--){
+      var opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y;
+      annoAutoSelect.appendChild(opt);
+    }
+  })();
 
   function goToFormStep(n){
     formStep1.classList.toggle('active', n === 1);
@@ -2056,7 +2121,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           whatsapp: document.getElementById('whatsappNumero').value,
           email: document.getElementById('stepEmail').value,
           link_annuncio: document.getElementById('linkAnnuncio').value,
-          marca_modello: document.getElementById('marcaModello').value,
+          marca_modello: document.getElementById('marcaAuto').value + ' ' + document.getElementById('modelloAuto').value + ' (' + document.getElementById('annoAuto').value + ')',
           tipo_servizio: document.getElementById('tipoServizio').value,
           comune: comuneAutoInput.value,
           via_civico: document.getElementById('viaCivico').value,
