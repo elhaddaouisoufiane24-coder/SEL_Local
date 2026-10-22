@@ -766,9 +766,8 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     z-index:1;
   }
   .process-step h4{margin:0 0 4px 0; font-size:15px; font-weight:700; color:var(--text);}
-  .process-step h4 a{color:var(--accent); border-bottom:1px solid currentColor;}
-  .process-step h4 a:hover{color:var(--accent-hover);}
   .process-step p{margin:0; font-size:14px; line-height:1.55; color:var(--text-muted);}
+  .how-closing{text-align:center; margin:0 auto 24px; padding-top:20px; border-top:1px solid var(--border);}
   .process-card .btn{margin-top:auto;}
   @media(max-width:480px){
     .process-card{padding:24px 20px;}
@@ -1066,22 +1065,20 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 
   /* Chi siamo */
   .about{background:var(--bg-alt);}
-  .about .container{max-width:1080px;}
   .about-grid{
     display:grid;
-    grid-template-columns:1fr;
-    gap:32px;
+    grid-template-columns:minmax(0,1fr);
+    gap:40px;
     align-items:center;
   }
+  .about-content, .about-media{min-width:0;}
   .about-media{order:2;}
   .about-content{order:1;}
-  .about-content .eyebrow{margin-bottom:10px;}
-  .about-content h2{text-align:left; margin-bottom:6px;}
-  .about-subtitle{font-size:18px; font-weight:600; color:var(--text); margin:0 0 20px 0;}
-  .about-content p{margin:0 0 14px 0;}
+  .about-content .about-subtitle{font-size:17px; line-height:1.7; font-weight:600; color:var(--text);}
+  .about-content p{font-size:16px; line-height:1.7;}
   .pillars{
     list-style:none;
-    margin:6px 0 20px 0;
+    margin:0 0 16px 0;
     padding:0;
     display:flex;
     flex-direction:column;
@@ -1095,14 +1092,13 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     background:#fff;
     border:1px solid var(--border);
     border-radius:var(--radius-sm);
-    font-size:14px;
+    font-size:15px;
     font-weight:700;
-    letter-spacing:.02em;
+    line-height:1.4;
     color:var(--text);
   }
   .pillars .icon-circle{flex-shrink:0; width:36px; height:36px; margin:0;}
-  .about-closing{font-weight:600; color:var(--text);}
-  .about-photo{
+
     display:block;
     width:100%;
     max-width:460px;
@@ -1118,11 +1114,9 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }
   @media(min-width:900px){
     .about-grid{
-      grid-template-columns:1fr minmax(320px,420px);
+      grid-template-columns:minmax(0,1fr) minmax(320px,420px);
       gap:56px;
     }
-    .about-media{order:2;}
-    .about-content{order:1;}
   }
 
   .trust-points{
@@ -1296,9 +1290,9 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <!-- COME FUNZIONA -->
 <section class="how" id="come-funziona">
   <div class="container">
-    <span class="eyebrow center">Il processo</span>
-    <h2 class="center">Come funziona l'ispezione</h2>
-    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Dal form alla decisione finale, ecco cosa succede passo per passo.</p>
+    <span class="eyebrow center">Come funziona</span>
+    <h2 class="center">Dall'annuncio alla decisione, con un esperto al tuo fianco.</h2>
+    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Comprare un'auto usata non dovrebbe essere un salto nel buio. Ti accompagniamo nella valutazione del veicolo, per aiutarti a capire se è davvero l'acquisto giusto per te.</p>
     <div class="how-grid">
       <div class="process-card reveal">
         <div class="process-head">
@@ -1307,34 +1301,35 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         </div>
         <div class="process-steps">
           <div class="process-step">
-            <span class="step-badge">1</span>
+            <span class="step-badge">01</span>
             <div>
-              <h4><a href="#form">Compila il form</a></h4>
-              <p>Inserisci i dati dell'auto che ti interessa e i tuoi contatti nel modulo qui sotto.</p>
+              <h4>Ci racconti quale auto vuoi acquistare</h4>
+              <p>Compila la richiesta con le informazioni sull'auto che ti interessa. Un tecnico specializzato ti contatterà per conoscere meglio le tue esigenze e concordare i prossimi passi.</p>
             </div>
           </div>
           <div class="process-step">
-            <span class="step-badge">2</span>
+            <span class="step-badge">02</span>
             <div>
-              <h4>Ti contattiamo noi</h4>
-              <p>Un nostro tecnico specializzato ti chiama per capire le tue esigenze.</p>
+              <h4>Ci incontriamo dal venditore</h4>
+              <p>Fissiamo l'appuntamento con te presso il venditore dell'auto e ti accompagniamo a valutarla insieme, senza fermarci alla prima impressione o a quello che viene dichiarato nell'annuncio.</p>
             </div>
           </div>
           <div class="process-step">
-            <span class="step-badge">3</span>
+            <span class="step-badge">03</span>
             <div>
-              <h4>Fissiamo l'appuntamento</h4>
-              <p>Organizziamo noi il controllo direttamente presso il venditore.</p>
+              <h4>Controlliamo l'auto in modo approfondito</h4>
+              <p>Verifichiamo carrozzeria, motore, meccanica, interni ed elettronica, eseguiamo la diagnosi e, quando possibile, una prova su strada. Ti mostriamo le eventuali anomalie riscontrate e ti spieghiamo cosa meritano di approfondire.</p>
             </div>
           </div>
           <div class="process-step">
-            <span class="step-badge">4</span>
+            <span class="step-badge">04</span>
             <div>
-              <h4>Controlliamo l'auto e ricevi il report</h4>
-              <p>Ispezioniamo il veicolo e ti diamo indicazioni chiare e un report dettagliato per decidere in modo consapevole.</p>
+              <h4>Decidi con maggiore consapevolezza</h4>
+              <p>Ti aiutiamo a capire le condizioni dell'auto, quali spese potrebbero presentarsi e se il prezzo richiesto è giustificato. Se emergono elementi utili, avrai anche una base concreta su cui trattare con il venditore.</p>
             </div>
           </div>
         </div>
+        <p class="section-lead how-closing">Alla fine, avrai più elementi per scegliere se acquistare, negoziare oppure cercare un'altra auto.</p>
         <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione</a>
       </div>
     </div>
@@ -1627,21 +1622,23 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <span class="eyebrow">Il nostro founder</span>
         <h2>Come nasce AutoInspecta</h2>
         <p class="about-subtitle">Ti stai chiedendo perché affidarti a noi?</p>
-        <p>AutoInspecta nasce dall'esperienza del suo fondatore nel settore automotive e dalla volontà di rendere l'acquisto di un'auto usata più trasparente e consapevole.</p>
-        <p>Dopo 5 anni di esperienza come meccanico, il fondatore ha deciso di mettere le proprie competenze al servizio di chi acquista un'auto usata, aiutandolo a riconoscere eventuali problemi prima che diventino spese impreviste.</p>
+        <p>Il progetto AutoInspecta nasce dall'esperienza del nostro founder nel settore automotive, maturata lavorando come tecnico specializzato Audi.</p>
+        <p>Nel corso degli anni, ha visto più volte auto usate entrare in officina con guasti importanti a poca distanza dall'acquisto, spesso trasformando quello che doveva essere un buon affare in una spesa imprevista.</p>
+        <p>Allo stesso tempo, aiutando amici e familiari nella scelta di un'auto usata, si è reso conto di quanto sia difficile valutare davvero un veicolo senza le competenze tecniche necessarie.</p>
+        <p>Da queste esperienze è nata AutoInspecta: un servizio pensato per mettere le competenze di un meccanico al fianco di chi acquista un'auto usata, aiutandolo a fare una scelta più consapevole, trasparente e informata.</p>
         <p>Il nostro approccio si basa su 3 pilastri:</p>
         <ul class="pillars">
           <li>
             <span class="icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
-            CONTROLLI TECNICI APPROFONDITI
+            Controlli tecnici approfonditi
           </li>
           <li>
             <span class="icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#2E50E8" stroke-width="1.8"/><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
-            TRASPARENZA NELLA VALUTAZIONE
+            Trasparenza nella valutazione
           </li>
           <li>
             <span class="icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H8l-4 4V5Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
-            SUPPORTO NELLA DECISIONE E NELLA TRATTATIVA
+            Supporto nella decisione e nella trattativa
           </li>
         </ul>
         <p class="about-closing">Acquistare un'auto usata è una scelta importante. Con AutoInspecta hai un supporto competente per valutare ciò che stai comprando, prima di prendere una decisione.</p>
@@ -2535,15 +2532,15 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     },
     {
       q: "Cosa succede dopo che compilo il form?",
-      a: "Un tecnico specializzato AutoInspecta riceve la tua richiesta e ti contatta per capire le tue esigenze. Poi organizziamo noi il controllo direttamente presso il venditore."
+      a: "Un tecnico specializzato AutoInspecta riceve la tua richiesta e ti contatta per capire le tue esigenze. Poi fissiamo con te l'appuntamento presso il venditore dell'auto."
     },
     {
       q: "Chi mi contatta e in quanto tempo?",
       a: "Ti contatta un tecnico specializzato AutoInspecta, al numero di telefono che indichi nel form. Tempi di ricontatto: [DA COMPLETARE]."
     },
     {
-      q: "Chi fissa l'appuntamento con il venditore?",
-      a: "Lo fissiamo noi. Dopo la chiamata con il tecnico ci mettiamo d'accordo con il venditore e ti confermiamo giorno, ora e luogo del controllo."
+      q: "Come viene fissato l'appuntamento?",
+      a: "Concordiamo con te giorno e ora, e ci troviamo direttamente dal venditore dell'auto. Sei tu ad accordarti con il venditore per la visita."
     },
     {
       q: "Come viene calcolato il rimborso chilometrico?",
@@ -2563,7 +2560,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     },
     {
       q: "Quanto dura il controllo?",
-      a: "In genere tra 45 minuti e un'ora, inclusa la diagnosi elettronica e la prova su strada."
+      a: "In genere tra 45 minuti e un'ora, inclusa la diagnosi elettronica e, quando possibile, la prova su strada."
     },
     {
       q: "Posso richiederlo per un'auto venduta da un privato?",
