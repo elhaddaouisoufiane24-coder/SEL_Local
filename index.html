@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Autoinspecta — Ti accompagno a comprare l'auto giusta</title>
-<meta name="description" content="Prima di comprare un'auto usata, falla controllare da un esperto indipendente. Ispezione completa, diagnosi elettronica, analisi onesta. Eviti problemi che potrebbero costarti migliaia di euro.">
+<title>Autoinspecta — Al tuo fianco prima di comprare un'auto usata</title>
+<meta name="description" content="Prima di comprare un'auto usata, fai controllare l'auto da un tecnico specializzato indipendente. Ispezione completa, diagnosi elettronica, valutazione onesta: ti aiutiamo a evitare problemi che potrebbero costarti migliaia di euro.">
 
 <!-- Meta Pixel Code -->
 <script>
@@ -442,34 +442,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .review-chip p{margin:0; font-size:14px; color:var(--text-muted);}
   .review-chip strong{color:var(--text); font-weight:600;}
 
-  /* Scopri il mio servizio: spazio video */
-  .video-intro{background:var(--bg);}
-  .video-placeholder{
-    max-width:720px;
-    margin:32px auto 0;
-    aspect-ratio:16/9;
-    background:var(--bg-subtle);
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:14px;
-    color:var(--text-muted);
-  }
-  .video-placeholder-icon{
-    width:64px;
-    height:64px;
-    border-radius:50%;
-    background:var(--accent);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-  }
-  .video-placeholder span{font-size:14px; font-weight:600;}
-
   /* Scegli il tuo percorso: percorso principale (ispezione) + secondario (scelta auto) */
   .path-choice{background:var(--bg-alt);}
   .path-primary{
@@ -794,6 +766,8 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     z-index:1;
   }
   .process-step h4{margin:0 0 4px 0; font-size:15px; font-weight:700; color:var(--text);}
+  .process-step h4 a{color:var(--accent); border-bottom:1px solid currentColor;}
+  .process-step h4 a:hover{color:var(--accent-hover);}
   .process-step p{margin:0; font-size:14px; line-height:1.55; color:var(--text-muted);}
   .process-card .btn{margin-top:auto;}
   @media(max-width:480px){
@@ -818,6 +792,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     gap:6px 8px;
     margin-bottom:32px;
   }
+  .form-progress[hidden]{display:none;}
   .form-progress-step{
     font-size:13px;
     font-weight:600;
@@ -840,9 +815,19 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     grid-template-columns:1.1fr 1.1fr 0.8fr;
     gap:14px;
   }
+  .field-row-2{grid-template-columns:1fr 1fr;}
   @media(max-width:560px){
     .field-row{grid-template-columns:1fr; gap:0;}
   }
+  .form-success{text-align:center; padding:12px 0 4px;}
+  .form-success[hidden]{display:none;}
+  .form-success-icon{
+    width:64px; height:64px; border-radius:50%;
+    background:rgba(37,197,94,0.12);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 16px;
+  }
+  .form-success p{font-size:18px; font-weight:600; line-height:1.5; color:var(--text); margin:0;}
   .field label{
     display:block;
     font-size:13px;
@@ -883,6 +868,61 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     color:var(--gray-text);
     cursor:not-allowed;
   }
+  .combo{position:relative;}
+  .combo input[type="text"]:disabled{
+    background:var(--bg);
+    color:var(--gray-text);
+    cursor:not-allowed;
+  }
+  .combo-list{
+    position:absolute;
+    z-index:20;
+    top:calc(100% + 6px);
+    left:0;
+    right:0;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    box-shadow:0 16px 36px rgba(0,0,0,0.14);
+    max-height:260px;
+    overflow-y:auto;
+    list-style:none;
+    margin:0;
+    padding:6px;
+  }
+  .combo-list[hidden]{display:none;}
+  .combo-option{
+    padding:11px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    color:var(--text);
+    line-height:1.3;
+  }
+  .combo-option.active{background:var(--accent-light); color:var(--accent);}
+  .combo-option-altro{
+    border-top:1px solid var(--border);
+    margin-top:4px;
+    padding-top:13px;
+    color:var(--gray-text);
+    font-weight:500;
+  }
+  .combo-empty{padding:10px 12px; font-size:14px; color:var(--gray-text);}
+  .combo-altro-row{display:flex; gap:8px;}
+  .combo-altro-row input{flex:1;}
+  .combo-altro-back{
+    flex-shrink:0;
+    background:none;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    padding:0 14px;
+    font-size:13px;
+    color:var(--gray-text);
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .combo-altro-back:hover{color:var(--text); border-color:var(--text);}
+  .field-error{font-size:12px; color:#dc2626; margin:6px 0 0 0;}
   .form-nav{
     display:flex;
     flex-direction:column-reverse;
@@ -926,9 +966,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     padding:6px 0;
   }
   .price-summary-row span:last-child{font-weight:600; white-space:nowrap;}
-  .price-summary hr{border:none; border-top:1px solid var(--border); margin:8px 0;}
-  .price-summary-total{font-size:16px; font-weight:700;}
-  .price-summary-total span:last-child{color:var(--accent); font-size:20px;}
   .price-summary-note{font-size:12px; color:var(--text-muted); margin-top:4px;}
   .price-summary-loading{font-size:14px; color:var(--text-muted); padding:8px 0;}
   .price-summary-error{font-size:14px; color:#dc2626; padding:8px 0;}
@@ -1027,17 +1064,44 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }
   .social-row a:hover{background:var(--accent);}
 
-  /* Chi sono */
-  .about{background:var(--bg-alt); text-align:center;}
-  .about .section-lead{margin-top:8px;}
-  .about .container{max-width:640px;}
-  .about .eyebrow, .about h2{margin-left:auto; margin-right:auto;}
+  /* Chi siamo */
+  .about{background:var(--bg-alt);}
+  .about .container{max-width:1080px;}
   .about-grid{
     display:grid;
     grid-template-columns:1fr;
-    gap:28px;
-    margin-top:28px;
+    gap:32px;
+    align-items:center;
   }
+  .about-media{order:2;}
+  .about-content{order:1;}
+  .about-content .eyebrow{margin-bottom:10px;}
+  .about-content h2{text-align:left; margin-bottom:6px;}
+  .about-subtitle{font-size:18px; font-weight:600; color:var(--text); margin:0 0 20px 0;}
+  .about-content p{margin:0 0 14px 0;}
+  .pillars{
+    list-style:none;
+    margin:6px 0 20px 0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .pillars li{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 14px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.02em;
+    color:var(--text);
+  }
+  .pillars .icon-circle{flex-shrink:0; width:36px; height:36px; margin:0;}
+  .about-closing{font-weight:600; color:var(--text);}
   .about-photo{
     display:block;
     width:100%;
@@ -1052,30 +1116,14 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   @media(max-width:480px){
     .about-photo{aspect-ratio:1/1;}
   }
-  .about-bio{margin:0 auto;}
-  .about-bio p{margin:0 0 10px 0; text-align:center;}
-  .about-bio p:last-child{margin-bottom:0;}
-  .about-bio-more{
-    display:grid;
-    grid-template-rows:0fr;
-    transition:grid-template-rows .35s ease;
+  @media(min-width:900px){
+    .about-grid{
+      grid-template-columns:1fr minmax(320px,420px);
+      gap:56px;
+    }
+    .about-media{order:2;}
+    .about-content{order:1;}
   }
-  .about-bio-more-inner{overflow:hidden;}
-  .about-bio-more-inner p:first-child{margin-top:10px;}
-  .about-bio.expanded .about-bio-more{grid-template-rows:1fr;}
-  .about-more-btn{
-    display:inline-block;
-    margin-top:12px;
-    background:none;
-    border:none;
-    padding:0;
-    font-size:15px;
-    font-weight:700;
-    color:var(--accent);
-    cursor:pointer;
-    transition:color .2s ease;
-  }
-  .about-more-btn:hover{color:var(--accent-hover);}
 
   .trust-points{
     display:flex;
@@ -1090,15 +1138,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   .trust-point h4{margin:0 0 4px 0; font-size:15px; font-weight:700; color:var(--text);}
   .trust-point p{margin:0; font-size:14px; line-height:1.55; color:var(--text-muted);}
 
-  @media(min-width:900px){
-    .about .container{max-width:1080px;}
-    .about-grid{
-      grid-template-columns:minmax(320px,420px) 1fr;
-      align-items:start;
-      gap:56px;
-    }
-    .about-bio p{text-align:left;}
-  }
 
   /* Cosa controllo */
   .services{background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
@@ -1187,7 +1226,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       <nav class="nav-links">
         <a href="#percorso">Servizi</a>
         <a href="#come-funziona">Come funziona</a>
-        <a href="#chi-sono">Chi sono</a>
+        <a href="#chi-siamo">Chi siamo</a>
         <a href="#faq">FAQ</a>
       </nav>
       <div class="nav-cta">
@@ -1201,7 +1240,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   <nav class="nav-mobile" id="navMobile">
     <a href="#percorso">Servizi</a>
     <a href="#come-funziona">Come funziona</a>
-    <a href="#chi-sono">Chi sono</a>
+    <a href="#chi-siamo">Chi siamo</a>
     <a href="#faq">FAQ</a>
   </nav>
 </header>
@@ -1212,7 +1251,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     <div class="reveal hero-copy">
       <span class="eyebrow">Al tuo fianco, prima dell'acquisto di un'auto usata</span>
       <h1>Stai per acquistare un'auto usata? Un'ispezione professionale può evitarti di buttare migliaia di euro!</h1>
-      <p class="sub">Ti accompagno a vedere l'auto che vuoi acquistare e la ispeziono da cima a fondo. Se l'auto è valida te lo dirò. Se c'è margine per trattare il prezzo, te lo dimostrerò. Se non vale la pena comprarla, sarò il primo a dirtelo.</p>
+      <p class="sub">Ti accompagniamo a vedere l'auto che vuoi acquistare e la ispezioniamo da cima a fondo. Se l'auto è valida te lo diremo. Se c'è margine per trattare il prezzo, te lo dimostreremo. Se non vale la pena comprarla, saremo i primi a dirtelo.</p>
       <div class="hero-actions">
         <a href="#form" class="btn btn-primary">Prenota l'ispezione</a>
       </div>
@@ -1230,19 +1269,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           Un parere sincero
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- VIDEO SPIEGAZIONE -->
-<section class="video-intro">
-  <div class="container">
-    <h2 class="center">Scopri il mio servizio</h2>
-    <div class="video-placeholder reveal">
-      <div class="video-placeholder-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7L8 5Z"/></svg>
-      </div>
-      <span>Video in arrivo</span>
     </div>
   </div>
 </section>
@@ -1283,29 +1309,29 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           <div class="process-step">
             <span class="step-badge">1</span>
             <div>
-              <h4>Compili il form</h4>
-              <p>Inserisci il link dell'annuncio dell'auto che vuoi valutare.</p>
+              <h4><a href="#form">Compila il form</a></h4>
+              <p>Inserisci i dati dell'auto che ti interessa e i tuoi contatti nel modulo qui sotto.</p>
             </div>
           </div>
           <div class="process-step">
             <span class="step-badge">2</span>
             <div>
-              <h4>Scegli data e ora dell'appuntamento</h4>
-              <p>Selezioni data e luogo dell'appuntamento dal venditore.</p>
+              <h4>Ti contattiamo noi</h4>
+              <p>Un nostro tecnico specializzato ti chiama per capire le tue esigenze.</p>
             </div>
           </div>
           <div class="process-step">
             <span class="step-badge">3</span>
             <div>
-              <h4>Ispeziono l'auto sul posto</h4>
-              <p>Ispeziono l'auto su 101 punti: carrozzeria, motore, interni, elettronica e molto altro.</p>
+              <h4>Fissiamo l'appuntamento</h4>
+              <p>Organizziamo noi il controllo direttamente presso il venditore.</p>
             </div>
           </div>
           <div class="process-step">
             <span class="step-badge">4</span>
             <div>
-              <h4>Ti aiuto a decidere</h4>
-              <p>Ricevi una valutazione reale e sincera, positiva o negativa che sia, e quando utile indicazioni per la trattativa.</p>
+              <h4>Controlliamo l'auto e ricevi il report</h4>
+              <p>Ispezioniamo il veicolo e ti diamo indicazioni chiare e un report dettagliato per decidere in modo consapevole.</p>
             </div>
           </div>
         </div>
@@ -1319,7 +1345,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         </div>
         <div>
           <h4>Non hai tempo o non vuoi fare tutta quella strada per vedere la macchina?</h4>
-          <p>Vado io a vederla per te e ti consegno foto e un report dettagliato.</p>
+          <p>Andiamo noi a vederla per te e ti consegniamo foto e un report dettagliato.</p>
         </div>
       </div>
     </div>
@@ -1330,7 +1356,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <section class="path-choice" id="percorso">
   <div class="container">
     <h2 class="center">Ok ma quanto costa?</h2>
-    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Ho un solo pacchetto, il controllo COMPLETO di tutta la vettura.</p>
+    <p class="center section-lead" style="margin-left:auto; margin-right:auto;">Abbiamo un solo pacchetto, il controllo COMPLETO di tutta la vettura.</p>
 
     <div class="path-primary reveal">
       <div class="path-primary-inner">
@@ -1339,7 +1365,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         </div>
         <div class="path-primary-content">
           <h3>Hai già trovato l'auto che vuoi comprare?</h3>
-          <p>Vengo con te a vederla, la ispeziono da cima a fondo e ti dico se conviene davvero comprarla, a quel prezzo.</p>
+          <p>Veniamo con te a vederla, la ispezioniamo da cima a fondo e ti diciamo se conviene davvero comprarla, a quel prezzo.</p>
           <ul class="path-bullets">
             <li>Controllo sul posto</li>
             <li>Diagnosi elettronica</li>
@@ -1352,7 +1378,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           <div class="path-price">
             <span class="price-old">249 €</span>
             <span class="price-new">149 €</span>
-            <span class="price-note">+ spese di uscita calcolate al checkout</span>
+            <span class="price-note">+ rimborso chilometrico calcolato nel modulo qui sotto</span>
           </div>
           <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione →</a>
         </div>
@@ -1362,10 +1388,10 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     <div class="path-secondary reveal" id="scelta-auto">
       <div class="path-secondary-text">
         <h4>Non hai ancora trovato l'auto giusta?</h4>
-        <p>Se sei indeciso tra più modelli o non sai quale alimentazione fa per te, posso aiutarti a capire cosa cercare prima di decidere.</p>
+        <p>Se sei indeciso tra più modelli o non sai quale alimentazione fa per te, possiamo aiutarti a capire cosa cercare prima di decidere.</p>
       </div>
       <!-- TODO: collegare al futuro questionario per la scelta dell'auto (non ancora implementato) -->
-      <a href="#scelta-auto" class="btn btn-outline">Scopri come posso aiutarti</a>
+      <a href="#scelta-auto" class="btn btn-outline">Scopri come possiamo aiutarti</a>
     </div>
   </div>
 </section>
@@ -1404,15 +1430,15 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       </div>
       <div class="benefit-item reveal">
         <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#2E50E8" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="#2E50E8" stroke-width="1.8"/><path d="M14.8 9.2A3.4 3.4 0 0 0 12 8c-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.2-3 2.2a3.5 3.5 0 0 1-3-1.4M12 6.5V8m0 8.8v1.7" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
         </div>
-        <span>Per trattare il prezzo</span>
+        <span>Spese impreviste dopo l'acquisto</span>
       </div>
       <div class="benefit-item reveal">
         <div class="icon-circle">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <span>Nessun conflitto di interessi: non devo venderti niente</span>
+        <span>Nessun conflitto di interessi: non dobbiamo venderti niente</span>
       </div>
     </div>
   </div>
@@ -1423,7 +1449,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   <div class="container">
     <span class="eyebrow center">Ispezione</span>
     <h2 class="center"><span class="accent-word">101</span> punti di controllo per non lasciare nulla al caso</h2>
-    <p class="section-lead center reveal" style="margin-left:auto; margin-right:auto;">Ispeziono ogni aspetto che incide su valore, affidabilità e sicurezza.</p>
+    <p class="section-lead center reveal" style="margin-left:auto; margin-right:auto;">Ispezioniamo ogni aspetto che incide su valore, affidabilità e sicurezza.</p>
     <div class="services-grid">
       <div class="service-card reveal">
         <div class="icon-circle">
@@ -1476,15 +1502,14 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <!-- FORM -->
 <section class="form-section" id="form">
   <div class="container">
-    <span class="eyebrow center" style="display:block; text-align:center;">Prenota</span>
-    <h2 class="center">Raccontami che auto stai valutando.</h2>
-    <p class="center section-lead">Compila il form, vedi il prezzo e paga: ti scrivo su WhatsApp entro poche ore per fissare giorno e ora.</p>
+    <span class="eyebrow center" style="display:block; text-align:center;">Richiedi il controllo</span>
+    <h2 class="center">Raccontaci che auto stai valutando.</h2>
+    <p class="center section-lead">Compila il form: un tecnico specializzato AutoInspecta ti ricontatterà a breve.</p>
 
     <div class="form-wrap reveal">
       <div class="form-progress">
         <div class="form-progress-step active" id="progressStep1">1. L'auto</div>
         <div class="form-progress-step" id="progressStep2">2. I tuoi dati</div>
-        <div class="form-progress-step" id="progressStep3">3. Pagamento</div>
       </div>
 
       <form id="leadForm" novalidate>
@@ -1493,46 +1518,20 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <div class="form-step active" id="formStep1">
           <div class="field-row">
             <div class="field">
-              <label for="marcaAuto">Marca</label>
-              <select id="marcaAuto" name="marcaAuto" required>
-                <option value="" disabled selected>Seleziona</option>
-                <option>Abarth</option>
-                <option>Alfa Romeo</option>
-                <option>Audi</option>
-                <option>BMW</option>
-                <option>Citroen</option>
-                <option>Cupra</option>
-                <option>Dacia</option>
-                <option>DS</option>
-                <option>Fiat</option>
-                <option>Ford</option>
-                <option>Honda</option>
-                <option>Hyundai</option>
-                <option>Jeep</option>
-                <option>Kia</option>
-                <option>Lancia</option>
-                <option>Land Rover</option>
-                <option>Mazda</option>
-                <option>Mercedes-Benz</option>
-                <option>Mini</option>
-                <option>Nissan</option>
-                <option>Opel</option>
-                <option>Peugeot</option>
-                <option>Porsche</option>
-                <option>Renault</option>
-                <option>Seat</option>
-                <option>Skoda</option>
-                <option>Smart</option>
-                <option>Suzuki</option>
-                <option>Toyota</option>
-                <option>Volkswagen</option>
-                <option>Volvo</option>
-                <option>Altra</option>
-              </select>
+              <label for="marcaInput">Marca</label>
+              <div class="combo" id="comboMarca">
+                <input type="text" id="marcaInput" placeholder="Cerca marca..." autocomplete="off" required data-combo-skip>
+                <input type="hidden" id="marcaValue" name="marca">
+                <ul class="combo-list" id="marcaList" hidden></ul>
+              </div>
             </div>
             <div class="field">
-              <label for="modelloAuto">Modello</label>
-              <input type="text" id="modelloAuto" name="modelloAuto" placeholder="Es. Golf 1.6 TDI" required>
+              <label for="modelloInput">Modello</label>
+              <div class="combo" id="comboModello">
+                <input type="text" id="modelloInput" placeholder="Prima seleziona la marca" autocomplete="off" required disabled data-combo-skip>
+                <input type="hidden" id="modelloValue" name="modello">
+                <ul class="combo-list" id="modelloList" hidden></ul>
+              </div>
             </div>
             <div class="field">
               <label for="annoAuto">Anno</label>
@@ -1550,135 +1549,105 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
             <select id="tipoServizio" name="tipoServizio" required>
               <option value="" disabled selected>Scegli un'opzione</option>
               <option value="Andiamo a vederla insieme">Andiamo a vederla insieme</option>
-              <option value="Vai a vederla tu e fammi sapere">Vai a vederla tu e fammi sapere</option>
+              <option value="Andiamo noi a vederla al posto tuo">Andiamo noi a vederla al posto tuo</option>
             </select>
           </div>
           <div class="field">
-            <label for="comuneAuto">Comune dove si trova l'auto</label>
-            <input type="text" id="comuneAuto" name="comuneAuto" placeholder="Es. Verona" required>
-            <p class="field-hint">Serve solo per calcolare il rimborso trasferta.</p>
-          </div>
-          <div class="field">
-            <label for="viaCivico">Via e numero civico</label>
-            <input type="text" id="viaCivico" name="viaCivico" placeholder="Es. Via Roma 12" required>
+            <label for="comuneInput">Comune dove si trova l'auto</label>
+            <div class="combo" id="comboComune">
+              <input type="text" id="comuneInput" placeholder="Es. Verona" autocomplete="off" required data-combo-skip>
+              <ul class="combo-list" id="comuneList" hidden></ul>
+            </div>
+            <p class="field-hint">Serve solo per calcolare il rimborso chilometrico.</p>
+            <p class="field-error" id="comuneError" hidden>Seleziona il comune dall'elenco.</p>
           </div>
 
           <div class="price-summary" id="priceSummary" hidden>
-            <div class="price-summary-row">
-              <span>🔍 Ispezione professionale</span>
-              <span>€149,00</span>
-            </div>
             <div class="price-summary-row" id="rowTrasferta" hidden>
-              <span>🚗 Rimborso trasferta (<span id="kmValue">0</span> km A/R)</span>
+              <span>🚗 Rimborso chilometrico (<span id="kmValue">0</span> km A/R)</span>
               <span id="trasfertaValue">€0,00</span>
             </div>
             <p class="price-summary-note" id="comuneTrovatoNote" hidden></p>
             <p class="price-summary-loading" id="summaryLoading" hidden>Sto calcolando il percorso...</p>
             <p class="price-summary-error" id="summaryError" hidden></p>
-            <hr>
-            <div class="price-summary-row price-summary-total">
-              <span>💰 Totale</span>
-              <span id="totaleValue">€149,00</span>
-            </div>
           </div>
 
           <div class="form-nav">
-            <button type="button" class="btn btn-outline" id="btnCalcolaPrezzo">Calcola prezzo</button>
+            <button type="button" class="btn btn-outline" id="btnCalcolaPrezzo">Calcola rimborso chilometrico</button>
             <button type="button" class="btn btn-primary" id="btnStep1Continua" hidden>Continua</button>
           </div>
         </div>
 
         <div class="form-step" id="formStep2">
-          <div class="field">
-            <label for="nomeCognome">Nome e cognome</label>
-            <input type="text" id="nomeCognome" name="nomeCognome" placeholder="Es. Mario Rossi" required>
-          </div>
-          <div class="field">
-            <label for="whatsappNumero">Numero WhatsApp</label>
-            <input type="tel" id="whatsappNumero" name="whatsappNumero" placeholder="Es. 333 1234567" required>
-          </div>
-          <div class="field">
-            <label for="stepEmail">Indirizzo email</label>
-            <input type="email" id="stepEmail" name="stepEmail" placeholder="mario.rossi@email.it" required>
-          </div>
-          <div class="field">
-            <label for="preferenze">Giorni/orari preferiti <span class="optional-tag">(opzionale)</span></label>
-            <textarea id="preferenze" name="preferenze" rows="2" placeholder="Es. Preferisco i pomeriggi infrasettimanali"></textarea>
-          </div>
-
-          <div class="price-summary">
-            <div class="price-summary-row price-summary-total">
-              <span>💰 Totale</span>
-              <span id="totaleValueStep2">€149,00</span>
+          <div class="field-row field-row-2">
+            <div class="field">
+              <label for="nomeCliente">Nome</label>
+              <input type="text" id="nomeCliente" name="nome" placeholder="Es. Mario" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label for="cognomeCliente">Cognome</label>
+              <input type="text" id="cognomeCliente" name="cognome" placeholder="Es. Rossi" autocomplete="family-name" required>
             </div>
           </div>
+          <div class="field">
+            <label for="telefonoCliente">Numero di telefono</label>
+            <input type="tel" id="telefonoCliente" name="telefono" placeholder="Es. 333 1234567" autocomplete="tel" inputmode="tel" required>
+          </div>
+          <div class="field">
+            <label for="emailCliente">Indirizzo email</label>
+            <input type="email" id="emailCliente" name="email" placeholder="mario.rossi@email.it" autocomplete="email" required>
+          </div>
+
+          <p class="field-error" id="submitError" hidden></p>
 
           <div class="form-nav">
             <button type="button" class="btn btn-outline" id="btnStep2Indietro">Indietro</button>
-            <button type="button" class="btn btn-primary" id="btnPaga">Paga ora</button>
+            <button type="button" class="btn btn-primary" id="btnInvia">Richiedi di essere ricontattato</button>
           </div>
         </div>
       </form>
 
-      <p class="form-microcopy">I tuoi dati sono trattati con riservatezza e usati solo per organizzare la visita.</p>
+      <div class="form-success" id="formSuccess" hidden role="status" aria-live="polite">
+        <div class="form-success-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 12l7 7L21 5" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p>Grazie! Un tecnico specializzato AutoInspecta ti contatterà a breve per fissare il controllo.</p>
+      </div>
+
+      <p class="form-microcopy" id="formMicrocopy">I tuoi dati sono trattati con riservatezza e usati solo per ricontattarti.</p>
     </div>
   </div>
 </section>
 
-<!-- CHI SONO -->
-<section class="about" id="chi-sono">
+<!-- CHI SIAMO -->
+<section class="about" id="chi-siamo">
   <div class="container">
-    <h2 class="center">Chi c'è dietro AutoInspecta</h2>
     <div class="about-grid">
-      <div class="about-media">
-        <img src="asset/IMG_2564.PNG" alt="Soufiane al lavoro su un'auto" class="about-photo">
+      <div class="about-content reveal">
+        <span class="eyebrow">Il nostro founder</span>
+        <h2>Come nasce AutoInspecta</h2>
+        <p class="about-subtitle">Ti stai chiedendo perché affidarti a noi?</p>
+        <p>AutoInspecta nasce dall'esperienza del suo fondatore nel settore automotive e dalla volontà di rendere l'acquisto di un'auto usata più trasparente e consapevole.</p>
+        <p>Dopo 5 anni di esperienza come meccanico, il fondatore ha deciso di mettere le proprie competenze al servizio di chi acquista un'auto usata, aiutandolo a riconoscere eventuali problemi prima che diventino spese impreviste.</p>
+        <p>Il nostro approccio si basa su 3 pilastri:</p>
+        <ul class="pillars">
+          <li>
+            <span class="icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            CONTROLLI TECNICI APPROFONDITI
+          </li>
+          <li>
+            <span class="icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#2E50E8" stroke-width="1.8"/><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            TRASPARENZA NELLA VALUTAZIONE
+          </li>
+          <li>
+            <span class="icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H8l-4 4V5Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            SUPPORTO NELLA DECISIONE E NELLA TRATTATIVA
+          </li>
+        </ul>
+        <p class="about-closing">Acquistare un'auto usata è una scelta importante. Con AutoInspecta hai un supporto competente per valutare ciò che stai comprando, prima di prendere una decisione.</p>
       </div>
-      <div class="about-content">
-        <div class="about-bio reveal" id="aboutBio">
-          <p>Ciao, sono Soufiane. Ho creato AutoInspecta e sarò io a controllare l'auto insieme a te.</p>
-          <p>Da anni lavoro ogni giorno nel mondo dell'auto, tra concessionarie ufficiali e officina. È un'esperienza che mi ha permesso di conoscere da vicino le auto, i loro difetti più comuni e tutti quegli aspetti che spesso non emergono semplicemente guardandole in un annuncio.</p>
-          <div class="about-bio-more" id="aboutBioMore">
-            <div class="about-bio-more-inner">
-              <p>AutoInspecta nasce anche da qualcosa di molto semplice: per anni amici e parenti mi hanno chiesto di accompagnarli a vedere le auto che stavano pensando di comprare.</p>
-              <p>Andavamo dal venditore, controllavamo l'auto insieme e cercavamo di capire una cosa sola: <strong>vale davvero la pena comprarla?</strong></p>
-              <p>A volte il controllo confermava che fosse un buon acquisto. Altre volte emergevano problemi, lavori da mettere in conto o semplicemente motivi per lasciarla perdere.</p>
-              <p>Da qui è nata AutoInspecta.</p>
-              <p>Oggi ho trasformato quell'aiuto che davo ad amici e parenti in un vero servizio: quando prenoti un'ispezione, <strong>sarò io a venire con te a vedere l'auto e a controllarla prima dell'acquisto</strong>.</p>
-              <p>Perché prima di spendere migliaia di euro per un'auto usata, secondo me è importante avere accanto qualcuno che sappia cosa guardare.</p>
-              <p><strong>Io non devo venderti quell'auto. Devo aiutarti a capire se vale la pena comprarla.</strong></p>
-            </div>
-          </div>
-          <button type="button" class="about-more-btn" id="aboutMoreBtn">Scopri di più</button>
-        </div>
-        <div class="trust-points reveal">
-          <div class="trust-point">
-            <div class="icon-circle">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6" stroke="#2E50E8" stroke-width="1.8"/><path d="M20 20l-4.35-4.35" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </div>
-            <div>
-              <h4>Nessun interesse nella vendita</h4>
-              <p>Non vendo auto e non guadagno dalla loro vendita.</p>
-            </div>
-          </div>
-          <div class="trust-point">
-            <div class="icon-circle">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            </div>
-            <div>
-              <h4>Un controllo fatto per chi compra</h4>
-              <p>Guardo l'auto dalla parte dell'acquirente, non del venditore.</p>
-            </div>
-          </div>
-          <div class="trust-point">
-            <div class="icon-circle">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H8l-4 4V5Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            </div>
-            <div>
-              <h4>Un parere sincero</h4>
-              <p>Se qualcosa non mi convince, te lo dico chiaramente.</p>
-            </div>
-          </div>
-        </div>
+      <div class="about-media reveal">
+        <img src="asset/IMG_2564.PNG" alt="Il fondatore di AutoInspecta al lavoro su un'auto" class="about-photo">
       </div>
     </div>
   </div>
@@ -1712,7 +1681,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 <section class="faq" id="faq">
   <div class="container">
     <span class="eyebrow center" style="display:block; text-align:center;">Domande frequenti</span>
-    <h2 class="center">Le domande che mi fanno prima di prenotare.</h2>
+    <h2 class="center">Le domande che ci fanno prima di richiedere il controllo.</h2>
     <div class="faq-list" id="faqList"></div>
   </div>
 </section>
@@ -1725,7 +1694,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       <div class="cta-mid-options">
         <a href="#form" class="btn btn-white">Prenota l'ispezione</a>
       </div>
-      <a href="#scelta-auto" class="cta-mid-link">Non hai ancora trovato l'auto? Scopri come posso aiutarti.</a>
+      <a href="#scelta-auto" class="cta-mid-link">Non hai ancora trovato l'auto? Scopri come possiamo aiutarti.</a>
     </div>
   </div>
 </section>
@@ -1737,7 +1706,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     <div class="footer-grid">
       <div>
         <div class="footer-logo"><img src="asset/logo-autoinspecta-dark.png" alt="Autoinspecta"></div>
-        <p style="max-width:280px; color:rgba(255,255,255,0.4); font-size:14px; margin-top:8px;">Ti accompagno a comprare l'auto giusta, come farebbe un amico.</p>
+        <p style="max-width:280px; color:rgba(255,255,255,0.4); font-size:14px; margin-top:8px;">Al tuo fianco, prima dell'acquisto di un'auto usata.</p>
         <div class="social-row">
           <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 8h2V4h-2c-2.2 0-4 1.8-4 4v2H9v4h2v8h4v-8h2.6l.4-4H15V8Z" fill="#fff"/></svg></a>
           <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1" fill="#fff"/></svg></a>
@@ -1783,7 +1752,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     Vorrei maggiori informazioni 💬
     <button type="button" class="whatsapp-tooltip-close" id="waTooltipClose" aria-label="Chiudi">✕</button>
   </div>
-  <a class="whatsapp-float" id="waLink" href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20venire%20a%20vedere%20un%27auto%20con%20te" target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp">
+  <a class="whatsapp-float" id="waLink" href="https://wa.me/390000000000?text=Ciao%2C%20vorrei%20informazioni%20sul%20controllo%20di%20un%27auto%20usata" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
   </a>
 </div>
@@ -1909,16 +1878,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     startReviewsAutoplay();
   }
 
-  // ---- Chi sono: espandi/comprimi bio lunga ----
-  var aboutMoreBtn = document.getElementById('aboutMoreBtn');
-  var aboutBio = document.getElementById('aboutBio');
-  if(aboutMoreBtn && aboutBio){
-    aboutMoreBtn.addEventListener('click', function(){
-      var expanded = aboutBio.classList.toggle('expanded');
-      aboutMoreBtn.textContent = expanded ? 'Mostra meno' : 'Scopri di più';
-    });
-  }
-
   // ---- Estende .reveal a H2 di sezione (senza toccare l'HTML sorgente) ----
   document.querySelectorAll('h2').forEach(function(el){ el.classList.add('reveal'); });
 
@@ -1934,10 +1893,9 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(function(el){ observer.observe(el); });
 
-  // ---- Form a 2 step (+ Stripe come step esterno) ----
+  // ---- Form a 2 step: dati auto + dati cliente, invio a /api/submit-lead ----
   var form = document.getElementById('leadForm');
   var sitoWebInput = document.getElementById('sitoWeb');
-  var comuneAutoInput = document.getElementById('comuneAuto');
   var formStep1 = document.getElementById('formStep1');
   var formStep2 = document.getElementById('formStep2');
   var progressStep1 = document.getElementById('progressStep1');
@@ -1946,8 +1904,13 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   var btnCalcolaPrezzo = document.getElementById('btnCalcolaPrezzo');
   var btnStep1Continua = document.getElementById('btnStep1Continua');
   var btnStep2Indietro = document.getElementById('btnStep2Indietro');
-  var btnPaga = document.getElementById('btnPaga');
+  var btnInvia = document.getElementById('btnInvia');
+  var formSuccess = document.getElementById('formSuccess');
+  var formMicrocopy = document.getElementById('formMicrocopy');
+  var formProgress = document.querySelector('.form-progress');
+  var submitError = document.getElementById('submitError');
   var annoAutoSelect = document.getElementById('annoAuto');
+  var comuneErrorEl = document.getElementById('comuneError');
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -1955,7 +1918,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
 
   (function populateAnni(){
     var currentYear = new Date().getFullYear();
-    for(var y = currentYear + 1; y >= 1990; y--){
+    for(var y = currentYear; y >= currentYear - 30; y--){
       var opt = document.createElement('option');
       opt.value = y;
       opt.textContent = y;
@@ -1975,6 +1938,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   function validateFields(container){
     var valid = true;
     container.querySelectorAll('input, select, textarea').forEach(function(f){
+      if(f.hasAttribute('data-combo-skip') || f.disabled) return;
       if(!f.checkValidity()){
         f.reportValidity();
         valid = false;
@@ -1983,8 +1947,364 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     return valid;
   }
 
-  // ---- Calcolo trasferta (solo sul comune) + riepilogo prezzo ----
-  var travelState = { km: null, trasferta_cents: null, comune_trovato: null, loading: false, error: null, comune: null };
+  function normalizeText(s){
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+
+  // ---- Dataset marche/modelli e comuni: caricati solo al primo utilizzo ----
+  var carModelsData = null, carModelsPromise = null;
+  function loadCarModels(){
+    if(!carModelsPromise){
+      carModelsPromise = fetch('data/car-models.json').then(function(r){ return r.json(); }).then(function(data){
+        carModelsData = data;
+        return data;
+      });
+    }
+    return carModelsPromise;
+  }
+
+  var comuniData = null, comuniPromise = null;
+  function loadComuni(){
+    if(!comuniPromise){
+      comuniPromise = fetch('data/comuni.json').then(function(r){ return r.json(); }).then(function(data){
+        comuniData = data;
+        return data;
+      });
+    }
+    return comuniPromise;
+  }
+
+  // ---- Componente combobox riutilizzabile (marca, modello, comune) ----
+  function createCombobox(opts){
+    var state = { resolved: null, altroMode: false };
+    var currentItems = [];
+    var activeIndex = -1;
+
+    function close(){
+      opts.list.hidden = true;
+      activeIndex = -1;
+    }
+
+    function renderList(items, messageText){
+      currentItems = items;
+      opts.list.innerHTML = '';
+      var hasContent = false;
+      if(messageText){
+        var msgLi = document.createElement('li');
+        msgLi.className = 'combo-empty';
+        msgLi.textContent = messageText;
+        opts.list.appendChild(msgLi);
+        hasContent = true;
+      }
+      items.forEach(function(item){
+        var li = document.createElement('li');
+        li.className = 'combo-option' + (item.altro ? ' combo-option-altro' : '');
+        li.textContent = item.label;
+        li.addEventListener('mousedown', function(e){
+          e.preventDefault();
+          select(item);
+        });
+        opts.list.appendChild(li);
+        hasContent = true;
+      });
+      activeIndex = -1;
+      opts.list.hidden = !hasContent;
+    }
+
+    function refresh(query){
+      if(state.altroMode) return;
+      var minChars = opts.minChars || 0;
+      if(query.length < minChars){
+        renderList([], null);
+        return;
+      }
+      if(opts.isLoading && opts.isLoading()){
+        var loadingItems = opts.allowAltro ? [{ altro: true, label: opts.altroLabel || 'Altro / non in elenco' }] : [];
+        renderList(loadingItems, opts.loadingMessage || 'Caricamento...');
+        return;
+      }
+      var raw = opts.getItems(query) || [];
+      var messageText = null;
+      if(raw.length === 0 && opts.noResultsMessage && query.length > 0){
+        messageText = opts.noResultsMessage;
+      }
+      var items = raw.slice();
+      if(opts.allowAltro){
+        items.push({ altro: true, label: opts.altroLabel || 'Altro / non in elenco' });
+      }
+      renderList(items, messageText);
+    }
+
+    function highlight(i){
+      var els = opts.list.querySelectorAll('.combo-option');
+      els.forEach(function(el){ el.classList.remove('active'); });
+      if(i >= 0 && i < els.length){
+        els[i].classList.add('active');
+        els[i].scrollIntoView({ block: 'nearest' });
+      }
+      activeIndex = i;
+    }
+
+    function select(item){
+      if(item.altro){
+        enterAltroMode();
+        return;
+      }
+      state.resolved = item;
+      opts.input.value = item.label;
+      close();
+      if(opts.onResolve) opts.onResolve(item);
+    }
+
+    function enterAltroMode(){
+      state.altroMode = true;
+      state.resolved = null;
+      opts.input.value = '';
+      opts.input.placeholder = opts.altroPlaceholder || 'Scrivi qui...';
+      close();
+      if(opts.onAltroEnter) opts.onAltroEnter();
+      opts.input.focus();
+    }
+
+    function exitAltroMode(){
+      state.altroMode = false;
+      opts.input.value = '';
+      opts.input.placeholder = opts.placeholder || '';
+      if(opts.onAltroExit) opts.onAltroExit();
+      refresh('');
+      opts.input.focus();
+    }
+
+    function invalidate(){
+      if(state.resolved){
+        state.resolved = null;
+        if(opts.onInvalidate) opts.onInvalidate();
+      }
+    }
+
+    opts.input.addEventListener('focus', function(){
+      if(state.altroMode) return;
+      refresh(opts.input.value.trim());
+    });
+
+    opts.input.addEventListener('input', function(){
+      if(state.altroMode){
+        if(opts.onAltroInput) opts.onAltroInput(opts.input.value);
+        return;
+      }
+      invalidate();
+      refresh(opts.input.value.trim());
+    });
+
+    opts.input.addEventListener('keydown', function(e){
+      if(state.altroMode) return;
+      if(e.key === 'Escape'){ close(); return; }
+      if(opts.list.hidden && e.key === 'ArrowDown'){
+        refresh(opts.input.value.trim());
+        return;
+      }
+      var count = currentItems.length;
+      if(!count) return;
+      if(e.key === 'ArrowDown'){
+        e.preventDefault();
+        highlight((activeIndex + 1) % count);
+      } else if(e.key === 'ArrowUp'){
+        e.preventDefault();
+        highlight((activeIndex - 1 + count) % count);
+      } else if(e.key === 'Enter'){
+        if(activeIndex >= 0 && currentItems[activeIndex]){
+          e.preventDefault();
+          select(currentItems[activeIndex]);
+        }
+      }
+    });
+
+    document.addEventListener('click', function(e){
+      if(opts.wrap && !opts.wrap.contains(e.target)){
+        close();
+      }
+    });
+
+    return {
+      isResolved: function(){ return !!state.resolved || (state.altroMode && opts.input.value.trim().length > 0); },
+      isAltro: function(){ return state.altroMode; },
+      getValue: function(){
+        if(state.altroMode) return opts.input.value.trim();
+        return state.resolved ? state.resolved.label : '';
+      },
+      getResolvedItem: function(){ return state.resolved; },
+      hardReset: function(){
+        state.resolved = null;
+        state.altroMode = false;
+        opts.input.value = '';
+        close();
+      },
+      enterAltroMode: enterAltroMode,
+      exitAltroMode: exitAltroMode,
+      refreshNow: function(){ refresh(opts.input.value.trim()); }
+    };
+  }
+
+  // ---- Marca ----
+  var marcaInput = document.getElementById('marcaInput');
+  var marcaList = document.getElementById('marcaList');
+  var comboMarcaWrap = document.getElementById('comboMarca');
+
+  var marcaCombo = createCombobox({
+    input: marcaInput,
+    list: marcaList,
+    wrap: comboMarcaWrap,
+    allowAltro: true,
+    altroLabel: 'Altro / non in elenco',
+    altroPlaceholder: 'Scrivi la marca',
+    placeholder: 'Cerca marca...',
+    isLoading: function(){ return !carModelsData; },
+    loadingMessage: 'Caricamento marche...',
+    getItems: function(query){
+      if(!carModelsData) return [];
+      var brands = Object.keys(carModelsData).sort(function(a, b){ return a.localeCompare(b, 'it'); });
+      var q = normalizeText(query);
+      if(!q) return brands.map(function(b){ return { label: b, value: b }; });
+      var starts = [], contains = [];
+      brands.forEach(function(b){
+        var nb = normalizeText(b);
+        var idx = nb.indexOf(q);
+        if(idx === 0) starts.push(b);
+        else if(idx > 0) contains.push(b);
+      });
+      return starts.concat(contains).map(function(b){ return { label: b, value: b }; });
+    },
+    onResolve: function(item){ setModelloForBrand(item.value); },
+    onInvalidate: function(){ lockModello(); },
+    onAltroEnter: function(){ forceModelloAltro(); },
+    onAltroExit: function(){ lockModello(); }
+  });
+
+  marcaInput.addEventListener('focus', function(){
+    if(!carModelsData){
+      loadCarModels().then(function(){ marcaCombo.refreshNow(); });
+    }
+  });
+
+  // "Cambia" per tornare dalla marca libera alla ricerca
+  var marcaAltroBack = document.createElement('button');
+  marcaAltroBack.type = 'button';
+  marcaAltroBack.className = 'combo-altro-back';
+  marcaAltroBack.textContent = 'Cerca';
+  marcaAltroBack.hidden = true;
+  comboMarcaWrap.appendChild(marcaAltroBack);
+  marcaAltroBack.addEventListener('click', function(){
+    marcaAltroBack.hidden = true;
+    marcaCombo.exitAltroMode();
+  });
+
+  // ---- Modello (dipende dalla marca) ----
+  var modelloInput = document.getElementById('modelloInput');
+  var modelloList = document.getElementById('modelloList');
+  var comboModelloWrap = document.getElementById('comboModello');
+  var currentModelloList = [];
+
+  var modelloCombo = createCombobox({
+    input: modelloInput,
+    list: modelloList,
+    wrap: comboModelloWrap,
+    allowAltro: true,
+    altroLabel: 'Altro / non in elenco',
+    altroPlaceholder: 'Scrivi il modello',
+    placeholder: 'Cerca modello...',
+    getItems: function(query){
+      var q = normalizeText(query);
+      if(!q) return currentModelloList.map(function(m){ return { label: m, value: m }; });
+      var starts = [], contains = [];
+      currentModelloList.forEach(function(m){
+        var nm = normalizeText(m);
+        var idx = nm.indexOf(q);
+        if(idx === 0) starts.push(m);
+        else if(idx > 0) contains.push(m);
+      });
+      return starts.concat(contains).map(function(m){ return { label: m, value: m }; });
+    },
+    onAltroEnter: function(){ modelloAltroBack.hidden = false; },
+    onAltroExit: function(){ modelloAltroBack.hidden = true; }
+  });
+
+  var modelloAltroBack = document.createElement('button');
+  modelloAltroBack.type = 'button';
+  modelloAltroBack.className = 'combo-altro-back';
+  modelloAltroBack.textContent = 'Cerca';
+  modelloAltroBack.hidden = true;
+  comboModelloWrap.appendChild(modelloAltroBack);
+  modelloAltroBack.addEventListener('click', function(){
+    modelloAltroBack.hidden = true;
+    modelloCombo.exitAltroMode();
+  });
+
+  function lockModello(){
+    modelloCombo.hardReset();
+    modelloAltroBack.hidden = true;
+    currentModelloList = [];
+    modelloInput.disabled = true;
+    modelloInput.placeholder = 'Prima seleziona la marca';
+  }
+
+  function setModelloForBrand(brand){
+    currentModelloList = (carModelsData && carModelsData[brand]) || [];
+    modelloCombo.hardReset();
+    modelloAltroBack.hidden = true;
+    modelloInput.disabled = false;
+    modelloInput.placeholder = 'Cerca modello...';
+  }
+
+  function forceModelloAltro(){
+    currentModelloList = [];
+    modelloInput.disabled = false;
+    modelloCombo.hardReset();
+    modelloCombo.enterAltroMode();
+  }
+
+  // ---- Comune (elenco ISTAT statico, nessuna API esterna per i suggerimenti) ----
+  var comuneInput = document.getElementById('comuneInput');
+  var comuneList = document.getElementById('comuneList');
+  var comboComuneWrap = document.getElementById('comboComune');
+
+  var comuneCombo = createCombobox({
+    input: comuneInput,
+    list: comuneList,
+    wrap: comboComuneWrap,
+    allowAltro: false,
+    minChars: 2,
+    noResultsMessage: 'Nessun comune trovato',
+    isLoading: function(){ return !comuniData; },
+    loadingMessage: 'Caricamento comuni...',
+    getItems: function(query){
+      if(!comuniData || query.length < 2) return [];
+      var q = normalizeText(query);
+      var starts = [], contains = [];
+      for(var i = 0; i < comuniData.length; i++){
+        var c = comuniData[i];
+        var idx = c.z.indexOf(q);
+        if(idx === 0) starts.push(c);
+        else if(idx > 0) contains.push(c);
+      }
+      return starts.concat(contains).slice(0, 8).map(function(c){
+        return { label: c.n + ' (' + c.s + ')', value: c };
+      });
+    },
+    onResolve: function(){
+      comuneErrorEl.hidden = true;
+      invalidatePrice();
+    },
+    onInvalidate: function(){ invalidatePrice(); }
+  });
+
+  comuneInput.addEventListener('focus', function(){
+    if(!comuniData){
+      loadComuni().then(function(){ comuneCombo.refreshNow(); });
+    }
+  });
+
+  // ---- Calcolo rimborso chilometrico (solo sul comune) ----
+  var travelState = { km: null, trasferta_cents: null, comune_trovato: null, loading: false, error: null };
 
   function formatEuro(cents){
     return '€' + (cents / 100).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -1997,8 +2317,6 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     var comuneTrovatoNote = document.getElementById('comuneTrovatoNote');
     var loadingEl = document.getElementById('summaryLoading');
     var errorEl = document.getElementById('summaryError');
-    var totaleValue = document.getElementById('totaleValue');
-    var totaleValueStep2 = document.getElementById('totaleValueStep2');
 
     loadingEl.hidden = !travelState.loading;
     errorEl.hidden = !travelState.error;
@@ -2010,15 +2328,21 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       trasfertaValue.textContent = formatEuro(travelState.trasferta_cents);
       comuneTrovatoNote.hidden = !travelState.comune_trovato;
       comuneTrovatoNote.textContent = travelState.comune_trovato ? ('Calcolato su: ' + travelState.comune_trovato) : '';
-      var totale = 14900 + travelState.trasferta_cents;
-      totaleValue.textContent = formatEuro(totale);
-      totaleValueStep2.textContent = formatEuro(totale);
       btnStep1Continua.hidden = false;
     } else {
       rowTrasferta.hidden = true;
       comuneTrovatoNote.hidden = true;
-      totaleValue.textContent = formatEuro(14900);
-      totaleValueStep2.textContent = formatEuro(14900);
+      btnStep1Continua.hidden = true;
+    }
+  }
+
+  // Se il comune cambia dopo un calcolo già fatto, il prezzo non è più
+  // valido: si nasconde tutto finché non si preme di nuovo "Calcola rimborso chilometrico".
+  function invalidatePrice(){
+    if(travelState.trasferta_cents != null || travelState.error){
+      travelState.trasferta_cents = null;
+      travelState.error = null;
+      priceSummaryEl.hidden = true;
       btnStep1Continua.hidden = true;
     }
   }
@@ -2026,26 +2350,29 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   var travelRequestId = 0;
 
   function calcolaPrezzo(){
-    var comune = comuneAutoInput.value.trim();
+    var comuneItem = comuneCombo.getResolvedItem();
+    if(!comuneItem){
+      comuneErrorEl.hidden = false;
+      return;
+    }
+    comuneErrorEl.hidden = true;
+
     var requestId = ++travelRequestId;
     priceSummaryEl.hidden = false;
     travelState.loading = true;
     travelState.error = null;
     travelState.trasferta_cents = null;
-    travelState.comune = comune;
     renderPriceSummary();
-
-    if(comune.length < 2){
-      travelState.loading = false;
-      travelState.error = 'Inserisci un comune valido.';
-      renderPriceSummary();
-      return;
-    }
 
     fetch('/api/calculate-travel', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ comune: comune, sito_web: sitoWebInput.value })
+      body: JSON.stringify({
+        comune: comuneItem.value.n,
+        sigla: comuneItem.value.s,
+        provincia: comuneItem.value.p,
+        sito_web: sitoWebInput.value
+      })
     })
     .then(function(r){
       return r.json().then(function(data){ return { ok: r.ok, data: data }; });
@@ -2077,23 +2404,31 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     btnCalcolaPrezzo.addEventListener('click', calcolaPrezzo);
   }
 
-  // Se il comune cambia dopo un calcolo già fatto, il prezzo non è più
-  // valido: si nasconde tutto finché non si preme di nuovo "Calcola prezzo".
-  if(comuneAutoInput){
-    comuneAutoInput.addEventListener('input', function(){
-      if(travelState.trasferta_cents != null || travelState.error){
-        travelState.trasferta_cents = null;
-        travelState.error = null;
-        travelState.comune = null;
-        priceSummaryEl.hidden = true;
-        btnStep1Continua.hidden = true;
-      }
-    });
+  function validateStep1(){
+    var valid = validateFields(formStep1);
+
+    if(!marcaCombo.isResolved()){
+      valid = false;
+      marcaInput.setCustomValidity(marcaInput.value.trim() ? 'Seleziona la marca dall\'elenco oppure scegli "Altro / non in elenco".' : 'Seleziona la marca.');
+      marcaInput.reportValidity();
+    } else {
+      marcaInput.setCustomValidity('');
+    }
+
+    if(valid && !modelloCombo.isResolved()){
+      valid = false;
+      modelloInput.setCustomValidity(modelloInput.value.trim() ? 'Seleziona il modello dall\'elenco oppure scegli "Altro / non in elenco".' : 'Seleziona il modello.');
+      modelloInput.reportValidity();
+    } else if(modelloCombo.isResolved()){
+      modelloInput.setCustomValidity('');
+    }
+
+    return valid;
   }
 
   if(btnStep1Continua){
     btnStep1Continua.addEventListener('click', function(){
-      if(!validateFields(formStep1)) return;
+      if(!validateStep1()) return;
       if(travelState.trasferta_cents == null) return;
       goToFormStep(2);
     });
@@ -2105,43 +2440,89 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     });
   }
 
-  if(btnPaga){
-    btnPaga.addEventListener('click', function(){
-      if(btnPaga.disabled) return;
-      if(!validateFields(formStep2)) return;
+  // Telefono: 8-15 cifre, con eventuale prefisso internazionale e separatori comuni
+  function isValidPhone(v){
+    var cleaned = v.trim();
+    if(!/^\+?[0-9\s().\-]+$/.test(cleaned)) return false;
+    var digits = cleaned.replace(/\D/g, '');
+    return digits.length >= 8 && digits.length <= 15;
+  }
+  function isValidEmail(v){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+  }
 
-      btnPaga.disabled = true;
-      btnPaga.textContent = 'Reindirizzamento al pagamento...';
+  var telefonoInput = document.getElementById('telefonoCliente');
+  var emailInput = document.getElementById('emailCliente');
 
-      fetch('/api/create-checkout', {
+  function validateStep2(){
+    var valid = validateFields(formStep2);
+    if(!valid) return false;
+    if(!isValidPhone(telefonoInput.value)){
+      telefonoInput.setCustomValidity('Inserisci un numero di telefono valido (es. 333 1234567).');
+      telefonoInput.reportValidity();
+      return false;
+    }
+    telefonoInput.setCustomValidity('');
+    if(!isValidEmail(emailInput.value)){
+      emailInput.setCustomValidity('Inserisci un indirizzo email valido.');
+      emailInput.reportValidity();
+      return false;
+    }
+    emailInput.setCustomValidity('');
+    return true;
+  }
+  telefonoInput.addEventListener('input', function(){ telefonoInput.setCustomValidity(''); });
+  emailInput.addEventListener('input', function(){ emailInput.setCustomValidity(''); });
+
+  if(btnInvia){
+    btnInvia.addEventListener('click', function(){
+      if(btnInvia.disabled) return;
+      submitError.hidden = true;
+      if(!validateStep2()) return;
+
+      var comuneItem = comuneCombo.getResolvedItem();
+      if(!comuneItem){
+        goToFormStep(1);
+        comuneErrorEl.hidden = false;
+        return;
+      }
+
+      btnInvia.disabled = true;
+      btnInvia.textContent = 'Invio in corso...';
+
+      fetch('/api/submit-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          nome: document.getElementById('nomeCognome').value,
-          whatsapp: document.getElementById('whatsappNumero').value,
-          email: document.getElementById('stepEmail').value,
-          link_annuncio: document.getElementById('linkAnnuncio').value,
-          marca_modello: document.getElementById('marcaAuto').value + ' ' + document.getElementById('modelloAuto').value + ' (' + document.getElementById('annoAuto').value + ')',
+          nome: document.getElementById('nomeCliente').value.trim(),
+          cognome: document.getElementById('cognomeCliente').value.trim(),
+          telefono: telefonoInput.value.trim(),
+          email: emailInput.value.trim(),
+          link_annuncio: document.getElementById('linkAnnuncio').value.trim(),
+          marca: marcaCombo.getValue(),
+          modello: modelloCombo.getValue(),
+          anno: annoAutoSelect.value,
           tipo_servizio: document.getElementById('tipoServizio').value,
-          comune: comuneAutoInput.value,
-          via_civico: document.getElementById('viaCivico').value,
-          preferenze: document.getElementById('preferenze').value,
-          trasferta_cents: travelState.trasferta_cents || 0,
+          comune: comuneItem.value.n + ' (' + comuneItem.value.s + ')',
+          km_ar: travelState.km,
+          rimborso_km_cents: travelState.trasferta_cents || 0,
           sito_web: sitoWebInput.value
         })
       })
       .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, data: data }; }); })
       .then(function(result){
-        if(result.data && result.data.url){
-          window.location.href = result.data.url;
-          return;
-        }
-        throw new Error((result.data && result.data.error) || 'Errore sconosciuto');
+        if(!result.ok) throw new Error((result.data && result.data.error) || 'Errore sconosciuto');
+        form.hidden = true;
+        formProgress.hidden = true;
+        formMicrocopy.hidden = true;
+        formSuccess.hidden = false;
+        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       })
       .catch(function(){
-        btnPaga.disabled = false;
-        btnPaga.textContent = 'Paga ora';
-        alert('Si è verificato un errore. Riprova o contattami su WhatsApp.');
+        btnInvia.disabled = false;
+        btnInvia.textContent = 'Richiedi di essere ricontattato';
+        submitError.textContent = 'Non siamo riusciti a inviare la richiesta. Riprova tra un momento oppure scrivici su WhatsApp.';
+        submitError.hidden = false;
       });
     });
   }
@@ -2149,48 +2530,64 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   // ---- FAQ accordion ----
   var faqData = [
     {
-      q: "Dove operi?",
-      a: "Principalmente in Veneto — Padova, Treviso, Venezia, Verona, Vicenza. Per auto fuori dal Veneto posso trovare una soluzione."
+      q: "Dove operiamo?",
+      a: "Principalmente in Veneto — Padova, Treviso, Venezia, Verona, Vicenza. Per auto fuori dal Veneto possiamo trovare una soluzione: indicaci il comune nel form."
+    },
+    {
+      q: "Cosa succede dopo che compilo il form?",
+      a: "Un tecnico specializzato AutoInspecta riceve la tua richiesta e ti contatta per capire le tue esigenze. Poi organizziamo noi il controllo direttamente presso il venditore."
+    },
+    {
+      q: "Chi mi contatta e in quanto tempo?",
+      a: "Ti contatta un tecnico specializzato AutoInspecta, al numero di telefono che indichi nel form. Tempi di ricontatto: [DA COMPLETARE]."
+    },
+    {
+      q: "Chi fissa l'appuntamento con il venditore?",
+      a: "Lo fissiamo noi. Dopo la chiamata con il tecnico ci mettiamo d'accordo con il venditore e ti confermiamo giorno, ora e luogo del controllo."
+    },
+    {
+      q: "Come viene calcolato il rimborso chilometrico?",
+      a: "In base ai chilometri del percorso di andata e ritorno dalla nostra base operativa al comune in cui si trova l'auto, a 0,65 € al chilometro (pedaggi stimati inclusi). Lo vedi nel form subito dopo aver indicato il comune."
     },
     {
       q: "Quanto costa l'ispezione?",
-      a: "Il prezzo è 149 €, a cui si aggiungono le spese di uscita calcolate al checkout in base alla distanza. Nessun altro costo nascosto."
+      a: "Il prezzo di lancio è 149 €, a cui si aggiunge il rimborso chilometrico calcolato nel form in base alla distanza. Nessun altro costo nascosto."
     },
     {
-      q: "Quanto dura?",
+      q: "Quando e come si paga il servizio?",
+      a: "Modalità e momento del pagamento vengono definiti durante la chiamata con il tecnico. Online non è richiesto alcun pagamento."
+    },
+    {
+      q: "Cosa contiene il report?",
+      a: "Una valutazione chiara dell'auto, con foto e un report dettagliato dei controlli effettuati, per decidere in modo consapevole. [DA COMPLETARE: elenco preciso dei contenuti del report]"
+    },
+    {
+      q: "Quanto dura il controllo?",
       a: "In genere tra 45 minuti e un'ora, inclusa la diagnosi elettronica e la prova su strada."
     },
     {
-      q: "Posso richiederla per un'auto venduta da un privato?",
-      a: "Sì, è il caso più comune: vengo con te a vedere l'auto direttamente dal privato che la vende."
+      q: "Posso richiederlo per un'auto venduta da un privato?",
+      a: "Sì, è il caso più comune: andiamo a vedere l'auto direttamente dal privato che la vende."
     },
     {
-      q: "Posso richiederla per un'auto venduta da un concessionario?",
+      q: "Posso richiederlo per un'auto venduta da un concessionario?",
       a: "Sì. Il controllo è identico. In concessionaria spesso ci si fida troppo del nome — è lì che le sorprese costano di più."
     },
     {
       q: "Devo essere presente?",
-      a: "Sì, è consigliato: vieni con me all'appuntamento così vediamo l'auto insieme e ti spiego ogni controllo in tempo reale."
-    },
-    {
-      q: "Cosa ricevo al termine dell'ispezione?",
-      a: "Una valutazione chiara dell'auto e, quando utile, indicazioni concrete per trattare il prezzo."
-    },
-    {
-      q: "Quale servizio fa per me?",
-      a: "Se hai già trovato l'auto, il passo giusto è l'ispezione in loco. Se invece non sai ancora quale auto comprare, posso aiutarti anche prima, per capire cosa cercare."
+      a: "È consigliato: vieni con noi all'appuntamento così vediamo l'auto insieme e ti spieghiamo ogni controllo in tempo reale. Se non puoi, andiamo noi al posto tuo e ti consegniamo foto e report."
     },
     {
       q: "E se l'auto non va bene?",
-      a: "Te lo dico chiaramente. Il mio compenso è per l'ispezione, non per la vendita. Se l'auto ha problemi, è mio interesse dirtelo."
+      a: "Te lo diciamo chiaramente. Il nostro compenso è per l'ispezione, non per la vendita: se l'auto ha problemi, è nostro interesse dirtelo."
     },
     {
-      q: "Hai esperienza con elettriche e ibride?",
-      a: "Sì. Ho lavorato su tutta la gamma del gruppo Volkswagen, incluse le versioni elettriche e ibride plug-in."
+      q: "Avete esperienza con elettriche e ibride?",
+      a: "Sì. Abbiamo esperienza su tutta la gamma del gruppo Volkswagen, incluse le versioni elettriche e ibride plug-in."
     },
     {
-      q: "Posso chiederti consiglio prima ancora di scegliere l'auto?",
-      a: "Certo. Puoi compilare un form indicando le tue esigenze, il budget e la percorrenza che ti serve: in base a queste informazioni ti mando un report con le migliori auto da cercare."
+      q: "Potete aiutarmi anche prima di scegliere l'auto?",
+      a: "Sì, possiamo aiutarti a capire cosa cercare in base a esigenze, budget e percorrenza. [DA COMPLETARE: come richiedere questa consulenza]"
     }
   ];
 

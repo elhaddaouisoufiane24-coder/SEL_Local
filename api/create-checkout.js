@@ -25,30 +25,34 @@ export default async function handler(req, res) {
     whatsapp,
     email,
     link_annuncio,
-    marca_modello,
+    marca,
+    modello,
+    anno,
     tipo_servizio,
     comune,
-    via_civico,
+    km_ar,
     preferenze,
     trasferta_cents,
   } = req.body || {};
 
-  if (!nome || !whatsapp || !email || !marca_modello || !tipo_servizio || !comune || !via_civico) {
+  if (!nome || !whatsapp || !email || !marca || !modello || !anno || !tipo_servizio || !comune) {
     return res.status(400).json({ error: 'Dati mancanti o non validi' });
   }
 
   const trasferta = Number.isFinite(trasferta_cents) ? trasferta_cents : 0;
   const preferenzeTesto = preferenze || '(non indicate)';
   const linkAnnuncioTesto = link_annuncio || '(non fornito)';
+  const kmArTesto = Number.isFinite(km_ar) ? String(km_ar) : '(non calcolati)';
+  const auto = `${marca} ${modello} ${anno}`;
 
   // Riepilogo leggibile: appare come descrizione del pagamento nella dashboard
   // Stripe e nell'app mobile, così è visibile a colpo d'occhio senza aprire i metadata.
   const paymentDescription = [
     nome,
     `WhatsApp: ${whatsapp}`,
-    `Auto: ${marca_modello}`,
+    `Auto: ${auto}`,
     `Comune: ${comune}`,
-    `Via: ${via_civico}`,
+    `Km A/R: ${kmArTesto}`,
     `Servizio: ${tipo_servizio}`,
     `Annuncio: ${linkAnnuncioTesto}`,
     `Preferenze: ${preferenzeTesto}`,
@@ -88,14 +92,18 @@ export default async function handler(req, res) {
         description: paymentDescription,
       },
       metadata: {
+        servizio_tipo: 'ispezione',
+        marca,
+        modello,
+        anno: String(anno),
+        auto,
+        link_annuncio: linkAnnuncioTesto,
+        tipo_servizio,
+        comune,
+        km_ar: kmArTesto,
         nome,
         whatsapp,
         email,
-        link_annuncio: linkAnnuncioTesto,
-        marca_modello,
-        tipo_servizio,
-        comune,
-        via_civico,
         preferenze: preferenzeTesto,
       },
     });

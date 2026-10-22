@@ -9,10 +9,14 @@ const RATE_PER_KM_EURO = 0.65; // per km, già sul totale andata+ritorno; includ
 const ORS_GEOCODE_URL = 'https://api.openrouteservice.org/geocode/search';
 const ORS_DIRECTIONS_URL = 'https://api.heigit.org/openrouteservice/v2/directions/driving-car';
 
-async function geocodeComune(comune) {
+async function geocodeComune(comune, provincia) {
+  // Il comune arriva dall'elenco ISTAT statico del form: aggiungere la provincia
+  // al testo di ricerca rende il geocoding molto più preciso (evita ambiguità
+  // tra comuni omonimi in province diverse).
+  const searchText = provincia ? `${comune}, ${provincia}, Italia` : `${comune}, Italia`;
   const url = `${ORS_GEOCODE_URL}?${new URLSearchParams({
     api_key: process.env.OPENROUTESERVICE_API_KEY,
-    text: comune,
+    text: searchText,
     'boundary.country': 'IT',
     size: '1',
   })}`;
@@ -28,9 +32,7 @@ async function geocodeComune(comune) {
     throw err;
   }
   const [lon, lat] = feature.geometry.coordinates;
-  const props = feature.properties || {};
-  const comuneTrovato = props.region_a ? `${props.name}, ${props.region_a}` : props.label || props.name;
-  return { lat, lon, comuneTrovato };
+  return { lat, lon };
 }
 
 export default async function handler(req, res) {
@@ -50,13 +52,15 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Troppe richieste, riprova più tardi.' });
   }
 
-  const { comune } = req.body || {};
+  const { comune, sigla, provincia } = req.body || {};
   if (!comune || typeof comune !== 'string' || comune.trim().length < 2) {
     return res.status(400).json({ error: 'Comune non valido' });
   }
 
+  const comuneTrovato = sigla ? `${comune} (${sigla})` : comune;
+
   try {
-    const { lat: destLat, lon: destLon, comuneTrovato } = await geocodeComune(comune);
+    const { lat: destLat, lon: destLon } = await geocodeComune(comune, provincia);
 
     const orsResponse = await fetch(ORS_DIRECTIONS_URL, {
       method: 'POST',
