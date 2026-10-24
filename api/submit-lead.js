@@ -41,7 +41,7 @@ export default async function handler(req, res) {
   const {
     nome, cognome, telefono, email,
     link_annuncio, marca, modello, anno,
-    tipo_servizio, comune, km_ar, rimborso_km_cents,
+    tipo_servizio, comune,
   } = req.body || {};
 
   if (
@@ -60,8 +60,6 @@ export default async function handler(req, res) {
     return res.status(503).json({ error: 'Servizio non disponibile' });
   }
 
-  const rimborso = Number.isFinite(rimborso_km_cents) ? `${(rimborso_km_cents / 100).toFixed(2)} €` : 'n/d';
-  const km = Number.isFinite(km_ar) ? `${km_ar} km A/R` : 'n/d';
   const annuncio = isText(link_annuncio, 500) ? link_annuncio.trim() : '(non fornito)';
   const auto = `${marca} ${modello} ${anno}`;
 
@@ -72,7 +70,6 @@ export default async function handler(req, res) {
     ['Auto', auto],
     ['Comune', comune],
     ['Servizio', tipo_servizio],
-    ['Rimborso chilometrico', `${rimborso} (${km})`],
     ['Annuncio', annuncio],
   ];
 
