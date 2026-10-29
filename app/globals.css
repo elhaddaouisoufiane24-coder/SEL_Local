@@ -1,0 +1,86 @@
+:root{
+  --bg:#ffffff; --bg-subtle:#f5f5f7; --text:#1a1a1a; --text-muted:#6b7280;
+  --accent:#2563eb; --accent-hover:#1d4ed8; --accent-light:#eff6ff;
+  --border:rgba(0,0,0,0.08); --radius:14px; --radius-sm:10px; --radius-full:9999px;
+  --green:#16a34a; --green-bg:#dcfce7; --red:#dc2626; --red-bg:#fee2e2; --amber:#b45309; --amber-bg:#fef3c7;
+  --shadow:0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+}
+*{box-sizing:border-box;}
+html,body{max-width:100%; overflow-x:clip;}
+body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
+  background:var(--bg-subtle); color:var(--text); font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased;}
+a{color:inherit; text-decoration:none;}
+h1,h2,h3{margin:0 0 12px; line-height:1.2;}
+h1{font-size:24px;} h2{font-size:18px;}
+p{margin:0 0 12px;}
+.muted{color:var(--text-muted);}
+.small{font-size:13px;}
+
+/* Bottoni */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border-radius:var(--radius-full);
+  border:1px solid transparent; font:inherit; font-weight:600; font-size:15px; cursor:pointer; text-align:center; line-height:1.2;
+  background:var(--accent); color:#fff; transition:background .2s;}
+.btn:hover{background:var(--accent-hover);}
+.btn:disabled{opacity:.5; cursor:not-allowed;}
+.btn-outline{background:#fff; color:var(--text); border-color:var(--border);}
+.btn-outline:hover{background:var(--bg-subtle);}
+.btn-green{background:#25D366; color:#fff;} .btn-green:hover{background:#1fb955;}
+.btn-danger{background:#fff; color:var(--red); border-color:var(--red-bg);} .btn-danger:hover{background:var(--red-bg);}
+.btn-block{width:100%;}
+.btn-sm{padding:8px 14px; font-size:14px;}
+
+/* Form */
+.field{margin-bottom:16px;}
+.field label{display:block; font-size:13px; font-weight:600; margin-bottom:6px;}
+input[type=text],input[type=email],input[type=password],input[type=number],input[type=search],textarea,select{
+  width:100%; padding:12px 14px; font:inherit; font-size:16px; border-radius:var(--radius-sm); border:1px solid var(--border); background:#fff; color:var(--text);}
+textarea{min-height:110px; resize:vertical;}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline-offset:0; border-color:var(--accent);}
+
+/* Layout pagine */
+.wrap{max-width:760px; margin:0 auto; padding:16px;}
+.card{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:14px; box-shadow:var(--shadow);}
+.topbar{background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:10;}
+.topbar-in{max-width:760px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px;}
+.topbar img{height:30px; width:auto; display:block;}
+
+/* Badge */
+.badge{display:inline-block; padding:3px 10px; border-radius:var(--radius-full); font-size:12px; font-weight:700; white-space:nowrap;}
+.b-green{background:var(--green-bg); color:var(--green);} .b-red{background:var(--red-bg); color:var(--red);}
+.b-blue{background:var(--accent-light); color:var(--accent);} .b-gray{background:#e5e7eb; color:#374151;} .b-amber{background:var(--amber-bg); color:var(--amber);}
+
+/* Admin: lista */
+.counter{display:flex; align-items:center; gap:12px; background:var(--red-bg); color:var(--red); border-radius:var(--radius); padding:14px 16px; font-weight:700; margin-bottom:14px;}
+.counter.zero{background:var(--green-bg); color:var(--green);}
+.counter .n{font-size:28px; line-height:1;}
+.filters{display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin:0 -16px 12px; padding-left:16px; padding-right:16px; scrollbar-width:none;}
+.filters::-webkit-scrollbar{display:none;}
+.chip{flex:0 0 auto; padding:8px 14px; border-radius:var(--radius-full); background:#fff; border:1px solid var(--border); font-size:14px; font-weight:600; white-space:nowrap;}
+.chip.on{background:var(--accent); color:#fff; border-color:var(--accent);}
+.searchrow{display:flex; gap:8px; margin-bottom:12px;}
+.lead-item{display:flex; gap:10px; align-items:stretch; background:#fff; border:1px solid var(--border); border-radius:var(--radius); margin-bottom:10px; box-shadow:var(--shadow); overflow:hidden;}
+.lead-main{flex:1; min-width:0; padding:14px;}
+.lead-name{font-weight:700; font-size:16px; overflow-wrap:anywhere;}
+.lead-meta{font-size:14px; color:var(--text-muted); overflow-wrap:anywhere;}
+.lead-badges{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+.lead-toggle{display:flex; align-items:center; padding-right:12px;}
+.toggle{border:0; background:none; padding:8px; cursor:pointer; font:inherit; font-size:12px; font-weight:700; color:var(--text-muted); text-align:center;}
+.toggle .box{display:block; width:34px; height:34px; border-radius:50%; margin:0 auto 4px; border:2px solid var(--red); color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px;}
+.toggle.on .box{background:var(--green); border-color:var(--green);}
+
+/* Admin: scheda */
+dl.kv{display:grid; grid-template-columns:110px 1fr; gap:8px 12px; margin:0;}
+dl.kv dt{color:var(--text-muted); font-size:14px;} dl.kv dd{margin:0; font-weight:600; overflow-wrap:anywhere;}
+.actions{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.price-box{background:var(--accent-light); border-radius:var(--radius-sm); padding:12px 14px; margin-bottom:12px;}
+.price-row{display:flex; justify-content:space-between; gap:12px; padding:2px 0;}
+.price-total{font-weight:800; font-size:20px; color:var(--accent); border-top:1px solid var(--border); margin-top:6px; padding-top:8px;}
+.linkbox{background:var(--bg-subtle); border:1px dashed var(--border); border-radius:var(--radius-sm); padding:10px 12px; font-size:13px; overflow-wrap:anywhere; margin-bottom:12px;}
+.flash{padding:10px 14px; border-radius:var(--radius-sm); margin-bottom:12px; font-weight:600; font-size:14px;}
+.flash.ok{background:var(--green-bg); color:var(--green);} .flash.err{background:var(--red-bg); color:var(--red);}
+
+/* Prenota */
+.hero-card{text-align:center;}
+.hero-card .icon{width:56px; height:56px; border-radius:50%; background:var(--accent-light); display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:26px;}
+.cal-frame{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:6px; min-height:560px; overflow:hidden;}
+@media (min-width:640px){ h1{font-size:28px;} .wrap{padding:24px 16px;} }

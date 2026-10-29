@@ -812,6 +812,10 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   @media(max-width:560px){
     .field-row{grid-template-columns:1fr; gap:0;}
   }
+  .consent{margin:4px 0 16px;}
+  .consent label{display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5; color:var(--text-muted); cursor:pointer;}
+  .consent input[type=checkbox]{flex:0 0 20px; width:20px; height:20px; margin:2px 0 0; accent-color:var(--accent);}
+  .consent a{color:var(--accent); text-decoration:underline;}
   .form-success{text-align:center; padding:12px 0 4px;}
   .form-success[hidden]{display:none;}
   .form-success-icon{
@@ -1560,6 +1564,13 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
             <input type="email" id="emailCliente" name="email" placeholder="mario.rossi@email.it" autocomplete="email" required>
           </div>
 
+          <div class="consent">
+            <label for="consensoPrivacy">
+              <input type="checkbox" id="consensoPrivacy" name="consenso_privacy" required>
+              <span>Ho letto l'<a href="/privacy.html" target="_blank" rel="noopener">informativa sulla privacy</a> e acconsento al trattamento dei miei dati per essere ricontattato.</span>
+            </label>
+          </div>
+
           <p class="field-error" id="submitError" hidden></p>
 
           <div class="form-nav">
@@ -1693,7 +1704,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <ul>
           <li><a href="#come-funziona">Come funziona</a></li>
           <li><a href="#faq">Domande frequenti</a></li>
-          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="#">Termini e condizioni</a></li>
         </ul>
       </div>
@@ -2295,7 +2306,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       btnInvia.disabled = true;
       btnInvia.textContent = 'Invio in corso...';
 
-      fetch('/api/submit-lead', {
+      fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2309,22 +2320,23 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           anno: annoAutoSelect.value,
           tipo_servizio: document.getElementById('tipoServizio').value,
           comune: comuneInput.value.trim(),
+          consenso_privacy: document.getElementById('consensoPrivacy').checked,
           sito_web: sitoWebInput.value
         })
       })
-      .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, data: data }; }); })
+      .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, status: r.status, data: data }; }); })
       .then(function(result){
-        if(!result.ok) throw new Error((result.data && result.data.error) || 'Errore sconosciuto');
+        if(!result.ok){ var se = new Error((result.data && result.data.error) || 'Errore sconosciuto'); se.fromServer = result.status < 500; throw se; }
         form.hidden = true;
         formProgress.hidden = true;
         formMicrocopy.hidden = true;
         formSuccess.hidden = false;
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       })
-      .catch(function(){
+      .catch(function(err){
         btnInvia.disabled = false;
         btnInvia.textContent = 'Fai controllare la mia auto →';
-        submitError.textContent = 'Non siamo riusciti a inviare la richiesta. Riprova tra un momento oppure scrivici su WhatsApp.';
+        submitError.textContent = (err && err.fromServer) ? err.message : 'Non siamo riusciti a inviare la richiesta. Riprova tra un momento oppure scrivici su WhatsApp.';
         submitError.hidden = false;
       });
     });
