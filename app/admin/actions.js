@@ -116,3 +116,17 @@ export async function setStato(formData) {
   await supabase.from('leads').update({ stato }).eq('id', id);
   redirect(`/admin/leads/${id}?ok=${encodeURIComponent('Stato aggiornato')}`);
 }
+
+export async function changePassword(formData) {
+  const { supabase } = await requireAdmin();
+  const nuova = String(formData.get('nuova') || '');
+  const conferma = String(formData.get('conferma') || '');
+  if (nuova.length < 10) redirect('/admin/password?e=corta');
+  if (nuova !== conferma) redirect('/admin/password?e=diverse');
+  const { error } = await supabase.auth.updateUser({ password: nuova });
+  if (error) {
+    console.error('admin: cambio password fallito', error.message);
+    redirect('/admin/password?e=fallita');
+  }
+  redirect('/admin/password?ok=1');
+}

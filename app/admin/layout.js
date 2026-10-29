@@ -13,7 +13,10 @@ export default async function AdminLayout({ children }) {
         <div className="topbar-in">
           <a href="/admin"><img src="/asset/logo-autoinspecta-transparent.png" alt="AutoInspecta" /></a>
           {user && (
-            <form action={signOut}><button className="btn btn-outline btn-sm" type="submit">Esci</button></form>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <a className="btn btn-outline btn-sm" href="/admin/password">Password</a>
+              <form action={signOut}><button className="btn btn-outline btn-sm" type="submit">Esci</button></form>
+            </div>
           )}
         </div>
       </div>
