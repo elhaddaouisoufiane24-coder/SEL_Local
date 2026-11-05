@@ -105,6 +105,20 @@ Poi *Settings → Developer → Webhooks → New*:
 6. Prova riprogramma e disdetta da Cal.com: la scheda si aggiorna e ricevi le mail.
 7. Prova anche: link scaduto (imposta `token_scadenza` nel passato), link di una lead già prenotata, rimborso da Stripe (stato `rimborsato`).
 
+### Consulenza scelta auto (29,99 €)
+
+Prima volta: esegui `supabase/migrations/002_consulenze.sql` nel SQL Editor di Supabase. Il webhook Stripe è lo stesso delle ispezioni (`checkout.session.completed`, `charge.refunded`): non serve crearne un altro.
+
+1. Sulla landing clicca **Scopri come possiamo aiutarti**: si apre il modale. Prova a chiuderlo con ✕, Esc e clic fuori.
+2. Compila il form (prova anche campi vuoti, email sbagliata, un link che non inizia con `https://`) e premi **Continua al pagamento**.
+3. In Supabase la riga in `consulenze` è `in_attesa_pagamento`. Su Stripe premi **Indietro**: arrivi su `/consulenza/grazie` con il pulsante per riprovare.
+4. Paga con `4242 4242 4242 4242` → torni su `/consulenza/grazie`: stato `pagato`, email di conferma al cliente e notifica a te.
+5. In `/admin/consulenze` la trovi tra le "Da fare"; segnala completata.
+6. Rimborsala da Stripe: lo stato diventa `rimborsato`.
+7. Carta rifiutata: `4000 0000 0000 0002` (la consulenza resta `in_attesa_pagamento`).
+
+Prima di andare live: completa `CONSULENZA_PROSSIMI_PASSI` in `lib/email.js` (canale e tempi di contatto, compare al cliente). Il prezzo è `CONSULENZA_PREZZO` in `lib/format.js` (e il testo "29,99 €" nel modale di `public/index.html`).
+
 ## Passaggio da test a live
 
 1. Stripe: disattiva la modalità test, crea un **nuovo webhook** live (stesso URL e stessi eventi) e prendi il suo `whsec_...`.
@@ -122,6 +136,8 @@ app/api/stripe     webhook Stripe (firma verificata)
 app/api/calcom     webhook Cal.com (firma HMAC verificata)
 app/admin          pannello (login, lista, scheda)
 app/prenota/[token] pagina pubblica di pagamento + calendario
+app/api/consulenze riceve il modale consulenza e apre lo Stripe Checkout
+app/consulenza     pagina di ritorno dopo il pagamento della consulenza
 lib/               validazione, email, stripe, prenotazioni, client Supabase
 supabase/          migrazione SQL
 tests/             test (npm test)

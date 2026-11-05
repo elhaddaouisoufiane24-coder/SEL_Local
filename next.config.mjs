@@ -7,7 +7,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/(admin|prenota)/:path*',
+        source: '/(admin|prenota|consulenza)/:path*',
         headers: [
           { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
           { key: 'Cache-Control', value: 'no-store' },

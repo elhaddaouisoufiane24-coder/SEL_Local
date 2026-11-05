@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { stripe, settleSession, settleRefund } from '@/lib/stripe';
+import { settleConsulenzaSession, settleConsulenzaRefund } from '@/lib/consulenze';
 
 export const runtime = 'nodejs';
 
@@ -20,9 +21,13 @@ export async function POST(request) {
 
   try {
     if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
-      await settleSession(event.data.object);
+      const session = event.data.object;
+      if (session.metadata?.tipo === 'consulenza') await settleConsulenzaSession(session);
+      else await settleSession(session);
     } else if (event.type === 'charge.refunded') {
+      // Il payment intent appartiene a una sola delle due tabelle: l'altra non trova nulla.
       await settleRefund(event.data.object);
+      await settleConsulenzaRefund(event.data.object);
     }
   } catch (err) {
     console.error('stripe webhook: errore elaborazione', event.type, err);

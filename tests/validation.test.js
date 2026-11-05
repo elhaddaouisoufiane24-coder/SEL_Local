@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizePhone, isValidEmail, validateLeadPayload, whatsappNumber } from '../lib/validation.js';
+import {
+  normalizePhone, isValidEmail, validateLeadPayload, validateConsulenzaPayload, parseLinkAnnunci, whatsappNumber,
+} from '../lib/validation.js';
 
 test('normalizePhone: formati italiani validi', () => {
   assert.equal(normalizePhone('333 1234567'), '+393331234567');
@@ -74,4 +76,42 @@ test('whatsappNumber', () => {
   assert.equal(whatsappNumber('+393331234567'), '393331234567');
   assert.equal(whatsappNumber('3331234567'), '393331234567');
   assert.equal(whatsappNumber(''), '');
+});
+
+const consulenza = {
+  nome: 'Mario', cognome: 'Rossi', email: 'Mario@Esempio.it', telefono: '333 1234567',
+  percorrenza: '10_20k', uso_prevalente: 'misto', comune_residenza: ' Padova ', blocchi_traffico: 'non_so',
+  auto_preferite: 'Golf\nOctavia', link_annunci: '', consenso_privacy: true,
+};
+
+test('validateConsulenzaPayload: payload del modale', () => {
+  const r = validateConsulenzaPayload(consulenza);
+  assert.equal(r.ok, true);
+  assert.equal(r.data.email, 'mario@esempio.it');
+  assert.equal(r.data.telefono, '+393331234567');
+  assert.equal(r.data.comune_residenza, 'Padova');
+  assert.equal(r.data.link_annunci, null);
+});
+
+test('validateConsulenzaPayload: scelte fuori elenco e campi mancanti', () => {
+  const r = validateConsulenzaPayload({ ...consulenza, percorrenza: '50k', uso_prevalente: 'toString', blocchi_traffico: undefined, auto_preferite: ' ' });
+  assert.equal(r.ok, false);
+  assert.ok(r.errors.percorrenza);
+  assert.ok(r.errors.uso_prevalente);
+  assert.ok(r.errors.blocchi_traffico);
+  assert.ok(r.errors.auto_preferite);
+});
+
+test('validateConsulenzaPayload: consenso privacy obbligatorio', () => {
+  const r = validateConsulenzaPayload({ ...consulenza, consenso_privacy: 'true' });
+  assert.equal(r.ok, false);
+  assert.ok(r.errors.consenso_privacy);
+});
+
+test('parseLinkAnnunci: uno per riga, solo http(s), massimo 10', () => {
+  assert.deepEqual(parseLinkAnnunci(' https://a.it/1 \n\nhttp://b.com/x\r\n').links, ['https://a.it/1', 'http://b.com/x']);
+  assert.equal(parseLinkAnnunci('https://a.it/1\nciao').ok, false);
+  assert.equal(parseLinkAnnunci('javascript:alert(1)').ok, false);
+  assert.equal(parseLinkAnnunci(Array(11).fill('https://a.it').join('\n')).ok, false);
+  assert.equal(parseLinkAnnunci(undefined).ok, true);
 });

@@ -6,23 +6,8 @@
 <title>Autoinspecta — Al tuo fianco prima di comprare un'auto usata</title>
 <meta name="description" content="Prima di comprare un'auto usata, fai controllare l'auto da un tecnico specializzato indipendente. Ispezione completa, diagnosi elettronica, valutazione onesta: ti aiutiamo a evitare problemi che potrebbero costarti migliaia di euro.">
 
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '926497990533064');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+<!-- Banner cookie + Meta Pixel (caricato solo dopo il consenso) -->
+<script src="/consent.js" defer></script>
 
 <style>
   :root{
@@ -1193,6 +1178,59 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
   @media(max-width:768px){
     .cta-mid{padding:48px 24px; margin:0 16px 40px;}
   }
+  /* Modale consulenza scelta auto */
+  .cz-overlay{
+    position:fixed; inset:0; z-index:10000;
+    background:rgba(8,31,54,0.55);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+  }
+  .cz-overlay[hidden]{display:none;}
+  .cz-dialog{
+    position:relative;
+    width:100%; max-width:560px;
+    max-height:calc(100vh - 48px); max-height:calc(100dvh - 48px);
+    overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch;
+    background:#fff; border-radius:20px; box-shadow:var(--shadow-lg);
+    padding:28px 28px 24px;
+    animation:cz-in .2s var(--transition);
+  }
+  @keyframes cz-in{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;}}
+  .cz-close{
+    position:sticky; top:0; float:right;
+    width:40px; height:40px; margin:-12px -12px 0 0;
+    border-radius:50%; background:var(--bg-subtle); color:var(--text);
+    font-size:18px; line-height:1; z-index:1;
+  }
+  .cz-close:hover{background:#e5e7eb;}
+  .cz-dialog h3{font-size:24px; line-height:1.25; margin:0 0 8px; padding-right:36px;}
+  .cz-intro{font-size:15px; color:var(--text-muted); margin:0 0 6px;}
+  .cz-price{display:inline-block; font-weight:700; color:var(--accent); background:var(--accent-light); border-radius:var(--radius-full); padding:4px 12px; font-size:14px; margin:0 0 22px;}
+  .cz-dialog fieldset{border:none; margin:0 0 20px; padding:0; min-width:0;}
+  .cz-dialog legend{font-size:13px; font-weight:600; color:var(--text); margin-bottom:8px; padding:0;}
+  .cz-options{display:flex; flex-wrap:wrap; gap:8px;}
+  .cz-options-2{display:grid; grid-template-columns:1fr 1fr;}
+  .cz-option{position:relative; flex:1 1 auto;}
+  .cz-option input{position:absolute; inset:0; width:100%; height:100%; opacity:0; margin:0; cursor:pointer;}
+  .cz-option span{
+    display:block; text-align:center;
+    padding:11px 12px; border:1px solid var(--border-hover); border-radius:var(--radius-sm);
+    font-size:15px; line-height:1.3; color:var(--text); background:#fff;
+    transition:border-color .15s, background .15s;
+  }
+  .cz-option input:checked + span{border-color:var(--accent); background:var(--accent-light); color:var(--accent); font-weight:600;}
+  .cz-option input:focus-visible + span{outline:2px solid var(--accent); outline-offset:2px;}
+  .cz-dialog .form-nav{margin-top:8px;}
+  @media(max-width:600px){
+    .cz-overlay{padding:0; align-items:flex-end;}
+    .cz-dialog{
+      max-width:none; border-radius:20px 20px 0 0;
+      max-height:92vh; max-height:92dvh;
+      padding:22px 18px calc(20px + env(safe-area-inset-bottom));
+    }
+    .cz-dialog h3{font-size:21px;}
+  }
+
 </style>
 </head>
 <body>
@@ -1371,8 +1409,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
         <h4>Non hai ancora trovato l'auto giusta?</h4>
         <p>Se sei indeciso tra più modelli o non sai quale alimentazione fa per te, possiamo aiutarti a capire cosa cercare prima di decidere.</p>
       </div>
-      <!-- TODO: collegare al futuro questionario per la scelta dell'auto (non ancora implementato) -->
-      <a href="#scelta-auto" class="btn btn-outline">Scopri come possiamo aiutarti</a>
+      <a href="#scelta-auto" class="btn btn-outline" data-open-consulenza>Scopri come possiamo aiutarti</a>
     </div>
   </div>
 </section>
@@ -1672,7 +1709,7 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       <div class="cta-mid-options">
         <a href="#form" class="btn btn-white">Prenota l'ispezione</a>
       </div>
-      <a href="#scelta-auto" class="cta-mid-link">Non hai ancora trovato l'auto? Scopri come possiamo aiutarti.</a>
+      <a href="#scelta-auto" class="cta-mid-link" data-open-consulenza>Non hai ancora trovato l'auto? Scopri come possiamo aiutarti.</a>
     </div>
   </div>
 </section>
@@ -1705,6 +1742,8 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
           <li><a href="#come-funziona">Come funziona</a></li>
           <li><a href="#faq">Domande frequenti</a></li>
           <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="#" data-cookie-prefs>Preferenze cookie</a></li>
           <li><a href="#">Termini e condizioni</a></li>
         </ul>
       </div>
@@ -1724,6 +1763,96 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
     </div>
   </div>
 </footer>
+
+<!-- MODALE CONSULENZA SCELTA AUTO -->
+<div class="cz-overlay" id="czModal" hidden>
+  <div class="cz-dialog" role="dialog" aria-modal="true" aria-labelledby="czTitle">
+    <button type="button" class="cz-close" id="czClose" aria-label="Chiudi">✕</button>
+    <h3 id="czTitle">Ti aiutiamo a scegliere l'auto giusta</h3>
+    <p class="cz-intro">Rispondi a qualche domanda: ci serve per capire quale auto fa per te in base a come la userai.</p>
+    <p class="cz-price">Consulenza: 29,99 €</p>
+
+    <form id="czForm" novalidate>
+      <input type="text" name="sito_web" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="field-row field-row-2">
+        <div class="field">
+          <label for="czNome">Nome</label>
+          <input type="text" id="czNome" name="nome" placeholder="Es. Mario" autocomplete="given-name" maxlength="80" required>
+        </div>
+        <div class="field">
+          <label for="czCognome">Cognome</label>
+          <input type="text" id="czCognome" name="cognome" placeholder="Es. Rossi" autocomplete="family-name" maxlength="80" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="czEmail">Indirizzo email</label>
+        <input type="email" id="czEmail" name="email" placeholder="mario.rossi@email.it" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="czTelefono">Numero di telefono</label>
+        <input type="tel" id="czTelefono" name="telefono" placeholder="Es. 333 1234567" autocomplete="tel" inputmode="tel" required>
+      </div>
+
+      <fieldset>
+        <legend>Quanti km fai all'anno?</legend>
+        <div class="cz-options cz-options-2">
+          <label class="cz-option"><input type="radio" name="percorrenza" value="meno_10k" required><span>Meno di 10.000</span></label>
+          <label class="cz-option"><input type="radio" name="percorrenza" value="10_20k"><span>10.000 - 20.000</span></label>
+          <label class="cz-option"><input type="radio" name="percorrenza" value="20_30k"><span>20.000 - 30.000</span></label>
+          <label class="cz-option"><input type="radio" name="percorrenza" value="oltre_30k"><span>Oltre 30.000</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Dove fai più strada?</legend>
+        <div class="cz-options">
+          <label class="cz-option"><input type="radio" name="uso_prevalente" value="citta" required><span>Città</span></label>
+          <label class="cz-option"><input type="radio" name="uso_prevalente" value="misto"><span>Misto</span></label>
+          <label class="cz-option"><input type="radio" name="uso_prevalente" value="autostrada"><span>Autostrada</span></label>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="czComune">Dove abiti?</label>
+        <input type="text" id="czComune" name="comune_residenza" placeholder="Città o comune, es. Padova" autocomplete="address-level2" maxlength="120" required>
+      </div>
+
+      <fieldset>
+        <legend>Nella tua città ci sono blocchi del traffico per le emissioni?</legend>
+        <div class="cz-options">
+          <label class="cz-option"><input type="radio" name="blocchi_traffico" value="si" required><span>Sì</span></label>
+          <label class="cz-option"><input type="radio" name="blocchi_traffico" value="no"><span>No</span></label>
+          <label class="cz-option"><input type="radio" name="blocchi_traffico" value="non_so"><span>Non so</span></label>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="czAuto">Auto che ti piacciono</label>
+        <textarea id="czAuto" name="auto_preferite" rows="3" maxlength="2000" placeholder="Es. Golf, Tiguan, Octavia station wagon..." required></textarea>
+      </div>
+      <div class="field">
+        <label for="czLink">Link agli annunci che hai visto <span class="optional-tag">(opzionale)</span></label>
+        <textarea id="czLink" name="link_annunci" rows="3" placeholder="Incolla un link per riga"></textarea>
+        <p class="field-hint">Uno per riga, al massimo 10.</p>
+      </div>
+
+      <div class="consent">
+        <label for="czPrivacy">
+          <input type="checkbox" id="czPrivacy" name="consenso_privacy" required>
+          <span>Ho letto l'<a href="/privacy.html" target="_blank" rel="noopener">informativa sulla privacy</a>.</span>
+        </label>
+      </div>
+
+      <p class="field-error" id="czError" role="alert" hidden></p>
+
+      <div class="form-nav">
+        <button type="submit" class="btn btn-primary" id="czSubmit">Continua al pagamento →</button>
+      </div>
+      <p class="form-microcopy">Pagamento sicuro con Stripe: verrai portato alla pagina di pagamento.</p>
+    </form>
+  </div>
+</div>
 
 <div class="whatsapp-widget" id="waWidget">
   <div class="whatsapp-tooltip" id="waTooltip">
@@ -2327,6 +2456,13 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, status: r.status, data: data }; }); })
       .then(function(result){
         if(!result.ok){ var se = new Error((result.data && result.data.error) || 'Errore sconosciuto'); se.fromServer = result.status < 500; throw se; }
+        // Conversione Meta: solo a richiesta salvata, e solo se l'utente ha dato il consenso
+        if(window.AIConsent){
+          AIConsent.track('Lead', {
+            content_name: 'Richiesta ispezione',
+            content_category: document.getElementById('tipoServizio').value
+          });
+        }
         form.hidden = true;
         formProgress.hidden = true;
         formMicrocopy.hidden = true;
@@ -2341,6 +2477,125 @@ src="https://www.facebook.com/tr?id=926497990533064&ev=PageView&noscript=1"
       });
     });
   }
+
+  // ---- Modale consulenza scelta auto ----
+  var czModal = document.getElementById('czModal');
+  var czDialog = czModal.querySelector('.cz-dialog');
+  var czForm = document.getElementById('czForm');
+  var czError = document.getElementById('czError');
+  var czSubmit = document.getElementById('czSubmit');
+  var czOpener = null;
+
+  function czFocusables(){
+    return Array.prototype.filter.call(
+      czDialog.querySelectorAll('button, a[href], input:not([type=hidden]):not(.hp-field), textarea, select'),
+      function(el){ return !el.disabled && el.offsetParent !== null; }
+    );
+  }
+  function openConsulenza(opener){
+    czOpener = opener || document.activeElement;
+    czModal.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    czDialog.scrollTop = 0;
+    setTimeout(function(){ document.getElementById('czNome').focus(); }, 50);
+  }
+  function closeConsulenza(){
+    if(czModal.hidden) return;
+    czModal.hidden = true;
+    document.documentElement.style.overflow = '';
+    if(czOpener && czOpener.focus) czOpener.focus();
+  }
+
+  document.querySelectorAll('[data-open-consulenza]').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openConsulenza(el); });
+  });
+  document.getElementById('czClose').addEventListener('click', closeConsulenza);
+  // Click fuori dalla finestra (sullo sfondo scuro)
+  czModal.addEventListener('click', function(e){ if(e.target === czModal) closeConsulenza(); });
+  document.addEventListener('keydown', function(e){
+    if(czModal.hidden) return;
+    if(e.key === 'Escape'){ closeConsulenza(); return; }
+    if(e.key === 'Tab'){
+      // Il focus resta dentro il modale
+      var f = czFocusables();
+      if(!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  });
+
+  function czValidate(){
+    var tel = document.getElementById('czTelefono');
+    var mail = document.getElementById('czEmail');
+    var links = document.getElementById('czLink');
+    tel.setCustomValidity(tel.value.trim() && !isValidPhone(tel.value) ? 'Inserisci un numero di telefono valido (es. 333 1234567).' : '');
+    mail.setCustomValidity(mail.value.trim() && !isValidEmail(mail.value) ? 'Inserisci un indirizzo email valido.' : '');
+    var righe = links.value.split(/\r?\n/).map(function(l){ return l.trim(); }).filter(Boolean);
+    var linkOk = righe.length <= 10 && righe.every(function(l){ return /^https?:\/\/\S+\.\S+$/i.test(l); });
+    links.setCustomValidity(linkOk ? '' : 'Inserisci al massimo 10 link, uno per riga, che inizino con http:// o https://.');
+    // Si segnala solo il primo campo non valido, come nel form delle ispezioni
+    var fields = czForm.querySelectorAll('input:not(.hp-field), textarea');
+    for(var i = 0; i < fields.length; i++){
+      if(!fields[i].checkValidity()){ fields[i].reportValidity(); return false; }
+    }
+    return true;
+  }
+  czForm.querySelectorAll('#czTelefono, #czEmail, #czLink').forEach(function(f){
+    f.addEventListener('input', function(){ f.setCustomValidity(''); });
+  });
+
+  function czValue(name){
+    var el = czForm.elements[name];
+    return el ? String(el.value || '').trim() : '';
+  }
+
+  czForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(czSubmit.disabled) return;
+    czError.hidden = true;
+    if(!czValidate()) return;
+
+    czSubmit.disabled = true;
+    czSubmit.textContent = 'Attendi...';
+
+    fetch('/api/consulenze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nome: czValue('nome'),
+        cognome: czValue('cognome'),
+        email: czValue('email'),
+        telefono: czValue('telefono'),
+        percorrenza: czValue('percorrenza'),
+        uso_prevalente: czValue('uso_prevalente'),
+        comune_residenza: czValue('comune_residenza'),
+        blocchi_traffico: czValue('blocchi_traffico'),
+        auto_preferite: czValue('auto_preferite'),
+        link_annunci: czValue('link_annunci'),
+        consenso_privacy: document.getElementById('czPrivacy').checked,
+        sito_web: czValue('sito_web')
+      })
+    })
+    .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, status: r.status, data: data }; }); })
+    .then(function(result){
+      if(!result.ok || !result.data.url){
+        var fields = result.data && result.data.fields;
+        var msg = fields ? fields[Object.keys(fields)[0]] : (result.data && result.data.error);
+        var se = new Error(msg || 'Errore sconosciuto'); se.fromServer = result.status < 500 || result.status === 502; throw se;
+      }
+      if(window.AIConsent){
+        AIConsent.track('InitiateCheckout', { value: 29.99, currency: 'EUR', content_name: 'Consulenza scelta auto' });
+      }
+      window.location.href = result.data.url;
+    })
+    .catch(function(err){
+      czSubmit.disabled = false;
+      czSubmit.textContent = 'Continua al pagamento →';
+      czError.textContent = (err && err.fromServer) ? err.message : 'Non siamo riusciti a inviare la richiesta. Riprova tra un momento oppure scrivici su WhatsApp.';
+      czError.hidden = false;
+    });
+  });
 
   // ---- FAQ accordion ----
   var faqData = [

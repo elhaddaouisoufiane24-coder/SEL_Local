@@ -6,7 +6,7 @@ import { sessionClient } from '@/lib/supabase/server';
 import { requireAdmin } from '@/lib/admin';
 import { newBookingToken, tokenExpiry } from '@/lib/tokens';
 import { sendBookingLink } from '@/lib/email';
-import { siteUrl, STATI } from '@/lib/format';
+import { siteUrl, STATI, CONSULENZA_STATI } from '@/lib/format';
 
 export async function signIn(formData) {
   const email = String(formData.get('email') || '').trim();
@@ -129,4 +129,22 @@ export async function changePassword(formData) {
     redirect('/admin/password?e=fallita');
   }
   redirect('/admin/password?ok=1');
+}
+
+// ---- Consulenze ----
+
+export async function saveNoteConsulenza(formData) {
+  const { supabase } = await requireAdmin();
+  const id = String(formData.get('id'));
+  await supabase.from('consulenze').update({ note_interne: String(formData.get('note') || '') }).eq('id', id);
+  redirect(`/admin/consulenze/${id}?ok=${encodeURIComponent('Note salvate')}`);
+}
+
+export async function setStatoConsulenza(formData) {
+  const { supabase } = await requireAdmin();
+  const id = String(formData.get('id'));
+  const stato = String(formData.get('stato'));
+  if (!CONSULENZA_STATI.includes(stato)) redirect(`/admin/consulenze/${id}`);
+  await supabase.from('consulenze').update({ stato }).eq('id', id);
+  redirect(`/admin/consulenze/${id}?ok=${encodeURIComponent('Stato aggiornato')}`);
 }
