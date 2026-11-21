@@ -1124,7 +1124,7 @@
   .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
   .cost-section{background:var(--bg); border-top:1px solid var(--hairline);}
   .cost-section .container{max-width:920px;}
-  .cost-head{text-align:center; margin-bottom:48px;}
+  .cost-head{text-align:center; margin-bottom:40px;}
   .cost-head h2{
     font-size:clamp(34px, 6vw, 60px);
     font-weight:600;
@@ -1132,68 +1132,79 @@
     line-height:1.05;
     color:var(--ink);
     max-width:none;
-    margin:0 auto 16px auto;
+    margin:0 auto 20px auto;
     text-wrap:balance;
   }
-  .cost-head p{font-size:19px; line-height:1.5; color:var(--ink-muted); max-width:720px; margin:0 auto;}
-  .cost-chart-card{background:var(--bg-subtle); border-radius:24px; padding:40px;}
-  .cost-chart{display:flex; flex-direction:column; gap:22px;}
-  .cost-row{
-    display:grid;
-    grid-template-columns:minmax(150px, 240px) minmax(0,1fr) 128px;
-    grid-template-areas:"label bar value";
-    align-items:center;
-    column-gap:20px;
+  .cost-lead{
+    font-size:clamp(20px, 2.8vw, 28px);
+    font-weight:500;
+    letter-spacing:-0.02em;
+    line-height:1.3;
+    color:var(--ink);
+    max-width:720px;
+    margin:0 auto 12px auto;
+    text-wrap:balance;
   }
-  .cost-label{grid-area:label; font-size:15px; font-weight:500; line-height:1.35; color:var(--ink);}
-  .cost-bar{grid-area:bar; position:relative; height:14px; border-radius:7px; background:rgba(0,0,0,0.045);}
-  .cost-value{grid-area:value; text-align:right; font-size:16px; font-weight:600; letter-spacing:-0.01em; color:var(--ink); white-space:nowrap; font-variant-numeric:tabular-nums;}
-  .cost-fill{
-    position:absolute; left:0; top:0; height:100%;
-    width:0;
-    border-radius:7px;
-    transition:width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
-    transition-delay:var(--d, 0s);
+  .cost-sub{font-size:16px; line-height:1.5; color:var(--ink-muted); max-width:560px; margin:0 auto;}
+
+  /* Selettore a segmenti (radio nativi: frecce, tab, tocco) */
+  .cost-picker{border:0; margin:0; padding:0; min-width:0; display:flex; justify-content:center;}
+  .cost-seg{display:inline-flex; flex-wrap:wrap; justify-content:center; gap:4px; padding:4px; background:var(--bg-subtle); border-radius:14px;}
+  .cost-seg-opt{position:relative; cursor:pointer;}
+  .cost-seg-opt input{position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer;}
+  .cost-seg-opt span{
+    display:block;
+    padding:9px 16px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:500;
+    line-height:1.2;
+    color:var(--ink-muted);
+    white-space:nowrap;
+    transition:background .25s var(--transition), color .25s var(--transition), box-shadow .25s var(--transition);
   }
-  .cost-chart.is-in .cost-fill{width:var(--w);}
-  .cost-fill-max{background:#d2d2d7;}
-  .cost-fill-min{background:#86868b;}
-  .cost-row-main .cost-label{font-weight:600;}
-  .cost-row-main .cost-fill{background:var(--accent);}
-  .cost-row-main .cost-value{color:var(--accent);}
-  .cost-sep{height:1px; background:var(--hairline); margin:2px 0;}
-  .cost-note{font-size:13px; color:var(--ink-muted); margin:24px 0 0 0; text-align:center;}
-  .cost-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:16px;}
+  .cost-seg-opt:hover input:not(:checked) + span{color:var(--ink);}
+  .cost-seg-opt input:checked + span{background:#fff; color:var(--ink); font-weight:600; box-shadow:0 1px 3px rgba(0,0,0,0.10), 0 0 0 0.5px rgba(0,0,0,0.04);}
+  .cost-seg-opt input:focus-visible + span{outline:2px solid var(--accent); outline-offset:2px;}
+  .cost-desc{text-align:center; font-size:15px; line-height:1.5; color:var(--ink-muted); min-height:46px; margin:16px auto 0 auto; max-width:560px; transition:opacity .25s var(--transition);}
+  .cost-desc.is-fading{opacity:0;}
+
+  /* Confronto: senza ispezione / con AutoInspecta */
+  .cost-duo{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px;}
+  .cost-box{border-radius:24px; padding:32px; display:flex; flex-direction:column; gap:10px; min-height:250px;}
+  .cost-box-no{background:var(--bg-subtle); color:var(--ink);}
+  .cost-box-yes{background:var(--accent); color:#fff;}
+  .cost-box-label{font-size:14px; font-weight:600; letter-spacing:0.01em;}
+  .cost-box-no .cost-box-label{color:var(--ink-muted);}
+  .cost-box-yes .cost-box-label{color:rgba(255,255,255,0.92);}
+  .cost-box-text{font-size:18px; font-weight:500; letter-spacing:-0.01em; line-height:1.35; margin:0; max-width:320px; color:inherit;}
+  .cost-box-value{margin-top:auto; font-size:clamp(36px, 5.4vw, 56px); font-weight:600; letter-spacing:-0.04em; line-height:1; font-variant-numeric:tabular-nums;}
+  .cost-box-pre{font-size:0.34em; font-weight:500; letter-spacing:0; margin-right:0.5em; color:var(--ink-muted);}
+
+  /* Numero protagonista */
+  .cost-save{text-align:center; margin-top:56px;}
+  .cost-save-pre{display:block; font-size:clamp(22px, 3.2vw, 32px); font-weight:500; letter-spacing:-0.02em; color:var(--ink);}
+  .cost-save-num{display:block; margin-top:6px; font-size:clamp(76px, 16vw, 148px); font-weight:600; letter-spacing:-0.055em; line-height:1; color:var(--accent); font-variant-numeric:tabular-nums;}
+  .cost-note{font-size:13px; color:var(--ink-muted); margin:20px 0 0 0; text-align:center;}
+
+  .cost-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:56px;}
   .cost-cards .service-card{background:var(--bg-subtle); border:none; padding:32px;}
   .cost-cards .service-card:hover{border-color:transparent;}
-  .cost-close{text-align:center; margin-top:56px;}
-  .cost-close h3{
-    font-size:clamp(24px, 3.6vw, 36px);
-    font-weight:600;
-    letter-spacing:-0.03em;
-    line-height:1.15;
-    color:var(--ink);
-    max-width:640px;
-    margin:0 auto 28px auto;
-    text-wrap:balance;
-  }
+  .cost-close{text-align:center; margin-top:48px;}
   @media(max-width:760px){
-    .cost-cards{grid-template-columns:1fr;}
-    .cost-chart-card{padding:28px 20px; border-radius:20px;}
-    .cost-head{margin-bottom:36px;}
-    .cost-head p{font-size:17px;}
-    .cost-chart{gap:20px;}
-    .cost-row{
-      grid-template-columns:minmax(0,1fr) auto;
-      grid-template-areas:"label label" "bar value";
-      row-gap:8px;
-      column-gap:14px;
-    }
-    .cost-value{font-size:15px; min-width:116px;}
-    .cost-close{margin-top:44px;}
+    .cost-cards{grid-template-columns:1fr; margin-top:44px;}
+    .cost-head{margin-bottom:32px;}
+    .cost-duo{grid-template-columns:1fr;}
+    .cost-box{min-height:0; padding:28px 24px; gap:8px;}
+    .cost-box-value{margin-top:12px;}
+    .cost-seg{width:100%;}
+    .cost-seg-opt{flex:1 1 auto;}
+    .cost-seg-opt span{text-align:center; padding:10px 12px;}
+    .cost-save{margin-top:44px;}
+    .cost-close{margin-top:40px;}
   }
   @media (prefers-reduced-motion: reduce){
-    .cost-fill{transition:none;}
+    .cost-seg-opt span, .cost-desc{transition:none;}
   }
 
   /* CTA intermedia */
@@ -1459,7 +1470,7 @@
           <span class="price-launch-badge">Prezzo di lancio</span>
           <div class="path-price">
             <span class="price-old">249 €</span>
-            <span class="price-new">149 €</span>
+            <span class="price-new" data-prezzo>149 €</span>
             <span class="price-note">+ rimborso chilometrico, che ti comunichiamo prima di confermare</span>
           </div>
           <a href="#form" class="btn btn-primary btn-block">Prenota l'ispezione →</a>
@@ -1481,19 +1492,44 @@
 <section class="cost-section" id="costo">
   <div class="container">
     <div class="cost-head">
-      <h2><span class="accent-word">149&nbsp;€</span> oggi. O&nbsp;migliaia domani.</h2>
-      <p>Molti difetti costosi non si vedono durante una visita: noi li cerchiamo per te.</p>
+      <h2><span class="accent-word" data-prezzo>149&nbsp;€</span> oggi. O&nbsp;migliaia domani.</h2>
+      <p class="cost-lead">Scoprirlo prima di firmare costa <span data-prezzo>149&nbsp;€</span>. Scoprirlo dopo costa molto di più.</p>
+      <p class="cost-sub">Molti difetti costosi non si vedono durante una visita: noi li cerchiamo per te.</p>
     </div>
 
-    <div class="cost-chart-card reveal">
-      <!-- Il grafico e la tabella per screen reader sono generati dallo script (blocco COSTI_NON_CONTROLLARE): modifica gli importi lì -->
-      <div class="cost-chart" id="costChart" aria-hidden="true"></div>
+    <!-- Confronto interattivo: selettore, card e risparmio sono generati dallo script (blocco GUASTI_NASCOSTI): modifica gli importi lì -->
+    <div class="cost-compare" id="costCompare">
+      <fieldset class="cost-picker">
+        <legend class="sr-only">Scegli il tipo di guasto nascosto</legend>
+        <div class="cost-seg" id="costSeg"></div>
+      </fieldset>
+      <p class="cost-desc" id="costDesc"></p>
+
+      <div class="cost-duo">
+        <div class="cost-box cost-box-no">
+          <span class="cost-box-label">Senza ispezione</span>
+          <p class="cost-box-text">Lo scopri dopo l'acquisto.</p>
+          <div class="cost-box-value"><span class="cost-box-pre">fino a</span><span id="costSenza"></span></div>
+        </div>
+        <div class="cost-box cost-box-yes">
+          <span class="cost-box-label">Con AutoInspecta</span>
+          <p class="cost-box-text">Lo scopri prima di firmare: tratti il prezzo o cambi auto.</p>
+          <div class="cost-box-value"><span data-prezzo>149&nbsp;€</span></div>
+        </div>
+      </div>
+
+      <div class="cost-save">
+        <span class="cost-save-pre">Risparmi fino a</span>
+        <span class="cost-save-num" id="costRisparmio"></span>
+      </div>
+      <p class="cost-note">Costi di riparazione indicativi, variano in base a modello e officina.</p>
+
+      <p class="sr-only" id="costStato" aria-live="polite"></p>
       <div class="sr-only"><table id="costTable">
-        <caption>Costo dell'ispezione AutoInspecta a confronto con il costo indicativo di riparazione di alcuni guasti nascosti</caption>
-        <thead><tr><th scope="col">Voce</th><th scope="col">Costo</th></tr></thead>
+        <caption>Costo indicativo di riparazione di alcuni guasti nascosti, costo dell'ispezione AutoInspecta e risparmio massimo</caption>
+        <thead><tr><th scope="col">Guasto</th><th scope="col">Costo di riparazione indicativo</th><th scope="col">Costo ispezione AutoInspecta</th><th scope="col">Risparmio massimo</th></tr></thead>
         <tbody></tbody>
       </table></div>
-      <p class="cost-note">Costi di riparazione indicativi, variano in base a modello e officina.</p>
     </div>
 
     <div class="cost-cards">
@@ -1517,7 +1553,6 @@
     <!-- TESTIMONIANZA (opzionale): inserire qui una recensione reale di un cliente, con nome e città, solo se autorizzata. Non inventare testimonianze o statistiche. -->
 
     <div class="cost-close reveal">
-      <h3>Scoprirlo prima di firmare costa 149&nbsp;€. Scoprirlo dopo costa molto di più.</h3>
       <a href="#form" class="btn btn-primary">Prenota l'ispezione</a>
     </div>
   </div>
@@ -1963,6 +1998,14 @@
 <script>
 (function(){
   "use strict";
+
+  // ---- Prezzo dell'ispezione: UNICA fonte per tutta la pagina ----
+  // Cambia solo questo valore: titolo, card e risparmio della sezione "Quanto costa non controllare"
+  // e il prezzo nella sezione prezzi (elementi con data-prezzo) si aggiornano di conseguenza.
+  var PREZZO_ISPEZIONE = 149;
+  function formatMigliaia(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function formatEuro(n){ return formatMigliaia(n) + ' €'; }
+  document.querySelectorAll('[data-prezzo]').forEach(function(e){ e.textContent = formatEuro(PREZZO_ISPEZIONE); });
 
   // ---- Progress bar ----
   var progressBar = document.getElementById('progress-bar');
@@ -2653,103 +2696,108 @@
   });
 
 
-  // ---- Quanto costa non controllare: grafico a barre animato ----
-  // MODIFICA QUI gli importi (in euro, indicativi). Per ogni guasto: min e max del costo di
-  // riparazione (parte scura fino al min, chiara fino al max). Metti min = max per un importo singolo.
-  // L'ordine dell'elenco e' l'ordine delle barre; la scala si adatta da sola al valore piu' alto.
-  var COSTI_NON_CONTROLLARE = {
-    ispezione: { nome: 'Ispezione AutoInspecta', costo: 149 },
-    guasti: [
-      { nome: 'Incidente non dichiarato / carrozzeria riparata di nascosto', min: 1500, max: 5000 },
-      { nome: 'Meccatronica cambio automatico / DSG', min: 1500, max: 3500 },
-      { nome: 'Frizione e volano bimassa', min: 1200, max: 2500 },
-      { nome: 'Turbina', min: 900, max: 2200 },
-      { nome: 'Cinghia / catena di distribuzione', min: 700, max: 2000 }
-    ]
-  };
+  // ---- Quanto costa non controllare: confronto con selettore ----
+  // MODIFICA QUI gli importi (in euro, indicativi). Per ogni guasto: nome (etichetta del selettore),
+  // descrizione breve (sotto il selettore), costoMin e costoMax della riparazione.
+  // Il risparmio mostrato e' costoMax - PREZZO_ISPEZIONE. L'ordine dell'elenco e' l'ordine del selettore.
+  var GUASTI_NASCOSTI = [
+    { nome: 'Incidente non dichiarato', descrizione: 'Danni di un incidente non dichiarato o carrozzeria riparata di nascosto.', costoMin: 1500, costoMax: 5000 },
+    { nome: 'Meccatronica DSG', descrizione: 'Meccatronica del cambio automatico / DSG da riparare o sostituire.', costoMin: 1500, costoMax: 3500 },
+    { nome: 'Frizione e volano', descrizione: 'Frizione e volano bimassa da sostituire.', costoMin: 1200, costoMax: 2500 },
+    { nome: 'Turbina', descrizione: 'Turbina da riparare o sostituire.', costoMin: 900, costoMax: 2200 },
+    { nome: 'Distribuzione', descrizione: 'Cinghia o catena di distribuzione da sostituire.', costoMin: 700, costoMax: 2000 }
+  ];
+  var GUASTO_PREDEFINITO = 2; // posizione nell'elenco: 2 = Frizione e volano
 
-  (function initCostChart(){
-    var chart = document.getElementById('costChart');
+  (function initCostCompare(){
+    var seg = document.getElementById('costSeg');
+    var elDesc = document.getElementById('costDesc');
+    var elSenza = document.getElementById('costSenza');
+    var elRisp = document.getElementById('costRisparmio');
+    var elStato = document.getElementById('costStato');
     var tbody = document.querySelector('#costTable tbody');
-    if(!chart || !tbody) return;
+    var box = document.getElementById('costCompare');
+    if(!seg || !elDesc || !elSenza || !elRisp || !tbody || !box) return;
 
-    // Punto come separatore delle migliaia anche a 4 cifre (1.500), come si scrive in italiano comune
-    var nf = { format: function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); } };
-    var rows = [{ nome: COSTI_NON_CONTROLLARE.ispezione.nome, min: COSTI_NON_CONTROLLARE.ispezione.costo, max: COSTI_NON_CONTROLLARE.ispezione.costo, main: true }]
-      .concat(COSTI_NON_CONTROLLARE.guasti.map(function(g){ return { nome: g.nome, min: g.min, max: g.max, main: false }; }));
-    var scala = Math.max.apply(null, rows.map(function(r){ return r.max; }));
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var animabile = !reduce && ('IntersectionObserver' in window);
+    function risparmio(g){ return Math.max(g.costoMax - PREZZO_ISPEZIONE, 0); }
+    function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
 
-    function fmt(r, p){
-      var a = nf.format(Math.round(r.min * p));
-      if(r.min === r.max) return a + ' €';
-      return a + ' – ' + nf.format(Math.round(r.max * p)) + ' €';
+    // contatore che parte dal valore mostrato in quel momento (transizione morbida tra due guasti)
+    function contatore(el){
+      var cur = 0, raf = 0;
+      return {
+        set: function(v){ cancelAnimationFrame(raf); cur = v; el.textContent = formatEuro(v); },
+        to: function(v, ms){
+          cancelAnimationFrame(raf);
+          var from = cur, t0 = performance.now();
+          (function frame(now){
+            var p = Math.min((now - t0) / ms, 1);
+            cur = from + (v - from) * easeOut(p);
+            el.textContent = formatEuro(cur);
+            if(p < 1){ raf = requestAnimationFrame(frame); } else { cur = v; }
+          })(t0);
+        }
+      };
     }
-    function el(tag, cls, text){
-      var e = document.createElement(tag);
-      if(cls) e.className = cls;
-      if(text !== undefined) e.textContent = text;
-      return e;
-    }
+    var cSenza = contatore(elSenza), cRisp = contatore(elRisp);
 
-    var values = [];
-    rows.forEach(function(r, i){
-      var row = el('div', 'cost-row' + (r.main ? ' cost-row-main' : ''));
-      row.appendChild(el('div', 'cost-label', r.nome));
-      var bar = el('div', 'cost-bar');
-      row.style.setProperty('--d', (i * 0.09).toFixed(2) + 's');
-      if(r.min === r.max){
-        var f = el('span', 'cost-fill');
-        f.style.setProperty('--w', Math.max(r.max / scala * 100, 2.5) + '%');
-        bar.appendChild(f);
-      } else {
-        var fMax = el('span', 'cost-fill cost-fill-max');
-        fMax.style.setProperty('--w', (r.max / scala * 100) + '%');
-        var fMin = el('span', 'cost-fill cost-fill-min');
-        fMin.style.setProperty('--w', (r.min / scala * 100) + '%');
-        bar.appendChild(fMax); bar.appendChild(fMin);
-      }
-      row.appendChild(bar);
-      var val = el('div', 'cost-value', fmt(r, 1));
-      row.appendChild(val);
-      values.push(val);
-      chart.appendChild(row);
-      if(i === 0) chart.appendChild(el('div', 'cost-sep'));
+    // selettore (radio nativi dentro etichette) + tabella per screen reader
+    GUASTI_NASCOSTI.forEach(function(g, i){
+      var label = document.createElement('label'); label.className = 'cost-seg-opt';
+      var input = document.createElement('input'); input.type = 'radio'; input.name = 'guastoNascosto'; input.value = String(i);
+      var span = document.createElement('span'); span.textContent = g.nome;
+      label.appendChild(input); label.appendChild(span); seg.appendChild(label);
 
       var tr = document.createElement('tr');
-      tr.appendChild(el('th', '', r.nome)); tr.firstChild.setAttribute('scope', 'row');
-      tr.appendChild(el('td', '', r.min === r.max ? nf.format(r.min) + ' euro' : 'da ' + nf.format(r.min) + ' a ' + nf.format(r.max) + ' euro'));
+      var th = document.createElement('th'); th.scope = 'row'; th.textContent = g.nome; tr.appendChild(th);
+      [ 'da ' + formatMigliaia(g.costoMin) + ' a ' + formatMigliaia(g.costoMax) + ' euro',
+        formatMigliaia(PREZZO_ISPEZIONE) + ' euro',
+        'fino a ' + formatMigliaia(risparmio(g)) + ' euro' ].forEach(function(t){
+        var td = document.createElement('td'); td.textContent = t; tr.appendChild(td);
+      });
       tbody.appendChild(tr);
     });
 
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduce || !('IntersectionObserver' in window)){
-      chart.classList.add('is-in');
+    var inputs = seg.querySelectorAll('input');
+    var corrente = Math.min(Math.max(GUASTO_PREDEFINITO, 0), GUASTI_NASCOSTI.length - 1);
+    var visibile = !animabile;   // finche' la sezione non e' stata vista, niente transizioni
+    inputs[corrente].checked = true;
+
+    function mostra(i, daUtente){
+      var g = GUASTI_NASCOSTI[i]; corrente = i;
+      elDesc.classList.add('is-fading');
+      setTimeout(function(){ elDesc.textContent = g.descrizione; elDesc.classList.remove('is-fading'); }, (reduce || !visibile) ? 0 : 160);
+      if(!visibile){ return; }
+      if(reduce){ cSenza.set(g.costoMax); cRisp.set(risparmio(g)); }
+      else { cSenza.to(g.costoMax, 650); cRisp.to(risparmio(g), 650); }
+      if(daUtente && elStato){
+        elStato.textContent = g.nome + ': senza ispezione fino a ' + formatMigliaia(g.costoMax) + ' euro, con AutoInspecta ' +
+          formatMigliaia(PREZZO_ISPEZIONE) + ' euro. Risparmi fino a ' + formatMigliaia(risparmio(g)) + ' euro.';
+      }
+    }
+    inputs.forEach(function(inp){
+      inp.addEventListener('change', function(){ if(inp.checked) mostra(Number(inp.value), true); });
+    });
+
+    // stato iniziale
+    elDesc.textContent = GUASTI_NASCOSTI[corrente].descrizione;
+    if(!animabile){
+      cSenza.set(GUASTI_NASCOSTI[corrente].costoMax);
+      cRisp.set(risparmio(GUASTI_NASCOSTI[corrente]));
       return;
     }
-
-    values.forEach(function(v, i){ v.textContent = fmt(rows[i], 0); });
-    var DURATA = 1000;
-    function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
-    function animaNumeri(){
-      var t0 = performance.now();
-      (function frame(now){
-        var done = true;
-        values.forEach(function(v, i){
-          var p = Math.min(Math.max((now - t0 - i * 90) / DURATA, 0), 1);
-          if(p < 1) done = false;
-          v.textContent = fmt(rows[i], easeOut(p));
-        });
-        if(!done) requestAnimationFrame(frame);
-      })(t0);
-    }
+    cSenza.set(0); cRisp.set(0);
     var io = new IntersectionObserver(function(entries){
-      if(entries[0].isIntersecting){
-        io.disconnect();
-        chart.classList.add('is-in');
-        animaNumeri();
-      }
-    }, { threshold: 0.35 });
-    io.observe(chart);
+      if(!entries[0].isIntersecting) return;
+      io.disconnect();
+      visibile = true;
+      var g = GUASTI_NASCOSTI[corrente];
+      cSenza.to(g.costoMax, 1100);
+      cRisp.to(risparmio(g), 1100);
+    }, { threshold: 0.3 });
+    io.observe(box);
   })();
 
   // ---- FAQ accordion ----
