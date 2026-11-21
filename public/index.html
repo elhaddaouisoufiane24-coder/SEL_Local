@@ -31,7 +31,10 @@
     --shadow-lg:0 20px 48px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.04);
     --transition:cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --section-gap:80px;
-    --bg-alt:#eef3fb;
+    --bg-alt:#f5f5f7;
+    --ink:#1d1d1f;
+    --ink-muted:#6e6e73;
+    --hairline:rgba(0,0,0,0.06);
     --hero-dark:#081f36;
 
     /* alias retrocompatibili per le regole esistenti */
@@ -196,18 +199,10 @@
     .hero .eyebrow::before{animation:none;}
   }
 
-  /* Delay progressivo per card in griglia (via nth-child, nessuna classe extra) */
-  .service-card:nth-child(1),
-  .testimonial-card:nth-child(1),
-  .process-card:nth-child(1){transition-delay:0s;}
-  .service-card:nth-child(2),
-  .testimonial-card:nth-child(2),
-  .process-card:nth-child(2){transition-delay:.1s;}
-  .service-card:nth-child(3),
-  .testimonial-card:nth-child(3){transition-delay:.2s;}
-  .service-card:nth-child(4){transition-delay:.3s;}
-  .service-card:nth-child(5),
-  .service-card:nth-child(6){transition-delay:.4s;}
+  /* Card: ingresso con fade (.6s) e hover discreto (.25s), senza ritardi che sporcherebbero l'hover */
+  .service-card, .benefit-item, .testimonial-card{
+    transition:opacity .6s var(--transition), transform .25s var(--transition), border-color .25s var(--transition);
+  }
 
   /* Progress bar */
   #progress-bar{
@@ -423,7 +418,7 @@
     text-align:center;
     padding:0 8px;
   }
-  .review-chip .stars{color:#f59e0b; letter-spacing:1px; font-size:13px; flex-shrink:0;}
+  .review-chip .stars{color:var(--ink); letter-spacing:1px; font-size:13px; flex-shrink:0;}
   .review-chip p{margin:0; font-size:14px; color:var(--text-muted);}
   .review-chip strong{color:var(--text); font-weight:600;}
 
@@ -432,9 +427,9 @@
   .path-primary{
     position:relative;
     background:#fff;
-    border:2px solid var(--accent);
-    border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-lg);
+    border:1px solid var(--hairline);
+    border-radius:24px;
+    box-shadow:none;
     padding:40px;
     margin-top:48px;
   }
@@ -444,17 +439,14 @@
     gap:28px;
   }
   .path-primary-icon{
-    width:64px;
-    height:64px;
-    border-radius:16px;
-    background:var(--accent-light);
     display:flex;
-    align-items:center;
-    justify-content:center;
+    align-items:flex-start;
     flex-shrink:0;
+    padding-top:4px;
+    color:var(--ink);
   }
-  .path-primary-content h3{font-size:26px; margin-bottom:12px;}
-  .path-primary-content > p{font-size:16px; line-height:1.65; color:var(--text-muted); margin-bottom:20px;}
+  .path-primary-content h3{font-size:26px; font-weight:600; letter-spacing:-0.02em; color:var(--ink); margin-bottom:12px;}
+  .path-primary-content > p{font-size:16px; line-height:1.65; color:var(--ink-muted); margin-bottom:20px;}
   .path-bullets{
     list-style:none;
     display:grid;
@@ -475,10 +467,9 @@
   .path-bullets li::before{
     content:'';
     flex-shrink:0;
-    width:22px;
-    height:22px;
-    border-radius:50%;
-    background:rgba(34,197,94,0.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2316a34a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px 12px no-repeat;
+    width:18px;
+    height:18px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d1d1f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/18px 18px no-repeat;
   }
   .path-price{
     display:flex;
@@ -487,18 +478,18 @@
     gap:8px 10px;
     margin-bottom:20px;
   }
-  .price-old{font-size:18px; font-weight:600; color:var(--text-muted); text-decoration:line-through; text-decoration-thickness:1.5px;}
-  .price-new{font-size:28px; font-weight:800; color:var(--accent);}
+  .price-old{font-size:18px; font-weight:500; color:var(--ink-muted); text-decoration:line-through; text-decoration-thickness:1.5px;}
+  .price-new{font-size:28px; font-weight:600; letter-spacing:-0.02em; color:var(--ink);}
   .price-note{font-size:13px; color:var(--text-muted); width:100%;}
   .price-launch-badge{
     display:inline-flex;
     align-items:center;
-    background:var(--accent-light);
-    color:var(--accent);
+    background:var(--bg-subtle);
+    color:var(--ink);
     font-size:12px;
-    font-weight:700;
-    letter-spacing:0.02em;
-    padding:4px 10px;
+    font-weight:600;
+    letter-spacing:0.01em;
+    padding:5px 12px;
     border-radius:var(--radius-full);
     width:fit-content;
     margin-bottom:10px;
@@ -515,14 +506,14 @@
     align-items:stretch;
     text-align:center;
     gap:16px;
-    background:var(--bg-subtle);
-    border:1px solid var(--border);
-    border-radius:var(--radius-md);
-    padding:22px 28px;
+    background:#fff;
+    border:1px solid var(--hairline);
+    border-radius:20px;
+    padding:28px 32px;
     margin-top:20px;
   }
-  .path-secondary-text h4{font-size:16px; margin:0 0 4px 0; color:var(--text);}
-  .path-secondary-text p{font-size:14px; line-height:1.5; color:var(--text-muted); margin:0;}
+  .path-secondary-text h4{font-size:17px; font-weight:600; letter-spacing:-0.01em; margin:0 0 4px 0; color:var(--ink);}
+  .path-secondary-text p{font-size:15px; line-height:1.5; color:var(--ink-muted); margin:0;}
   .path-secondary .btn{width:100%;}
 
   .testimonials-section{
@@ -537,19 +528,18 @@
   @media(max-width:900px){ .testimonial-row{grid-template-columns:repeat(2,1fr);} }
   @media(max-width:640px){ .testimonial-row{grid-template-columns:1fr;} }
   .testimonial-card{
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:var(--radius-md);
-    padding:28px;
+    background:var(--bg-subtle);
+    border:none;
+    border-radius:20px;
+    padding:32px;
     display:flex;
     flex-direction:column;
     gap:16px;
-    transition:all .25s var(--transition);
   }
-  .testimonial-card:hover{transform:translateY(-2px); box-shadow:var(--shadow-md);}
-  .testimonial-card .stars{color:#f59e0b; font-size:14px; letter-spacing:2px; margin:0;}
-  .testimonial-card p{font-size:15px; line-height:1.65; font-style:italic; color:var(--text); margin:0;}
-  .testimonial-author{font-size:13px; font-weight:600; color:var(--text-muted); margin-top:auto;}
+  .testimonial-card:hover{transform:scale(1.02);}
+  .testimonial-card .stars{color:var(--ink); font-size:14px; letter-spacing:2px; margin:0;}
+  .testimonial-card p{font-size:15px; line-height:1.65; font-style:normal; color:var(--ink); margin:0;}
+  .testimonial-author{font-size:13px; font-weight:500; color:var(--ink-muted); margin-top:auto;}
 
   /* WhatsApp floating button */
   .whatsapp-widget{
@@ -637,13 +627,15 @@
   }
   .whatsapp-tooltip-close:hover{color:var(--text);}
   @media(max-width:480px){ .whatsapp-tooltip{max-width:180px; font-size:13px;} }
-  /* Icon circle helper */
+  /* Icone: line, tratto 1.5, un solo colore, nessuno sfondo */
+  .ico{flex-shrink:0; color:var(--ink);}
+  /* Icon circle helper (ora solo un contenitore, senza sfondo) */
   .icon-circle{
-    width:52px;height:52px;
-    border-radius:14px;
-    background:rgba(0,102,204,0.10);
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:18px;
+    display:flex; align-items:center; justify-content:flex-start;
+    width:auto; height:auto;
+    background:none; border-radius:0;
+    margin-bottom:20px;
+    color:var(--ink);
   }
 
   /* Pain agitation */
@@ -663,31 +655,27 @@
   .benefit-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    max-width:820px;
-    margin:32px auto 0 auto;
+    gap:16px;
+    max-width:880px;
+    margin:40px auto 0 auto;
   }
-  @media(max-width:760px){ .benefit-grid{grid-template-columns:repeat(2,1fr);} }
-  @media(max-width:420px){ .benefit-grid{grid-template-columns:1fr;} }
+  @media(max-width:900px){ .benefit-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:560px){ .benefit-grid{grid-template-columns:1fr;} }
+  .benefit-item:hover{transform:scale(1.02);}
   .benefit-item{
     display:flex;
-    align-items:center;
-    gap:12px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:16px;
     background:var(--bg-subtle);
-    border:1px solid var(--border);
-    border-radius:var(--radius-md);
-    padding:14px 16px;
+    border:none;
+    border-radius:20px;
+    padding:28px;
     text-align:left;
     min-width:0;
   }
-  .benefit-item .icon-circle{
-    width:38px;
-    height:38px;
-    border-radius:10px;
-    margin-bottom:0;
-    flex-shrink:0;
-  }
-  .benefit-item span{font-size:14px; font-weight:600; color:var(--text); min-width:0;}
+  .benefit-item .icon-circle{margin-bottom:0;}
+  .benefit-item span{font-size:16px; font-weight:600; letter-spacing:-0.01em; line-height:1.35; color:var(--ink); min-width:0;}
 
   /* Come funziona: processo dell'ispezione */
   .how{background:var(--bg);}
@@ -696,10 +684,10 @@
     margin:40px auto 0;
   }
   .process-card{
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    padding:32px;
+    background:var(--bg-subtle);
+    border:none;
+    border-radius:24px;
+    padding:40px;
     display:flex;
     flex-direction:column;
   }
@@ -710,7 +698,7 @@
     margin-bottom:24px;
   }
   .process-head svg{flex-shrink:0;}
-  .process-head h3{margin:0; font-size:20px;}
+  .process-head h3{margin:0; font-size:20px; font-weight:600; letter-spacing:-0.01em; color:var(--ink);}
   .process-steps{display:flex; flex-direction:column; margin-bottom:24px;}
   .process-step{
     display:flex;
@@ -735,21 +723,22 @@
     width:36px;
     height:36px;
     border-radius:50%;
-    background:var(--accent);
-    color:#fff;
-    font-size:14px;
-    font-weight:800;
+    background:#fff;
+    border:1px solid var(--hairline);
+    color:var(--ink);
+    font-size:13px;
+    font-weight:600;
     flex-shrink:0;
     position:relative;
     z-index:1;
   }
   .step-icon{display:inline-block; vertical-align:-3px; margin-right:8px;}
-  .process-step h4{margin:0 0 4px 0; font-size:15px; font-weight:700; color:var(--text);}
-  .process-step p{margin:0; font-size:14px; line-height:1.55; color:var(--text-muted);}
+  .process-step h4{margin:0 0 4px 0; font-size:16px; font-weight:600; letter-spacing:-0.01em; color:var(--ink);}
+  .process-step p{margin:0; font-size:15px; line-height:1.55; color:var(--ink-muted);}
   .how-closing{text-align:center; margin:0 auto 24px; padding-top:20px; border-top:1px solid var(--border);}
   .process-card .btn{margin-top:auto;}
   @media(max-width:480px){
-    .process-card{padding:24px 20px;}
+    .process-card{padding:28px 22px;}
   }
 
   /* Form */
@@ -804,10 +793,9 @@
   .form-success{text-align:center; padding:12px 0 4px;}
   .form-success[hidden]{display:none;}
   .form-success-icon{
-    width:64px; height:64px; border-radius:50%;
-    background:rgba(37,197,94,0.12);
     display:flex; align-items:center; justify-content:center;
     margin:0 auto 16px;
+    color:var(--ink);
   }
   .form-success p{font-size:18px; font-weight:600; line-height:1.5; color:var(--text); margin:0;}
   .field label{
@@ -1057,17 +1045,18 @@
   .pillars li{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:12px 14px;
+    gap:16px;
+    padding:18px 22px;
     background:#fff;
-    border:1px solid var(--border);
-    border-radius:var(--radius-sm);
-    font-size:15px;
-    font-weight:700;
+    border:1px solid var(--hairline);
+    border-radius:18px;
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:-0.01em;
     line-height:1.4;
-    color:var(--text);
+    color:var(--ink);
   }
-  .pillars .icon-circle{flex-shrink:0; width:36px; height:36px; margin:0;}
+  .pillars .icon-circle{flex-shrink:0; margin:0;}
   .about-photo{
     display:block;
     width:100%;
@@ -1099,9 +1088,9 @@
   }
   .trust-point{display:flex; gap:14px; align-items:flex-start;}
   .how-reassurance{max-width:640px; margin-left:auto; margin-right:auto; margin-top:40px;}
-  .trust-point .icon-circle{flex-shrink:0;}
-  .trust-point h4{margin:0 0 4px 0; font-size:15px; font-weight:700; color:var(--text);}
-  .trust-point p{margin:0; font-size:14px; line-height:1.55; color:var(--text-muted);}
+  .trust-point .icon-circle{flex-shrink:0; margin-bottom:0;}
+  .trust-point h4{margin:0 0 4px 0; font-size:16px; font-weight:600; letter-spacing:-0.01em; color:var(--ink);}
+  .trust-point p{margin:0; font-size:15px; line-height:1.55; color:var(--ink-muted);}
 
 
   /* Cosa controllo */
@@ -1116,18 +1105,16 @@
   @media(max-width:560px){ .services-grid{grid-template-columns:1fr;} }
   .service-card{
     background:#fff;
-    border:1px solid var(--border);
-    border-top:3px solid var(--accent);
-    border-radius:var(--radius-md);
-    padding:28px;
-    transition:all .25s var(--transition);
+    border:1px solid var(--hairline);
+    border-radius:20px;
+    padding:32px;
   }
-  .service-card:hover{transform:translateY(-2px); box-shadow:var(--shadow-md); border-color:var(--border-hover); border-top-color:var(--accent);}
-  .service-card .icon-circle{margin-bottom:16px;}
-  .service-card h3{margin:0 0 6px 0; font-size:16px; font-weight:700; color:var(--text);}
-  .service-card p{font-size:14px; line-height:1.6; margin:0; color:var(--text-muted);}
+  .service-card:hover{transform:scale(1.02); border-color:rgba(0,0,0,0.12);}
+  .service-card .icon-circle{margin-bottom:20px;}
+  .service-card h3{margin:0 0 8px 0; font-size:18px; font-weight:600; letter-spacing:-0.01em; color:var(--ink);}
+  .service-card p{font-size:15px; line-height:1.55; margin:0; color:var(--ink-muted);}
   @media(max-width:480px){
-    .service-card{padding:20px;}
+    .service-card{padding:26px;}
   }
 
   .ispezione-question{margin:0; text-align:center;}
@@ -1275,15 +1262,15 @@
       </div>
       <div class="hero-trust">
         <div class="trust-badge reveal">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          <svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
           Nessun interesse nella vendita
         </div>
         <div class="trust-badge reveal">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
           Controlli approfonditi
         </div>
         <div class="trust-badge reveal">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          <svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
           Un parere sincero
         </div>
       </div>
@@ -1320,35 +1307,35 @@
     <div class="how-grid">
       <div class="process-card reveal">
         <div class="process-head">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
+          <svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
           <h3>Ispezione completa</h3>
         </div>
         <div class="process-steps">
           <div class="process-step reveal">
             <span class="step-badge">01</span>
             <div>
-              <h4><svg class="step-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Ci racconti quale auto vuoi acquistare</h4>
+              <h4><svg class="ico step-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Ci racconti quale auto vuoi acquistare</h4>
               <p>Compila la richiesta con le informazioni sull'auto che ti interessa. Un tecnico specializzato ti contatterà per conoscere meglio le tue esigenze e concordare i prossimi passi.</p>
             </div>
           </div>
           <div class="process-step reveal">
             <span class="step-badge">02</span>
             <div>
-              <h4><svg class="step-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Ci incontriamo dal venditore</h4>
+              <h4><svg class="ico step-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Ci incontriamo dal venditore</h4>
               <p>Fissiamo l'appuntamento con te presso il venditore dell'auto e ti accompagniamo a valutarla insieme, senza fermarci alla prima impressione o a quello che viene dichiarato nell'annuncio.</p>
             </div>
           </div>
           <div class="process-step reveal">
             <span class="step-badge">03</span>
             <div>
-              <h4><svg class="step-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Controlliamo l'auto in modo approfondito</h4>
+              <h4><svg class="ico step-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Controlliamo l'auto in modo approfondito</h4>
               <p>Verifichiamo carrozzeria, motore, meccanica, interni ed elettronica, eseguiamo la diagnosi e, quando possibile, una prova su strada. Ti mostriamo le eventuali anomalie riscontrate e ti spieghiamo cosa meritano di approfondire.</p>
             </div>
           </div>
           <div class="process-step reveal">
             <span class="step-badge">04</span>
             <div>
-              <h4><svg class="step-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Decidi con maggiore consapevolezza</h4>
+              <h4><svg class="ico step-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Decidi con maggiore consapevolezza</h4>
               <p>Ti aiutiamo a capire le condizioni dell'auto, quali spese potrebbero presentarsi e se il prezzo richiesto è giustificato. Se emergono elementi utili, avrai anche una base concreta su cui trattare con il venditore.</p>
             </div>
           </div>
@@ -1360,7 +1347,7 @@
     <div class="trust-points how-reassurance reveal">
       <div class="trust-point">
         <div class="icon-circle">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <div>
           <h4>Non hai tempo o non vuoi fare tutta quella strada per vedere la macchina?</h4>
@@ -1380,7 +1367,7 @@
     <div class="path-primary reveal">
       <div class="path-primary-inner">
         <div class="path-primary-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#2E50E8" stroke-width="1.8"/></svg>
+          <svg class="ico" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
         </div>
         <div class="path-primary-content">
           <h3>Hai già trovato l'auto che vuoi comprare?</h3>
@@ -1424,37 +1411,37 @@
     <div class="benefit-grid">
       <div class="benefit-item reveal">
         <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
         </div>
         <span>Eviti problemi nascosti</span>
       </div>
       <div class="benefit-item reveal">
         <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
         </div>
         <span>Individui lavori imminenti</span>
       </div>
       <div class="benefit-item reveal">
         <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 15l1.5-5.5A2 2 0 0 1 6.4 8h11.2a2 2 0 0 1 1.9 1.5L21 15" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><rect x="2.5" y="15" width="19" height="4.5" rx="1.5" stroke="#2E50E8" stroke-width="1.8"/><circle cx="7" cy="19.5" r="1.4" fill="#2E50E8"/><circle cx="17" cy="19.5" r="1.4" fill="#2E50E8"/><path d="M9 5l6 0" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
         </div>
         <span>Auto gravemente incidentate e riparate</span>
       </div>
       <div class="benefit-item reveal">
         <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="13" r="8" stroke="#2E50E8" stroke-width="1.8"/><path d="M12 13l4-3M8 13a4 4 0 0 1 4-4" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
         </div>
         <span>Km scalati</span>
       </div>
       <div class="benefit-item reveal">
         <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg>
         </div>
         <span>Spese impreviste dopo l'acquisto</span>
       </div>
       <div class="benefit-item reveal">
         <div class="icon-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
         </div>
         <span>Nessun conflitto di interessi: non dobbiamo venderti niente</span>
       </div>
@@ -1471,42 +1458,42 @@
     <div class="services-grid">
       <div class="service-card reveal">
         <div class="icon-circle">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 15l1.5-5.5A2 2 0 0 1 6.4 8h11.2a2 2 0 0 1 1.9 1.5L21 15" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/><rect x="2.5" y="15" width="19" height="4.5" rx="1.5" stroke="#2E50E8" stroke-width="1.8"/><circle cx="7" cy="19.5" r="1.4" fill="#2E50E8"/><circle cx="17" cy="19.5" r="1.4" fill="#2E50E8"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
         </div>
         <h3>Carrozzeria e struttura</h3>
         <p>Danni, riparazioni e verniciature nascoste.</p>
       </div>
       <div class="service-card reveal">
         <div class="icon-circle">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         </div>
         <h3>Motore e meccanica</h3>
         <p>Rumori, perdite e usura dei componenti.</p>
       </div>
       <div class="service-card reveal">
         <div class="icon-circle">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg>
         </div>
         <h3>Interni</h3>
         <p>Comandi, sedili e dotazioni funzionanti.</p>
       </div>
       <div class="service-card reveal">
         <div class="icon-circle">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>
         </div>
         <h3>Elettronica e diagnosi</h3>
         <p>Centraline, spie ed errori memorizzati.</p>
       </div>
       <div class="service-card reveal">
         <div class="icon-circle">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2"/><path d="M12 14v8"/><path d="M10 11.4 2.2 10"/><path d="m14 11.4 7.8-1.4"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2"/><path d="M12 14v8"/><path d="M10 11.4 2.2 10"/><path d="m14 11.4 7.8-1.4"/></svg>
         </div>
         <h3>Prova su strada</h3>
         <p>Comportamento reale del veicolo su strada.</p>
       </div>
       <div class="service-card reveal">
         <div class="icon-circle">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E50E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+          <svg class="ico" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
         </div>
         <h3>Coerenza tra km, condizioni e prezzo</h3>
         <p>Il prezzo giusto per lo stato reale dell'auto.</p>
@@ -1619,7 +1606,7 @@
 
       <div class="form-success" id="formSuccess" hidden role="status" aria-live="polite">
         <div class="form-success-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 12l7 7L21 5" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="ico" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
         </div>
         <p>Grazie! Un tecnico specializzato AutoInspecta ti contatterà a breve per fissare il controllo.</p>
       </div>
@@ -1644,15 +1631,15 @@
         <p>Il nostro approccio si basa su 3 pilastri:</p>
         <ul class="pillars">
           <li>
-            <span class="icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            <span class="icon-circle"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
             Controlli tecnici approfonditi
           </li>
           <li>
-            <span class="icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#2E50E8" stroke-width="1.8"/><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            <span class="icon-circle"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg></span>
             Trasparenza nella valutazione
           </li>
           <li>
-            <span class="icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H8l-4 4V5Z" stroke="#2E50E8" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            <span class="icon-circle"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/></svg></span>
             Supporto nella decisione e nella trattativa
           </li>
         </ul>
